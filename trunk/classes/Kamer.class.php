@@ -1,4 +1,5 @@
 <?php
+require_once("DB.class.php");
 class Kamer{
 	//velden die bij een kamer horen
 	public $home;
