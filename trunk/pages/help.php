@@ -4,14 +4,14 @@
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
 	    <title>Dringende Herstellingen</title>
-	    <link rel="stylesheet" type="text/css" href="style.css"/>
+	    <link rel="stylesheet" type="text/css" href="../style.css"/>
 	</head>
 	<body>
 		<!--logo linksboven-->
-		<div id="logo"><img src="img/logo.gif" width="200" height="60" alt="Logo Universiteit Gent" usemap="#linklogo" /><map name="linklogo" id="linklogo"><area shape="rect" coords="60,0,142,60" href="http://www.ugent.be" alt="Startpagina Universiteit Gent" /></map></div>
+		<div id="logo"><img src="../images/logo.gif" width="200" height="60" alt="Logo Universiteit Gent" usemap="#linklogo" /><map name="linklogo" id="linklogo"><area shape="rect" coords="60,0,142,60" href="http://www.ugent.be" alt="Startpagina Universiteit Gent" /></map></div>
 		
 		<!--pagina titel-->
-		<div id="siteid"><img src="img/siteid-portal.jpg" width="300" height="80" alt="Portaalsite Universiteit Gent" /><a class="text" >Dringende Herstellingen</a></div>
+		<div id="siteid"><img src="../images/siteid-portal.jpg" width="300" height="80" alt="Portaalsite Universiteit Gent" /><a class="text" >Dringende Herstellingen</a></div>
 		
 		<!--linkjes rechtsboven-->
 		<div id="utility">

@@ -1,4 +1,4 @@
-<a href="help.php">klik</a>
+<a href="pages/help.php">klik</a>
 <?
 $s = "test";
 echo $s;

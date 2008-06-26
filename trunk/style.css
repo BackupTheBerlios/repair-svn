@@ -102,7 +102,7 @@ pre.note {font-family:"x-small Verdana", Arial, mono; background-color:#FFF; bor
 
 
 #related, .box, .box ul, .box li, .box dd  {margin:0; padding:0;}/* om de problemen in ie op te lossen met het verdwijnen van de menuitems als er over links gegaan wordt in class box- menu rechts boven  de properties van .box dd in .box dt geplaatst - Probleem opgelost */
-.box  { background: #fff url("img/boxbg.gif") left top repeat-x;  border-top: 1px solid #369; border-bottom: 1px solid #369; }
+.box  { background: #fff url("images/boxbg.gif") left top repeat-x;  border-top: 1px solid #369; border-bottom: 1px solid #369; }
 .box dt { font-weight: bold; color: #369; padding: 4px 5px 0 0.5em; font-size: 0.85em; margin:0; padding:0;}
 .box a { text-decoration:none;}
 .box ul { list-style-type: none; margin: 0 0 10px 0; padding: 0 0 5px 0; }
@@ -112,7 +112,7 @@ pre.note {font-family:"x-small Verdana", Arial, mono; background-color:#FFF; bor
 .box li a:hover { color: #69C; }
 .box p {font-size: 0.85em; padding: 0 5px 0 0.5em; margin: 5px 0;}
 .box-img { background-color:#ECEFF8;border-top: 1px solid #369;border-bottom: 1px solid #369;}
-.caption { background: #fff url("img/boxbgbottom.gif") left bottom repeat-x; font-size: 0.85em; padding: 5px; }
+.caption { background: #fff url("images/boxbgbottom.gif") left bottom repeat-x; font-size: 0.85em; padding: 5px; }
 .box, .box-img {margin-bottom: 15px;}
 
 /* === footer === */
@@ -124,7 +124,7 @@ pre.note {font-family:"x-small Verdana", Arial, mono; background-color:#FFF; bor
 /* === Top banner === */
 
 /* siteid, with picture and site title */
-#siteid { position: absolute; top: 0; left: 0; vertical-align: top; text-align: left; height: 80px; width: 100%; background: #fff url(img/balkje.gif) left top repeat; z-index: 10; margin: 0; padding: 0;}
+#siteid { position: absolute; top: 0; left: 0; vertical-align: top; text-align: left; height: 80px; width: 100%; background: #fff url(images/balkje.gif) left top repeat; z-index: 10; margin: 0; padding: 0;}
 #siteid img {position:relative; top:0; left: 200px;}
 #siteid a.text {position: absolute; top: 52px; left: 210px; font-size: 1.6em; font-family:Arial, Helvetica, sans-serif; color:#fff; text-decoration:none; }
 
@@ -142,7 +142,7 @@ a.advanced { font-size: 0.85em; text-decoration:none;}
 .searchbutton { background:#ddd; padding:0 3px; font:normal 0.85em verdana,sans-serif; color:#369; cursor:pointer;}
 
 /* login - login-act: login box, active and non-active */
-#login { position: absolute; top: 98px; right: 20px; z-index: 12;font-size: 0.85em; background:#eceff8 url("img/sleutel.gif") no-repeat 100% 50% ; border-top: 1px solid #69C; border-bottom: 1px solid #69C; padding: 5px 18px 5px 3px;}
+#login { position: absolute; top: 98px; right: 20px; z-index: 12;font-size: 0.85em; background:#eceff8 url("images/sleutel.gif") no-repeat 100% 50% ; border-top: 1px solid #69C; border-bottom: 1px solid #69C; padding: 5px 18px 5px 3px;}
 #login-act { position: absolute; top: 98px; right: 20px; z-index: 12;font-size: 0.85em; background:#FEFADD url(img/ingelogd.gif) no-repeat left center ; background-position: 3px; border-top: 1px solid #69C; border-bottom: 1px solid #69C; padding: 5px 3px 5px 18px;}
 #login a, #login-act a{ text-decoration:none;}
 
@@ -176,13 +176,13 @@ voice-family: inherit; padding-left:9px;}
 #nav li li {font-size: 1em;}
 #nav li a { display: block; width: 100%; text-decoration: none; color: #369; text-align: left; }
 #nav li a:hover { color: #69C; text-decoration: none; }
-#nav li#selected {background: #fc0 url("img/arrowlevel1.gif") left top no-repeat; }
+#nav li#selected {background: #fc0 url("images/arrowlevel1.gif") left top no-repeat; }
 #nav li.subnav ul {background: #fff;  line-height:1em;}
 #nav li.subnav li {padding:1px 5px 3px 10px; border-bottom: 1px dotted #e1e1e1; background: #fff; font-size: x-small; voice-family: "\"}\""; voice-family: inherit; padding-left:20px; font-size:small}
 /*Box Model Hack to accomodate IE5/Win: get correct indentation and reset font-size in IE5/Win */
 #nav li.subnav li {font-size: 0.82em;}
 #nav li.subnav li.lastitem {border-bottom: 1px solid #e1e1e1;}
-#nav li.subnav li#selected { background: #fc0 url("img/arrowlevel2.gif") left top no-repeat;}
+#nav li.subnav li#selected { background: #fc0 url("images/arrowlevel2.gif") left top no-repeat;}
 
 .facet  { background:#fff; border-top: 1px solid #69C; border-bottom: 1px solid #69C; padding-bottom: 4px; margin-top: 10px;}
 .facet dt { font-size: 0.85em; font-weight: bold; color: #69C; padding: 4px 5px 2px 0.5em;}
