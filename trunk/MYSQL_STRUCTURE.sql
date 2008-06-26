@@ -38,11 +38,13 @@ CREATE TABLE `herstelformulier` (
 DROP TABLE IF EXISTS `home`;
 CREATE TABLE `home` (
   `id` int(11) NOT NULL auto_increment,
-  `naam` varchar(255) NOT NULL,
+  `korteNaam` varchar(255) NOT NULL,
+  `langeNaam` varchar(255) NOT NULL,
   `adres` varchar(255) NOT NULL,
   `verdiepen` int(11) NOT NULL,
+  `kamerPrefix` varchar(5) NOT NULL,
   PRIMARY KEY  (`id`),
-  UNIQUE KEY `naam` (`naam`,`adres`)
+  UNIQUE KEY `korteNaam` (`korteNaam`,`adres`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------

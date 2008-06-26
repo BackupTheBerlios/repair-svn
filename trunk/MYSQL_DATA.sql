@@ -25,13 +25,13 @@ INSERT INTO `herstelformulier` (`id`, `datum`, `status`, `userId`, `kamer`, `hom
 -- Dumping data for table `home`
 -- 
 
-INSERT INTO `home` (`id`, `naam`, `adres`, `verdiepen`) VALUES 
-(1, 'Home Koning Boudewijn', 'Harelbekestraat 70', 14),
-(2, 'Home Koningin Astrid', 'Krijgslaan 250', 5),
-(3, 'Home Koningin Fabiola', 'Stalhof 4', 7),
-(4, 'Home August Vermeylen', 'Stalhof 6', 8),
-(5, 'Home Bertha De Vriese', 'De Pintelaan 260B', 4),
-(6, 'Home Corneel Heymans', 'Isabellakaai 120', 7);
+INSERT INTO `home` (`id`, `korteNaam`, `langeNaam`, `adres`, `verdiepen`, `kamerPrefix`) VALUES 
+(1, 'Boudewijn', 'Home Koning Boudewijn', 'Harelbekestraat 70', 14, '91.01'),
+(2, 'Astrid', 'Home Koningin Astrid', 'Krijgslaan 250', 5, '91.02'),
+(3, 'Fabiola', 'Home Koningin Fabiola', 'Stalhof 4', 7, '91.03'),
+(4, 'Vermeylen', 'Home August Vermeylen', 'Stalhof 6', 8, '91.04'),
+(5, 'Bertha', 'Home Bertha De Vriese', 'De Pintelaan 260B', 4, '91.05'),
+(6, 'Heymans', 'Home Corneel Heymans', 'Isabellakaai 120', 7, '91.06');
 
 -- 
 -- Dumping data for table `personeel`
