@@ -29,8 +29,8 @@ class Kamer{
 		$verdiep = substr($this->kamernummerLang,6,3);
 		$lokaal = substr($this->kamernummerLang,10,3);
 		
-		//TODO opzoeken van de home
-		//$this->home = $homes.getByPrefix($prefix).naam;
+		//opzoeken van de naam van de home
+		$this->home = new Home($prefix).naam;
 		
 		//instellen van het kamernummer
 		$this->kamernummerKort=(($verdiep/10)-10).substr($lokaal,1,2);		
