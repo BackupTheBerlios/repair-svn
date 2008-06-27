@@ -36,8 +36,8 @@ class Student extends User {
 			$statement->execute();
 			$statement->bind_result($this->taal, $this->homeId, $kamer, $this->telefoon);
 			$statement->fetch();
-			$this->kamer = new Kamer($kamer);
 			$statement->close();
+			$this->kamer = new Kamer($kamer);
 		}
 		$this->updated = 0;
 	}
