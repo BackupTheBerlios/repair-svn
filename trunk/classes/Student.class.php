@@ -6,24 +6,25 @@ class Student extends User {
 	
 	private $taal;
 	private $home;
+	private $homeId;
 	private $kamer;
 	private $telefoon;
 	
 	// Is er een veld geupdate? Dan moet er weggeschreven worden in __destruct(), anders niet.
 	private $updated;
 	
-	function __construct($id, $gebruikersnaam = "", $laatsteOnline = "", $email = "", $taal = "nl", $homeId = "", $kamer = "", $telefoon = "") {
+	function __construct($id, $gebruikersnaam = "", $laatsteOnline = "", $email = "", $taal = "nl", $homeId = "", $langkamernummer = "", $telefoon = "") {
 		$db = DB::getDB();
 		if ($id == "") {
 			// Nieuwe Student en User
 			parent::__construct($id, $gebruikersnaam, $laatsteOnline, $email);
 			$this->taal = $taal;
-			$this->home = new Home("id", $homeId);
-			$this->kamer = new Kamer($kamer);
+			$this->homeId = $homeId;
+			$this->kamer = new Kamer($langkamernummer);
 			$this->telefoon = $telefoon;
 			// Maak de Student aan
 			$statement = $db->prepare("INSERT INTO student (userId, taal, homeId, kamer, telefoon) VALUES (?, ?, ?, ?, ?)");
-			$statement->bind_param('isisi', $this->id, $this->taal, $this->home->getId(), $this->kamer->getKamernummerLang(), $this->telefoon);
+			$statement->bind_param('isisi', $this->id, $this->taal, $this->homeId, $this->kamer->getKamernummerLang(), $this->telefoon);
 			$statement->execute();
 			$statement->close();
 		} else {
@@ -33,9 +34,8 @@ class Student extends User {
 			$statement = $db->prepare("SELECT taal, homeId, kamer, telefoon FROM student WHERE userId = ? LIMIT 1");
 			$statement->bind_param('i', $id);
 			$statement->execute();
-			$statement->bind_result($this->taal, $homeId, $kamer, $this->telefoon);
+			$statement->bind_result($this->taal, $this->homeId, $kamer, $this->telefoon);
 			$statement->fetch();
-			$this->home = new Home("id", $homeId);
 			$this->kamer = new Kamer($kamer);
 			$statement->close();
 		}
@@ -50,7 +50,7 @@ class Student extends User {
 	function save() {
 		if ($this->updated == 1) {
 			$statement = $db->prepare("UPDATE student SET taal = ?, homeId = ?, kamer = ?, telefoon = ? WHERE userId = ?");
-			$statement->bind_param('sisii', $this->taal, $this->home->getId(), $this->kamer->getKamernummerLang(), $this->telefoon, $this->id);
+			$statement->bind_param('sisii', $this->taal, $this->homeId, $this->kamer->getKamernummerLang(), $this->telefoon, $this->id);
 			$statement->execute();
 			$statement->close();
 		}
@@ -58,38 +58,36 @@ class Student extends User {
 	}
 	
 	function setTaal($taal) {
-		if ($taal == "en" || $taal == "nl") {
+		if ($taal == "en" || $taal == "nl")
 			$this->taal = $taal;
-			$this->updated = 1;
-		} else // TODO: speciale exception
-			throw new Exception();
+		else throw new Exception(); // TODO: speciale exception
+		
+		$this->updated = 1;
 	}
 	
 	function setHome($home) {
-		if (is_a($home, "Home")) {
+		if (is_a($home, "Home"))
 			$this->home = $home;
-			$this->updated = 1;
-		}
-		else
-			throw new Exception(); // TODO: speciale exception
+		else throw new Exception(); // TODO: speciale exception
+		$this->homeId = $this->home->getId();
+		
+		$this->updated = 1;
 	}
 	
 	function setKamer($kamer) {
-		if (is_a($kamer, "Kamer")) {
+		if (is_a($kamer, "Kamer"))
 			$this->kamer = $kamer;
-			$this->updated = 1;
-		}
-		else
-			throw new Exception(); // TODO: speciale exception
+		else throw new Exception(); // TODO: speciale exception
+		
+		$this->updated = 1;
 	}
 	
 	function setTelefoon($telefoon) {
-		if (is_numeric($telefoon)) {
+		if (is_numeric($telefoon))
 			$this->telefoon = $telefoon;
-			$this->updated = 1;
-		}
-		else
-			throw new Exception(); // TODO: speciale exception
+		else throw new Exception(); // TODO: speciale exception
+		
+		$this->updated = 1;
 	}
 	
 	function getTaal() {
@@ -97,6 +95,9 @@ class Student extends User {
 	}
 	
 	function getHome() {
+		if (!isset($this->home))
+			$this->home = new Home($this->homeId);
+			
 		return $this->home;
 	}
 	

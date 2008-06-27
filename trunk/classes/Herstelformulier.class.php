@@ -7,10 +7,13 @@ class Herstelformulier {
 	private $id;
 	private $datum;
 	private $status;
+	private $studentId;
 	private $student;
 	private $kamer;
 	private $home;
+	private $homeId;
 	private $opmerking;
+	
 	private $veldenlijst;
 	
 	private $updated;
@@ -40,15 +43,17 @@ class Herstelformulier {
 			if (is_a($student, "Student"))
 				$this->student = $student;
 			else throw new Exception(); // TODO: gepaste exception
+			$this->studentId = $this->student->getId();
 			
 			$this->kamer = $this->student->getKamer();
 			$this->home = $this->student->getHome();
+			$this->homeId = $this->home->getId();
 			$this->opmerking = $opmerking;
 			$this->veldenlijst = $veldenlijst;
 			
 			// bepalen van zijn herstelformulierId
 			$statement = $db->prepare("INSERT INTO herstelformulier (datum, status, userId, kamer, homeId, opmerking) VALUES (?, ?, ?, ?, ?, ?)");
-			$statement->bind_param('ssisis', $this->datum, $this->status->getValue(), $this->student->getId(), $this->kamer->getKamernummerLang(), $this->home->getId(), $this->opmerking);
+			$statement->bind_param('ssisis', $this->datum, $this->status->getValue(), $this->studentId, $this->kamer->getKamernummerLang(), $this->homeId, $this->opmerking);
 			$statement->execute();
 			$this->id = $db->insert_id;
 			$statement->close();
@@ -58,13 +63,11 @@ class Herstelformulier {
 			$statement = $db->prepare("SELECT datum, status, userId, kamer, homeId, opmerking FROM herstelformulier WHERE id = ? LIMIT 1");
 			$statement->bind_param('i', $this->id);
 			$statement->execute();
-			$statement->bind_result($this->datum, $status, $userId, $kamer, $homeId, $this->opmerking);
+			$statement->bind_result($this->datum, $status, $this->studentId, $kamer, $this->homeId, $this->opmerking);
 			$statement->fetch();
 			$statement->close();
 			$this->status = new Status($status);
-			$this->student = new Student($userId);
 			$this->kamer = new Kamer($kamer);
-			$this->home = new Home("id", $homeId);
 		}
 		
 		$this->updated = 0;
@@ -77,7 +80,7 @@ class Herstelformulier {
 	function save() {
 		if ($this->updated == 1) {
 			$statement = $db->prepare("UPDATE herstelformulier SET datum = ?, status = ?, userId = ?, kamer = ?, homeId = ?, opmerking = ? WHERE id = ?");
-			$statement->bind_param('ssisisi', $this->datum, $this->status->getValue(), $this->student->getId(), $this->kamer->getKamernummerLang(), $this->home->getId(), $this->opmerking, $this->id);
+			$statement->bind_param('ssisisi', $this->datum, $this->status->getValue(), $this->studentId, $this->kamer->getKamernummerLang(), $this->homeId, $this->opmerking, $this->id);
 			$statement->execute();
 			$statement->close();
 		}
@@ -94,6 +97,8 @@ class Herstelformulier {
 	 * @return Home
 	 */
 	public function getHome() {
+		if (!isset($this->home))
+			$this->home = new Home($this->homeId);
 		return $this->home;
 	}
 	
@@ -129,6 +134,8 @@ class Herstelformulier {
 	 * @return Student
 	 */
 	public function getStudent() {
+		if (!isset($this->student))
+			$this->student = new Student($this->studentId);
 		return $this->student;
 	}
 	
@@ -141,6 +148,8 @@ class Herstelformulier {
 	            $this->datum = $datum;
 	        } else throw new Exception(); // TODO: gepaste exception
 	    } else throw new Exception(); // TODO: gepaste exception
+	    
+	    $this->updated = 1;
 	}
 	
 	/**
@@ -150,6 +159,9 @@ class Herstelformulier {
 		if (is_a($home, "Home"))
 			$this->home = $home;
 		else throw new Exception(); // TODO: gepaste exception
+		$this->homeId = $this->home->getId();
+		
+		$this->updated = 1;
 	}
 	
 	/**
@@ -159,6 +171,8 @@ class Herstelformulier {
 		if (is_numeric($id))
 			$this->id = $id;
 		else throw new Exception(); // TODO: gepaste exception
+		
+		$this->updated = 1;
 	}
 	
 	/**
@@ -168,6 +182,8 @@ class Herstelformulier {
 		if (is_a($kamer, "Kamer"))
 			$this->kamer = $kamer;
 		else throw new Exception(); // TODO: gepaste exception
+		
+		$this->updated = 1;
 	}
 	
 	/**
@@ -175,6 +191,8 @@ class Herstelformulier {
 	 */
 	public function setOpmerking($opmerking) {
 		$this->opmerking = $opmerking;
+		
+		$this->updated = 1;
 	}
 	
 	/**
@@ -184,6 +202,8 @@ class Herstelformulier {
 		if (is_a($status, "Status"))
 			$this->status = $status;
 		else throw new Exception(); // TODO: gepaste exception
+		
+		$this->updated = 1;
 	}
 	
 	/**
@@ -193,6 +213,9 @@ class Herstelformulier {
 		if (is_a($student, "Student"))
 			$this->student = $student;
 		else throw new Exception(); // TODO: gepaste exception
+		$this->studentId = $this->student->getId();
+		
+		$this->updated = 1;
 	}
 
 }
