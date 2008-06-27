@@ -42,6 +42,28 @@ INSERT INTO `personeel` (`userId`) VALUES
 (2);
 
 -- 
+-- Dumping data for table `relatie_herstelformulier_velden`
+-- 
+
+INSERT INTO `relatie_herstelformulier_velden` (`herstelformulierId`, `veldId`) VALUES 
+(1, 2),
+(1, 6),
+(2, 8),
+(3, 4),
+(2, 4),
+(1, 15),
+(1, 6),
+(4, 1);
+
+-- 
+-- Dumping data for table `relatie_personeel_home`
+-- 
+
+INSERT INTO `relatie_personeel_home` (`homeId`, `personeelId`) VALUES 
+(1, 1),
+(1, 2);
+
+-- 
 -- Dumping data for table `student`
 -- 
 

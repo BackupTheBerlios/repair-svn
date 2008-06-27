@@ -1,3 +1,5 @@
+-- --------------------------------------------------------
+
 -- 
 -- Table structure for table `categorie`
 -- 
@@ -59,6 +61,34 @@ DROP TABLE IF EXISTS `personeel`;
 CREATE TABLE `personeel` (
   `userId` int(11) NOT NULL,
   PRIMARY KEY  (`userId`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+-- 
+-- Table structure for table `relatie_herstelformulier_velden`
+-- 
+
+DROP TABLE IF EXISTS `relatie_herstelformulier_velden`;
+CREATE TABLE `relatie_herstelformulier_velden` (
+  `herstelformulierId` int(11) NOT NULL,
+  `veldId` int(11) NOT NULL,
+  KEY `herstelformulierId` (`herstelformulierId`),
+  KEY `veldId` (`veldId`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+-- 
+-- Table structure for table `relatie_personeel_home`
+-- 
+
+DROP TABLE IF EXISTS `relatie_personeel_home`;
+CREATE TABLE `relatie_personeel_home` (
+  `homeId` int(11) NOT NULL,
+  `personeelId` int(11) NOT NULL,
+  KEY `homeId` (`homeId`),
+  KEY `personeelId` (`personeelId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -129,6 +159,20 @@ ALTER TABLE `herstelformulier`
 -- 
 ALTER TABLE `personeel`
   ADD CONSTRAINT `personeel_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- 
+-- Constraints for table `relatie_herstelformulier_velden`
+-- 
+ALTER TABLE `relatie_herstelformulier_velden`
+  ADD CONSTRAINT `relatie_herstelformulier_velden_ibfk_2` FOREIGN KEY (`veldId`) REFERENCES `velden` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `relatie_herstelformulier_velden_ibfk_1` FOREIGN KEY (`herstelformulierId`) REFERENCES `herstelformulier` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- 
+-- Constraints for table `relatie_personeel_home`
+-- 
+ALTER TABLE `relatie_personeel_home`
+  ADD CONSTRAINT `relatie_personeel_home_ibfk_2` FOREIGN KEY (`personeelId`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `relatie_personeel_home_ibfk_1` FOREIGN KEY (`homeId`) REFERENCES `home` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- 
 -- Constraints for table `student`
