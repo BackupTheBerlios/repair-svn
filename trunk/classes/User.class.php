@@ -27,6 +27,8 @@ class User {
 			$statement->close();
 		} else {
 			// Al bestaande User
+			if (!is_numeric($id)) throw new Exception(); // TODO: gepaste exception
+			
 			$this->id = $id;
 			$statement = $db->prepare("SELECT gebruikersnaam, laatsteOnline, email FROM user WHERE id = ? LIMIT 1");
 			$statement->bind_param('i', $id);
@@ -39,12 +41,17 @@ class User {
 	}
 	
 	function __destruct() {
+		save();
+	}
+	
+	function save() {
 		if ($this->updated == 1) {
 			$statement = $db->prepare("UPDATE user SET laatsteOnline = ?, email = ? WHERE id = ?");
 			$statement->bind_param("ssi", $this->laatsteOnline, $this->email, $this->id);
 			$statement->execute();
 			$statement->close();
 		}
+		$this->updated = 0;
 	}
 	
 	function setLaatsteOnline($tijdstip) {

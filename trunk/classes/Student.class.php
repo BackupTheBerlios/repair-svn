@@ -27,6 +27,8 @@ class Student extends User {
 			$statement->execute();
 			$statement->close();
 		} else {
+			if (!is_numeric($id)) throw new Exception(); // TODO: gepaste exception
+			
 			parent::__construct ( $id );
 			$statement = $db->prepare("SELECT taal, homeId, kamer, telefoon FROM student WHERE userId = ? LIMIT 1");
 			$statement->bind_param('i', $id);
@@ -41,12 +43,18 @@ class Student extends User {
 	}
 	
 	function __destruct() {
+		save();
+		parent::__destruct();
+	}
+	
+	function save() {
 		if ($this->updated == 1) {
 			$statement = $db->prepare("UPDATE student SET taal = ?, homeId = ?, kamer = ?, telefoon = ? WHERE userId = ?");
 			$statement->bind_param('sisii', $this->taal, $this->home->getId(), $this->kamer->getKamernummerLang(), $this->telefoon, $this->id);
 			$statement->execute();
 			$statement->close();
 		}
+		$this->updated = 0;
 	}
 	
 	function setTaal($taal) {
