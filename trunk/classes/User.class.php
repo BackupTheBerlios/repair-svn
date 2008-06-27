@@ -9,34 +9,54 @@ class User {
 	protected $laatsteOnline;
 	protected $email;
 	
-	function __construct($id) {
-		$this->id = $id;
+	// Is er een veld geupdate? Dan moet er weggeschreven worden in __destruct(), anders niet.
+	private $updated;
+	
+	function __construct($id, $gebruikersnaam = "", $laatsteOnline = "", $email = "") {
 		$db = DB::getDB();
-		$statement = $db->prepare("SELECT gebruikersnaam, laatsteOnline, email FROM user WHERE id = ? LIMIT 1");
-		$statement->bind_param("i", $id);
-		$statement->execute();
-		$statement->bind_result($this->gebruikersnaam, $this->laatsteOnline, $this->email);
-		$statement->fetch();
-		$statement->close();
+		if ($id == "") {
+			// Dit is een nieuwe User
+			$this->gebruikersnaam = $gebruikersnaam;
+			setLaatsteOnline($laatsteOnline);
+			setEmail($email);
+			// bepalen van zijn userId
+			$statement = $db->prepare("INSERT INTO user (gebruikersnaam, laatsteOnline, email) VALUES (?, ?, ?)");
+			$statement->bind_param('sss', $this->gebruikersnaam, $this->laatsteOnline, $this->email);
+			$statement->execute();
+			$this->id = $db->insert_id;
+			$statement->close();
+		} else {
+			// Al bestaande User
+			$this->id = $id;
+			$statement = $db->prepare("SELECT gebruikersnaam, laatsteOnline, email FROM user WHERE id = ? LIMIT 1");
+			$statement->bind_param('i', $id);
+			$statement->execute();
+			$statement->bind_result($this->gebruikersnaam, $this->laatsteOnline, $this->email);
+			$statement->fetch();
+			$statement->close();
+		}
+		$this->updated = 0; // vanaf dat er een update gebeurt, zal __destruct() dit weten
 	}
 	
 	function __destruct() {
-		$statement = $db->prepare("UPDATE user SET laatsteOnline = ?, email = ? WHERE id = ?");
-		$statement->bind_param("s", $this->laatsteOnline);
-		$statement->bind_param("s", $this->email);
-		$statement->bind_param("i", $this->id);
-		$statement->execute();
-		$statement->close();
+		if ($this->updated == 1) {
+			$statement = $db->prepare("UPDATE user SET laatsteOnline = ?, email = ? WHERE id = ?");
+			$statement->bind_param("ssi", $this->laatsteOnline, $this->email, $this->id);
+			$statement->execute();
+			$statement->close();
+		}
 	}
 	
 	function setLaatsteOnline($tijdstip) {
 		// TODO: input sanitizing
 		$this->laatsteOnline = $tijdstip;
+		$this->updated = 1;
 	}
 	
 	function setEmail($email) {
 		if (ereg("^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)+$", $email)) {
 			$this->email = $email;
+			$this->updated = 1;
 		} else
 			throw new OngeldigeEmailException();
 	}
