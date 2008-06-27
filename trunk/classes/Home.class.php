@@ -13,7 +13,7 @@ class Home{
 	public $kamerPrefix;
 	
 	/**
-	 * haalt  een Home object op uit de databank die voldoet aan de opgegeven parameters.
+	 * Haalt een Home object op uit de databank die voldoet aan de opgegeven parameters.
 	 * Indien een niet uniek veld wordt opgegeven zal de eerste record die aan de parameters
 	 * voldoet aangemaakt worden
 	 *

@@ -1,6 +1,6 @@
 <?php
 
-require_once ('classes/User.class.php');
+require_once ('User.class.php');
 
 class Student extends User {
 	
