@@ -12,16 +12,6 @@ INSERT INTO `categorie` (`id`, `naamNL`, `naamEN`, `locatie`) VALUES
 (7, 'Allerlei', 'Extra', 'kot');
 
 -- 
--- Dumping data for table `herstelformulier`
--- 
-
-INSERT INTO `herstelformulier` (`id`, `datum`, `status`, `userId`, `kamer`, `homeId`, `opmerking`) VALUES 
-(1, '2008-06-26 20:14:29', 'ongezien', 2, '91.01.240.030', 1, 'Dit is mijn eerste herstelformuliertje ooit, cool h'),
-(2, '2008-06-25 20:14:58', 'gezien', 1, '91.01.230.012', 1, 'Dit herstelformulier is al gezien, maar nog niet uitgevoerd.'),
-(3, '2008-06-17 20:15:45', 'gedaan', 1, '91.01.230.012', 1, 'Dit herstelformulier is uitgevoerd, maar niet ge?valueerd.'),
-(4, '2008-06-03 20:16:03', 'afgesloten', 2, '91.01.240.030', 1, 'Dit herstelformulier is uitgevoerd en afgesloten door de student.');
-
--- 
 -- Dumping data for table `home`
 -- 
 
@@ -34,6 +24,14 @@ INSERT INTO `home` (`id`, `korteNaam`, `langeNaam`, `adres`, `verdiepen`, `kamer
 (6, 'Heymans', 'Home Corneel Heymans', 'Isabellakaai 120', 7, '91.06');
 
 -- 
+-- Dumping data for table `user`
+-- 
+
+INSERT INTO `user` (`id`, `gebruikersnaam`, `laatsteOnline`, `email`) VALUES 
+(1, 'bmesuere', '2008-06-26 19:56:05', 'bart.mesuere@ugent.be'),
+(2, 'bevdeghi', '2008-06-26 19:56:23', 'bert.vandeghinste@ugent.be');
+
+-- 
 -- Dumping data for table `personeel`
 -- 
 
@@ -42,42 +40,12 @@ INSERT INTO `personeel` (`userId`) VALUES
 (2);
 
 -- 
--- Dumping data for table `relatie_herstelformulier_velden`
--- 
-
-INSERT INTO `relatie_herstelformulier_velden` (`herstelformulierId`, `veldId`) VALUES 
-(1, 2),
-(1, 6),
-(2, 8),
-(3, 4),
-(2, 4),
-(1, 15),
-(1, 6),
-(4, 1);
-
--- 
--- Dumping data for table `relatie_personeel_home`
--- 
-
-INSERT INTO `relatie_personeel_home` (`homeId`, `personeelId`) VALUES 
-(1, 1),
-(1, 2);
-
--- 
 -- Dumping data for table `student`
 -- 
 
 INSERT INTO `student` (`userId`, `taal`, `homeId`, `kamer`, `telefoon`) VALUES 
 (1, 'nl', 1, '91.01.230.012', 14715),
 (2, 'nl', 1, '91.01.240.030', 14765);
-
--- 
--- Dumping data for table `user`
--- 
-
-INSERT INTO `user` (`id`, `gebruikersnaam`, `laatsteOnline`, `email`) VALUES 
-(1, 'bmesuere', '2008-06-26 19:56:05', 'bart.mesuere@ugent.be'),
-(2, 'bevdeghi', '2008-06-26 19:56:23', 'bert.vandeghinste@ugent.be');
 
 -- 
 -- Dumping data for table `velden`
@@ -100,3 +68,35 @@ INSERT INTO `velden` (`id`, `naamNL`, `naamEN`, `categorieId`, `homeId`, `verwij
 (14, 'Radiator geeft geen warmte', 'No heating from radiator', 5, 1, 0),
 (15, 'Skandiaflex', 'Persian blind', 7, 1, 0),
 (16, 'Scharnier kast', 'Wardrobe hinge', 3, 1, 0);
+
+-- 
+-- Dumping data for table `herstelformulier`
+-- 
+
+INSERT INTO `herstelformulier` (`id`, `datum`, `status`, `userId`, `kamer`, `homeId`, `opmerking`) VALUES 
+(1, '2008-06-26 20:14:29', 'ongezien', 2, '91.01.240.030', 1, 'Dit is mijn eerste herstelformuliertje ooit, cool h'),
+(2, '2008-06-25 20:14:58', 'gezien', 1, '91.01.230.012', 1, 'Dit herstelformulier is al gezien, maar nog niet uitgevoerd.'),
+(3, '2008-06-17 20:15:45', 'gedaan', 1, '91.01.230.012', 1, 'Dit herstelformulier is uitgevoerd, maar niet ge?valueerd.'),
+(4, '2008-06-03 20:16:03', 'afgesloten', 2, '91.01.240.030', 1, 'Dit herstelformulier is uitgevoerd en afgesloten door de student.');
+
+-- 
+-- Dumping data for table `relatie_herstelformulier_velden`
+-- 
+
+INSERT INTO `relatie_herstelformulier_velden` (`herstelformulierId`, `veldId`) VALUES 
+(1, 2),
+(1, 6),
+(2, 8),
+(3, 4),
+(2, 4),
+(1, 15),
+(1, 6),
+(4, 1);
+
+-- 
+-- Dumping data for table `relatie_personeel_home`
+-- 
+
+INSERT INTO `relatie_personeel_home` (`homeId`, `personeelId`) VALUES 
+(1, 1),
+(1, 2);
