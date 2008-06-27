@@ -1,6 +1,8 @@
 <?php
 
 require_once ('User.class.php');
+require_once ('Home.class.php');
+require_once ('Kamer.class.php');
 
 class Student extends User {
 	
@@ -43,7 +45,7 @@ class Student extends User {
 	}
 	
 	function __destruct() {
-		save();
+		self::save();
 		parent::__destruct();
 	}
 	

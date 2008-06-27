@@ -41,7 +41,7 @@ class User {
 	}
 	
 	function __destruct() {
-		save();
+		self::save();
 	}
 	
 	function save() {

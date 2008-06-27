@@ -22,7 +22,7 @@ class Home{
 	 */
 	public function __construct($veld, $value){
 		$this->db = DB::getDB();
-		$statement = $this->db->prepare("SELECT id, korteNaam, langeNaam, adres, verdiepen, kamerPrefix FROM items WHERE $veld = ?");
+		$statement = $this->db->prepare("SELECT id, korteNaam, langeNaam, adres, verdiepen, kamerPrefix FROM home WHERE $veld = ?");
 		$statement->bind_param('s', $value);
 		$statement->execute();
 		$statement->bind_result($this->id, $this->korteNaam, $this->langeNaam, 
