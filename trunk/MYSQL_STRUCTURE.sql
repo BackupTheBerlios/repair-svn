@@ -9,7 +9,7 @@ CREATE TABLE `categorie` (
   `naamEN` varchar(255) NOT NULL,
   `locatie` enum('kot','verdiep','gemeenschappelijk') NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
 
 -- --------------------------------------------------------
 
@@ -26,8 +26,10 @@ CREATE TABLE `herstelformulier` (
   `kamer` varchar(13) NOT NULL,
   `homeId` int(11) NOT NULL,
   `opmerking` text NOT NULL,
-  PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
+  PRIMARY KEY  (`id`),
+  KEY `userId` (`userId`),
+  KEY `homeId` (`homeId`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 -- --------------------------------------------------------
 
@@ -45,7 +47,7 @@ CREATE TABLE `home` (
   `kamerPrefix` varchar(5) NOT NULL,
   PRIMARY KEY  (`id`),
   UNIQUE KEY `korteNaam` (`korteNaam`,`adres`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 -- --------------------------------------------------------
 
@@ -57,7 +59,7 @@ DROP TABLE IF EXISTS `personeel`;
 CREATE TABLE `personeel` (
   `userId` int(11) NOT NULL,
   PRIMARY KEY  (`userId`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -72,8 +74,9 @@ CREATE TABLE `student` (
   `homeId` int(11) NOT NULL,
   `kamer` varchar(13) NOT NULL,
   `telefoon` int(5) NOT NULL,
-  UNIQUE KEY `userId` (`userId`,`kamer`,`telefoon`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  UNIQUE KEY `userId` (`userId`,`kamer`,`telefoon`),
+  KEY `homeId` (`homeId`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -89,7 +92,7 @@ CREATE TABLE `user` (
   `email` varchar(255) NOT NULL,
   PRIMARY KEY  (`id`),
   UNIQUE KEY `gebruikersnaam` (`gebruikersnaam`,`email`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 -- --------------------------------------------------------
 
@@ -105,5 +108,38 @@ CREATE TABLE `velden` (
   `categorieId` int(11) NOT NULL,
   `homeId` int(11) NOT NULL,
   `verwijderd` tinyint(1) NOT NULL,
-  PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
+  PRIMARY KEY  (`id`),
+  KEY `categorieId` (`categorieId`),
+  KEY `homeId` (`homeId`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=17 ;
+
+-- 
+-- Constraints for dumped tables
+-- 
+
+-- 
+-- Constraints for table `herstelformulier`
+-- 
+ALTER TABLE `herstelformulier`
+  ADD CONSTRAINT `herstelformulier_ibfk_2` FOREIGN KEY (`homeId`) REFERENCES `home` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `herstelformulier_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE;
+
+-- 
+-- Constraints for table `personeel`
+-- 
+ALTER TABLE `personeel`
+  ADD CONSTRAINT `personeel_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- 
+-- Constraints for table `student`
+-- 
+ALTER TABLE `student`
+  ADD CONSTRAINT `student_ibfk_2` FOREIGN KEY (`homeId`) REFERENCES `home` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `student_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- 
+-- Constraints for table `velden`
+-- 
+ALTER TABLE `velden`
+  ADD CONSTRAINT `velden_ibfk_2` FOREIGN KEY (`homeId`) REFERENCES `home` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `velden_ibfk_1` FOREIGN KEY (`categorieId`) REFERENCES `categorie` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE;

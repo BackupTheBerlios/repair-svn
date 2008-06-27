@@ -16,9 +16,9 @@ INSERT INTO `categorie` (`id`, `naamNL`, `naamEN`, `locatie`) VALUES
 -- 
 
 INSERT INTO `herstelformulier` (`id`, `datum`, `status`, `userId`, `kamer`, `homeId`, `opmerking`) VALUES 
-(1, '2008-06-26 20:14:29', 'ongezien', 2, '91.01.240.030', 1, 'Dit is mijn eerste herstelformuliertje ooit, cool hé!'),
+(1, '2008-06-26 20:14:29', 'ongezien', 2, '91.01.240.030', 1, 'Dit is mijn eerste herstelformuliertje ooit, cool h'),
 (2, '2008-06-25 20:14:58', 'gezien', 1, '91.01.230.012', 1, 'Dit herstelformulier is al gezien, maar nog niet uitgevoerd.'),
-(3, '2008-06-17 20:15:45', 'gedaan', 1, '91.01.230.012', 1, 'Dit herstelformulier is uitgevoerd, maar niet geëvalueerd.'),
+(3, '2008-06-17 20:15:45', 'gedaan', 1, '91.01.230.012', 1, 'Dit herstelformulier is uitgevoerd, maar niet ge?valueerd.'),
 (4, '2008-06-03 20:16:03', 'afgesloten', 2, '91.01.240.030', 1, 'Dit herstelformulier is uitgevoerd en afgesloten door de student.');
 
 -- 
