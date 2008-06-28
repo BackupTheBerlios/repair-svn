@@ -74,7 +74,7 @@ class Categorie {
 	function setNaamNL($naam) {
 		if (strlen($naam) > 0)
 			$this->naamNL = $naam;
-		else throw new Exception(); // TODO: gepaste exception
+		else throw new BadParameterException();
 		
 		$this->updated = 1;
 	}
@@ -82,7 +82,7 @@ class Categorie {
 	function setNaamEN($naam) {
 		if (strlen($naam) > 0)
 			$this->naamEN = $naam;
-		else throw new Exception(); // TODO: gepaste exception
+		else throw new BadParameterException();
 		
 		$this->updated = 1;
 	}
@@ -93,7 +93,7 @@ class Categorie {
 	function setLocatie($locatie) {
 		if (is_a($locatie, "Locatie"))
 			$this->locatie = $locatie;
-		else throw new Exception(); // TODO: gepaste exception
+		else throw new BadParameterException();
 		
 		$this->updated = 1;
 	}

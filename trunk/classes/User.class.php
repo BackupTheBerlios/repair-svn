@@ -27,7 +27,7 @@ class User {
 			$statement->close();
 		} else {
 			// Al bestaande User
-			if (!is_numeric($id)) throw new Exception(); // TODO: gepaste exception
+			if (!is_numeric($id)) throw new BadParameterException();
 			
 			$this->id = $id;
 			$statement = $this->db->prepare("SELECT gebruikersnaam, laatsteOnline, email FROM user WHERE id = ? LIMIT 1");

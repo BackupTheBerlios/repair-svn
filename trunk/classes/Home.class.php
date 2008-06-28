@@ -96,7 +96,7 @@ class Home {
 	public function setAdres($adres) {
 		if (strlen($adres) > 0)
 			$this->adres = $adres;
-		else throw new Exception(); // TODO: gepaste exception
+		else throw new BadParameterException();
 		
 		$this->updated = 1;
 	}
@@ -107,7 +107,7 @@ class Home {
 	public function setKamerPrefix($kamerPrefix) {
 		if (strlen($kamerPrefix) > 0 && strlen($kamerPrefix) < 6)
 			$this->kamerPrefix = $kamerPrefix;
-		else throw new Exception(); // TODO: gepaste exception
+		else throw new BadParameterException();
 		
 		$this->updated = 1;
 	}
@@ -118,7 +118,7 @@ class Home {
 	public function setKorteNaam($korteNaam) {
 		if (strlen($korteNaam) > 0)
 			$this->korteNaam = $korteNaam;
-		else throw new Exception(); // TODO: gepaste exception
+		else throw new BadParameterException();
 		
 		$this->updated = 1;
 	}
@@ -129,7 +129,7 @@ class Home {
 	public function setLangeNaam($langeNaam) {
 		if (strlen($langeNaam) > 0)
 			$this->langeNaam = $langeNaam;
-		else throw new Exception(); // TODO: gepaste exception
+		else throw new BadParameterException();
 		
 		$this->updated = 1;
 	}
@@ -140,7 +140,7 @@ class Home {
 	public function setVerdiepen($verdiepen) {
 		if (is_numeric($verdiepen) && $verdiepen > 0)
 			$this->verdiepen = $verdiepen;
-		else throw new Exception(); // TODO: gepaste exception
+		else throw new BadParameterException();
 		
 		$this->updated = 1;
 	}

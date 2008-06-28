@@ -43,11 +43,11 @@ class Herstelformulier {
 			
 			if (is_a($status, "Status"))
 				$this->status = $status;
-			else throw new Exception(); // TODO: gepaste exception
+			else throw new BadParameterException();
 			
 			if (is_a($student, "Student"))
 				$this->student = $student;
-			else throw new Exception(); // TODO: gepaste exception
+			else throw new BadParameterException();
 			$this->studentId = $this->student->getId();
 			
 			$this->kamer = $this->student->getKamer();
@@ -64,7 +64,7 @@ class Herstelformulier {
 			$statement->close();
 		} else {
 			// bestaand herstelformulier opvragen
-			if (!is_numeric($id)) throw new Exception(); // TODO: gepaste exception
+			if (!is_numeric($id)) throw new BadParameterException();
 			
 			$this->id = $id;
 			$statement = $this->db->prepare("SELECT datum, status, userId, kamer, homeId, opmerking FROM herstelformulier WHERE id = ? LIMIT 1");
@@ -161,8 +161,8 @@ class Herstelformulier {
 		if (preg_match("/^(\d{4})-(\d{2})-(\d{2}) ([01][0-9]|2[0-3]):([0-5][0-9]):([0-5][0-9])$/", $datum, $matches)) {
 	        if (checkdate($matches[2], $matches[3], $matches[1])) {
 	            $this->datum = $datum;
-	        } else throw new Exception(); // TODO: gepaste exception
-	    } else throw new Exception(); // TODO: gepaste exception
+	        } else throw new BadParameterException();
+	    } else throw new BadParameterException();
 	    
 	    $this->updated = 1;
 	}
@@ -173,7 +173,8 @@ class Herstelformulier {
 	public function setHome($home) {
 		if (is_a($home, "Home"))
 			$this->home = $home;
-		else throw new Exception(); // TODO: gepaste exception
+		else throw new BadParameterException();
+		
 		$this->homeId = $this->home->getId();
 		
 		$this->updated = 1;
@@ -186,7 +187,7 @@ class Herstelformulier {
 	public function setKamer($kamer) {
 		if (is_a($kamer, "Kamer"))
 			$this->kamer = $kamer;
-		else throw new Exception(); // TODO: gepaste exception
+		else throw new BadParameterException();
 		
 		$this->updated = 1;
 	}
@@ -206,7 +207,7 @@ class Herstelformulier {
 	public function setStatus($status) {
 		if (is_a($status, "Status"))
 			$this->status = $status;
-		else throw new Exception(); // TODO: gepaste exception
+		else throw new BadParameterException();
 		
 		$this->updated = 1;
 	}
@@ -217,7 +218,8 @@ class Herstelformulier {
 	public function setStudent($student) {
 		if (is_a($student, "Student"))
 			$this->student = $student;
-		else throw new Exception(); // TODO: gepaste exception
+		else throw new BadParameterException();
+		
 		$this->studentId = $this->student->getId();
 		
 		$this->updated = 1;

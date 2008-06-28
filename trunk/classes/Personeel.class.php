@@ -7,7 +7,7 @@ class Personeel extends User {
 	private $homeslijst;
 	
 	function __construct($id) {
-		if (!is_numeric($id)) throw new Exception(); // TODO: gepaste exception
+		if (!is_numeric($id)) throw new BadParameterException();
 		
 		parent::__construct ( $id );
 		$statement = $db->prepare("SELECT homeId FROM relatie_personeel_home WHERE personeelId = ?");

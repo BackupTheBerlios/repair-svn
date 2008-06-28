@@ -6,7 +6,7 @@ class Status {
 	function __construct($value) {
 		if (Status::isValid($value))
 			$this->value = $value;
-		else throw new Exception(); // TODO: gepaste exception
+		else throw new BadParameterException();
 	}
 	
 	public static function isValid($value) {
@@ -24,7 +24,7 @@ class Status {
 	public function setValue($newvalue) {
 		if (Status::isValid($newvalue))
 			$this->value = $newvalue;
-		else throw new Exception(); // TODO: gepaste exception
+		else throw new BadParameterException();
 	}
 }
 

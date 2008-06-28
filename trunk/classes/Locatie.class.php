@@ -6,7 +6,7 @@ class Locatie {
 	function __construct($locatie) {
 		if (self::isValid($locatie))
 			$this->value = $locatie;
-		else throw new Exception(); // TODO: gepaste exception
+		else throw new BadParameterException();
 	}
 	
 	function isValid($locatie) {
@@ -24,7 +24,7 @@ class Locatie {
 	function setValue($value) {
 		if (self::isValid($value)) 
 			$this->value = $value;
-		else throw new Exception(); // TODO: gepaste exception
+		else throw new BadParameterException();
 	}
 }
 

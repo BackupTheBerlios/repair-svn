@@ -105,7 +105,7 @@ class Veld {
 	public function setCategorie($categorie) {
 		if (is_a($categorie, "Categorie"))
 			$this->categorie = $categorie;
-		else throw new Exception(); // TODO: gepaste exception
+		else throw new BadParameterException();
 		
 		$this->categorieId = $this->categorie->getId();
 		$this->updated = 1;
@@ -117,7 +117,7 @@ class Veld {
 	public function setHome($home) {
 		if (is_a($home, "Home"))
 			$this->home = $home;
-		else throw new Exception(); // TODO: gepaste exception
+		else throw new BadParameterException();
 		
 		$this->homeId = $this->home->getId();
 		$this->updated = 1;
@@ -129,7 +129,7 @@ class Veld {
 	public function setNaamEN($naamEN) {
 		if (strlen($naamEN) > 0)
 			$this->naamEN = $naamEN;
-		else throw new Exception(); // TODO: gepaste exception
+		else throw new BadParameterException();
 		
 		$this->updated = 1;
 	}
@@ -140,7 +140,7 @@ class Veld {
 	public function setNaamNL($naamNL) {
 		if (strlen($naamNL) > 0)
 			$this->naamNL = $naamNL;
-		else throw new Exception(); // TODO: gepaste exception
+		else throw new BadParameterException();
 		
 		$this->updated = 1;	
 	}
@@ -151,7 +151,7 @@ class Veld {
 	public function setVerwijderd($verwijderd) {
 		if ($verwijderd == 0 || $verwijderd == 1)
 			$this->verwijderd = $verwijderd;
-		else throw new Exception(); // TODO: gepaste exception
+		else throw new BadParameterException();
 		
 		$this->updated = 1;	
 	}

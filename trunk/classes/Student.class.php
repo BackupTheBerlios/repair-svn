@@ -29,7 +29,7 @@ class Student extends User {
 			$statement->execute();
 			$statement->close();
 		} else {
-			if (!is_numeric($id)) throw new Exception(); // TODO: gepaste exception
+			if (!is_numeric($id)) throw new BadParameterException();
 			
 			parent::__construct ( $id );
 			$statement = $this->db->prepare("SELECT taal, homeId, kamer, telefoon FROM student WHERE userId = ? LIMIT 1");
@@ -61,7 +61,7 @@ class Student extends User {
 	function setTaal($taal) {
 		if ($taal == "en" || $taal == "nl")
 			$this->taal = $taal;
-		else throw new Exception(); // TODO: speciale exception
+		else throw new BadParameterException();
 		
 		$this->updated = 1;
 	}
@@ -69,7 +69,7 @@ class Student extends User {
 	function setHome($home) {
 		if (is_a($home, "Home"))
 			$this->home = $home;
-		else throw new Exception(); // TODO: speciale exception
+		else throw new BadParameterException();
 		$this->homeId = $this->home->getId();
 		
 		$this->updated = 1;
@@ -78,7 +78,7 @@ class Student extends User {
 	function setKamer($kamer) {
 		if (is_a($kamer, "Kamer"))
 			$this->kamer = $kamer;
-		else throw new Exception(); // TODO: speciale exception
+		else throw new BadParameterException();
 		
 		$this->updated = 1;
 	}
@@ -86,7 +86,7 @@ class Student extends User {
 	function setTelefoon($telefoon) {
 		if (is_numeric($telefoon))
 			$this->telefoon = $telefoon;
-		else throw new Exception(); // TODO: speciale exception
+		else throw new BadParameterException();
 		
 		$this->updated = 1;
 	}
