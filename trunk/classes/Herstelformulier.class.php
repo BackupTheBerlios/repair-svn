@@ -30,6 +30,8 @@ class Herstelformulier {
 	 * @param unknown_type $veldenlijst
 	 */
 	function __construct($id, $datum = "", $status = "", $student = "", $opmerking = "", $veldenlijst = "") { // TODO: veldenlijst implementeren
+		$this->db = DB::getDB();
+		
 		if (!is_numeric($id)) throw new Exception(); // TODO: gepaste exception
 		
 		if ($id == "") {
@@ -52,15 +54,15 @@ class Herstelformulier {
 			$this->veldenlijst = $veldenlijst;
 			
 			// bepalen van zijn herstelformulierId
-			$statement = $db->prepare("INSERT INTO herstelformulier (datum, status, userId, kamer, homeId, opmerking) VALUES (?, ?, ?, ?, ?, ?)");
+			$statement = $this->db->prepare("INSERT INTO herstelformulier (datum, status, userId, kamer, homeId, opmerking) VALUES (?, ?, ?, ?, ?, ?)");
 			$statement->bind_param('ssisis', $this->datum, $this->status->getValue(), $this->studentId, $this->kamer->getKamernummerLang(), $this->homeId, $this->opmerking);
 			$statement->execute();
-			$this->id = $db->insert_id;
+			$this->id = $this->db->insert_id;
 			$statement->close();
 		} else {
 			// bestaand herstelformulier opvragen
 			$this->id = $id;
-			$statement = $db->prepare("SELECT datum, status, userId, kamer, homeId, opmerking FROM herstelformulier WHERE id = ? LIMIT 1");
+			$statement = $this->db->prepare("SELECT datum, status, userId, kamer, homeId, opmerking FROM herstelformulier WHERE id = ? LIMIT 1");
 			$statement->bind_param('i', $this->id);
 			$statement->execute();
 			$statement->bind_result($this->datum, $status, $this->studentId, $kamer, $this->homeId, $this->opmerking);
@@ -79,7 +81,7 @@ class Herstelformulier {
 	
 	function save() {
 		if ($this->updated == 1) {
-			$statement = $db->prepare("UPDATE herstelformulier SET datum = ?, status = ?, userId = ?, kamer = ?, homeId = ?, opmerking = ? WHERE id = ?");
+			$statement = $this->db->prepare("UPDATE herstelformulier SET datum = ?, status = ?, userId = ?, kamer = ?, homeId = ?, opmerking = ? WHERE id = ?");
 			$statement->bind_param('ssisisi', $this->datum, $this->status->getValue(), $this->studentId, $this->kamer->getKamernummerLang(), $this->homeId, $this->opmerking, $this->id);
 			$statement->execute();
 			$statement->close();
@@ -98,7 +100,7 @@ class Herstelformulier {
 	 */
 	public function getHome() {
 		if (!isset($this->home))
-			$this->home = new Home($this->homeId);
+			$this->home = new Home("id", $this->homeId);
 		return $this->home;
 	}
 	

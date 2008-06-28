@@ -13,24 +13,24 @@ class User {
 	private $updated;
 	
 	function __construct($id, $gebruikersnaam = "", $laatsteOnline = "", $email = "") {
-		$db = DB::getDB();
+		$this->db = DB::getDB();
 		if ($id == "") {
 			// Dit is een nieuwe User
 			$this->gebruikersnaam = $gebruikersnaam;
-			setLaatsteOnline($laatsteOnline);
-			setEmail($email);
+			self::setLaatsteOnline($laatsteOnline);
+			self::setEmail($email);
 			// bepalen van zijn userId
-			$statement = $db->prepare("INSERT INTO user (gebruikersnaam, laatsteOnline, email) VALUES (?, ?, ?)");
+			$statement = $this->db->prepare("INSERT INTO user (gebruikersnaam, laatsteOnline, email) VALUES (?, ?, ?)");
 			$statement->bind_param('sss', $this->gebruikersnaam, $this->laatsteOnline, $this->email);
 			$statement->execute();
-			$this->id = $db->insert_id;
+			$this->id = $this->db->insert_id;
 			$statement->close();
 		} else {
 			// Al bestaande User
 			if (!is_numeric($id)) throw new Exception(); // TODO: gepaste exception
 			
 			$this->id = $id;
-			$statement = $db->prepare("SELECT gebruikersnaam, laatsteOnline, email FROM user WHERE id = ? LIMIT 1");
+			$statement = $this->db->prepare("SELECT gebruikersnaam, laatsteOnline, email FROM user WHERE id = ? LIMIT 1");
 			$statement->bind_param('i', $id);
 			$statement->execute();
 			$statement->bind_result($this->gebruikersnaam, $this->laatsteOnline, $this->email);
@@ -46,7 +46,7 @@ class User {
 	
 	function save() {
 		if ($this->updated == 1) {
-			$statement = $db->prepare("UPDATE user SET laatsteOnline = ?, email = ? WHERE id = ?");
+			$statement = $this->db->prepare("UPDATE user SET laatsteOnline = ?, email = ? WHERE id = ?");
 			$statement->bind_param("ssi", $this->laatsteOnline, $this->email, $this->id);
 			$statement->execute();
 			$statement->close();

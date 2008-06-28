@@ -16,7 +16,6 @@ class Student extends User {
 	private $updated;
 	
 	function __construct($id, $gebruikersnaam = "", $laatsteOnline = "", $email = "", $taal = "nl", $homeId = "", $langkamernummer = "", $telefoon = "") {
-		$db = DB::getDB();
 		if ($id == "") {
 			// Nieuwe Student en User
 			parent::__construct($id, $gebruikersnaam, $laatsteOnline, $email);
@@ -25,7 +24,7 @@ class Student extends User {
 			$this->kamer = new Kamer($langkamernummer);
 			$this->telefoon = $telefoon;
 			// Maak de Student aan
-			$statement = $db->prepare("INSERT INTO student (userId, taal, homeId, kamer, telefoon) VALUES (?, ?, ?, ?, ?)");
+			$statement = $this->db->prepare("INSERT INTO student (userId, taal, homeId, kamer, telefoon) VALUES (?, ?, ?, ?, ?)");
 			$statement->bind_param('isisi', $this->id, $this->taal, $this->homeId, $this->kamer->getKamernummerLang(), $this->telefoon);
 			$statement->execute();
 			$statement->close();
@@ -33,7 +32,7 @@ class Student extends User {
 			if (!is_numeric($id)) throw new Exception(); // TODO: gepaste exception
 			
 			parent::__construct ( $id );
-			$statement = $db->prepare("SELECT taal, homeId, kamer, telefoon FROM student WHERE userId = ? LIMIT 1");
+			$statement = $this->db->prepare("SELECT taal, homeId, kamer, telefoon FROM student WHERE userId = ? LIMIT 1");
 			$statement->bind_param('i', $id);
 			$statement->execute();
 			$statement->bind_result($this->taal, $this->homeId, $kamer, $this->telefoon);
@@ -51,7 +50,7 @@ class Student extends User {
 	
 	function save() {
 		if ($this->updated == 1) {
-			$statement = $db->prepare("UPDATE student SET taal = ?, homeId = ?, kamer = ?, telefoon = ? WHERE userId = ?");
+			$statement = $this->db->prepare("UPDATE student SET taal = ?, homeId = ?, kamer = ?, telefoon = ? WHERE userId = ?");
 			$statement->bind_param('sisii', $this->taal, $this->homeId, $this->kamer->getKamernummerLang(), $this->telefoon, $this->id);
 			$statement->execute();
 			$statement->close();
@@ -98,7 +97,7 @@ class Student extends User {
 	
 	function getHome() {
 		if (!isset($this->home))
-			$this->home = new Home($this->homeId);
+			$this->home = new Home("id", $this->homeId);
 			
 		return $this->home;
 	}

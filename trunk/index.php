@@ -1,8 +1,7 @@
-<a href="pages/help.php">klik</a>
+<a href="pages/help.php">klik</a><br/>
 <?
-$s = "test";
-echo $s;
 require_once 'classes/Student.class.php';
-$o = new Student(1);
-echo $o->getGebruikersnaam();
+$o = new Student("", "alfred", "2008-06-26 19:46:23", "emailadres@gmail.com", "en", 2, "91.02.130.232", "14987");
+echo $o->getEmail()."<br/>";
+echo $o->getHome()->getKorteNaam();
 ?>
