@@ -15,8 +15,13 @@ class Auth{
 	private static $aid="rep";//application id die meegegeven wordt bij het inloggen. mag maximaal 4 tekens lang zijn
 	private static $threshold = 300;//aantal seconden dat een webauth key geldig is
 	
-	
-	public function __construct(){
+	/**
+	 * maak een auth object aan op je pagina om de gebruiker in te loggen
+	 * de $automatisch parameter geeft aan of de gebruiker vanzelf moet ingelogd worden
+	 *
+	 * @param boolean $automatisch als true: automatische redirect naar webauth
+	 */
+	public function __construct($automatisch){
 		if(isset($_SESSION['userid'])){//is de gebruiker ingelogd?
 			$this->user=new User($_SESSION['userid']);
 		}
@@ -54,8 +59,10 @@ class Auth{
 			    else throw new Exception("InvalidKeyException");//TODO: custom InvalidKeyException
 			}
 			else{//nog niet ingelogd en niet bezig, dus we zwieren hem naar webauth
-				echo("<meta http-equiv=\"Refresh\" content=\"0; URL=https://webauth.ugent.be/?aid=".self::$aid ."&url=http://".$_SERVER['SERVER_NAME'].$_SERVER['SCRIPT_NAME']."\">");
-				die();//we stoppen de uitvoering
+				if($automatisch){
+					echo("<meta http-equiv=\"Refresh\" content=\"0; URL=https://webauth.ugent.be/?aid=".self::$aid ."&url=http://".$_SERVER['SERVER_NAME'].$_SERVER['SCRIPT_NAME']."\">");
+					die();//we stoppen de uitvoering
+				}
 			}
 		}
 	}
