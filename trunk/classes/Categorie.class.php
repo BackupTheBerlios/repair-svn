@@ -1,4 +1,5 @@
 <?php
+require_once("exceptions/BadParameterException.class.php");
 require_once("DB.class.php");
 require_once("Locatie.class.php");
 
@@ -13,19 +14,34 @@ class Categorie {
 	
 	private $updated;
 	
-	function __construct($id) {
+	function __construct($id, $naamNL = "", $naamEN = "", $locatie = "kot") {
 		$this->db = DB::getDB();
 		$this->id = $id;
+		
+		if ($this->id == "") {
+			// deze categorie bestaat nog niet
+			$this->naamNL = $naamNL;
+			$this->naamEN = $naamEN;
+			$this->locatie = new Locatie($locatie);
+			
+			$statement = $this->db->prepare("INSERT INTO categorie (naamNL, naamEN, locatie) VALUES (?, ?, ?)");
+			$statement->bind_param('sss', $this->naamNL, $this->naamEN, $this->locatie->getValue());
+			$statement->execute();
+			$this->id = $this->db->insert_id;
+			$statement->close();
+		} else {
+			if (!is_numeric($id) || $id < 1) throw new BadParameterException();
+			$statement = $this->db->prepare("SELECT naamNL, naamEN, locatie FROM categorie WHERE id = ?");
+			$statement->bind_param('i', $this->id);
+			$statement->execute();
+			$statement->bind_result($this->naamNL, $this->naamEN, $locatie);
+			$statement->fetch();
+			$statement->close();	
+			
+			$this->locatie = new Locatie($locatie);
+		}
+		
 		$this->updated = 0;
-		
-		$statement = $this->db->prepare("SELECT naamNL, naamEN, locatie FROM categorie WHERE id = ?");
-		$statement->bind_param('i', $this->id);
-		$statement->execute();
-		$statement->bind_result($this->naamNL, $this->naamEN, $locatie);
-		$statement->fetch();
-		$statement->close();	
-		
-		$this->locatie = new Locatie($locatie);
 	}
 	
 	function __destruct() {

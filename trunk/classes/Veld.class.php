@@ -21,20 +21,37 @@ class Veld {
 	 *
 	 * @param integer $id
 	 */
-	function __construct($id) {
+	function __construct($id, $naamNL = "", $naamEN = "", $categorie = "", $home = "", $verwijderd = 0) {
 		$this->db = DB::getDB();
 		$this->updated = 0;
+		$this->id = $id;
 		
-		if (is_numeric($id) && $id > 0)
-			$this->id = $id;
-		else throw new Exception(); // TODO: gepaste exception
-		
-		$statement = $this->db->prepare("SELECT naamNL, naamEN, categorieId, homeId, verwijderd FROM velden WHERE id = ?");
-		$statement->bind_param('i', $this->id);
-		$statement->execute();
-		$statement->bind_result($this->naamNL, $this->naamEN, $this->categorieId, $this->homeId, $this->verwijderd);
-		$statement->fetch();
-		$statement->close();
+		if ($this->id == "") {
+			// sanity checks
+			$this->naamNL = $naamNL;
+			if (!is_a($categorie, "Categorie")) throw new BadParameterException();
+			$this->categorie = $categorie;
+			$this->categorieId = $this->categorie->getId();
+			if (!is_a($home, "Home")) throw new BadParameterException();
+			$this->home = $home;
+			$this->homeId = $this->home->getId();
+			if ($verwijderd != 0 && $verwijderd != 1) throw new BadParameterException();
+			
+			$statement = $this->db->prepare("INSERT INTO Velden (naamNL, naamEN, categorieId, homeId, verwijderd) VALUES (?, ?, ?, ?, ?)");
+			$statement->bind_param('ssiii', $this->naamNL, $this->naamEN, $this->categorieId, $this->homeId, $this->verwijderd);
+			$statement->execute();
+			$this->id = $this->db->insert_id;
+			$statement->close();
+		} else {	
+			if (!is_numeric($this->id) || $this->id < 1) throw new BadParameterException();
+			
+			$statement = $this->db->prepare("SELECT naamNL, naamEN, categorieId, homeId, verwijderd FROM velden WHERE id = ?");
+			$statement->bind_param('i', $this->id);
+			$statement->execute();
+			$statement->bind_result($this->naamNL, $this->naamEN, $this->categorieId, $this->homeId, $this->verwijderd);
+			$statement->fetch();
+			$statement->close();
+		}
 	}
 	
 	function __destruct() {
