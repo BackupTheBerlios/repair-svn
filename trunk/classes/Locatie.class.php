@@ -1,4 +1,5 @@
 <?php
+require_once("exceptions/BadParameterException.class.php");
 class Locatie {
 	
 	private $value;
