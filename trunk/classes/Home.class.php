@@ -102,17 +102,6 @@ class Home {
 	}
 	
 	/**
-	 * @param integer $id
-	 */
-	public function setId($id) {
-		if (is_numeric($id))
-			$this->id = $id;
-		else throw new Exception(); // TODO: gepaste exception
-		
-		$this->updated = 1;
-	}
-	
-	/**
 	 * @param string $kamerPrefix
 	 */
 	public function setKamerPrefix($kamerPrefix) {

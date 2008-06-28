@@ -1,5 +1,9 @@
 <?php
 require_once("DB.class.php");
+require_once("Kamer.class.php");
+require_once("Home.class.php");
+require_once("Status.class.php");
+
 class Herstelformulier {
 	
 	protected $db;
@@ -14,6 +18,7 @@ class Herstelformulier {
 	private $homeId;
 	private $opmerking;
 	
+	// Array met koppels {veldid, Veld object}
 	private $veldenlijst;
 	
 	private $updated;
@@ -32,11 +37,9 @@ class Herstelformulier {
 	function __construct($id, $datum = "", $status = "", $student = "", $opmerking = "", $veldenlijst = "") { // TODO: veldenlijst implementeren
 		$this->db = DB::getDB();
 		
-		if (!is_numeric($id)) throw new Exception(); // TODO: gepaste exception
-		
 		if ($id == "") {
 			// nieuw herstelformulier
-			setDatum($datum);
+			self::setDatum($datum);
 			
 			if (is_a($status, "Status"))
 				$this->status = $status;
@@ -61,6 +64,8 @@ class Herstelformulier {
 			$statement->close();
 		} else {
 			// bestaand herstelformulier opvragen
+			if (!is_numeric($id)) throw new Exception(); // TODO: gepaste exception
+			
 			$this->id = $id;
 			$statement = $this->db->prepare("SELECT datum, status, userId, kamer, homeId, opmerking FROM herstelformulier WHERE id = ? LIMIT 1");
 			$statement->bind_param('i', $this->id);
@@ -70,13 +75,21 @@ class Herstelformulier {
 			$statement->close();
 			$this->status = new Status($status);
 			$this->kamer = new Kamer($kamer);
+			
+			$statement = $this->db->prepare("SELECT veldid FROM relatie_herstelformulier_velden WHERE herstelformulierId = ?");
+			$statement->bind_param('i', $this->id);
+			$statement->execute();
+			$statement->bind_result($veldid);
+			while ($statement->fetch())
+				$this->veldenlijst[] = $veldid;
+			$statement->close();
 		}
 		
 		$this->updated = 0;
 	}
 	
 	function __destruct() {
-		save();
+		self::save();
 	}
 	
 	function save() {
@@ -165,17 +178,7 @@ class Herstelformulier {
 		
 		$this->updated = 1;
 	}
-	
-	/**
-	 * @param integer $id
-	 */
-	public function setId($id) {
-		if (is_numeric($id))
-			$this->id = $id;
-		else throw new Exception(); // TODO: gepaste exception
-		
-		$this->updated = 1;
-	}
+
 	
 	/**
 	 * @param Kamer $kamer
@@ -220,6 +223,12 @@ class Herstelformulier {
 		$this->updated = 1;
 	}
 
+	/**
+	 * @return array(veldid)
+	 */
+	public function getVeldenlijst() {
+		return $this->veldenlijst;
+	}
 }
 
 ?>
