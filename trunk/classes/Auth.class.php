@@ -12,6 +12,7 @@ require_once 'User.class.php';
 class Auth{	
 	
 	private $user;
+	private $isLoggedIn = false;
 	private static $aid="rep";//application id die meegegeven wordt bij het inloggen. mag maximaal 4 tekens lang zijn
 	private static $threshold = 300;//aantal seconden dat een webauth key geldig is
 	
@@ -24,6 +25,7 @@ class Auth{
 	public function __construct($automatisch){
 		if(isset($_SESSION['userid'])){//is de gebruiker ingelogd?
 			$this->user=new User($_SESSION['userid']);
+			$this->isLoggedIn=true;
 		}
 		else{//de gebruiker is nog niet ingelogd
 			if(isset($_GET['key'])){//is hij aan het inloggen?
@@ -51,6 +53,7 @@ class Auth{
 			        			$this->user=new User("", "joske de niet bestaande gebruiker", "", "a@a.aa");//TODO: vervangen als de LDAP werkt
 
 			        		$_SESSION['userid'] = $this->user->getId();
+			        		$this->isLoggedIn=true;
 			        	}
 			        	else throw new Exception("InvalidKeyException");//TODO: custom InvalidKeyException		        	
 			        }
@@ -60,7 +63,7 @@ class Auth{
 			}
 			else{//nog niet ingelogd en niet bezig, dus we zwieren hem naar webauth
 				if($automatisch){
-					echo("<meta http-equiv=\"Refresh\" content=\"0; URL=https://webauth.ugent.be/?aid=".self::$aid ."&url=http://".$_SERVER['SERVER_NAME'].$_SERVER['SCRIPT_NAME']."\">");
+					echo("<meta http-equiv=\"Refresh\" content=\"0; URL=".self::getLoginURL()."\">");
 					die();//we stoppen de uitvoering
 				}
 			}
@@ -69,6 +72,24 @@ class Auth{
 	
 	public function getUser(){
 		return $this->user;
+	}
+	
+	/**
+	 * geeft de login url terug (webauth)
+	 *
+	 * @return de url
+	 */
+	public function getLoginURL(){
+		return "https://webauth.ugent.be/?aid=".self::$aid ."&url=http://".$_SERVER['SERVER_NAME'].$_SERVER['SCRIPT_NAME'];
+	}
+	
+	/**
+	 * geeft terug of de user ingelogd is of niet
+	 *
+	 * @return boolean
+	 */
+	public function isLoggedIn(){
+		return $this->isLoggedIn;
 	}
 }
 ?>

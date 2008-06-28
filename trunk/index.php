@@ -51,11 +51,17 @@
 			<!--de inhoud van de pagina-->
 			<div id="contenthome">
 				
-				<!--Titel met alinea-->
+				<? if($auth->isLoggedIn()){ ?>
+				<div>
+					<h1>Welkom</h1>
+					<p>Hier komt een overzichts pagina ofzo van de laatste 5 herstellingen</p>
+				</div>
+				<?} else{ ?>
 				<div>
 					<h1>Welkom</h1>
 					<p>Welkom op de online herstelformulier applicatie. Klink rechts op aanmelden om een formulier in te vullen.</p>
 				</div>				
+				<?}?>
 				
 			</div>		
 		</div>		
@@ -78,13 +84,13 @@
 		</div>
 		
 		<!--login aan de rechterkant-->
-		<? if(isset($_SESSION['userid'])){ ?>
+		<? if($auth->isLoggedIn()){ ?>
 			<div id="login-act">
 			 &nbsp;-&nbsp;<a href="#"><?=$auth->getUser()->getGebruikersnaam() ?></a>
 		 	</div>
 		<? } else{ ?>
 			<div id="login">
-				<a href="#">aanmelden</a>
+				<a href="<?=$auth->getLoginURL() ?>">aanmelden</a>
 		 	</div>
 		<?} ?>
 		 
