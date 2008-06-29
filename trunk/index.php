@@ -61,10 +61,9 @@
 						<tr><th>Datum</th><th>Inhoud</th><th>Status</th></tr>
 						<?
 							$lijst = HerstelformulierList::getLatest($auth->getUser()->getId(), 5);
-							print_r($lijst);
-							for($i; $i < sizeof($lijst);$i++){
+							for($i=0; $i < sizeof($lijst);$i++){
 								$form = $lijst[$i];
-								echo("<tr>".$form->getDatum()."<td><tr>".$form->getKamer()."<td><tr>".$form->getStatus()."<td></tr>");
+								echo("<tr><td>".$form->getDatum()."</td><td>".$form->getKamer()->getKamernummerKort()."</td><td>".$form->getStatus()->getValue()."</td></tr>");
 							}
 						 ?>
 					</table>
