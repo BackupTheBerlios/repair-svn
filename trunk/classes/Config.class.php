@@ -7,6 +7,11 @@ final class Config {
 	public static $DB_LOGIN = "repair";
 	public static $DB_PASSWORD = "r3p@1r";
 	public static $DB_DATABASE = "repair";
+	
+	/**
+	 * Debug
+	 */
+	public static $IS_DEBUG = 0;
 }
 
 /**
