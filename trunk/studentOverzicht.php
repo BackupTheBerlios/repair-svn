@@ -24,15 +24,6 @@
 			<a href="help.php">CSS</a> | <a href="#">English</a> | <a href="#">Contact</a> | <a href="#" onclick="window.print()">Print</a>
 		</div>
 		
-		<!--zoekveldje-->
-		<div id="search">
-			<form method="get" action="">
-				<a href="#" class="advanced"/> 
-				<input name="q" value="" class="searchinput" type="text" /> 
-				<input type="submit" value="zoek" class="searchbutton" />
-			</form>
-		</div>
-		
 		<!--broodkruimeltjes-->
 		<div id="breadcrumb"> 
 			<a href='index.php'>Dringende Herstellingen</a> &gt; Overzicht
@@ -58,8 +49,8 @@
 					<h1>Overzicht</h1>
 					<p>Welkom <?=$auth->getUser()->getVoornaam()?>, op deze pagina kunt u een overzicht vinden van de reeds ingediende herstelformulieren.</p>
 					<table>
-						<caption><em>Overzicht van de voorbije herstellingen</em></caption>
-						<tr><th>Datum</th><th>Inhoud</th><th>Status</th></tr>
+						<tr class="tabelheader"><td colspan="3">Overzicht van de voorbije herstellingen</td></tr>
+						<tr class="legende"><td>Datum</td><td>Inhoud</td><td>Status</td></tr>
 						<?
 							$lijst = HerstelformulierList::getLatest($auth->getUser()->getId(), 5);
 							for($i=0; $i < sizeof($lijst);$i++){
@@ -94,15 +85,9 @@
 		</div>
 		
 		<!--login aan de rechterkant-->
-		<? if($auth->isLoggedIn()){ ?>
-			<div id="login-act">
-			 &nbsp;-&nbsp;<a href="logout.php"><?=$auth->getUser()->getGebruikersnaam() ?></a>
-		 	</div>
-		<? } else{ ?>
-			<div id="login">
-				<a href="<?=$auth->getLoginURL() ?>">aanmelden</a>
-		 	</div>
-		<?} ?>
+		<div id="login-act">
+			<?=$auth->getUser()->getGebruikersnaam() ?>&nbsp;-&nbsp;<a href="logout.php" title="uitloggen" >afmelden</a>
+		 </div>
 		 
 		 
 		

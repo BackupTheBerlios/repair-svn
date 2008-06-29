@@ -24,15 +24,6 @@
 			<a href="help.php">CSS</a> | <a href="#">English</a> | <a href="#">Contact</a> | <a href="#" onclick="window.print()">Print</a>
 		</div>
 		
-		<!--zoekveldje-->
-		<div id="search">
-			<form method="get" action="">
-				<a href="#" class="advanced"/> 
-				<input name="q" value="" class="searchinput" type="text" /> 
-				<input type="submit" value="zoek" class="searchbutton" />
-			</form>
-		</div>
-		
 		<!--broodkruimeltjes-->
 		<div id="breadcrumb"> 
 			<a href='index.php'>Dringende Herstellingen</a> &gt; Index
@@ -44,7 +35,7 @@
 			<!--horizontale navigatiebalk bovenaan-->
 			<div id="mainnav">
 				<ul>
-					<li><a href="overzicht.php">Overzicht</a></li>
+					<li class="first"><a href="overzicht.php">Overzicht</a></li>
 					<li><a href="#">Defect melden</a></li>
 					<li><a href="#">Statistieken</a></li>
 				</ul>
@@ -61,8 +52,8 @@
 						
 					</p>
 					<ul>
-						<li>Een defect <a href="#">melden</a></li>
-						<li><a href="studentOverzicht.php">Overzicht</a> van de vorige aanvragen</li>
+						<li>Een <a href="#">defect</a> melden</li>
+						<li>Een <a href="studentOverzicht.php">Overzicht</a> van de vorige aanvragen bekijken</li>
 					</ul>
 				</div>
 				<?}} else{ ?>
@@ -95,11 +86,11 @@
 		<!--login aan de rechterkant-->
 		<? if($auth->isLoggedIn()){ ?>
 			<div id="login-act">
-			 &nbsp;-&nbsp;<a href="logout.php"><?=$auth->getUser()->getGebruikersnaam() ?></a>
+			 <?=$auth->getUser()->getGebruikersnaam() ?>&nbsp;-&nbsp;<a href="logout.php" title="uitloggen" >afmelden</a>
 		 	</div>
 		<? } else{ ?>
 			<div id="login">
-				<a href="<?=$auth->getLoginURL() ?>">aanmelden</a>
+				<a href="<?=$auth->getLoginURL() ?>" title="inloggen">aanmelden</a>
 		 	</div>
 		<?} ?>
 		 
