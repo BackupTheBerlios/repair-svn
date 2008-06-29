@@ -12,10 +12,10 @@ final class Config {
 /**
  * Eigen exceptionhandler
  */
-function exceptions_error_handler($severity, $message, $filename, $lineno) { 
+/**function exceptions_error_handler($severity, $message, $filename, $lineno) { 
     echo "WTFFF";
 }
 
 set_error_handler('exceptions_error_handler');
-
+*/
 ?>
