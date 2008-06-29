@@ -53,7 +53,7 @@
 					</p>
 					<ul>
 						<li>Een <a href="#">defect</a> melden</li>
-						<li>Een <a href="studentOverzicht.php">Overzicht</a> van de vorige aanvragen bekijken</li>
+						<li>Een <a href="studentOverzicht.php">overzicht</a> van de vorige aanvragen bekijken</li>
 					</ul>
 				</div>
 				<?}} else{ ?>

@@ -55,7 +55,7 @@
 							$lijst = HerstelformulierList::getLatest($auth->getUser()->getId(), 5);
 							for($i=0; $i < sizeof($lijst);$i++){
 								$form = $lijst[$i];
-								echo("<tr><td>".$form->getDatum()."</td><td>".$form->getKamer()->getKamernummerKort()."</td><td>".$form->getStatus()->getValue()."</td></tr>");
+								echo("<tr><td>".$form->getDatum()."</td><td>".$form->getSamenvatting()."</td><td>".$form->getStatus()->getValue()."</td></tr>");
 							}
 						 ?>
 					</table>

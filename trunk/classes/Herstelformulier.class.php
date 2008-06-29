@@ -3,6 +3,7 @@ require_once("DB.class.php");
 require_once("Kamer.class.php");
 require_once("Home.class.php");
 require_once("Status.class.php");
+require_once 'Veld.class.php';
 
 class Herstelformulier {
 	
@@ -18,13 +19,14 @@ class Herstelformulier {
 	private $homeId;
 	private $opmerking;
 	
-	// Array met koppels {veldid, Veld object}
+	// Array met koppels {veldid, Veld object} TODO: Dit lijkt me niet te kloppen
 	private $veldenlijst;
 	
 	private $updated;
 	
 	/**
-	 * Maakt een herstelformulier. Met enkel $id gespecifieerd zal het herstelformulier met id = $id uit de database gehaald worden, anders wordt aan de hand van de andere parameters een nieuw herstelformulier gemaakt.
+	 * Maakt een herstelformulier. Met enkel $id gespecifieerd zal het herstelformulier met id = $id uit de database gehaald worden, 
+	 * anders wordt aan de hand van de andere parameters een nieuw herstelformulier gemaakt.
 	 * Het herstelformulier schrijft zichzelf weg wanneer het object verwijderd wordt.
 	 *
 	 * @param integer $id
@@ -230,6 +232,15 @@ class Herstelformulier {
 	 */
 	public function getVeldenlijst() {
 		return $this->veldenlijst;
+	}
+
+	public function getSamenvatting(){
+		$output="";
+		for($i=0; $i < sizeof($this->veldenlijst); $i++){
+			$veld = new Veld($this->veldenlijst[$i]);
+			$output .= $veld->getNaamNL().", ";//TODO taal onafhankelijk maken
+		}
+		return substr($output, 0, -2);
 	}
 }
 
