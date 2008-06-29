@@ -4,7 +4,7 @@
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
 	    <title>Dringende Herstellingen</title>
-	    <link rel="stylesheet" type="text/css" href="../style.css"/>
+	    <link rel="stylesheet" type="text/css" href="style.css"/>
 	</head>
 	<body>
 		<!--logo linksboven-->

@@ -2,7 +2,7 @@
 	session_start(); 
 	require_once 'classes/Auth.class.php';
 	require_once 'classes/HerstelformulierList.class.php';
-	$auth = new Auth(false);
+	$auth = new Auth(true);
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -35,7 +35,7 @@
 		
 		<!--broodkruimeltjes-->
 		<div id="breadcrumb"> 
-			<a href='index.php'>Dringende Herstellingen</a> &gt; Index
+			<a href='index.php'>Dringende Herstellingen</a> &gt; Overzicht
 		</div>
 		
 		<!--main content-->
@@ -44,7 +44,7 @@
 			<!--horizontale navigatiebalk bovenaan-->
 			<div id="mainnav">
 				<ul>
-					<li><a href="overzicht.php">Overzicht</a></li>
+					<li class="first" id="active"><a href="#">Overzicht</a></li>
 					<li><a href="#">Defect melden</a></li>
 					<li><a href="#">Statistieken</a></li>
 				</ul>
@@ -52,24 +52,25 @@
 			
 			<!--de inhoud van de pagina-->
 			<div id="contenthome">
-				<? if($auth->isLoggedIn()){ if($auth->getUser()->isStudent()){?>
+				
+				<? if($auth->getUser()->isStudent()){ ?>
 				<div>
-					<h1>Welkom</h1>
-					<p>
-						Welkom <?=$auth->getUser()->getVoornaam()?>, volgens onze gegevens woont u op <?=$auth->getUser()->getHome()->getKorteNaam() ?> op kamer <?=$auth->getUser()->getKamer()->getKamernummerKort() ?>. 
-						Indien deze gegevens niet correct zijn, neem contact op met de <a href="http://www.ugent.be/nl/voorzieningen/huisvesting">Afdeling Huisvesting</a>. Maak uw keuze uit de volgende opties:
-						
-					</p>
-					<ul>
-						<li>Een defect <a href="#">melden</a></li>
-						<li><a href="studentOverzicht.php">Overzicht</a> van de vorige aanvragen</li>
-					</ul>
+					<h1>Overzicht</h1>
+					<p>Welkom <?=$auth->getUser()->getVoornaam()?>, op deze pagina kunt u een overzicht vinden van de reeds ingediende herstelformulieren.</p>
+					<table>
+						<caption><em>Overzicht van de voorbije herstellingen</em></caption>
+						<tr><th>Datum</th><th>Inhoud</th><th>Status</th></tr>
+						<?
+							$lijst = HerstelformulierList::getLatest($auth->getUser()->getId(), 5);
+							for($i=0; $i < sizeof($lijst);$i++){
+								$form = $lijst[$i];
+								echo("<tr><td>".$form->getDatum()."</td><td>".$form->getKamer()->getKamernummerKort()."</td><td>".$form->getStatus()->getValue()."</td></tr>");
+							}
+						 ?>
+					</table>
 				</div>
-				<?}} else{ ?>
-				<div>
-					<h1>Welkom</h1>
-					<p>Welkom op de online herstelformulier applicatie. Op deze website is het mogelijk om een herstelformulier digitaal in te vullen. Klik rechts op aanmelden om verder te gaan.</p>
-				</div>				
+				<?} else{ ?>
+					<meta http-equiv="Refresh" content="0; URL=personeelOverzicht.php">			
 				<?}?>
 				
 			</div>		

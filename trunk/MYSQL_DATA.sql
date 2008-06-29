@@ -29,15 +29,9 @@ INSERT INTO `home` (`id`, `korteNaam`, `langeNaam`, `adres`, `verdiepen`, `kamer
 
 INSERT INTO `user` (`id`, `gebruikersnaam`, `voornaam`, `achternaam`, `laatsteOnline`, `email`) VALUES 
 (1, 'bmesuere', 'Bart', 'Mesuere', '2008-06-26 19:56:05', 'bart.mesuere@ugent.be'),
-(2, 'bevdeghi', 'Bert', 'Vandeghinste', 2008-06-26 19:56:23', 'bert.vandeghinste@ugent.be');
+(2, 'bevdeghi', 'Bert', 'Vandeghinste', '2008-06-26 19:56:23', 'bert.vandeghinste@ugent.be');
 
--- 
--- Dumping data for table `personeel`
--- 
 
-INSERT INTO `personeel` (`userId`) VALUES 
-(1),
-(2);
 
 -- 
 -- Dumping data for table `student`

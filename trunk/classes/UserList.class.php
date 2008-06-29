@@ -1,8 +1,10 @@
 <?php
 require_once 'DB.class.php';
+require_once 'Student.class.php';
+require_once 'Personeel.class.php';
 class UserList {
 	
-	private static $array;
+	private static $array = array();
 	
 	/**
 	 * Geeft een gebruiker terug. Indien een gebruiker eerder al aangemaakt werd, zal er geen nieuw User-object aangemaakt worden, maar zal het al bestaande object gerecycled worden.
@@ -14,11 +16,14 @@ class UserList {
 		if (!array_key_exists($id, self::$array)) {
 			if(self::isStudent($id))
 				self::$array[$id] = new Student($id);
-			else
+			else if(self::isPersoneel($id))
 				self::$array[$id] = new Personeel($id);
-		} else {
-			return self::$array[$id];
-		}
+			else{
+				throw new Exception("de gebruiker is geen student en geen personeel, er klopt iets niet");
+				die();
+			}
+		} 
+		return self::$array[$id];
 	}
 	
 	/**

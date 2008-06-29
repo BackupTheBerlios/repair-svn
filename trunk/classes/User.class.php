@@ -97,6 +97,14 @@ class User {
 	function getEmail() {
 		return $this->email;
 	}
+	
+	function isStudent(){
+		return is_a($this, "Student");
+	}
+	
+	function isPersoneel(){
+		return is_a($this, "Personeel");
+	}
 }
 
 ?>

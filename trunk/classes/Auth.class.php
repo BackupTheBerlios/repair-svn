@@ -24,7 +24,7 @@ class Auth{
 	 */
 	public function __construct($automatisch){
 		if(isset($_SESSION['userid'])){//is de gebruiker ingelogd?
-			$this->user=new User($_SESSION['userid']);
+			$this->user=UserList::getUser($_SESSION['userid']);
 			$this->isLoggedIn=true;
 		}
 		else{//de gebruiker is nog niet ingelogd
@@ -51,9 +51,17 @@ class Auth{
 			        			$this->user=UserList::getUser($id);
 			        		else //anders, haal zen gegevens uit de ldap
 			        			$this->user=new User("", "joske de niet bestaande gebruiker", "", "a@a.aa");//TODO: vervangen als de LDAP werkt
-
 			        		$_SESSION['userid'] = $this->user->getId();
 			        		$this->isLoggedIn=true;
+			        		
+			        		//doorsturen naar de juiste pagina
+			        		if($this->user->isStudent())
+			        			echo("<meta http-equiv=\"Refresh\" content=\"0; URL=studentOverzicht.php\">"); 
+			        		else if($this->user->isPersoneel())
+			        			echo("<meta http-equiv=\"Refresh\" content=\"0; URL=personeelOverzicht.php\">");
+			        		else
+			        			throw new Exception("De ingelogde gebruiker is geen student en geen geregistreerd personeelslid");
+			        		die();//stoppen met de output
 			        	}
 			        	else throw new Exception("InvalidKeyException");//TODO: custom InvalidKeyException		        	
 			        }
