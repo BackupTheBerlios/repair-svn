@@ -70,6 +70,11 @@ class Auth{
 		}
 	}
 	
+	/**
+	 * geeft het userobject terug van de ingelogde gebruiker
+	 *
+	 * @return User
+	 */
 	public function getUser(){
 		return $this->user;
 	}
@@ -100,7 +105,7 @@ class Auth{
 	public function logOut(){
 		session_destroy();
 		$this->isLoggedIn=false;
-		echo("<meta http-equiv=\"Refresh\" content=\"0; URL=http://".$_SERVER['SERVER_NAME']."\">");
+		echo("<meta http-equiv=\"Refresh\" content=\"0; URL=index.php\">");
 		die();
 	}
 }

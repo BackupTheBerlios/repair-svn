@@ -1,6 +1,7 @@
 <? 
 	session_start(); 
 	require_once 'classes/Auth.class.php';
+	require_once 'classes/HerstelformulierList.class.php';
 	$auth = new Auth(false);
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
@@ -54,7 +55,19 @@
 				<? if($auth->isLoggedIn()){ ?>
 				<div>
 					<h1>Welkom</h1>
-					<p>Hier komt een overzichts pagina ofzo van de laatste 5 herstellingen</p>
+					<p>Welkom <?=$auth->getUser()->getGebruikersnaam() ?>, </p>
+					<table>
+						<caption>Overzicht van de voorbije herstellingen</caption>
+						<tr><th>Datum</th><th>Inhoud</th><th>Status</th></tr>
+						<?
+							$lijst = HerstelformulierList::getLatest($auth->getUser()->getId(), 5);
+							print_r($lijst);
+							for($i; $i < sizeof($lijst);$i++){
+								$form = $lijst[$i];
+								echo("<tr>".$form->getDatum()."<td><tr>".$form->getKamer()."<td><tr>".$form->getStatus()."<td></tr>");
+							}
+						 ?>
+					</table>
 				</div>
 				<?} else{ ?>
 				<div>

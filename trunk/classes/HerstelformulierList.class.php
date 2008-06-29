@@ -43,6 +43,30 @@ class HerstelformulierList {
 		else
 			return $lijst[$searchStatus->getValue()];
 	}
+	
+	/**
+	 * geeft een lijst van maximaal $aantal items terug met Herstelformulier objecten horende bij het opgegeven userid
+	 *
+	 * @param integer $userId
+	 * @param integer $aantal
+	 * @return Array een lijst van Herstelformulier objecten
+	 */
+	static function getLatest($userId, $aantal){
+		$db = DB::getDB();
+		$lijst = Array();
+		if (!is_numeric($userId) || $userId < 1 || !is_numeric($aantal)) throw new BadParameterException();		
+		
+		$statement = $db->prepare("SELECT id FROM herstelformulier WHERE userId = ? ORDER BY status, datum DESC LIMIT ?");
+		$statement->bind_param('ii', $userId, $aantal);
+		$statement->execute();
+		$statement->bind_result($id);
+		$statement->store_result();
+		while ($statement->fetch()) 
+			$lijst[] = new Herstelformulier($id);
+		$statement->free_result();
+		$statement->close();
+		return $lijst;
+	}
 }
 
 ?>
