@@ -118,6 +118,8 @@ DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `id` int(11) NOT NULL auto_increment,
   `gebruikersnaam` varchar(8) NOT NULL,
+  `voornaam` varchar(255) NOT NULL,
+  `achternaam` varchar(255) NOT NULL,
   `laatsteOnline` datetime NOT NULL,
   `email` varchar(255) NOT NULL,
   PRIMARY KEY  (`id`),
