@@ -86,7 +86,7 @@
 		<!--login aan de rechterkant-->
 		<? if($auth->isLoggedIn()){ ?>
 			<div id="login-act">
-			 &nbsp;-&nbsp;<a href="#"><?=$auth->getUser()->getGebruikersnaam() ?></a>
+			 &nbsp;-&nbsp;<a href="logout.php"><?=$auth->getUser()->getGebruikersnaam() ?></a>
 		 	</div>
 		<? } else{ ?>
 			<div id="login">

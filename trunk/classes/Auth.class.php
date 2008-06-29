@@ -91,5 +91,17 @@ class Auth{
 	public function isLoggedIn(){
 		return $this->isLoggedIn;
 	}
+	
+	/**
+	 * functie om uit te loggen. Wist alle session data en stuurt de gebruiker terug naar de index
+	 * TODO: eventueel zorgen dat de taal ed. blijft opgeslaan
+	 *
+	 */
+	public function logOut(){
+		session_destroy();
+		$this->isLoggedIn=false;
+		echo("<meta http-equiv=\"Refresh\" content=\"0; URL=http://".$_SERVER['SERVER_NAME']."\">");
+		die();
+	}
 }
 ?>
