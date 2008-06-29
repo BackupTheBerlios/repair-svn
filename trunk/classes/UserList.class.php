@@ -8,13 +8,16 @@ class UserList {
 	 * Geeft een gebruiker terug. Indien een gebruiker eerder al aangemaakt werd, zal er geen nieuw User-object aangemaakt worden, maar zal het al bestaande object gerecycled worden.
 	 *
 	 * @param int $id
-	 * @return User-object
+	 * @return User
 	 */
 	public static function getUser($id) {
-		if (!array_key_exists($id, $array)) {
-			$array[$id] = new User($id);
+		if (!array_key_exists($id, self::$array)) {
+			if(self::isStudent($id))
+				self::$array[$id] = new Student($id);
+			else
+				self::$array[$id] = new Personeel($id);
 		} else {
-			return $array[$id];
+			return self::$array[$id];
 		}
 	}
 	
@@ -40,6 +43,38 @@ class UserList {
 		else
 			return 0;
 	}
+	
+	/**
+	 * checkt of de gebruiker met dit Id een student is
+	 *
+	 * @param integer $id userid
+	 * @return boolean
+	 */
+	private static function isStudent($id){
+		$db = DB::getDB();
+		$statement = $db->prepare("SELECT userId FROM student WHERE userId = ?");
+		$statement->bind_param('i', $id);
+		$statement->execute();
+		$statement->store_result();
+		return $statement->num_rows==1;
+	}
+	
+	/**
+	 * checkt of de gebruiker met dit Id personeel is
+	 *
+	 * @param integer $id userid
+	 * @return boolean
+	 */
+	private static function isPersoneel($id){
+		$db = DB::getDB();
+		$statement = $db->prepare("SELECT userId FROM personeel WHERE userId = ?");
+		$statement->bind_param('i', $id);
+		$statement->execute();
+		$statement->store_result();
+		return $statement->num_rows==1;
+	}
+	
+	
 }
 
 ?>

@@ -48,7 +48,7 @@ class Auth{
 			        		//zit de gebruiker al in onze databank?
 			        		$id=UserList::isExistingUser($user);
 			        		if($id!=0)//als dat zo is maak zijn object aan
-			        			$this->user=new User($id);
+			        			$this->user=UserList::getUser($id);
 			        		else //anders, haal zen gegevens uit de ldap
 			        			$this->user=new User("", "joske de niet bestaande gebruiker", "", "a@a.aa");//TODO: vervangen als de LDAP werkt
 
