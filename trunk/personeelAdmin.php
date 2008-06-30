@@ -51,13 +51,13 @@
 					<h1>Beheer</h1>
 					<p>Hieronder kunt u het herstelformulier van Home Boudewijn aanpassen.</p><?//TODO: dynamisch maken ?>
 					<table>
-						<tr class="tabelheader"><td colspan="3">Herstelformulier Home Boudewijn</td></tr>
-						<tr class="legende"><td>Naam Nederlands</td><td>Naam Engels</td><td>Categorie</td></tr>
+						<tr class="tabelheader"><td colspan="4">Herstelformulier Home Boudewijn</td></tr>
+						<tr class="legende"><td>Naam Nederlands</td><td>Naam Engels</td><td>Categorie</td><td>Locatie</td></tr>
 						<?
 							$lijst = VeldList::getHomeForm(1);
 							for($i=0; $i < sizeof($lijst);$i++){
 								$veld = $lijst[$i];
-								echo("<tr><td>".$veld->getnaamNL()."</td><td>".$veld->getnaamEN()."</td><td>".$veld->getCategorie()->getNaamNL()."</td></tr>");
+								echo("<tr><td>".$veld->getnaamNL()."</td><td>".$veld->getnaamEN()."</td><td>".$veld->getCategorie()->getNaamNL()."</td><td>".$veld->getCategorie()->getLocatie()->getValue()."</td></tr>");
 							}
 						 ?>
 					</table>
