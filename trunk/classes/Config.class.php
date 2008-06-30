@@ -17,13 +17,12 @@ final class Config {
 /**
  * Eigen exceptionhandler
  */
-function error_handler($severity, $message, $filename, $lineno, $errcontext) { 
+function error_handler($severity, $message, $filename, $lineno) { 
 	//alle brol afzetten
-	//if ( ! ($error_level & error_reporting ()) || ! (ini_get ('display_errors') || ini_get ('log_errors')))
-     //   return;
-    $error = $message." ".$message." ". $filename." ".$lineno;
+	if ( ! ($error_level & error_reporting ()) || ! (ini_get ('display_errors') || ini_get ('log_errors')))
+        return;
+    $error = "<p><em>".$message.":</em> ". $filename." op lijn".$lineno;
     showError($error);
-    exit;
 }
 
 
@@ -40,12 +39,12 @@ function exception_handler($exception){
 
 function showError($msg){
 	$_SESSION['error']=$msg;
-    echo("<meta http-equiv=\"Refresh\" content=\"0; URL=error.php\">");
+    echo("meta http-equiv=\"Refresh\" content=\"0; URL=error.php\">");
 	die();
 }
 
 error_reporting (E_ALL & ~ (E_NOTICE | E_USER_NOTICE));
-set_error_handler('error_handler');//TODO: o, de een of andere reden werkt dit niet :(
+set_error_handler('error_handler');
 set_exception_handler('exception_handler');
 
 ?>
