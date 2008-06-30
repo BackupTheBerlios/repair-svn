@@ -33,13 +33,13 @@ function error_handler($severity, $message, $filename, $lineno) {
  * @param Exception $exception de exception
  */
 function exception_handler($exception){
-	$error = "<p><em>".$exception->getMessage().":</em> ".$exception->getFile()." at line".$exception->getLine()."</p>";
+	$error = "<p><em>".$exception->getMessage().":</em> ".$exception->getFile()." op lijn ".$exception->getLine()."</p>";
 	showError($error);
 }
 
 function showError($msg){
 	$_SESSION['error']=$msg;
-    echo("meta http-equiv=\"Refresh\" content=\"0; URL=error.php\">");
+    echo("<meta http-equiv=\"Refresh\" content=\"0; URL=error.php\">");
 	die();
 }
 

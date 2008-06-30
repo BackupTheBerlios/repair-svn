@@ -73,7 +73,7 @@ class Veld {
 	 */
 	public function getCategorie() {
 		if (!isset($this->categorie))
-			$this->categorie = new Category($this->categorieId);
+			$this->categorie = new Categorie($this->categorieId);
 			
 		return $this->categorie;
 	}

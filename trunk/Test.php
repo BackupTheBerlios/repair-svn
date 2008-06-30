@@ -14,4 +14,11 @@ echo "<br/><br/>";
  */
 $lijstje = HerstelformulierList::getList(1, new Status("gezien"));
 print_r($lijstje);
+
+echo "<br/><br/>";
+/*
+ * testje
+ */
+require_once 'classes/VeldList.php';
+print_r(VeldList::getHomeForm(1));
 ?>

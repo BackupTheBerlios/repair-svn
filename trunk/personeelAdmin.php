@@ -1,7 +1,11 @@
 <? 
 	session_start(); 
 	require_once 'classes/Auth.class.php';
-	$auth = new Auth(false);
+	require_once 'classes/VeldList.php';
+	$auth = new Auth(true);
+	if($auth->getUser()->isStudent()){
+		//throw new Exception("Access Violation Exception");//todo: aanzetten
+	}
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -25,7 +29,7 @@
 		
 		<!--broodkruimeltjes-->
 		<div id="breadcrumb"> 
-			<a href='index.php'>Dringende Herstellingen</a> &gt; Index
+			<a href='index.php'>Dringende Herstellingen</a> &gt; Beheer
 		</div>
 		
 		<!--main content-->
@@ -37,32 +41,27 @@
 					<li class="first"><a href="overzicht.php">Overzicht</a></li>
 					<li><a href="#">Defect melden</a></li>
 					<li><a href="#">Statistieken</a></li>
-					<li><a href="personeelAdmin.php">TIJDELIJKE LINK NAAR BEHEER</a></li>
+					<li id=active><a href="#">Beheer</a></li>
 				</ul>
 			</div>
 			
 			<!--de inhoud van de pagina-->
 			<div id="contenthome">
-				<? if($auth->isLoggedIn()){ if($auth->getUser()->isStudent()){?>
 				<div>
-					<h1>Welkom</h1>
-					<p>
-						Welkom <?=$auth->getUser()->getVoornaam()?>, volgens onze gegevens woont u op <?=$auth->getUser()->getHome()->getKorteNaam() ?> op kamer <?=$auth->getUser()->getKamer()->getKamernummerKort() ?>. 
-						Indien deze gegevens niet correct zijn, neem contact op met de <a href="http://www.ugent.be/nl/voorzieningen/huisvesting">Afdeling Huisvesting</a>. Maak uw keuze uit de volgende opties:
-						
-					</p>
-					<ul>
-						<li>Een <a href="#">defect</a> melden</li>
-						<li>Een <a href="studentOverzicht.php">overzicht</a> van de vorige aanvragen bekijken</li>
-					</ul>
+					<h1>Beheer</h1>
+					<p>Hieronder kunt u het herstelformulier van Home Boudewijn aanpassen.</p><?//TODO: dynamisch maken ?>
+					<table>
+						<tr class="tabelheader"><td colspan="3">Herstelformulier Home Boudewijn</td></tr>
+						<tr class="legende"><td>Naam Nederlands</td><td>Naam Engels</td><td>Categorie</td></tr>
+						<?
+							$lijst = VeldList::getHomeForm(1);
+							for($i=0; $i < sizeof($lijst);$i++){
+								$veld = $lijst[$i];
+								echo("<tr><td>".$veld->getnaamNL()."</td><td>".$veld->getnaamEN()."</td><td>".$veld->getCategorie()->getNaamNL()."</td></tr>");
+							}
+						 ?>
+					</table>
 				</div>
-				<?}} else{ ?>
-				<div>
-					<h1>Welkom</h1>
-					<p>Welkom op de online herstelformulier applicatie. Op deze website is het mogelijk om een herstelformulier digitaal in te vullen. Klik rechts op aanmelden om verder te gaan.</p>
-				</div>				
-				<?}?>
-				
 			</div>		
 		</div>		
 		
@@ -84,15 +83,9 @@
 		</div>
 		
 		<!--login aan de rechterkant-->
-		<? if($auth->isLoggedIn()){ ?>
-			<div id="login-act">
-			 <?=$auth->getUser()->getGebruikersnaam() ?>&nbsp;-&nbsp;<a href="logout.php" title="uitloggen" >afmelden</a>
-		 	</div>
-		<? } else{ ?>
-			<div id="login">
-				<a href="<?=$auth->getLoginURL() ?>" title="inloggen">aanmelden</a>
-		 	</div>
-		<?} ?>
+		<div id="login-act">
+			<?=$auth->getUser()->getGebruikersnaam() ?>&nbsp;-&nbsp;<a href="logout.php" title="uitloggen" >afmelden</a>
+		</div>
 		 
 		 
 		

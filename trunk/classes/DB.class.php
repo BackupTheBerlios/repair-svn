@@ -2,10 +2,13 @@
 require_once("Config.class.php");
 
 class DBWrapper extends mysqli {
+	public $aantal = 0;
 
 	public function prepare($query) {
 		if (Config::$IS_DEBUG)
 			echo($query."<br/>");
+		$this->aantal++;
+		$_SESSION['numOfQ'] = $this->aantal;
 		return parent::prepare($query);
 	}
 	
