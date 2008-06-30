@@ -1,5 +1,6 @@
 <?php
 
+require_once 'classes/exceptions/BadParameterException.class.php';
 require_once ('User.class.php');
 require_once ('Home.class.php');
 require_once ('Kamer.class.php');
