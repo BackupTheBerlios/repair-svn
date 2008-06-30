@@ -116,11 +116,11 @@ class User {
 	}
 	
 	function isStudent(){
-		return is_a($this, "Student");
+		return $this instanceof Student;
 	}
 	
 	function isPersoneel(){
-		return is_a($this, "Personeel");
+		return $this instanceof Personeel;
 	}
 }
 
