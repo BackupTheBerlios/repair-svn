@@ -1,4 +1,5 @@
 <?php
+require_once 'classes/exceptions/BadParameterException.class.php';
 require_once("DB.class.php");
 class Home {
 	//databank connectie
@@ -23,6 +24,7 @@ class Home {
 	 * @param String $value waarde van het veld
 	 */
 	public function __construct($veld, $value) {
+		if (strlen($veld) == 0) throw new BadParameterException();
 		$this->db = DB::getDB();
 		$statement = $this->db->prepare("SELECT id, korteNaam, langeNaam, adres, verdiepen, kamerPrefix FROM home WHERE $veld = ?");
 		$statement->bind_param('s', $value);

@@ -35,7 +35,7 @@
 			<div id="mainnav">
 				<ul>
 					<li class="first"><a href="overzicht.php">Overzicht</a></li>
-					<li><a href="#">Defect melden</a></li>
+					<li><a href="nieuweMelding.php">Defect melden</a></li>
 					<li><a href="#">Statistieken</a></li>
 					<li><a href="personeelAdmin.php">TIJDELIJKE LINK NAAR BEHEER</a></li>
 				</ul>

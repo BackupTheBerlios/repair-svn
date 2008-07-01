@@ -1,5 +1,8 @@
-<? 
+<?
 	session_start(); 
+	require_once 'classes/HomeList.class.php';
+	require_once 'classes/Locatie.class.php';
+	require_once 'classes/Home.class.php';
 	require_once 'classes/Auth.class.php';
 	require_once 'classes/VeldList.php';
 	$auth = new Auth(true);
@@ -42,7 +45,7 @@
 			<div id="mainnav">
 				<ul>
 					<li class="first"><a href="overzicht.php">Overzicht</a></li>
-					<li><a href="#">Defect melden</a></li>
+					<li><a href="nieuweMelding.php">Defect melden</a></li>
 					<li><a href="#">Statistieken</a></li>
 					<li id=active><a href="#">Beheer</a></li>
 				</ul>
@@ -52,37 +55,32 @@
 			<div id="contenthome">
 				<div>
 					<h1>Beheer</h1>
-					<p>Hieronder kunt u het herstelformulier van Home Boudewijn aanpassen.</p><?//TODO: dynamisch maken ?>
+					<p>Hieronder kunt u het herstelformulier van Home Boudewijn aanpassen.</p>
+					<?
+						// TODO: dynamisch maken: alle homes voor dit personeelslid opvragen, en erover loopen
+						// tijdelijk is het gewoon alle homes
+						$homes = HomeList::getHomes();
+						$locaties = Locatie::getAllValues();
+					
+					foreach ($homes as $homeId => $currentHome) {
+					?>
 					<table>
-						<tr class="tabelheader"><td colspan="5">Herstelformulier Home Boudewijn</td></tr>
-						<tr class="subheader"><td colspan="5">Kot</td></tr>
+						<tr class="tabelheader"><td colspan="5">Herstelformulier <?=$currentHome->getKorteNaam(); ?></td></tr>
+						<?
+						foreach ($locaties as $index => $locatie) {
+						?>
+						<tr class="subheader"><td colspan="5"><?=$locatie->getValue(); ?></td></tr>
 						<tr class="legende"><td>Naam Nederlands</td><td>Naam Engels</td><td>Categorie</td><td></td><td></td></tr>
 						<?
-							$lijst = VeldList::getHomeLocationFields(1,'kot');
+							$lijst = VeldList::getHomeLocationFields($currentHome,$locatie);
 							for($i=0; $i < sizeof($lijst);$i++){
 								$veld = $lijst[$i];
 								echo("<tr id='item_".$veld->getId()."'><td>".$veld->getnaamNL()."</td><td>".$veld->getnaamEN()."</td><td>".$veld->getCategorie()->getNaamNL()."</td><td><img class='klik' title='Dit veld bewerken' src='images/page_edit.gif' onclick='bewerkVeld(".$veld->getId().");'/></td><td><img title='Dit veld verwijderen' src='images/page_delete.gif'/></td></tr>");
 							}
-						 ?>
-						 <tr class="subheader"><td colspan="5">Verdiep</td></tr>
-						<tr class="legende"><td>Naam Nederlands</td><td>Naam Engels</td><td>Categorie</td><td></td><td></td></tr>
-						<?
-							$lijst = VeldList::getHomeLocationFields(1,'verdiep');
-							for($i=0; $i < sizeof($lijst);$i++){
-								$veld = $lijst[$i];
-								echo("<tr><td>".$veld->getnaamNL()."</td><td>".$veld->getnaamEN()."</td><td>".$veld->getCategorie()->getNaamNL()."</td><td><img title='Dit veld bewerken' src='images/page_edit.gif'/></td><td><img title='Dit veld verwijderen' src='images/page_delete.gif'/></td></tr>");
-							}
-						 ?>
-						 <tr class="subheader"><td colspan="5">Gemeenschappelijk</td></tr>
-						<tr class="legende"><td>Naam Nederlands</td><td>Naam Engels</td><td>Categorie</td><td></td><td></td></tr>
-						<?
-							$lijst = VeldList::getHomeLocationFields(1,'gemeenschappelijk');
-							for($i=0; $i < sizeof($lijst);$i++){
-								$veld = $lijst[$i];
-								echo("<tr><td>".$veld->getnaamNL()."</td><td>".$veld->getnaamEN()."</td><td>".$veld->getCategorie()->getNaamNL()."</td><td><img title='Dit veld bewerken' src='images/page_edit.gif'/></td><td><img title='Dit veld verwijderen' src='images/page_delete.gif'/></td></tr>");
-							}
-						 ?>
+						}
+						?>
 					</table>
+					<? } ?>
 				</div>
 			</div>		
 		</div>		

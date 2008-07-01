@@ -1,19 +1,8 @@
 <?php
-/**
- * Opvragen van een Herstelformulierenlijst voor gebruiker met userId 1
- */
-require_once 'classes/HerstelformulierList.class.php';
-$lijstje = HerstelformulierList::getList(1);
+require_once 'classes/Student.class.php';
+$q = new Student(2);
 
-print_r($lijstje);
-
-echo "<br/><br/>";
-
-/**
- * Opvragen van een herstelformulierenlijst voor gebruiker met userId 1 en status Ongezien
- */
-$lijstje = HerstelformulierList::getList(1, new Status("gezien"));
-print_r($lijstje);
+echo $q->is_valid_email_address("test@test.com");
 
 echo "<br/><br/>";
 /*

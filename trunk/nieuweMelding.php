@@ -1,8 +1,12 @@
-<? 
+<?
 	session_start(); 
+	require_once 'classes/UserList.class.php';
+	require_once 'classes/VeldList.php';
 	require_once 'classes/Auth.class.php';
-	require_once 'classes/HerstelformulierList.class.php';
 	$auth = new Auth(true);
+	if (!$auth->isLoggedIn()) {
+		// throw new UnauthorizedException(); // TODO: gepaste exception
+	}
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -11,6 +15,9 @@
 		<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
 	    <title>Online Herstelformulier</title>
 	    <link rel="stylesheet" type="text/css" href="style.css"/>
+	    <script type="text/javascript" src="js/jquery/jquery.js"/>
+	    <script type="text/javascript" src="js/nieuweMelding.js"/>
+	    
 	</head>
 	<body>
 		<!--logo linksboven-->
@@ -26,7 +33,7 @@
 		
 		<!--broodkruimeltjes-->
 		<div id="breadcrumb"> 
-			<a href='index.php'>Dringende Herstellingen</a> &gt; Overzicht
+			<a href='index.php'>Dringende Herstellingen</a> &gt; Defect Melden
 		</div>
 		
 		<!--main content-->
@@ -35,35 +42,37 @@
 			<!--horizontale navigatiebalk bovenaan-->
 			<div id="mainnav">
 				<ul>
-					<li class="first" id="active"><a href="#">Overzicht</a></li>
-					<li><a href="nieuweMelding.php">Defect melden</a></li>
+					<li class="first"><a href="overzicht.php">Overzicht</a></li>
+					<li><a href="#">Defect melden</a></li>
 					<li><a href="#">Statistieken</a></li>
+					<li><a href="personeelAdmin.php">TIJDELIJKE LINK NAAR BEHEER</a></li>
 				</ul>
 			</div>
 			
 			<!--de inhoud van de pagina-->
 			<div id="contenthome">
-				
-				<? if($auth->getUser()->isStudent()){ ?>
 				<div>
-					<h1>Overzicht</h1>
-					<p>Welkom <?=$auth->getUser()->getVoornaam()?>, op deze pagina kunt u een overzicht vinden van de reeds ingediende herstelformulieren.</p>
-					<table>
-						<tr class="tabelheader"><td colspan="3">Overzicht van de voorbije herstellingen</td></tr>
-						<tr class="legende"><td>Datum</td><td>Inhoud</td><td>Status</td></tr>
-						<?
-							$lijst = HerstelformulierList::getLatest($auth->getUser()->getId(), 5);
-							for($i=0; $i < sizeof($lijst);$i++){
-								$form = $lijst[$i];
-								echo("<tr><td>".$form->getDatum()."</td><td>".$form->getSamenvatting()."</td><td>".$form->getStatus()->getValue()."</td></tr>");
-							}
-						 ?>
-					</table>
-				</div>
-				<?} else{ ?>
-					<meta http-equiv="Refresh" content="0; URL=personeelOverzicht.php">			
-				<?}?>
+				<?
+				$user = NULL;
+				$currentHome = NULL;
+				if ($auth->getUser()->isStudent()) {
+					$user = UserList::getUser($auth->getUser()->getId());
+					$currentHome = $user->getHome();
+				}
 				
+				?>
+				<table>
+						<tr class="tabelheader"><td colspan="5">Herstelformulier <?=$currentHome->getKorteNaam(); ?></td></tr>
+						<tr class="legende"><td></td><td>Naam Nederlands</td><td>Naam Engels</td><td>Categorie</td><td></td><td></td></tr>
+						<?
+							$lijst = VeldList::getHomeForm($currentHome);
+							for($i=0; $i < sizeof($lijst);$i++){
+								$veld = $lijst[$i];
+								echo("<tr id='item_".$veld->getId()."'><td><input type='checkbox' onclick='checkVeld(".$veld->getId().", this.checked);'/></td><td>".$veld->getnaamNL()."</td><td>".$veld->getnaamEN()."</td><td>".$veld->getCategorie()->getNaamNL()."</td></tr>");
+							}
+						?>
+				</table>
+				</div>				
 			</div>		
 		</div>		
 		
@@ -85,9 +94,15 @@
 		</div>
 		
 		<!--login aan de rechterkant-->
-		<div id="login-act">
-			<?=$auth->getUser()->getGebruikersnaam() ?>&nbsp;-&nbsp;<a href="logout.php" title="uitloggen" >afmelden</a>
-		 </div>
+		<? if($auth->isLoggedIn()){ ?>
+			<div id="login-act">
+			 <?=$auth->getUser()->getGebruikersnaam() ?>&nbsp;-&nbsp;<a href="logout.php" title="uitloggen" >afmelden</a>
+		 	</div>
+		<? } else{ ?>
+			<div id="login">
+				<a href="<?=$auth->getLoginURL() ?>" title="inloggen">aanmelden</a>
+		 	</div>
+		<?} ?>
 		 
 		 
 		
