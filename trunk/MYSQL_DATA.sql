@@ -46,9 +46,9 @@ INSERT INTO `student` (`userId`, `taal`, `homeId`, `kamer`, `telefoon`) VALUES
 -- 
 
 INSERT INTO `velden` (`id`, `naamNL`, `naamEN`, `categorieId`, `homeId`, `verwijderd`) VALUES 
-(1, 'Lamp boven lavabo', 'Lamp above the sink', 1, 1, 0),
+(1, 'Lamp boven lavabo', 'Lamp above the sink', 4, 1, 0),
 (2, 'Bed: poot afgebroken', 'Bed: leg is broken', 3, 1, 0),
-(3, 'Grote lichten', 'Striplighting', 1, 1, 0),
+(3, 'Grote lichten', 'Striplighting', 1, 4, 0),
 (4, 'Lamp boven bed', 'Lamp above the bed', 1, 1, 0),
 (5, 'Schakelaar boven lavabo', 'Switch of lamp above the sink', 1, 1, 0),
 (6, 'Schakelaar grote lichten', 'Switch of striplighting', 1, 1, 0),
@@ -58,8 +58,8 @@ INSERT INTO `velden` (`id`, `naamNL`, `naamEN`, `categorieId`, `homeId`, `verwij
 (10, 'Kraan lavabo lekt', 'Tap sink leaks', 5, 1, 0),
 (11, 'Lavabo verstopt', 'Sinkdrain is clogged', 5, 1, 0),
 (12, 'Radiator sluit niet af', 'Radiator can not be turned off', 5, 1, 0),
-(13, 'Radiator kraan lekt', 'Radiator tap leaks', 5, 1, 0),
-(14, 'Radiator geeft geen warmte', 'No heating from radiator', 5, 1, 0),
+(13, 'Radiator kraan lekt', 'Radiator tap leaks', 6, 1, 0),
+(14, 'Radiator geeft geen warmte', 'No heating from radiator', 6, 1, 0),
 (15, 'Skandiaflex', 'Persian blind', 7, 1, 0),
 (16, 'Scharnier kast', 'Wardrobe hinge', 3, 1, 0);
 

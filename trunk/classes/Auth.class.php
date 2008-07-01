@@ -93,6 +93,7 @@ class Auth{
 	 * @return de url
 	 */
 	public function getLoginURL(){
+		//return "https://webauth.ugent.be/?relogin=1&aid=".self::$aid ."&amp;url=http://".$_SERVER['SERVER_NAME'].$_SERVER['SCRIPT_NAME'];//TODO: deze regel aanzetten
 		return "https://webauth.ugent.be/?aid=".self::$aid ."&amp;url=http://".$_SERVER['SERVER_NAME'].$_SERVER['SCRIPT_NAME'];
 	}
 	

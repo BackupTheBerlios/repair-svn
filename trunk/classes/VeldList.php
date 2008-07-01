@@ -21,6 +21,24 @@ class VeldList {
 		$statement->close();
 		return $lijst;
 	}
+	
+	static function getHomeLocationFields($homeid, $locatie){
+		$db = DB::getDB();
+		$lijst = Array();
+		if (!is_numeric($homeid) || $homeid < 1) throw new BadParameterException();		
+		
+		$statement = $db->prepare("SELECT velden.id FROM velden INNER JOIN categorie ON (velden.categorieId = categorie.id)WHERE homeId = ? AND locatie = ? ORDER BY locatie, categorieId, velden.naamNL");
+		$statement->bind_param('is', $homeid, $locatie);
+		$statement->execute();
+		$statement->bind_result($id);
+		$statement->store_result();
+		while ($statement->fetch()) 
+			$lijst[] = new Veld($id);
+		$statement->free_result();
+		$statement->close();
+		return $lijst;
+		
+	}
 }
 
 ?>

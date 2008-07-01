@@ -198,7 +198,7 @@ table tr td {text-align: left; border-top: 1px solid #369; padding: 5px 5px 7px 
 table tr td.center {text-align: center;}
 table tr.tabelheader td { border-top: 0; background-color: #369; color: #fff; font-weight:bold; border-left: 1px solid #fff;}
 table tr.subheader td { font-weight:bold; background-color: #F2F5FE; padding-top: 7px; padding-bottom: 10px; text-align: left;}
-table tr.legende td { border-top: 0; color: #369; background-color: #FFF; font-size: 0.85em;  text-align: left;}
+table tr.legende td { color: #369; background-color: #FFF; font-size: 0.85em;  text-align: left;}
 table tr.unityheader td { padding-bottom: 4px;}
 table tr.unity td {border-top: 0;}
 table tr td.unity-subheader { font-style: italic;}

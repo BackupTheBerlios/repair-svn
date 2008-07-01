@@ -51,13 +51,32 @@
 					<h1>Beheer</h1>
 					<p>Hieronder kunt u het herstelformulier van Home Boudewijn aanpassen.</p><?//TODO: dynamisch maken ?>
 					<table>
-						<tr class="tabelheader"><td colspan="4">Herstelformulier Home Boudewijn</td></tr>
-						<tr class="legende"><td>Naam Nederlands</td><td>Naam Engels</td><td>Categorie</td><td>Locatie</td></tr>
+						<tr class="tabelheader"><td colspan="5">Herstelformulier Home Boudewijn</td></tr>
+						<tr class="subheader"><td colspan="5">Kot</td></tr>
+						<tr class="legende"><td>Naam Nederlands</td><td>Naam Engels</td><td>Categorie</td><td></td><td></td></tr>
 						<?
-							$lijst = VeldList::getHomeForm(1);
+							$lijst = VeldList::getHomeLocationFields(1,'kot');
 							for($i=0; $i < sizeof($lijst);$i++){
 								$veld = $lijst[$i];
-								echo("<tr><td>".$veld->getnaamNL()."</td><td>".$veld->getnaamEN()."</td><td>".$veld->getCategorie()->getNaamNL()."</td><td>".$veld->getCategorie()->getLocatie()->getValue()."</td></tr>");
+								echo("<tr><td>".$veld->getnaamNL()."</td><td>".$veld->getnaamEN()."</td><td>".$veld->getCategorie()->getNaamNL()."</td><td><img title='Dit veld bewerken' src='images/page_edit.gif'/></td><td><img title='Dit veld verwijderen' src='images/page_delete.gif'/></td></tr>");
+							}
+						 ?>
+						 <tr class="subheader"><td colspan="5">Verdiep</td></tr>
+						<tr class="legende"><td>Naam Nederlands</td><td>Naam Engels</td><td>Categorie</td><td></td><td></td></tr>
+						<?
+							$lijst = VeldList::getHomeLocationFields(1,'verdiep');
+							for($i=0; $i < sizeof($lijst);$i++){
+								$veld = $lijst[$i];
+								echo("<tr><td>".$veld->getnaamNL()."</td><td>".$veld->getnaamEN()."</td><td>".$veld->getCategorie()->getNaamNL()."</td><td><img title='Dit veld bewerken' src='images/page_edit.gif'/></td><td><img title='Dit veld verwijderen' src='images/page_delete.gif'/></td></tr>");
+							}
+						 ?>
+						 <tr class="subheader"><td colspan="5">Gemeenschappelijk</td></tr>
+						<tr class="legende"><td>Naam Nederlands</td><td>Naam Engels</td><td>Categorie</td><td></td><td></td></tr>
+						<?
+							$lijst = VeldList::getHomeLocationFields(1,'gemeenschappelijk');
+							for($i=0; $i < sizeof($lijst);$i++){
+								$veld = $lijst[$i];
+								echo("<tr><td>".$veld->getnaamNL()."</td><td>".$veld->getnaamEN()."</td><td>".$veld->getCategorie()->getNaamNL()."</td><td><img title='Dit veld bewerken' src='images/page_edit.gif'/></td><td><img title='Dit veld verwijderen' src='images/page_delete.gif'/></td></tr>");
 							}
 						 ?>
 					</table>
