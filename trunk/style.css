@@ -266,3 +266,5 @@ html>body .nav li a { width: auto;}
 
 /* ===  Searchbox  === */
 #search { position: absolute; top: 27px; right: 20px; z-index: 14;}
+
+.klik { cursor: pointer;}

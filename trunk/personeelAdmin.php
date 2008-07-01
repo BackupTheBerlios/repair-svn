@@ -14,6 +14,9 @@
 		<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
 	    <title>Online Herstelformulier</title>
 	    <link rel="stylesheet" type="text/css" href="style.css"/>
+	    <script type="text/javascript" src="js/jquery/jquery.js"/>
+	    <script type="text/javascript" src="js/personeelAdmin.js"/>
+	    
 	</head>
 	<body>
 		<!--logo linksboven-->
@@ -58,7 +61,7 @@
 							$lijst = VeldList::getHomeLocationFields(1,'kot');
 							for($i=0; $i < sizeof($lijst);$i++){
 								$veld = $lijst[$i];
-								echo("<tr><td>".$veld->getnaamNL()."</td><td>".$veld->getnaamEN()."</td><td>".$veld->getCategorie()->getNaamNL()."</td><td><img title='Dit veld bewerken' src='images/page_edit.gif'/></td><td><img title='Dit veld verwijderen' src='images/page_delete.gif'/></td></tr>");
+								echo("<tr id='item_".$veld->getId()."'><td>".$veld->getnaamNL()."</td><td>".$veld->getnaamEN()."</td><td>".$veld->getCategorie()->getNaamNL()."</td><td><img class='klik' title='Dit veld bewerken' src='images/page_edit.gif' onclick='bewerkVeld(".$veld->getId().");'/></td><td><img title='Dit veld verwijderen' src='images/page_delete.gif'/></td></tr>");
 							}
 						 ?>
 						 <tr class="subheader"><td colspan="5">Verdiep</td></tr>
