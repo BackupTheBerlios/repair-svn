@@ -75,18 +75,27 @@
 				}
 				
 				?>
-				<form action="<?=$_SERVER['PHP_SELF']; ?>" method="post">
+				<form action="<?=$_SERVER['PHP_SELF']; ?>" method="post" id='meldingform'>
 				<table>
-						<tr class="tabelheader"><td colspan="4">Herstelformulier <?=$currentHome->getKorteNaam(); ?></td></tr>
-						<tr class="legende"><td>Defect</td><td>Naam Nederlands</td><td>Naam Engels</td><td>Categorie</td></tr>
+						<tr class="tabelheader"><td colspan="3">Herstelformulier <?=$currentHome->getKorteNaam(); ?></td></tr>
 						<?
 							$lijst = VeldList::getHomeForm($currentHome);
+
 							for($i=0; $i < sizeof($lijst);$i++){
 								$veld = $lijst[$i];
-								echo("<tr class='klik' id='item_".$veld->getId()."' onclick='checkItem(".$veld->getId().");'><td><input id='check_".$veld->getId()."' type='checkbox' name='".$veld->getId()."' onclick='checkVeld(".$veld->getId().", this.checked);'/></td><td>".$veld->getnaamNL()."</td><td>".$veld->getnaamEN()."</td><td>".$veld->getCategorie()->getNaamNL()."</td></tr>");
+								$nieuweCategorie = $veld->getCategorie();
+								if (!isset($huidigeCategorie) || ($huidigeCategorie->getNaamNL() != $nieuweCategorie->getNaamNL())) {
+									if (isset($huidigeCategorie)) echo("</tbody>");
+									$huidigeCategorie = $nieuweCategorie;
+									echo("<tr class='subheader' id='cat_".$huidigeCategorie->getId()."' onclick='showGroup(".$huidigeCategorie->getId().");'><td colspan='3'>".$huidigeCategorie->getNaamNL()."/".$huidigeCategorie->getNaamEN()."</td></tr>");
+									echo("<tbody id='group_cat_".$huidigeCategorie->getId()."' style='display:none'>");
+									echo("<tr class='legende'><td>Defect</td><td>Naam Nederlands</td><td>Naam Engels</td></tr>");
+								}
+								echo("<tr class='klik' id='item_".$veld->getId()."' onclick='checkItem(".$veld->getId().");'><td><input id='check_".$veld->getId()."' type='checkbox' name='".$veld->getId()."' onclick='checkVeld(".$veld->getId().", this.checked);'/></td><td>".$veld->getnaamNL()."</td><td>".$veld->getnaamEN()."</td></tr>");
 							}
 						?>
 				</table>
+				<div><textarea name="opmerking" id="opmerking"></textarea></div>
 				<div><input name="submit" id="submit" type="submit"/></div>
 				</form>
 				</div>				

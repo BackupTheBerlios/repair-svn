@@ -9,6 +9,10 @@ function checkItem(a){
 	});
 }
 
+function showGroup(a){
+	$("#group_cat_"+a).show();
+}
+
 $(document).ready(function(){
 	$("#submit").click(function(){
 		// TODO: errorchecking (geen enkel veld ingevuld en ook geen opmerking ingevuld)
