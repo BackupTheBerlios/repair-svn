@@ -47,7 +47,7 @@
 					<li class="first"><a href="overzicht.php">Overzicht</a></li>
 					<li><a href="nieuweMelding.php">Defect melden</a></li>
 					<li><a href="#">Statistieken</a></li>
-					<li id=active><a href="#">Beheer</a></li>
+					<li id="active"><a href="#">Beheer</a></li>
 				</ul>
 			</div>
 			
@@ -75,7 +75,7 @@
 							$lijst = VeldList::getHomeLocationFields($currentHome,$locatie);
 							for($i=0; $i < sizeof($lijst);$i++){
 								$veld = $lijst[$i];
-								echo("<tr id='item_".$veld->getId()."'><td class='edit'>".$veld->getnaamNL()."</td><td class='edit'>".$veld->getnaamEN()."</td><td class='cat'>".$veld->getCategorie()->getNaamNL()."</td><td class='img'><img class='klik bewerk' title='Dit veld bewerken' src='images/page_edit.gif' onclick='bewerkVeld(".$veld->getId().");'/></td><td class='img'><img class='klik verwijder' title='Dit veld verwijderen' src='images/page_delete.gif' onclick='verwijderVeld(".$veld->getId().");'/></td></tr>");
+								echo("<tr id='item_".$veld->getId()."'><td class='edit'>".$veld->getnaamNL()."</td><td class='edit'>".$veld->getnaamEN()."</td><td class='cat'>".$veld->getCategorie()->getNaamNL()."</td><td class='img'><img alt='bewerken' class='klik bewerk' title='Dit veld bewerken' src='images/page_edit.gif' onclick='bewerkVeld(".$veld->getId().");'/></td><td class='img'><img class='klik verwijder' alt='verwijderen' title='Dit veld verwijderen' src='images/page_delete.gif' onclick='verwijderVeld(".$veld->getId().");'/></td></tr>");
 							}
 						}
 						?>

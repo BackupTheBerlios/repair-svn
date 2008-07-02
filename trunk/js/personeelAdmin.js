@@ -8,12 +8,12 @@ function bewerkVeld(a){
 	//eerste knop aanpassen
 	var img1 = $("#item_"+a).find(".img").find(".bewerk");
 	img1.each(function(){this.onclick = function(){submit(a)};});//event
-	img1.attr("src", "images/flag_gedaan.gif");
+	img1.attr("src", "images/icon_accept.gif");
 	img1.attr("title", "Doorsturen");
 	//tweede knop aanpassen
 	var img2 = $("#item_"+a).find(".img").find(".verwijder");
 	img2.each(function(){this.onclick = function(){restore(a)};});//event
-	img2.attr("src", "images/flag_ongezien.gif");
+	img2.attr("src", "images/action_stop.gif");
 	img2.attr("title", "Annuleren");
 }
 
@@ -41,7 +41,16 @@ function restore(a){
 }
 //we willen de rij opslaan
 function submit(a){
-	//TODO:opslaan
+	var naam = new Array();
+	$("#item_"+a).find(".edit").each(function(el) { naam[naam.length] = $(this).find(".waarde").attr('value');});
+	/*$.post("../ajax/postPersoneelAdmin.php", { "id": a, "naam_NL": naam[0] ,"naam_EN": naam[1], "categorie_id":"", "categorie":""},
+				function (data){
+					alert(data);
+				});*/
+	$.post("../ajax/postPersoneelAdmin.php", { "id": "3"},
+				function (data){
+					alert(data);
+				});			
 	//terug de aanpassingen weg doen
 	$("#item_"+a).find(".edit").each(function(el) { 
 		var input = "<td class='edit'>"+$(this).find(".waarde").attr('value')+"</td>";
