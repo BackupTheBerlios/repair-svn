@@ -10,7 +10,11 @@ function checkItem(a){
 }
 
 function showGroup(a){
-	$("#group_cat_"+a).show();
+	var test = $("#group_cat_"+a).css("display");
+	if (test == "none")
+		$("#group_cat_"+a).show();
+	else
+		$("#group_cat_"+a).hide();
 }
 
 $(document).ready(function(){
