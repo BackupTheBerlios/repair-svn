@@ -52,7 +52,7 @@
 						
 					</p>
 					<ul>
-						<li>Een <a href="#">defect</a> melden</li>
+						<li>Een <a href="nieuweMelding.php">defect</a> melden</li>
 						<li>Een <a href="studentOverzicht.php">overzicht</a> van de vorige aanvragen bekijken</li>
 					</ul>
 				</div>

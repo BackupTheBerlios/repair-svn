@@ -77,8 +77,8 @@
 				?>
 				<form action="<?=$_SERVER['PHP_SELF']; ?>" method="post">
 				<table>
-						<tr class="tabelheader"><td colspan="6">Herstelformulier <?=$currentHome->getKorteNaam(); ?></td></tr>
-						<tr class="legende"><td>Defect</td><td>Naam Nederlands</td><td>Naam Engels</td><td>Categorie</td><td></td><td></td></tr>
+						<tr class="tabelheader"><td colspan="4">Herstelformulier <?=$currentHome->getKorteNaam(); ?></td></tr>
+						<tr class="legende"><td>Defect</td><td>Naam Nederlands</td><td>Naam Engels</td><td>Categorie</td></tr>
 						<?
 							$lijst = VeldList::getHomeForm($currentHome);
 							for($i=0; $i < sizeof($lijst);$i++){
