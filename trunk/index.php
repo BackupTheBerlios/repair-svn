@@ -47,9 +47,8 @@
 				<div>
 					<h1>Welkom</h1>
 					<p>
-						Welkom <?=$auth->getUser()->getVoornaam()?>, volgens onze gegevens woont u op <?=$auth->getUser()->getHome()->getKorteNaam() ?> op kamer <?=$auth->getUser()->getKamer()->getKamernummerKort() ?>. 
+						Welkom <?=$auth->getUser()->getVoornaam()?>, volgens onze gegevens woont u op Home <?=$auth->getUser()->getHome()->getKorteNaam() ?> op kamer <?=$auth->getUser()->getKamer()->getKamernummerKort() ?>. 
 						Indien deze gegevens niet correct zijn, neem contact op met de <a href="http://www.ugent.be/nl/voorzieningen/huisvesting">Afdeling Huisvesting</a>. Maak uw keuze uit de volgende opties:
-						
 					</p>
 					<ul>
 						<li>Een <a href="nieuweMelding.php">defect</a> melden</li>
