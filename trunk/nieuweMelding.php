@@ -77,13 +77,13 @@
 				?>
 				<form action="<?=$_SERVER['PHP_SELF']; ?>" method="post">
 				<table>
-						<tr class="tabelheader"><td colspan="5">Herstelformulier <?=$currentHome->getKorteNaam(); ?></td></tr>
-						<tr class="legende"><td></td><td>Naam Nederlands</td><td>Naam Engels</td><td>Categorie</td><td></td><td></td></tr>
+						<tr class="tabelheader"><td colspan="6">Herstelformulier <?=$currentHome->getKorteNaam(); ?></td></tr>
+						<tr class="legende"><td>Defect</td><td>Naam Nederlands</td><td>Naam Engels</td><td>Categorie</td><td></td><td></td></tr>
 						<?
 							$lijst = VeldList::getHomeForm($currentHome);
 							for($i=0; $i < sizeof($lijst);$i++){
 								$veld = $lijst[$i];
-								echo("<tr id='item_".$veld->getId()."' onclick='checkItem(".$veld->getId().");'><td><input id='check_".$veld->getId()."' type='checkbox' name='".$veld->getId()."' onclick='checkVeld(".$veld->getId().", this.checked);'/></td><td>".$veld->getnaamNL()."</td><td>".$veld->getnaamEN()."</td><td>".$veld->getCategorie()->getNaamNL()."</td></tr>");
+								echo("<tr class='klik' id='item_".$veld->getId()."' onclick='checkItem(".$veld->getId().");'><td><input id='check_".$veld->getId()."' type='checkbox' name='".$veld->getId()."' onclick='checkVeld(".$veld->getId().", this.checked);'/></td><td>".$veld->getnaamNL()."</td><td>".$veld->getnaamEN()."</td><td>".$veld->getCategorie()->getNaamNL()."</td></tr>");
 							}
 						?>
 				</table>
