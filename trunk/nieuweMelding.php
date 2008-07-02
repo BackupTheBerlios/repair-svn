@@ -88,7 +88,7 @@
 								if (!isset($huidigeCategorie) || ($huidigeCategorie->getNaamNL() != $nieuweCategorie->getNaamNL())) {
 									if (isset($huidigeCategorie)) echo("</tbody>");
 									$huidigeCategorie = $nieuweCategorie;
-									echo("<tr class='subheader' id='cat_".$huidigeCategorie->getId()."' onclick='showGroup(".$huidigeCategorie->getId().");'><td colspan='3'>".$huidigeCategorie->getNaamNL()."/".$huidigeCategorie->getNaamEN()."</td></tr>");
+									echo("<tr class='subheader klik' id='cat_".$huidigeCategorie->getId()."' onclick='showGroup(".$huidigeCategorie->getId().");'><td colspan='3'>".$huidigeCategorie->getNaamNL()."/".$huidigeCategorie->getNaamEN()."</td></tr>");
 									echo("<tbody id='group_cat_".$huidigeCategorie->getId()."' style='display:none'>");
 									echo("<tr class='legende'><td>Defect</td><td>Naam Nederlands</td><td>Naam Engels</td></tr>");
 								}
