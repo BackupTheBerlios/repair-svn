@@ -17,7 +17,8 @@
 				$veldenlijst[] = $key;
 		}
 		$mysqldate = date("Y-m-d H:i:s");
-		$melding = new Herstelformulier("", $mysqldate, new Status("ongezien"), UserList::getUser($auth->getUser()->getId()), "", $veldenlijst);
+		$opmerking = $_POST['opmerking'];
+		$melding = new Herstelformulier("", $mysqldate, new Status("ongezien"), UserList::getUser($auth->getUser()->getId()), $opmerking, $veldenlijst);
 		// TODO: submit gedaan, geef melding aan gebruiker	
 		die("SUCCES met herstelformulierid ".$melding->getId()."!");
 	}
@@ -91,11 +92,11 @@
 									echo("<tbody id='group_cat_".$huidigeCategorie->getId()."' style='display:none'>");
 									echo("<tr class='legende'><td>Defect</td><td>Naam Nederlands</td><td>Naam Engels</td></tr>");
 								}
-								echo("<tr class='klik' id='item_".$veld->getId()."' onclick='checkItem(".$veld->getId().");'><td><input id='check_".$veld->getId()."' type='checkbox' name='".$veld->getId()."' onclick='checkVeld(".$veld->getId().", this.checked);'/></td><td>".$veld->getnaamNL()."</td><td>".$veld->getnaamEN()."</td></tr>");
+								echo("<tr class='klik' id='item_".$veld->getId()."' onclick='checkItem(".$veld->getId().");'><td><input id='check_".$veld->getId()."' type='checkbox' name='".$veld->getId()."' onclick='checkItem(".$veld->getId().");'/></td><td>".$veld->getnaamNL()."</td><td>".$veld->getnaamEN()."</td></tr>");
 							}
 						?>
 				</table>
-				<div><textarea name="opmerking" id="opmerking"></textarea></div>
+				<div><label for="opmerking">Opmerking:</label><div><textarea name="opmerking" id="opmerking" cols="50" rows="8"></textarea></div></div>
 				<div><input name="submit" id="submit" type="submit"/></div>
 				</form>
 				</div>				
