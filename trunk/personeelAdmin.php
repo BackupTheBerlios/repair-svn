@@ -75,7 +75,7 @@
 							$lijst = VeldList::getHomeLocationFields($currentHome,$locatie);
 							for($i=0; $i < sizeof($lijst);$i++){
 								$veld = $lijst[$i];
-								echo("<tr id='item_".$veld->getId()."'><td>".$veld->getnaamNL()."</td><td>".$veld->getnaamEN()."</td><td>".$veld->getCategorie()->getNaamNL()."</td><td><img class='klik' title='Dit veld bewerken' src='images/page_edit.gif' onclick='bewerkVeld(".$veld->getId().");'/></td><td><img title='Dit veld verwijderen' src='images/page_delete.gif'/></td></tr>");
+								echo("<tr id='item_".$veld->getId()."'><td class='edit'>".$veld->getnaamNL()."</td><td class='edit'>".$veld->getnaamEN()."</td><td class='cat'>".$veld->getCategorie()->getNaamNL()."</td><td class='img'><img class='klik bewerk' title='Dit veld bewerken' src='images/page_edit.gif' onclick='bewerkVeld(".$veld->getId().");'/></td><td class='img'><img class='klik verwijder' title='Dit veld verwijderen' src='images/page_delete.gif' onclick='verwijderVeld(".$veld->getId().");'/></td></tr>");
 							}
 						}
 						?>
