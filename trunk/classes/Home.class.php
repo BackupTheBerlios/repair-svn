@@ -1,5 +1,5 @@
 <?php
-require_once 'classes/exceptions/BadParameterException.class.php';
+require_once 'exceptions/BadParameterException.class.php';
 require_once("DB.class.php");
 class Home {
 	//databank connectie

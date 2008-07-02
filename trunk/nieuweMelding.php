@@ -1,5 +1,7 @@
 <?
 	session_start(); 
+	require_once 'classes/Herstelformulier.class.php';
+	require_once 'classes/Status.class.php';
 	require_once 'classes/UserList.class.php';
 	require_once 'classes/VeldList.php';
 	require_once 'classes/Auth.class.php';
@@ -7,6 +9,19 @@
 	if (!$auth->isLoggedIn()) {
 		// throw new UnauthorizedException(); // TODO: gepaste exception
 	}
+	/**/
+	if (isset($_POST['submit'])) {
+		// update database
+		foreach ($_POST as $key => $value) {
+			if ($value == "on")
+				$veldenlijst[] = $key;
+		}
+		$mysqldate = date("Y-m-d H:i:s");
+		$melding = new Herstelformulier("", $mysqldate, new Status("ongezien"), UserList::getUser($auth->getUser()->getId()), "", $veldenlijst);
+		// TODO: submit gedaan, geef melding aan gebruiker	
+		die("SUCCES met herstelformulierid ".$melding->getId()."!");
+	}
+	/**/
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -15,9 +30,8 @@
 		<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
 	    <title>Online Herstelformulier</title>
 	    <link rel="stylesheet" type="text/css" href="style.css"/>
-	    <script type="text/javascript" src="js/jquery/jquery.js"/>
-	    <script type="text/javascript" src="js/nieuweMelding.js"/>
-	    
+	    <script type="text/javascript" src="js/jquery/jquery.js"></script>
+		<script type="text/javascript" src="js/nieuweMelding.js"></script>	    
 	</head>
 	<body>
 		<!--logo linksboven-->
@@ -61,6 +75,7 @@
 				}
 				
 				?>
+				<form action="<?=$_SERVER['PHP_SELF']; ?>" method="post">
 				<table>
 						<tr class="tabelheader"><td colspan="5">Herstelformulier <?=$currentHome->getKorteNaam(); ?></td></tr>
 						<tr class="legende"><td></td><td>Naam Nederlands</td><td>Naam Engels</td><td>Categorie</td><td></td><td></td></tr>
@@ -68,10 +83,12 @@
 							$lijst = VeldList::getHomeForm($currentHome);
 							for($i=0; $i < sizeof($lijst);$i++){
 								$veld = $lijst[$i];
-								echo("<tr id='item_".$veld->getId()."'><td><input type='checkbox' onclick='checkVeld(".$veld->getId().", this.checked);'/></td><td>".$veld->getnaamNL()."</td><td>".$veld->getnaamEN()."</td><td>".$veld->getCategorie()->getNaamNL()."</td></tr>");
+								echo("<tr id='item_".$veld->getId()."'><td><input type='checkbox' name='".$veld->getId()."' onclick='checkVeld(".$veld->getId().", this.checked);'/></td><td>".$veld->getnaamNL()."</td><td>".$veld->getnaamEN()."</td><td>".$veld->getCategorie()->getNaamNL()."</td></tr>");
 							}
 						?>
 				</table>
+				<div><input name="submit" id="submit" type="submit"/></div>
+				</form>
 				</div>				
 			</div>		
 		</div>		

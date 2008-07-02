@@ -19,7 +19,7 @@ class Herstelformulier {
 	private $homeId;
 	private $opmerking;
 	
-	// Array met koppels {veldid, Veld object} TODO: Dit lijkt me niet te kloppen
+	// List<Veldid>
 	private $veldenlijst;
 	
 	private $updated;
@@ -34,7 +34,7 @@ class Herstelformulier {
 	 * @param Status $status
 	 * @param Student $student
 	 * @param string $opmerking
-	 * @param unknown_type $veldenlijst
+	 * @param List<veldid> $veldenlijst
 	 */
 	function __construct($id, $datum = "", $status = "", $student = "", $opmerking = "", $veldenlijst = "") { // TODO: veldenlijst implementeren
 		$this->db = DB::getDB();
@@ -63,6 +63,13 @@ class Herstelformulier {
 			$statement->bind_param('ssisis', $this->datum, $this->status->getValue(), $this->studentId, $this->kamer->getKamernummerLang(), $this->homeId, $this->opmerking);
 			$statement->execute();
 			$this->id = $this->db->insert_id;
+			$statement->close();
+			
+			$statement = $this->db->prepare("INSERT INTO relatie_herstelformulier_velden (herstelformulierId, veldId) VALUES (?, ?)");
+			foreach ($this->veldenlijst as $key => $veldId) {
+				$statement->bind_param('ii', $this->id, $veldId);
+				$statement->execute();
+			}
 			$statement->close();
 		} else {
 			// bestaand herstelformulier opvragen
