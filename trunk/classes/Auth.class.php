@@ -81,7 +81,7 @@ class Auth{
 	/**
 	 * geeft het userobject terug van de ingelogde gebruiker
 	 *
-	 * @return User
+	 * @return Student|Personeel
 	 */
 	public function getUser(){
 		return $this->user;
