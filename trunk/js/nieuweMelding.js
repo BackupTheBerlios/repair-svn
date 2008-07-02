@@ -1,5 +1,12 @@
 function checkVeld(a, checked){
-	$("#item_"+a).children().css("backgroundColor", checked ? "red" : "white");
+	$("#item_"+a).children().css("backgroundColor", checked ? "#FFCC00" : "white");
+}
+
+function checkItem(a){
+	$("#item_"+a).find("input[@type$='checkbox']").each(function(){
+		this.checked = !this.checked;
+		checkVeld(a, this.checked);
+	});
 }
 
 $(document).ready(function(){

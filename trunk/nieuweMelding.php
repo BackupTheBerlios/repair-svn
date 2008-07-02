@@ -83,7 +83,7 @@
 							$lijst = VeldList::getHomeForm($currentHome);
 							for($i=0; $i < sizeof($lijst);$i++){
 								$veld = $lijst[$i];
-								echo("<tr id='item_".$veld->getId()."'><td><input type='checkbox' name='".$veld->getId()."' onclick='checkVeld(".$veld->getId().", this.checked);'/></td><td>".$veld->getnaamNL()."</td><td>".$veld->getnaamEN()."</td><td>".$veld->getCategorie()->getNaamNL()."</td></tr>");
+								echo("<tr id='item_".$veld->getId()."' onclick='checkItem(".$veld->getId().");'><td><input id='check_".$veld->getId()."' type='checkbox' name='".$veld->getId()."' onclick='checkVeld(".$veld->getId().", this.checked);'/></td><td>".$veld->getnaamNL()."</td><td>".$veld->getnaamEN()."</td><td>".$veld->getCategorie()->getNaamNL()."</td></tr>");
 							}
 						?>
 				</table>
