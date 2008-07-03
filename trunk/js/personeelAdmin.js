@@ -5,6 +5,11 @@ function bewerkVeld(a){
 		var input = "<td class='edit'><input class='restore' type='hidden' value='"+$(this).text()+"'/><input class='waarde' type='text' value='"+$(this).text()+"'/></td>"
 		$(this).after(input).remove();
 	});
+	//categorie aanpassen
+	$.post("ajax/postPersoneelAdmin.php", { "actie":"categorie", "locatie": "kot"},
+				function (data){
+					alert(data);
+				});	
 	//eerste knop aanpassen
 	var img1 = $("#item_"+a).find(".img").find(".bewerk");
 	img1.each(function(){this.onclick = function(){submit(a)};});//event
@@ -43,7 +48,7 @@ function restore(a){
 function submit(a){
 	var naam = new Array();
 	$("#item_"+a).find(".edit").each(function(el) { naam[naam.length] = $(this).find(".waarde").attr('value');});
-	$.post("ajax/postPersoneelAdmin.php", { "id": a, "naam_NL": naam[0] ,"naam_EN": naam[1], "categorie_id":""},
+	$.post("ajax/postPersoneelAdmin.php", { "actie":"edit", "id": a, "naam_NL": naam[0] ,"naam_EN": naam[1], "categorie_id":""},
 				function (data){
 					//alert(data);
 				});	
