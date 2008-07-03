@@ -51,7 +51,7 @@
 					<h1>Overzicht</h1>
 					<p>Welkom <?=$auth->getUser()->getVoornaam()?>, op deze pagina kunt u een overzicht vinden van de reeds ingediende herstelformulieren.</p>
 					<table>
-						<tr class="tabelheader"><td colspan="5">Overzicht van de voorbije herstellingen</td></tr>
+						<tr class="tabelheader"><td colspan="6">Overzicht van de voorbije herstellingen</td></tr>
 						<?
 							$lijst = HerstelformulierList::getLatest($auth->getUser()->getId());
 							for($i=0; $i < sizeof($lijst);$i++){
@@ -60,11 +60,11 @@
 								if (!isset($huidigeStatus) || ($nieuweStatus->getValue() != $huidigeStatus->getValue())) {
 									if (isset($huidigeStatus)) echo("</tbody>");
 									$huidigeStatus = $nieuweStatus;
-									echo("<tr class='subheader klik' id='status_".$huidigeStatus->getValue()."' onclick=\"showGroup('".$huidigeStatus->getValue()."');\"><td colspan='5'>".$huidigeStatus->getValue()."</td></tr>");
+									echo("<tr class='subheader klik' id='status_".$huidigeStatus->getValue()."' onclick=\"showGroup('".$huidigeStatus->getValue()."');\"><td id='collapse_".$huidigeStatus->getValue()."'>-</td><td colspan='5'>".$huidigeStatus->getValue()."</td></tr>");
 									echo("<tbody id='group_status_".$huidigeStatus->getValue()."'>");
-									echo("<tr class='legende'><td>Datum</td><td>Inhoud</td><td>Status</td></tr>");
+									echo("<tr class='legende'><td></td><td>Datum</td><td>Inhoud</td><td>Status</td></tr>");
 								}
-								echo("<tr id='row_".$form->getId()."'><td>".$form->getDatum()."</td><td>".$form->getSamenvatting()."</td><td>".$form->getStatus()->getValue()."</td><td class='img'><img alt='bewerken' class='bewerk' title='Dit herstelformulier bewerken' src='images/page_edit.gif'/></td><td class='img'><img class='klik verwijder' alt='verwijderen' title='Dit herstelformulier verwijderen' src='images/page_delete.gif' onclick=\"verwijder('".$form->getId()."');\"/></td></tr>");
+								echo("<tr id='row_".$form->getId()."'><td></td><td>".$form->getDatum()."</td><td>".$form->getSamenvatting()."</td><td>".$form->getStatus()->getValue()."</td><td class='img'><img alt='bewerken' class='bewerk' title='Dit herstelformulier bewerken' src='images/page_edit.gif'/></td><td class='img'><img class='klik verwijder' alt='verwijderen' title='Dit herstelformulier verwijderen' src='images/page_delete.gif' onclick=\"verwijder('".$form->getId()."');\"/></td></tr>");
 							}
 						 ?>
 					</table>

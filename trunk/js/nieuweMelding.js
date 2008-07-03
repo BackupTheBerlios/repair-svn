@@ -11,10 +11,13 @@ function checkItem(a){
 
 function showGroup(a){
 	var test = $("#group_cat_"+a).css("display");
-	if (test == "none")
+	if (test == "none") {
 		$("#group_cat_"+a).show();
-	else
+		$("#collapse_"+a).text("-");
+	} else {
 		$("#group_cat_"+a).hide();
+		$("#collapse_"+a).text("+");
+	}
 }
 
 $(document).ready(function(){

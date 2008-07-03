@@ -1,9 +1,12 @@
 function showGroup(a){
 	var test = $("#group_status_"+a).css("display");
-	if (test == "none")
+	if (test == "none") {
 		$("#group_status_"+a).show();
-	else
+		$("#collapse_"+a).text("-");
+	} else {
 		$("#group_status_"+a).hide();
+		$("#collapse_"+a).text("+");
+	}
 }
 
 function verwijder(i){

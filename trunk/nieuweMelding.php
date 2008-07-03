@@ -78,7 +78,7 @@
 				?>
 				<form id='meldingform'>
 				<table>
-						<tr class="tabelheader"><td colspan="3">Herstelformulier <?=$currentHome->getKorteNaam(); ?></td></tr>
+						<tr class="tabelheader"><td colspan="4">Herstelformulier <?=$currentHome->getKorteNaam(); ?></td></tr>
 						<?
 							$lijst = VeldList::getHomeForm($currentHome);
 
@@ -88,11 +88,11 @@
 								if (!isset($huidigeCategorie) || ($huidigeCategorie->getNaamNL() != $nieuweCategorie->getNaamNL())) {
 									if (isset($huidigeCategorie)) echo("</tbody>");
 									$huidigeCategorie = $nieuweCategorie;
-									echo("<tr class='subheader klik' id='cat_".$huidigeCategorie->getId()."' onclick='showGroup(".$huidigeCategorie->getId().");'><td colspan='3'>".$huidigeCategorie->getNaamNL()."/".$huidigeCategorie->getNaamEN()."</td></tr>");
+									echo("<tr class='subheader klik' id='cat_".$huidigeCategorie->getId()."' onclick='showGroup(".$huidigeCategorie->getId().");'><td id='collapse_".$huidigeCategorie->getId()."'>+</td><td colspan='3'>".$huidigeCategorie->getNaamNL()."/".$huidigeCategorie->getNaamEN()."</td></tr>");
 									echo("<tbody id='group_cat_".$huidigeCategorie->getId()."' style='display:none'>");
-									echo("<tr class='legende'><td>Defect</td><td>Naam Nederlands</td><td>Naam Engels</td></tr>");
+									echo("<tr class='legende'><td></td><td>Defect</td><td>Naam Nederlands</td><td>Naam Engels</td></tr>");
 								}
-								echo("<tr class='klik' id='item_".$veld->getId()."' onclick='checkItem(".$veld->getId().");'><td><input id='check_".$veld->getId()."' type='checkbox' name='".$veld->getId()."' onclick='checkItem(".$veld->getId().");'/></td><td>".$veld->getnaamNL()."</td><td>".$veld->getnaamEN()."</td></tr>");
+								echo("<tr class='klik' id='item_".$veld->getId()."' onclick='checkItem(".$veld->getId().");'><td></td><td><input id='check_".$veld->getId()."' type='checkbox' name='".$veld->getId()."' onclick='checkItem(".$veld->getId().");'/></td><td>".$veld->getnaamNL()."</td><td>".$veld->getnaamEN()."</td></tr>");
 							}
 						?>
 				</table>
