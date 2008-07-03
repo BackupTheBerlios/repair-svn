@@ -43,14 +43,10 @@ function restore(a){
 function submit(a){
 	var naam = new Array();
 	$("#item_"+a).find(".edit").each(function(el) { naam[naam.length] = $(this).find(".waarde").attr('value');});
-	/*$.post("../ajax/postPersoneelAdmin.php", { "id": a, "naam_NL": naam[0] ,"naam_EN": naam[1], "categorie_id":"", "categorie":""},
+	$.post("ajax/postPersoneelAdmin.php", { "id": a, "naam_NL": naam[0] ,"naam_EN": naam[1], "categorie_id":""},
 				function (data){
-					alert(data);
-				});*/
-	$.post("../ajax/postPersoneelAdmin.php", { "id": "3"},
-				function (data){
-					alert(data);
-				});			
+					//alert(data);
+				});	
 	//terug de aanpassingen weg doen
 	$("#item_"+a).find(".edit").each(function(el) { 
 		var input = "<td class='edit'>"+$(this).find(".waarde").attr('value')+"</td>";
