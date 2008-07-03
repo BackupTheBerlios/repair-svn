@@ -3,6 +3,11 @@
 class Status {
 	private $value;
 	
+	private $ongezien = "Ongezien: de homemanager heeft dit nog niet bekeken.";
+	private $gezien = "Gezien: de homemanager heeft dit al bekeken.";
+	private $gedaan = "Gedaan: de homemanager heeft dit doorgegeven.";
+	private $afgesloten = "Afgesloten: dit euvel werd verholpen.";
+	
 	function __construct($value) {
 		if (Status::isValid($value))
 			$this->value = $value;
@@ -34,6 +39,11 @@ class Status {
 	 */
 	public function getChangeable() {
 		return ($this->value == "ongezien");
+	}
+	
+	public function getUitleg() {
+		$temp = $this->value;
+		return $this->$temp;
 	}
 }
 
