@@ -4,11 +4,7 @@ require_once 'CategorieList.class.php';
 require_once 'Categorie.class.php';
 class CategorieList{
 	
-	/**
-	 * geeft een lijst van alle Categori‘n objecten uit de databankt terug
-	 *
-	 * @return lijst van Categorie objecten met 
-	 */
+	
 	/**
 	 * geeft een lijst van alle Categori‘n objecten uit de databankt terug
 	 *

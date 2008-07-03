@@ -17,8 +17,8 @@
 		<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
 	    <title>Online Herstelformulier</title>
 	    <link rel="stylesheet" type="text/css" href="style.css"/>
-	    <script type="text/javascript" src="js/jquery/jquery.js"/>
-	    <script type="text/javascript" src="js/personeelAdmin.js"/>
+	    <script type="text/javascript" src="js/jquery/jquery.js"></script>
+	    <script type="text/javascript" src="js/personeelAdmin.js"></script>
 	    
 	</head>
 	<body>
