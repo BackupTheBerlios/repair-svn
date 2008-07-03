@@ -282,4 +282,5 @@ checkbox, select, option, radio{
 	color: black;
 	/*background-color:#FFFFFF;*/
 }
-table tr.subsubheader td { font-weight:bold; background-color: #F2F5FE; padding-top: 7px; padding-bottom: 10px; text-align: left;}
+table tr.subsubheader td { font-weight:bold; background-color: #F2F5FE; padding-left: 30px; padding-top: 7px; padding-bottom: 10px; text-align: left;}
+table tr.selected td { background-color: #FFCC00; }

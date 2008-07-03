@@ -1,5 +1,8 @@
 function checkVeld(a, checked){
-	$("#item_"+a).children().css("backgroundColor", checked ? "#FFCC00" : "white");
+	if (checked)
+		$("#item_"+a).addClass("selected");
+	else
+		$("#item_"+a).removeClass("selected");
 }
 
 function checkItem(a){
@@ -10,14 +13,36 @@ function checkItem(a){
 }
 
 function showGroup(a){
-	var test = $("#group_cat_"+a).css("display");
-	if (test == "none") {
-		$("#group_cat_"+a).show();
-		$("#collapse_"+a).text("-");
-	} else {
-		$("#group_cat_"+a).hide();
+	var text = $("#collapse_"+a).text();
+	if (text == "-")
 		$("#collapse_"+a).text("+");
-	}
+	else
+		$("#collapse_"+a).text("-");
+	
+	flipCategorie(a);
+}
+
+function flipCategorie(a){
+	$("."+a).each(function(){
+		var test = $(this).css("display");
+		if (test == "none") {
+			$(this).show();
+		} else {
+			if (!$(this).hasClass("selected"))
+				$(this).hide();
+		}
+	});
+}
+
+function showLocatie(a){
+	$("."+a).each(function(){
+		var test = $(this).css("display");
+		if (test == "none") {
+			$(this).show();
+		} else {
+			$(this).hide();
+		}
+	});
 }
 
 $(document).ready(function(){
