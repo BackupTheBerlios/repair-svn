@@ -6,10 +6,6 @@ function showGroup(a){
 		$("#group_status_"+a).hide();
 }
 
-function bewerk(formid){
-	return confirm('Wil je dit veld bewerken?');
-}
-
 function verwijder(i){
 	var answer = confirm("Wil je dit herstelformulier echt verwijderen?");
 	if (answer) {

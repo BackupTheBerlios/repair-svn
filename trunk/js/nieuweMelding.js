@@ -22,10 +22,19 @@ $(document).ready(function(){
 		// TODO: errorchecking (geen enkel veld ingevuld en ook geen opmerking ingevuld)
 		var hasError = false;
 		
+		// data collectie
+		var opmerking = $("#opmerking").val();
+		
+		var arrayCheckbox = new Array;
+		$('input:checked').each(function(){
+			arrayCheckbox.push(this.name);
+		});
+		
 		if (hasError == false) {
-			$.post("../ajax/postNieuweMelding.php", { 4: on },
+			$.post("ajax/postNieuweMelding.php", { "velden[]": arrayCheckbox, "opmerking": opmerking},
 				function (data){
-					$("#contentHome").before('<h1>Success</h1><p>Nieuwe melding werd ingevoerd.</p>');
+					$("#beforecontent").before('<div><h1>Success</h1><p>Nieuwe melding werd ingevoerd.</p></div>');
+					$("#meldingform").hide();
 				});
 		}
 		return false;

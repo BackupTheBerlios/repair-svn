@@ -8,14 +8,9 @@ $auth = new Auth(false);
 
 if (!$auth->isLoggedIn()) throw new Exception("Unauthorized"); // TODO: gepaste exception
 
-print_r($_POST);
-
-foreach ($_POST as $key => $value) {
-	if ($value == "on")
-		$veldenlijst[] = $key;
-}
+$veldenlijst = $_POST['velden'];
+$opmerking = $_POST['opmerking'];
 $mysqldate = date("Y-m-d H:i:s");
-$melding = new Herstelformulier("", $mysqldate, new Status("ongezien"), UserList::getUser($auth->getUser()->getId()), "", $veldenlijst);
+$melding = new Herstelformulier("", $mysqldate, new Status("ongezien"), UserList::getUser($auth->getUser()->getId()), $opmerking, $veldenlijst);
 // TODO: submit gedaan, geef melding aan gebruiker	
-	
 ?>

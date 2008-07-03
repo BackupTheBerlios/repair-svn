@@ -9,7 +9,7 @@
 	if (!$auth->isLoggedIn()) {
 		// throw new UnauthorizedException(); // TODO: gepaste exception
 	}
-	/**/
+	/*
 	if (isset($_POST['submit'])) {
 		// update database
 		foreach ($_POST as $key => $value) {
@@ -22,7 +22,7 @@
 		// TODO: submit gedaan, geef melding aan gebruiker	
 		die("SUCCES met herstelformulierid ".$melding->getId()."!");
 	}
-	/**/
+	*/
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -66,7 +66,7 @@
 			
 			<!--de inhoud van de pagina-->
 			<div id="contenthome">
-				<div>
+				<div id="beforecontent">
 				<?
 				$user = NULL;
 				$currentHome = NULL;
@@ -76,7 +76,7 @@
 				}
 				
 				?>
-				<form action="<?=$_SERVER['PHP_SELF']; ?>" method="post" id='meldingform'>
+				<form id='meldingform'>
 				<table>
 						<tr class="tabelheader"><td colspan="3">Herstelformulier <?=$currentHome->getKorteNaam(); ?></td></tr>
 						<?
@@ -97,7 +97,7 @@
 						?>
 				</table>
 				<div><label for="opmerking">Opmerking:</label><div><textarea name="opmerking" id="opmerking" cols="50" rows="8"></textarea></div></div>
-				<div><input name="submit" id="submit" type="submit"/></div>
+				<div><button name="submit" id="submit" type="submit">Submit</button></div>
 				</form>
 				</div>				
 			</div>		
