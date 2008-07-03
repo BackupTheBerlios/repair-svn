@@ -85,14 +85,20 @@
 							for($i=0; $i < sizeof($lijst);$i++){
 								$veld = $lijst[$i];
 								$nieuweCategorie = $veld->getCategorie();
+								$nieuweLocatie = $nieuweCategorie->getLocatie();
+								if (!isset($huidigeLocatie) || ($huidigeLocatie->getValue() != $nieuweLocatie->getValue())) {
+									if (isset($huidigeLocatie)) echo("</tbody>");
+									$huidigeLocatie = $nieuweLocatie;
+									echo("<tr class='subheader' id='locatie_".$huidigeLocatie->getValue()."'><td width='12px' id='collapse_".$huidigeLocatie->getValue()."'>+</td><td colspan='3'>".$huidigeLocatie->getValue()."</td></tr>");
+								}
 								if (!isset($huidigeCategorie) || ($huidigeCategorie->getNaamNL() != $nieuweCategorie->getNaamNL())) {
 									if (isset($huidigeCategorie)) echo("</tbody>");
 									$huidigeCategorie = $nieuweCategorie;
-									echo("<tr class='subheader klik' id='cat_".$huidigeCategorie->getId()."' onclick='showGroup(".$huidigeCategorie->getId().");'><td width='12px' id='collapse_".$huidigeCategorie->getId()."'>+</td><td colspan='3'>".$huidigeCategorie->getNaamNL()."/".$huidigeCategorie->getNaamEN()."</td></tr>");
+									echo("<tr class='subsubheader klik' id='cat_".$huidigeCategorie->getId()."' onclick='showGroup(".$huidigeCategorie->getId().");'><td width='12px' id='collapse_".$huidigeCategorie->getId()."'>+</td><td colspan='3'>".$huidigeCategorie->getNaamNL()."/".$huidigeCategorie->getNaamEN()."</td></tr>");
 									echo("<tbody id='group_cat_".$huidigeCategorie->getId()."' style='display:none'>");
 									echo("<tr class='legende'><td></td><td>Defect</td><td>Naam Nederlands</td><td>Naam Engels</td></tr>");
 								}
-								echo("<tr class='klik' id='item_".$veld->getId()."' onclick='checkItem(".$veld->getId().");'><td></td><td><input id='check_".$veld->getId()."' type='checkbox' name='".$veld->getId()."' onclick='checkItem(".$veld->getId().");'/></td><td>".$veld->getnaamNL()."</td><td>".$veld->getnaamEN()."</td></tr>");
+								echo("<tr class='klik ".$huidigeCategorie->getLocatie()->getValue()."' id='item_".$veld->getId()."' onclick='checkItem(".$veld->getId().");'><td></td><td><input id='check_".$veld->getId()."' type='checkbox' name='".$veld->getId()."' onclick='checkItem(".$veld->getId().");'/></td><td>".$veld->getnaamNL()."</td><td>".$veld->getnaamEN()."</td></tr>");
 							}
 						?>
 				</table>
