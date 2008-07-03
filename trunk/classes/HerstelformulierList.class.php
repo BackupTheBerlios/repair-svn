@@ -48,10 +48,10 @@ class HerstelformulierList {
 	 * geeft een lijst van maximaal $aantal items terug met Herstelformulier objecten horende bij het opgegeven userid
 	 *
 	 * @param integer $userId
-	 * @param integer $aantal
-	 * @return Array een lijst van Herstelformulier objecten
+	 * @param integer(optional) $aantal
+	 * @return array[herstelformulierobject] een lijst van Herstelformulier objecten
 	 */
-	static function getLatest($userId, $aantal){
+	static function getLatest($userId, $aantal = -1){
 		$db = DB::getDB();
 		$lijst = Array();
 		if (!is_numeric($userId) || $userId < 1 || !is_numeric($aantal)) throw new BadParameterException();		

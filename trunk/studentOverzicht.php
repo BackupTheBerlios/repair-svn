@@ -11,6 +11,8 @@
 		<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
 	    <title>Online Herstelformulier</title>
 	    <link rel="stylesheet" type="text/css" href="style.css"/>
+	    <script type="text/javascript" src="js/jquery/jquery.js"></script>
+	    <script type="text/javascript" src="js/studentOverzicht.js"></script>
 	</head>
 	<body>
 		<!--logo linksboven-->
@@ -49,13 +51,20 @@
 					<h1>Overzicht</h1>
 					<p>Welkom <?=$auth->getUser()->getVoornaam()?>, op deze pagina kunt u een overzicht vinden van de reeds ingediende herstelformulieren.</p>
 					<table>
-						<tr class="tabelheader"><td colspan="3">Overzicht van de voorbije herstellingen</td></tr>
-						<tr class="legende"><td>Datum</td><td>Inhoud</td><td>Status</td></tr>
+						<tr class="tabelheader"><td colspan="5">Overzicht van de voorbije herstellingen</td></tr>
 						<?
-							$lijst = HerstelformulierList::getLatest($auth->getUser()->getId(), 5);
+							$lijst = HerstelformulierList::getLatest($auth->getUser()->getId());
 							for($i=0; $i < sizeof($lijst);$i++){
 								$form = $lijst[$i];
-								echo("<tr><td>".$form->getDatum()."</td><td>".$form->getSamenvatting()."</td><td>".$form->getStatus()->getValue()."</td></tr>");
+								$nieuweStatus = $form->getStatus();
+								if (!isset($huidigeStatus) || ($nieuweStatus->getValue() != $huidigeStatus->getValue())) {
+									if (isset($huidigeStatus)) echo("</tbody>");
+									$huidigeStatus = $nieuweStatus;
+									echo("<tr class='subheader klik' id='status_".$huidigeStatus->getValue()."' onclick=\"showGroup('".$huidigeStatus->getValue()."');\"><td colspan='5'>".$huidigeStatus->getValue()."</td></tr>");
+									echo("<tbody id='group_status_".$huidigeStatus->getValue()."'>");
+									echo("<tr class='legende'><td>Datum</td><td>Inhoud</td><td>Status</td></tr>");
+								}
+								echo("<tr id='row_".$form->getId()."'><td>".$form->getDatum()."</td><td>".$form->getSamenvatting()."</td><td>".$form->getStatus()->getValue()."</td><td class='img'><img alt='bewerken' class='klik bewerk' title='Dit herstelformulier bewerken' src='images/page_edit.gif' onclick=\"bewerk('".$form->getId()."');\"/></td><td class='img'><img class='klik verwijder' alt='verwijderen' title='Dit herstelformulier verwijderen' src='images/page_delete.gif' onclick=\"verwijder('".$form->getId()."');\"/></td></tr>");
 							}
 						 ?>
 					</table>
