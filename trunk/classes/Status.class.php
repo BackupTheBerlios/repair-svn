@@ -26,6 +26,15 @@ class Status {
 			$this->value = $newvalue;
 		else throw new BadParameterException();
 	}
+
+	/**
+	 * Geeft terug of een herstelformulier met deze status nog aanpasbaar is.
+	 *
+	 * @return boolean
+	 */
+	public function getChangeable() {
+		return ($this->value == "ongezien");
+	}
 }
 
 ?>
