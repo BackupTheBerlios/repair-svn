@@ -4,12 +4,13 @@
 
 INSERT INTO `categorie` (`id`, `naamNL`, `naamEN`, `locatie`) VALUES 
 (1, 'Elektriciteit', 'Electricity', 'kot'),
-(2, 'Elektriciteit', 'Electricity', 'verdiep'),
+(2, 'Loodgieterswerk', 'Plumbing', 'kot'),
 (3, 'Meubilair', 'Furniture', 'kot'),
-(4, 'Elektriciteit', 'Electricity', 'gemeenschappelijk'),
-(5, 'Loodgieterswerk', 'Plumbing', 'kot'),
-(6, 'Loodgieterswerk', 'Plumbing', 'verdiep'),
-(7, 'Allerlei', 'Extra', 'kot');
+(4, 'Keuken', 'Kitchen', 'verdiep'),
+(5, 'Badkamer Keukenkant', 'Bathroom Kitchenside', 'verdiep'),
+(6, 'Badkamer Bijkeukenkant', 'Bathroom Sidekitchen', 'verdiep'),
+(7, 'Bijkeuken', 'Sidekitchen', 'verdiep'),
+(8, 'Gemeenschapsruimte', 'Recreationroom', 'gemeenschappelijk');
 
 -- 
 -- Dumping data for table `home`
@@ -43,34 +44,49 @@ INSERT INTO `student` (`userId`, `taal`, `homeId`, `kamer`, `telefoon`) VALUES
 
 -- 
 -- Dumping data for table `velden`
--- 
+--
 
 INSERT INTO `velden` (`id`, `naamNL`, `naamEN`, `categorieId`, `homeId`, `verwijderd`) VALUES 
-(1, 'Lamp boven lavabo', 'Lamp above the sink', 4, 1, 0),
-(2, 'Bed: poot afgebroken', 'Bed: leg is broken', 3, 1, 0),
-(3, 'Grote lichten', 'Striplighting', 1, 4, 0),
-(4, 'Lamp boven bed', 'Lamp above the bed', 1, 1, 0),
-(5, 'Schakelaar boven lavabo', 'Switch of lamp above the sink', 1, 1, 0),
-(6, 'Schakelaar grote lichten', 'Switch of striplighting', 1, 1, 0),
-(7, 'Schakelaar lamp boven bed', 'Switch of lamp above the bed', 1, 1, 0),
-(8, 'Stopcontacten', 'Sockets', 1, 1, 0),
-(9, 'Sifon lavabo lekt', 'Drain sink drips', 5, 1, 0),
-(10, 'Kraan lavabo lekt', 'Tap sink leaks', 5, 1, 0),
-(11, 'Lavabo verstopt', 'Sinkdrain is clogged', 5, 1, 0),
-(12, 'Radiator sluit niet af', 'Radiator can not be turned off', 5, 1, 0),
-(13, 'Radiator kraan lekt', 'Radiator tap leaks', 6, 1, 0),
-(14, 'Radiator geeft geen warmte', 'No heating from radiator', 6, 1, 0),
-(15, 'Skandiaflex', 'Persian blind', 7, 1, 0),
-(16, 'Scharnier kast', 'Wardrobe hinge', 3, 1, 0);
+(1, 'Lamp boven lavabo', 'Lamp above the sink', 1, 1, 0),
+(2, 'Grote lichten', 'Striplighting', 1, 1, 0),
+(3, 'Lamp boven bed', 'Lamp above the bed', 1, 1, 0),
+(4, 'Schakelaar boven lavabo', 'Switch of lamp above the sink', 1, 1, 0),
+(5, 'Schakelaar grote lichten', 'Switch of striplighting', 1, 1, 0),
+(6, 'Schakelaar lamp boven bed', 'Switch of lamp above the bed', 1, 1, 0),
+(7, 'Stopcontacten', 'Sockets', 1, 1, 0),
+(8, 'Telefoon', 'Phone', 1, 1, 0),
+(9, 'Sifon lavabo lekt', 'Drain sink drips', 2, 1, 0),
+(10, 'Kraan lavabo lekt', 'Tap sink leaks', 2, 1, 0),
+(11, 'Lavabo verstopt', 'Drain sink is clogged', 2, 1, 0),
+(12, 'Radiator sluit niet af', 'Radiator can not be turned off', 2, 1, 0),
+(13, 'Radiator kraan lekt', 'Radiator tap leaks', 2, 1, 0),
+(14, 'geen warmte uit radiator', 'radiator gives no heating', 2, 1, 0),
+(15, 'bedpoot afgebroken', 'leg of bed is broken', 3, 1, 0),
+(16, 'skandiaflex', 'persian blind', 3, 1, 0),
+(17, 'ingangsdeur slot', 'bedroomdoor lock is broken', 3, 1, 0),
+(18, 'ingangsdeur sleept', 'bedroomdoor drags', 3, 1, 0),
+(19, 'scharnier kast', 'hinge wardrobe', 3, 1, 0),
+(20, 'kast sluit niet', 'wardrobe doesnt close', 3, 1, 0),
+(21, 'bovenblad bureel beschadigd', 'desk has damaged tabletop', 3, 1, 0),
+(22, 'schuiven bij bureel', 'drawers of writingdesk', 3, 1, 0),
+(23, 'raamglas gebarsten', 'windowglass is broken', 3, 1, 0),
+(24, 'raam gaat niet open', 'window does not open', 3, 1, 0),
+(25, 'vloerbedekking beschadigd', 'floorcovering is damaged', 3, 1, 0),
+(26, 'plinten los', 'skirting-board has come off', 3, 1, 0),
+(27, 'Elektrisch vuurtje werkt niet', 'Electric stove doesnt work', 4, 1, 0),
+(28, 'Microgolf kapot', 'Microwaveoven broken', 4, 1, 0),
+(29, 'Niet schoongemaakt', 'Not cleaned well', 7, 1, 0),
+(30, 'TV kapot', 'TV broken', 8, 1, 0),
+(31, 'Pingpongtafel kapot', 'Pingpongtable broken', 8, 1, 0);
 
 -- 
 -- Dumping data for table `herstelformulier`
 -- 
 
 INSERT INTO `herstelformulier` (`id`, `datum`, `status`, `userId`, `kamer`, `homeId`, `opmerking`) VALUES 
-(1, '2008-06-26 20:14:29', 'ongezien', 2, '91.01.240.030', 1, 'Dit is mijn eerste herstelformuliertje ooit, cool h'),
+(1, '2008-06-26 20:14:29', 'ongezien', 2, '91.01.240.030', 1, ''),
 (2, '2008-06-25 20:14:58', 'gezien', 1, '91.01.230.012', 1, 'Dit herstelformulier is al gezien, maar nog niet uitgevoerd.'),
-(3, '2008-06-17 20:15:45', 'gedaan', 1, '91.01.230.012', 1, 'Dit herstelformulier is uitgevoerd, maar niet ge?valueerd.'),
+(3, '2008-06-17 20:15:45', 'gedaan', 1, '91.01.230.012', 1, 'Dit herstelformulier is uitgevoerd, maar niet geevalueerd.'),
 (4, '2008-06-03 20:16:03', 'afgesloten', 2, '91.01.240.030', 1, 'Dit herstelformulier is uitgevoerd en afgesloten door de student.');
 
 -- 
