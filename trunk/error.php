@@ -48,7 +48,7 @@
 			<!--de inhoud van de pagina-->
 			<div id="contenthome">
 				<h1>Error</h1>
-				<?=$error ?>
+				<p><?=$error ?></p>
 			</div>		
 		</div>		
 		
