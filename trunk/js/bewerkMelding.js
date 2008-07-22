@@ -46,8 +46,9 @@ function showLocatie(a){
 }
 
 $(document).ready(function(){
-		
-	$.get("ajax/getMelding.php", { formid: "5" }, function(data) {
+	var formid = $(document).getUrlParam("formid");  
+	
+	$.get("ajax/getMelding.php", { "formid": formid }, function(data) {
 		var i = 0;
 		for(item in data) {
 			if (i % 2 == 0) {
@@ -72,7 +73,7 @@ $(document).ready(function(){
 		});
 		
 		if (hasError == false) {
-			$.post("ajax/bewerkMelding.php", { "formid": "5", "velden[]": arrayCheckbox, "opmerking": opmerking},
+			$.post("ajax/bewerkMelding.php", { "formid": formid, "velden[]": arrayCheckbox, "opmerking": opmerking},
 				function (data){
 					$("#beforecontent").before('<div><h1>Success</h1><p>Uw melding werd aangepast.</p></div>');
 					$("#meldingform").hide();

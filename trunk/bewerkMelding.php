@@ -10,6 +10,18 @@ require_once 'classes/exceptions/BadParameterException.class.php';
 	if (!$auth->isLoggedIn()) {
 		// throw new UnauthorizedException(); // TODO: gepaste exception
 	}
+	
+	// Input sanitizing
+	$formid = $_GET['formid'];
+	if (!is_numeric($formid) || $formid < 0)
+		throw new BadParameterException();
+		
+	$formulier = new Herstelformulier($formid);
+	if ($formulier->getStudent()->getId() != $auth->getUser()->getId())
+		throw new Exception(); // TODO: gepaste exception
+		
+	if ($formulier->getStatus()->getValue() != "ongezien")
+		throw new Exception(); // TODO: gepaste exception
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -19,7 +31,8 @@ require_once 'classes/exceptions/BadParameterException.class.php';
 	    <title>Online Herstelformulier</title>
 	    <link rel="stylesheet" type="text/css" href="style.css"/>
 	    <script type="text/javascript" src="js/jquery/jquery.js"></script>
-		<script type="text/javascript" src="js/bewerkMelding.js"></script>	    
+	    <script type="text/javascript" src="js/jquery/jquery.getUrlParam.js"></script>
+		<script type="text/javascript" src="js/bewerkMelding.js?formid=<?=$_GET['formid'];?>" id="javascriptfile"></script>	    
 	</head>
 	<body>
 		<!--logo linksboven-->
