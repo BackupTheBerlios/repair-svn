@@ -36,7 +36,7 @@ class Herstelformulier {
 	 * @param string $opmerking
 	 * @param List<veldid> $veldenlijst
 	 */
-	function __construct($id, $datum = "", $status = "", $student = "", $opmerking = "", $veldenlijst = "") { // TODO: veldenlijst implementeren
+	function __construct($id, $datum = "", $status = "", $student = "", $opmerking = "", $veldenlijst = "") {
 		$this->db = DB::getDB();
 		
 		if ($id == "") {
@@ -234,6 +234,18 @@ class Herstelformulier {
 		$this->updated = 1;
 	}
 
+	public function setVeldenlijst($veldenlijst) {
+		$statement = $this->db->prepare("DELETE FROM relatie_herstelformulier_velden WHERE herstelformulierId = ?");
+		$statement->bind_param('i', $this->id);
+		$statement->execute();
+		
+		$statement = $this->db->prepare("INSERT INTO relatie_herstelformulier_velden (herstelformulierId, veldId) VALUES (?, ?)");
+		foreach ($veldenlijst as $key => $veldId) {
+			$statement->bind_param('ii', $this->id, $veldId);
+			$statement->execute();
+		}
+		$statement->close();
+	}
 	/**
 	 * @return array(veldid)
 	 */

@@ -1,4 +1,5 @@
 <?
+require_once 'classes/exceptions/BadParameterException.class.php';
 	session_start(); 
 	require_once 'classes/Herstelformulier.class.php';
 	require_once 'classes/Status.class.php';
@@ -18,7 +19,7 @@
 	    <title>Online Herstelformulier</title>
 	    <link rel="stylesheet" type="text/css" href="style.css"/>
 	    <script type="text/javascript" src="js/jquery/jquery.js"></script>
-		<script type="text/javascript" src="js/nieuweMelding.js"></script>	    
+		<script type="text/javascript" src="js/bewerkMelding.js"></script>	    
 	</head>
 	<body>
 		<!--logo linksboven-->

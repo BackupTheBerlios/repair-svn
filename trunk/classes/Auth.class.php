@@ -23,7 +23,6 @@ class Auth{
 	 * @param boolean $automatisch als true: automatische redirect naar webauth
 	 */
 	public function __construct($automatisch){
-		$_SESSION['userid']=1;
 		if(isset($_SESSION['userid'])){//is de gebruiker ingelogd?
 			$this->user=UserList::getUser($_SESSION['userid']);
 			$this->isLoggedIn=true;

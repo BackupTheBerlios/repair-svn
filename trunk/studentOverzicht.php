@@ -72,7 +72,7 @@
 								echo($parsedDate);
 								echo("</td><td>".$form->getSamenvatting()."</td>");
 								if ($form->getStatus()->getChangeable())
-									echo("<td class='img'><img alt='bewerken' class='bewerk' title='Dit herstelformulier bewerken' src='images/page_edit.gif'/></td><td class='img'><img class='klik verwijder' alt='verwijderen' title='Dit herstelformulier verwijderen' src='images/page_delete.gif' onclick=\"verwijder('".$form->getId()."');\"/></td></tr>");
+									echo("<td class='img'><a href='bewerkMelding.php?formid=".$form->getId()."'><img alt='bewerken' class='bewerk' title='Dit herstelformulier bewerken' src='images/page_edit.gif'/></a></td><td class='img'><img class='klik verwijder' alt='verwijderen' title='Dit herstelformulier verwijderen' src='images/page_delete.gif' onclick=\"verwijder('".$form->getId()."');\"/></td></tr>");
 								else
 									echo("<td colspan='4'></td>");
 							}
