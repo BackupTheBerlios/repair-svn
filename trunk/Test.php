@@ -1,13 +1,12 @@
 <?php
-require_once 'classes/Student.class.php';
-$q = new Student(2);
+require_once 'classes/LDAP.class.php';
+$ldap_conn = new LdapRepair();
+print_r($ldap_conn);
+$ldap_conn->connect();
+$ldap_conn->bind();
 
-echo $q->is_valid_email_address("test@test.com");
+$ldap_conn->search(null, "uid=bmesuere");
 
-echo "<br/><br/>";
-/*
- * testje
- */
-require_once 'classes/VeldList.php';
-print_r(VeldList::getHomeForm(1));
+print_r($ldap_conn->get_entries());
+
 ?>
