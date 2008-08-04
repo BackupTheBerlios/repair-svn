@@ -5,6 +5,7 @@
 	require_once 'classes/Home.class.php';
 	require_once 'classes/Auth.class.php';
 	require_once 'classes/VeldList.php';
+	require_once 'classes/Leftmenu.class.php';
 	$auth = new Auth(true);
 	if($auth->getUser()->isStudent()){
 		//throw new Exception("Access Violation Exception");//todo: aanzetten
@@ -77,6 +78,7 @@
 								$veld = $lijst[$i];
 								echo("<tr id='item_".$veld->getId()."'><td class='edit'>".$veld->getnaamNL()."</td><td class='edit'>".$veld->getnaamEN()."</td><td class='cat'>".$veld->getCategorie()->getNaamNL()."</td><td class='img'><img alt='bewerken' class='klik bewerk' title='Dit veld bewerken' src='images/page_edit.gif' onclick='bewerkVeld(".$veld->getId().");'/></td><td class='img'><img class='klik verwijder' alt='verwijderen' title='Dit veld verwijderen' src='images/page_delete.gif' onclick='verwijderVeld(".$veld->getId().");'/></td></tr>");
 							}
+							echo("<tr><td class='edit'><input type='text'/></td><td class='edit'><input type='text'/></td><td class='cat'>".$veld->getCategorie()->getNaamNL()."</td><td class='img'><img alt='bewerken' class='klik bewerk' title='Dit veld bewerken' src='images/page_edit.gif' onclick='bewerkVeld(".$veld->getId().");'/></td><td class='img'><img class='klik verwijder' alt='verwijderen' title='Dit veld verwijderen' src='images/page_delete.gif' onclick='verwijderVeld(".$veld->getId().");'/></td></tr>");
 						}
 						?>
 					</table>
@@ -89,18 +91,7 @@
 		<div id="footer">&#169; 2008 Bart Mesuere &amp; Bert Vandeghinste in opdracht van de <a href="http://www.ugent.be/nl/voorzieningen/huisvesting">Afdeling Huisvesting</a></div>
 		
 		<!--navigatie aan de linkerkant-->
-		<div id="leftnav">
-					
-			<!--linkjes onderaan-->
-			<dl class="facet">
-				<dt>Handige links</dt>
-				<dd><ul>
-					<li><a href="http://helpdesk.ugent.be">&#187; Helpdesk</a></li>
-					<li><a href="http://www.ugent.be/nl/voorzieningen/huisvesting">&#187; Huisvesting</a></li>
-					<li><a href="https://minerva.ugent.be/">&#187; Minerva</a></li>
-				</ul></dd>
-			</dl>				
-		</div>
+		<? new Leftmenu("Beheer", "personeelAdmin.php"); ?>
 		
 		<!--login aan de rechterkant-->
 		<div id="login-act">
