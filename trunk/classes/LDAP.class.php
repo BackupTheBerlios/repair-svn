@@ -62,7 +62,6 @@ class LDAP {
 			}
 		
 		}
-		echo ldap_error($this->connection);
 	}
 	
 	function search($filter) {
