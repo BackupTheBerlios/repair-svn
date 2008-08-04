@@ -96,5 +96,36 @@ class LdapRepair extends LDAP{
 	function __construct (){
 		parent::__construct(null,null, "cn=herstelformulier,ou=applications,dc=UGent,dc=be", "Abracadabra+1");
 	}
+	
+	/**
+	 * functie om gemakkelijk de userinfo op te halen aan de hand van de username
+	 *
+	 * @param unknown_type $uid ugent username
+	 * @return Array
+	 */
+	function getUserInfo($uid){
+		parent::connect();
+		parent::bind();
+		parent::search("uid=".$uid);
+		return self::parseData(parent::get_entries());
+	}
+	
+	function parseData($data){
+		$result = array();
+		$result['gebruikersnaam'] = $data[0]["uid"][0];
+		$result['voornaam'] = $data[0]["ugentpreferredgivenname"][0];
+		$result['achternaam'] = $data[0]["ugentpreferredsn"][0];
+		$result['email'] = $data[0]["mail"][0];
+		$kot = $data[0]["ugentdormpostaladdress"][0];
+		if($kot!=""){
+			$kot = explode("$", $kot);
+			if(strpos(" ".$kot[0], "HOME")){
+				$result['home'] = $kot[0];
+				$temp = explode(":", $kot[1]);
+				$result['kamer'] = $temp[1];
+			}
+		}
+		return $result;
+	}
 }
 ?>
