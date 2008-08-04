@@ -7,20 +7,24 @@ require_once("DB.class.php");
 class HerstelformulierList {
 	
 	/**
-	 * Enter description here...
+	 * Geeft een lijst van Herstelformulieren terug. Je kan zoeken op userId en/of status.
 	 *
 	 * @param integer $userId
 	 * @param Status(optioneel) $status
 	 * @return list<Status=>Herstelformulier>
 	 */
-	static function getList($userId, $searchStatus = "") {
+	static function getList($userId = 0, $searchStatus = "") {
 		$db = DB::getDB();
 		$lijst = Array();
-		if (!is_numeric($userId) || $userId < 1) throw new BadParameterException();
+		if (!is_numeric($userId) || $userId < 0) throw new BadParameterException();
 		
 		if ($searchStatus == "") {
 			$statement = $db->prepare("SELECT id, status FROM herstelformulier WHERE userId = ? ORDER BY status, datum DESC");
 			$statement->bind_param('i', $userId);
+		} else if ($userId == 0) {
+			if ($searchStatus == "") throw new BadParameterException();
+			$statement = $db->prepare("SELECT id, status FROM herstelformulier WHERE status = ? ORDER BY datum DESC");
+			$statement->bind_param('s', $searchStatus->getValue());
 		} else {
 			if (!is_a($searchStatus, "Status")) throw new BadParameterException();
 			$statement = $db->prepare("SELECT id, status FROM herstelformulier WHERE userId = ? AND status = ? ORDER BY datum DESC");

@@ -27,6 +27,15 @@ class Personeel extends User {
 	
 	function save() {
 	}
+	
+	/**
+	 * Geeft lijst van Homes voor deze Homemanager terug.
+	 *
+	 * @return list[Home]
+	 */
+	function getHomeslijst() {
+		return $this->homeslijst;
+	}
 }
 
 ?>
