@@ -1,5 +1,6 @@
 <?php
 require_once 'Auth.class.php';
+require_once 'HomeList.class.php';
 class Leftmenu {
 	
 	private $type;
@@ -21,9 +22,10 @@ class Leftmenu {
 						echo "<li><a href='personeelAdmin.php'>Beheer</a></li>";
 					if($type == "Beheer"){
 						echo("<li class='subnav'><ul>");
-						echo(self::generateSubMenuItem("personeelAdmin.php?homeId=1","Home Astrid"));
-						echo(self::generateSubMenuItem("personeelAdmin.php?homeId=2","Home Boudewijn"));
-						echo(self::generateSubMenuItem("personeelAdmin.php?homeId=3","Home Fabiola"));
+						$lijst = HomeList::getHomes();
+						foreach($lijst as $home){
+							echo(self::generateSubMenuItem("personeelAdmin.php?homeId=".$home->getId(),"Home ".$home->getKorteNaam()));
+						}
 						echo("</ul></li>");
 					}
 					

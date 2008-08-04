@@ -56,33 +56,33 @@
 			<div id="contenthome">
 				<div>
 					<h1>Beheer</h1>
-					<p>Hieronder kunt u het herstelformulier van Home Boudewijn aanpassen.</p>
-					<?
-						// TODO: dynamisch maken: alle homes voor dit personeelslid opvragen, en erover loopen
-						// tijdelijk is het gewoon alle homes
-						$homes = HomeList::getHomes();
+					<?if($_GET['homeId']=="") {?>
+						Volgens onze gegevens bent u beheerder van volgende homes:
+						//TODO dynamisch maken
+					<?}
+					else{ 
+						$currentHome = new Home("id", $_GET['homeId']);	
 						$locaties = Locatie::getAllValues();
-					
-					foreach ($homes as $homeId => $currentHome) {
-					?>
-					<table>
-						<tr class="tabelheader"><td colspan="5">Herstelformulier <?=$currentHome->getKorteNaam(); ?></td></tr>
-						<?
-						foreach ($locaties as $index => $locatie) {
+						echo("<p>Hieronder kunt u het herstelformulier van Home ".$currentHome->getKorteNaam()." aanpassen.</p>");
 						?>
-						<tr class="subheader"><td colspan="5"><?=$locatie->getValue(); ?></td></tr>
-						<tr class="legende"><td>Naam Nederlands</td><td>Naam Engels</td><td>Categorie</td><td></td><td></td></tr>
-						<?
-							$lijst = VeldList::getHomeLocationFields($currentHome,$locatie);
-							for($i=0; $i < sizeof($lijst);$i++){
-								$veld = $lijst[$i];
-								echo("<tr id='item_".$veld->getId()."'><td class='edit'>".$veld->getnaamNL()."</td><td class='edit'>".$veld->getnaamEN()."</td><td class='cat'>".$veld->getCategorie()->getNaamNL()."</td><td class='img'><img alt='bewerken' class='klik bewerk' title='Dit veld bewerken' src='images/page_edit.gif' onclick='bewerkVeld(".$veld->getId().");'/></td><td class='img'><img class='klik verwijder' alt='verwijderen' title='Dit veld verwijderen' src='images/page_delete.gif' onclick='verwijderVeld(".$veld->getId().");'/></td></tr>");
+						<table>
+							<tr class="tabelheader"><td colspan="5">Herstelformulier <?=$currentHome->getKorteNaam(); ?></td></tr>
+							<?
+							foreach ($locaties as $index => $locatie) {
+							?>
+							<tr class="subheader"><td colspan="5"><?=$locatie->getValue(); ?></td></tr>
+							<tr class="legende"><td>Naam Nederlands</td><td>Naam Engels</td><td>Categorie</td><td></td><td></td></tr>
+							<?
+								$lijst = VeldList::getHomeLocationFields($currentHome,$locatie);
+								for($i=0; $i < sizeof($lijst);$i++){
+									$veld = $lijst[$i];
+									echo("<tr id='item_".$veld->getId()."'><td class='edit'>".$veld->getnaamNL()."</td><td class='edit'>".$veld->getnaamEN()."</td><td class='cat'>".$veld->getCategorie()->getNaamNL()."</td><td class='img'><img alt='bewerken' class='klik bewerk' title='Dit veld bewerken' src='images/page_edit.gif' onclick='bewerkVeld(".$veld->getId().");'/></td><td class='img'><img class='klik verwijder' alt='verwijderen' title='Dit veld verwijderen' src='images/page_delete.gif' onclick='verwijderVeld(".$veld->getId().");'/></td></tr>");
+								}
+								echo("<tr><td class='edit'><input type='text'/></td><td class='edit'><input type='text'/></td><td class='cat'></td><td class='img'><img alt='bewerken' class='klik bewerk' title='Dit veld bewerken' src='images/page_edit.gif' /></td><td class='img'><img class='klik verwijder' alt='verwijderen' title='Dit veld verwijderen' src='images/page_delete.gif' /></td></tr>");
 							}
-							echo("<tr><td class='edit'><input type='text'/></td><td class='edit'><input type='text'/></td><td class='cat'>".$veld->getCategorie()->getNaamNL()."</td><td class='img'><img alt='bewerken' class='klik bewerk' title='Dit veld bewerken' src='images/page_edit.gif' onclick='bewerkVeld(".$veld->getId().");'/></td><td class='img'><img class='klik verwijder' alt='verwijderen' title='Dit veld verwijderen' src='images/page_delete.gif' onclick='verwijderVeld(".$veld->getId().");'/></td></tr>");
-						}
-						?>
-					</table>
-					<? } ?>
+							?>
+						</table>
+					<?} ?>
 				</div>
 			</div>		
 		</div>		
