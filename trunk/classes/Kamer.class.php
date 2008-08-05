@@ -37,7 +37,7 @@ class Kamer {
 		$this->kamernummerKort = (($verdiep / 10) - 10) . substr ( $lokaal, 1, 2 );
 		
 		//instellen van verdiep
-		$this->verdiep = $verdiep;
+		$this->verdiep = (($verdiep / 10) - 10);
 	}
 	
 	public function getHome() {

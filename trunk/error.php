@@ -1,11 +1,11 @@
 <? 
 	session_start(); 
-	require_once 'classes/Auth.class.php';
-	$auth = new Auth(false);
+	//require_once 'classes/Auth.class.php';
+	//$auth = new Auth(false);
 	if(isset($_SESSION['error']))
-		$error = $_SESSION['error'];
+		$e = $_SESSION['error'];
 	else
-		$error = "No error found";
+		$e = "No error found";
 	$_SESSION['error']=NULL;
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
@@ -48,7 +48,7 @@
 			<!--de inhoud van de pagina-->
 			<div id="contenthome">
 				<h1>Error</h1>
-				<p><?=$error ?></p>
+				<p><?=$e ?></p>
 			</div>		
 		</div>		
 		
@@ -68,20 +68,7 @@
 				</ul></dd>
 			</dl>				
 		</div>
-		
-		<!--login aan de rechterkant-->
-		<? if($auth->isLoggedIn()){ ?>
-			<div id="login-act">
-			 <?=$auth->getUser()->getGebruikersnaam() ?>&nbsp;-&nbsp;<a href="logout.php" title="uitloggen" >afmelden</a>
-		 	</div>
-		<? } else{ ?>
-			<div id="login">
-				<a href="<?=$auth->getLoginURL() ?>" title="inloggen">aanmelden</a>
-		 	</div>
-		<?} ?>
 		 
-		 
-		
 		<div id="topanchor"><a name="top" id="top">&nbsp;</a></div>		
 	</body>
 </html>

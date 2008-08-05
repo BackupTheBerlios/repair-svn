@@ -28,7 +28,9 @@ class Auth{
 			$this->isLoggedIn=true;
 		}
 		else{//de gebruiker is nog niet ingelogd
+			
 			if(isset($_GET['key'])){//is hij aan het inloggen?
+				
 				//we beginnen met de key public key in te lezen
 				$pubkey = openssl_get_publickey(file_get_contents('ugent.pub')); 
 				if(!$pubkey)//er loopt iets fout
@@ -42,18 +44,26 @@ class Auth{
 				if (openssl_public_decrypt($ticket,$data,$pubkey)) {//decrypteren
 			        $_data = explode(":",$data);
 			        list($user,$time,$aid) = $_data;
-			        //gedecrypteerde data verifi‘ren
+			        //$user = "sidooms";//DIT aanzetten als je met een andere user wil inloggen
+			        
+			        //gedecrypteerde data verifiï¿½ren
 			        if($aid==self::$aid ){//klopt het application id?
 			        	if((time()-$time) < self::$threshold){//is het geen oude key?
 			        		//zit de gebruiker al in onze databank?
 			        		$id=UserList::isExistingUser($user);
 			        		if($id!=0)//als dat zo is maak zijn object aan
 			        			$this->user=UserList::getUser($id);
-			        		else //anders, haal zen gegevens uit de ldap
-			        			$this->user=new User("", "joske de niet bestaande gebruiker", "", "a@a.aa");//TODO: vervangen als de LDAP werkt
+			        		else{ //anders, haal zen gegevens uit de ldap
+			        			require_once 'classes/LDAP.class.php';
+			        			$ldap = new LdapRepair();
+			        			$data = $ldap->getUserInfo($user);
+			        			if(isset($data[home]))
+			        				$this->user = new Student("", $data['gebruikersnaam'], $data['voornaam'], $data['achternaam'], "", $data['email'], "nl", $data['homeId'], $data['kamer'], "");
+			        			else
+			        				throw new Exception("Deze applicatie is enkel toegankelijk voor bewoners van een studentehomes");
+			        		}
 			        		$_SESSION['userid'] = $this->user->getId();
 			        		$this->isLoggedIn=true;
-			        		
 			        		//doorsturen naar de juiste pagina
 			        		if($this->user->isStudent())
 			        			echo("<meta http-equiv=\"Refresh\" content=\"0; URL=studentOverzicht.php\">"); 

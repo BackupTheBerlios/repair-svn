@@ -47,6 +47,7 @@ CREATE TABLE `home` (
   `adres` varchar(255) NOT NULL,
   `verdiepen` int(11) NOT NULL,
   `kamerPrefix` varchar(5) NOT NULL,
+  `ldapNaam` varchar(255) NOT NULL,
   PRIMARY KEY  (`id`),
   UNIQUE KEY `korteNaam` (`korteNaam`,`adres`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;

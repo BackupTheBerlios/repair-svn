@@ -25,8 +25,8 @@ class User {
 			self::setLaatsteOnline($laatsteOnline);
 			self::setEmail($email);
 			// bepalen van zijn userId
-			$statement = $this->db->prepare("INSERT INTO user (gebruikersnaam, voornaam, achternaam, laatsteOnline, email) VALUES (?, ?, ?, ?, ?)");
-			$statement->bind_param('sss', $this->gebruikersnaam, $this->voornaam, $this->achternaam, $this->laatsteOnline, $this->email);
+			$statement = $this->db->prepare("INSERT INTO user (gebruikersnaam, voornaam, achternaam, laatsteOnline, email) VALUES (?, ?, ?, NOW(), ?)");
+			$statement->bind_param('ssss', $this->gebruikersnaam, $this->voornaam, $this->achternaam, $this->email);
 			$statement->execute();
 			$this->id = $this->db->insert_id;
 			$statement->close();

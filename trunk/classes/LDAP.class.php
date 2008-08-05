@@ -120,9 +120,20 @@ class LdapRepair extends LDAP{
 		if($kot!=""){
 			$kot = explode("$", $kot);
 			if(strpos(" ".$kot[0], "HOME")){
-				$result['home'] = $kot[0];
+				require_once 'Home.class.php';
+				//VUILE LDAP HACK :(
+				$kot[0] = $kot[0]=="HOME BERTHA DE VRIES"?"HOME BERTHA DE VRIESE":$kot[0];
+				$home = new Home("ldapNaam", $kot[0]);
+				$result['homeId'] = $home->getId();
+				$result['home'] = $home->getLangeNaam();
 				$temp = explode(":", $kot[1]);
-				$result['kamer'] = $temp[1];
+				if(sizeof($temp)>1)
+					$result['kamer'] = $temp[1];
+				else{//NOG EEN VUILE LDAP HACK
+					$temp = explode("(", $kot[1]);
+					$temp = explode(")", $temp[1]);
+					$result['kamer'] = $home->getKamerPrefix().".".$temp[0];
+				}
 			}
 		}
 		return $result;

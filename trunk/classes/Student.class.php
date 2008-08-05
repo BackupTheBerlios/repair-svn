@@ -16,10 +16,10 @@ class Student extends User {
 	// Is er een veld geupdate? Dan moet er weggeschreven worden in __destruct(), anders niet.
 	private $updated;
 	
-	function __construct($id, $gebruikersnaam = "", $laatsteOnline = "", $email = "", $taal = "nl", $homeId = "", $langkamernummer = "", $telefoon = "") {
+	function __construct($id, $gebruikersnaam = "", $voornaam = "", $achternaam = "", $laatsteOnline = "", $email = "", $taal = "nl", $homeId = "", $langkamernummer = "", $telefoon = "") {
 		if ($id == "") {
 			// Nieuwe Student en User
-			parent::__construct($id, $gebruikersnaam, $laatsteOnline, $email);
+			parent::__construct($id, $gebruikersnaam, $voornaam, $achternaam, $laatsteOnline, $email);
 			$this->taal = $taal;
 			$this->homeId = $homeId;
 			$this->kamer = new Kamer($langkamernummer);
