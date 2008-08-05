@@ -1,11 +1,10 @@
 <? 
+require_once 'classes/exceptions/BadParameterException.class.php';
+require_once 'classes/Herstelformulier.class.php';
+
 	session_start(); 
 	require_once 'classes/Auth.class.php';
-	require_once 'classes/HerstelformulierList.class.php';
-	require_once 'classes/Personeel.class.php';
-	$auth = new Auth(true);
-	//if ($auth->getUser()->isPersoneel())
-	//	throw new Exception("Unauthorized!"); // TODO: gepaste exception
+	$auth = new Auth(false);
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -14,6 +13,8 @@
 		<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
 	    <title>Online Herstelformulier</title>
 	    <link rel="stylesheet" type="text/css" href="style.css"/>
+	    <script type="text/javascript" src="js/jquery/jquery.js"></script>
+	    <script type="text/javascript" src="js/doorgevenMelding.js"></script>
 	</head>
 	<body>
 		<!--logo linksboven-->
@@ -29,7 +30,7 @@
 		
 		<!--broodkruimeltjes-->
 		<div id="breadcrumb"> 
-			<a href='index.php'>Dringende Herstellingen</a> &gt; Overzicht
+			<a href='index.php'>Dringende Herstellingen</a> &gt; Index
 		</div>
 		
 		<!--main content-->
@@ -38,57 +39,35 @@
 			<!--horizontale navigatiebalk bovenaan-->
 			<div id="mainnav">
 				<ul>
-					<li class="first" id="active"><a href="#">Overzicht</a></li>
+					<li class="first"><a href="overzicht.php">Overzicht</a></li>
 					<li><a href="nieuweMelding.php">Defect melden</a></li>
 					<li><a href="#">Statistieken</a></li>
+					<li><a href="personeelAdmin.php">TIJDELIJKE LINK NAAR BEHEER</a></li>
 				</ul>
 			</div>
 			
 			<!--de inhoud van de pagina-->
 			<div id="contenthome">
-				
-				<div>
-					<h1>Overzicht</h1>
-					<table>
-						<tr class="tabelheader"><td colspan="6">Overzicht van herstellingen die niet afgewerkt zijn</td></tr>
-						<tr class="subheader"><td colspan="6">Ongeziene herstellingen</td></tr>
-						<tbody>
-							<tr class="legende">
-								<td></td>
-								<td>Datum</td>
-								<td>Inhoud</td>
-							</tr>
-						<?
-							$lijst = HerstelformulierList::getList(0, new Status("ongezien"));
-							for($i=0; $i < sizeof($lijst);$i++){
-								$form = $lijst[$i];
-								echo("<tr id='row_".$form->getId()."'><td></td><td>");
-								$timestamp = strtotime($form->getDatum());
-								$parsedDate = date("d-m-Y @ H:i",$timestamp);
-								echo($parsedDate);
-								echo("</td><td>".$form->getSamenvatting()."</td>");
-								echo("<td colspan='2' class='img'><a href='doorgevenMelding.php?formid=".$form->getId()."'><img alt='doorgeven' class='bewerk' title='Dit herstelformulier doorgeven' src='images/page_edit.gif'/></a></td></tr>");
-							}
-						 ?>
-						</tbody>
-						<tr class="subheader"><td colspan="6">Doorgegeven herstellingen die nog niet afgesloten zijn</td></tr>
-						<tbody>
-							<tr class="legende"><td></td><td>Datum</td><td>Inhoud</td></tr>
-							<?
-							$lijst = HerstelformulierList::getList(0, new Status("gedaan"));
-							for($i=0; $i < sizeof($lijst);$i++){
-								$form = $lijst[$i];
-								echo("<tr id='row_".$form->getId()."'><td></td><td>");
-								$timestamp = strtotime($form->getDatum());
-								$parsedDate = date("d-m-Y @ H:i",$timestamp);
-								echo($parsedDate);
-								echo("</td><td>".$form->getSamenvatting()."</td>");
-								echo("<td colspan='4'></td>");
-							}
-						 ?>
-						</tbody>
-					</table>
-				</div>				
+				<? if($auth->isLoggedIn()){ 
+					//if($auth->getUser()->isPersoneel()){?>
+				<?
+				$formid = $_GET['formid'];
+				if (!is_numeric($formid) || $formid < 1) throw new BadParameterException("Formid werd foutief gebruikt");
+				$formulier = new Herstelformulier($formid);
+				?>
+				<div>Melding doorgegeven door <?=$formulier->getStudent()->getAchternaam()." ".$formulier->getStudent()->getVoornaam();?> van kamer <?=$formulier->getKamer()->getKamernummerKort();?></div>					
+				<ul>
+				<?
+				foreach ($formulier->getVeldenlijst() as $key => $veldid) {
+					$veld = new Veld($veldid);
+					echo("<li>".$veld->getNaamNL()."</li>");
+				}
+				?>
+				</ul>
+				<div>Klik <a href="" onclick="geefDoor('<?=$formid;?>');">hier</a> om deze melding door te geven.</div>
+				<?
+				//}
+				}?>
 			</div>		
 		</div>		
 		
@@ -110,9 +89,15 @@
 		</div>
 		
 		<!--login aan de rechterkant-->
-		<div id="login-act">
-			<?=$auth->getUser()->getGebruikersnaam() ?>&nbsp;-&nbsp;<a href="logout.php" title="uitloggen" >afmelden</a>
-		 </div>
+		<? if($auth->isLoggedIn()){ ?>
+			<div id="login-act">
+			 <?=$auth->getUser()->getGebruikersnaam() ?>&nbsp;-&nbsp;<a href="logout.php" title="uitloggen" >afmelden</a>
+		 	</div>
+		<? } else{ ?>
+			<div id="login">
+				<a href="<?=$auth->getLoginURL() ?>" title="inloggen">aanmelden</a>
+		 	</div>
+		<?} ?>
 		 
 		 
 		
