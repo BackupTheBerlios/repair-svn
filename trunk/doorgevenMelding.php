@@ -48,26 +48,55 @@ require_once 'classes/Herstelformulier.class.php';
 			
 			<!--de inhoud van de pagina-->
 			<div id="contenthome">
-				<? if($auth->isLoggedIn()){ 
-					//if($auth->getUser()->isPersoneel()){?>
-				<?
-				$formid = $_GET['formid'];
-				if (!is_numeric($formid) || $formid < 1) throw new BadParameterException("Formid werd foutief gebruikt");
-				$formulier = new Herstelformulier($formid);
-				?>
-				<div>Melding doorgegeven door <?=$formulier->getStudent()->getAchternaam()." ".$formulier->getStudent()->getVoornaam();?> van kamer <?=$formulier->getKamer()->getKamernummerKort();?></div>					
-				<ul>
-				<?
-				foreach ($formulier->getVeldenlijst() as $key => $veldid) {
-					$veld = new Veld($veldid);
-					echo("<li>".$veld->getNaamNL()."</li>");
-				}
-				?>
-				</ul>
-				<div>Klik <a href="" onclick="geefDoor('<?=$formid;?>');">hier</a> om deze melding door te geven.</div>
-				<?
-				//}
-				}?>
+				<div id='beforecontent'>
+					<? if($auth->isLoggedIn()){ 
+						//if($auth->getUser()->isPersoneel()){?>
+					<?
+					$formid = $_GET['formid'];
+					if (!is_numeric($formid) || $formid < 1) throw new BadParameterException("Formid werd foutief gebruikt");
+					$formulier = new Herstelformulier($formid);
+					?>
+					<div id='test'>
+						<table>
+						<tr class="tabelheader"><td colspan="4">Melding</td></tr>
+						<tr class="legende">
+							<td>Datum ingave</td>
+							<td>Student</td>
+							<td>Kamer</td>
+							<td>Telefoon</td>
+						</tr>
+						<tr>
+							<td><?=$formulier->getDatum();?></td>
+							<td><?=$formulier->getStudent()->getAchternaam()." ".$formulier->getStudent()->getVoornaam();?></td>
+							<td><?=$formulier->getKamer()->getKamernummerKort();?></td>
+							<td><?=$formulier->getKamer()->getTelefoonnummer();?></td>
+						</tr>
+						<tr><td colspan="4">Gemelde defecten:</td></tr>
+						<?
+						foreach ($formulier->getVeldenlijst() as $key => $veldid) {
+							$veld = new Veld($veldid);
+						?>
+							<tr>
+								<td></td>
+								<td colspan="3"><?=$veld->getNaamNL();?></td>
+							</tr>
+						<?
+						}
+						?>
+						<tr>
+							<td>Opmerking:</td>
+							<td colspan="3"><?=$formulier->getOpmerking();?></td>
+						</tr>
+						<tr>
+							<td colspan="3"></td>
+							<td><button name="submit" id="submit" type="submit" onclick="geefDoor('<?=$formid;?>');">Doorgegeven</button></td>
+						</tr>
+						<?
+						//}
+						}?>
+						</table>
+					</div>
+				</div>
 			</div>		
 		</div>		
 		

@@ -38,6 +38,7 @@
 					<li><a href="nieuweMelding.php">Defect melden</a></li>
 					<li><a href="#">Statistieken</a></li>
 					<li><a href="personeelAdmin.php">TIJDELIJKE LINK NAAR BEHEER</a></li>
+					<li><a href="personeelOverzicht.php">TIJDELIJKE PERSONEEL OVERZICHT</a></li>
 				</ul>
 			</div>
 			

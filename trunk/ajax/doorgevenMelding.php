@@ -9,4 +9,6 @@ if (!is_numeric($formid) || $formid < 1)
 $herstelformulier = new Herstelformulier($formid);
 $herstelformulier->setStatus(new Status("gedaan"));
 $herstelformulier->save();
+
+echo "SUCCESS";
 ?>

@@ -51,6 +51,11 @@
 					<h1>Overzicht</h1>
 					<table>
 						<tr class="tabelheader"><td colspan="6">Overzicht van herstellingen die niet afgewerkt zijn</td></tr>
+						<?
+						$lijst = HerstelformulierList::getList(0, new Status("ongezien"));
+						$size = sizeof($lijst);
+						if ($size > 0) {
+						?>
 						<tr class="subheader"><td colspan="6">Ongeziene herstellingen</td></tr>
 						<tbody>
 							<tr class="legende">
@@ -59,8 +64,7 @@
 								<td>Inhoud</td>
 							</tr>
 						<?
-							$lijst = HerstelformulierList::getList(0, new Status("ongezien"));
-							for($i=0; $i < sizeof($lijst);$i++){
+							for($i=0; $i < $size;$i++){
 								$form = $lijst[$i];
 								echo("<tr id='row_".$form->getId()."'><td></td><td>");
 								$timestamp = strtotime($form->getDatum());
@@ -71,12 +75,18 @@
 							}
 						 ?>
 						</tbody>
+						<?
+						}
+						
+						$lijst = HerstelformulierList::getList(0, new Status("gedaan"));
+						$size = sizeof($lijst);
+						if ($size > 0) {
+ 						?>
 						<tr class="subheader"><td colspan="6">Doorgegeven herstellingen die nog niet afgesloten zijn</td></tr>
 						<tbody>
 							<tr class="legende"><td></td><td>Datum</td><td>Inhoud</td></tr>
 							<?
-							$lijst = HerstelformulierList::getList(0, new Status("gedaan"));
-							for($i=0; $i < sizeof($lijst);$i++){
+							for($i=0; $i < $size; $i++){
 								$form = $lijst[$i];
 								echo("<tr id='row_".$form->getId()."'><td></td><td>");
 								$timestamp = strtotime($form->getDatum());
@@ -87,6 +97,7 @@
 							}
 						 ?>
 						</tbody>
+						<? } ?>
 					</table>
 				</div>				
 			</div>		
