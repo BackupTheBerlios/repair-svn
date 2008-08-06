@@ -120,23 +120,33 @@ class LdapRepair extends LDAP{
 		if($kot!=""){
 			$kot = explode("$", $kot);
 			if(strpos(" ".$kot[0], "HOME")){
-				require_once 'Home.class.php';
 				//VUILE LDAP HACK :(
 				$kot[0] = $kot[0]=="HOME BERTHA DE VRIES"?"HOME BERTHA DE VRIESE":$kot[0];
+				require_once 'classes/Home.class.php';
 				$home = new Home("ldapNaam", $kot[0]);
 				$result['homeId'] = $home->getId();
 				$result['home'] = $home->getLangeNaam();
 				$temp = explode(":", $kot[1]);
 				if(sizeof($temp)>1)
-					$result['kamer'] = $temp[1];
-				else{//NOG EEN VUILE LDAP HACK
+					$result['kamer'] = $temp[1];//het meest normale geval (volledige kamercode staat waar hij moest staan)
+				else{
 					$temp = explode("(", $kot[1]);
 					$temp = explode(")", $temp[1]);
-					$result['kamer'] = $home->getKamerPrefix().".".$temp[0];
+					if(sizeof($temp)>1)
+						$result['kamer'] = $home->getKamerPrefix().".".$temp[0];//enkel de laatste cijfers van de code staan tussen haakjes
+					else{
+						echo "jep";
+						$temp = explode("K. ", $kot[1]);
+						$result['kamer'] = $home->getKamerPrefix().".".converteer($temp[0]);//er wordt nog een oud kamernummer gebruikt
+					}
 				}
 			}
 		}
 		return $result;
 	}
+}
+
+function converteer($data){
+	return "111.111";
 }
 ?>
