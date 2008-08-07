@@ -54,8 +54,7 @@ require_once 'classes/Herstelformulier.class.php';
 					if($auth->isLoggedIn()) { 
 						if($auth->getUser()->isStudent()) {
 								// Toon listing van alle formulieren die als "gedaan" gemarkeerd zijn en die geevalueerd moeten worden
-								$list = HerstelformulierList::getList($auth->getUser()->getId(), new Status("gedaan"));
-								$evaluatielijst = Array();
+								$list = HerstelformulierList::getEvaluationList($auth->getUser()->getId());
 								?>
 								<table>
 									<tr class="tableheader">
@@ -69,11 +68,9 @@ require_once 'classes/Herstelformulier.class.php';
 										</tr>
 										<?
 										foreach ($list as $formulier) {
-											if (strtotime($formulier->getDatum()) < (time() - (7 * 24 * 60 * 60))) { // aangepast langer dan 7 dagen geleden
-												?>
+											?>
 												<tr id="row_<?=$formulier->getId();?>"><td><?=$formulier->getDatum();?></td><td><?=$formulier->getSamenvatting();?></td><td class="img klik"><img alt="doorgeven" class="bewerk" title="Dit herstelformulier positief evalueren" src="images/icon_accept.gif" onclick="evalueerPositief('<?=$formulier->getId();?>');"/></td><td class="img klik"><img alt="doorgeven" class="bewerk" title="Dit herstelformulier negatief evalueren" src="images/action_stop.gif" onclick="evalueerNegatief('<?=$formulier->getId();?>');"/></td></tr>
 												<?
-											}
 										}
 										?>
 									</tbody>

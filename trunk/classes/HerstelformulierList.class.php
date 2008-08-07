@@ -71,6 +71,28 @@ class HerstelformulierList {
 		$statement->close();
 		return $lijst;
 	}
+	
+	static function getEvaluationList($userId) {
+		$db = DB::getDB();
+		$lijst = Array();
+		if (!is_numeric($userId) || $userId < 0) throw new BadParameterException();
+		
+		$statement = $db->prepare("SELECT id, status FROM herstelformulier WHERE userId = ? AND status = 'gedaan' AND datum < SUBDATE(NOW(), INTERVAL 7 DAY) ORDER BY datum DESC");
+		$statement->bind_param('i', $userId);
+		$statement->execute();
+		$statement->bind_result($id, $status);
+		$statement->store_result();
+		while ($statement->fetch()) {
+			if (!isset($lijst[$status])) $lijst[$status] = Array();
+			$tmp = $lijst[$status];
+			$tmp[] = new Herstelformulier($id);
+			$lijst[$status] = $tmp;
+		}
+		$statement->free_result();
+		$statement->close();
+		
+		return $lijst["gedaan"];
+	}
 }
 
 ?>

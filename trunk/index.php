@@ -1,4 +1,5 @@
-<? 
+<? require_once 'classes/HerstelformulierList.class.php';
+
 	session_start(); 
 	require_once 'classes/Auth.class.php';
 	$auth = new Auth(false);
@@ -47,6 +48,11 @@
 				<? if($auth->isLoggedIn()){ if($auth->getUser()->isStudent()){?>
 				<div>
 					<h1>Welkom</h1>
+					<?
+					$list = HerstelformulierList::getEvaluationList($auth->getUser()->getId());
+					if (sizeof($list) > 0)
+						echo "<center><b>U heeft nog herstelformulieren die <a href='evaluatieMelding.php'>geevalueerd</a> moeten worden.</b></center>";
+					?>
 					<p>
 						Welkom <?=$auth->getUser()->getVoornaam()?>, volgens onze gegevens woont u op Home <?=$auth->getUser()->getHome()->getKorteNaam() ?> op kamer <?=$auth->getUser()->getKamer()->getKamernummerKort() ?>. 
 						Indien deze gegevens niet correct zijn, neem contact op met de <a href="http://www.ugent.be/nl/voorzieningen/huisvesting">Afdeling Huisvesting</a>. Maak uw keuze uit de volgende opties:
