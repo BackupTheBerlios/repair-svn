@@ -1,6 +1,9 @@
 $(document).ready(function(){
 	$(".img1").each(setBewerk);//bewerkfunctionaliteit instellen
 	$(".img2").each(setVerwijder);//verwijderfunctionaliteit instellen
+	
+	addDropdowns();
+	$(".img").each(setVoegtoe);
 });
 
 function bewerk(){
@@ -67,7 +70,37 @@ function cancel(){
 	rij.find(".img2").each(setVerwijder);
 }
 
-function setDropDownValues(property, waarde, cel,content, locatie){
+function voegtoe(){
+	var rij = $(this).parent().parent();
+	var velden = new Array();
+	var waarden = new Array();
+	var r = "<tr>";
+	
+	rij.find(".edit, .select").each(function(){
+		var waarde = $(this).find("input[@type=text], select").val();
+		var tekst = waarde;
+		
+		$(this).find("input[@type=text]").each(function(){tekst = waarde;});
+		$(this).find("select").each(function(){tekst = $(this).find("option[@value="+$(this).val()+"]").html();});
+		velden[velden.length] = $(this).attr("id").split("_")[0];
+		waarden[waarden.length] = waarde;
+		$(this).find("input[@type=text]").val("");
+		r += "<td>"+tekst+"</td>";
+	});
+	r += "<td></td><td></td></tr>";
+	rij.before(r);
+	waarden = $.toJSON(waarden);
+	velden = $.toJSON(velden);
+	$.post("ajax/postPersoneelAdmin.php", { "actie":"add", "waarden": waarden ,"velden": velden, "home":rij.attr("id").split("_")[1]});
+}
+
+function addDropdowns(){
+	$(".dd").each(function(){
+		setDropDownValues($(this).attr("id").split("_")[0], "", $(this), "", $(this).attr("id").split("_")[1]);
+	});
+}
+
+function setDropDownValues(property, waarde, cel, content, locatie){
 	$.post("ajax/postPersoneelAdmin.php", {actie:"select", property:property, locatie:locatie}, function(data){	
 		var r = "<select>";
 		for(key in data){
@@ -97,4 +130,7 @@ function setOK(){
 function setCancel(){
 	var img = $(this).html("<img/>").find("img");
 	img.attr("src", "images/action_stop.gif").addClass("klik").attr("title", "Cancel").attr("alt", "Cancel").click(cancel);
+}
+function setVoegtoe(){
+	$(this).find("img").addClass("klik").attr("title", "Voeg dit veld toe").attr("alt", "Voeg dit veld toe").click(voegtoe);
 }

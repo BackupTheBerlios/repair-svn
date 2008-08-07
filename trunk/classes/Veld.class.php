@@ -29,6 +29,8 @@ class Veld {
 		if ($this->id == "") {
 			// sanity checks
 			$this->naamNL = $naamNL;
+			$this->naamEN = $naamEN;
+			$this->verwijderd = verwijderd;
 			if (!is_a($categorie, "Categorie")) throw new BadParameterException();
 			$this->categorie = $categorie;
 			$this->categorieId = $this->categorie->getId();

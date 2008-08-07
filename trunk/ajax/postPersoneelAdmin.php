@@ -2,6 +2,7 @@
 session_start();
 require_once '../classes/Auth.class.php';
 require_once '../classes/Veld.class.php';
+require_once '../classes/Home.class.php';
 require_once '../classes/Categorie.class.php';
 require_once '../classes/CategorieList.class.php';
 $auth = new Auth(false);
@@ -15,16 +16,22 @@ if($_POST['actie'] == "edit"){
 	$velden = json_decode(stripslashes($_POST['velden']));
 	$waarden = json_decode(stripslashes($_POST['waarden']));
 	$waarden = array_combine($velden, $waarden);
-	$naam_NL = $_POST['naam_NL'];
-	$naam_EN = $_POST['naam_EN'];
-	$categorie_id = $_POST['categorie_id'];
 	
 	$veld = new Veld($id);
 	$veld->setNaamNL($waarden['naamNL']);
 	$veld->setNaamEN($waarden['naamEN']);
 	$cat = new Categorie($waarden['categorie']);
 	$veld->setCategorie($cat);
-	// TODO: submit gedaan, geef melding aan gebruiker	
+}
+else if($_POST['actie'] == "add"){
+	//veldjes ophalen en omzetten
+	$velden = json_decode(stripslashes($_POST['velden']));
+	$waarden = json_decode(stripslashes($_POST['waarden']));
+	$waarden = array_combine($velden, $waarden);
+	
+	$cat = new Categorie($waarden['categorie']);
+	$home = new Home("id", $_POST['home']);
+	$veld = new Veld("", $waarden['naamNL'], $waarden['naamEN'], $cat, $home);
 }
 else if($_POST['actie'] == "select"){
 	if($_POST['property'] == "categorie")

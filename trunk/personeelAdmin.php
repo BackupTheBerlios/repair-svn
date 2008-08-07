@@ -20,7 +20,7 @@
 	    <link rel="stylesheet" type="text/css" href="style.css"/>
 	    <script type="text/javascript" src="js/jquery/jquery.js"></script>
 	    <script type="text/javascript" src="js/jquery/json.js"></script>
-	    <script type="text/javascript" src="js/personeelAdmin2.js"></script>
+	    <script type="text/javascript" src="js/personeelAdmin.js"></script>
 	    
 	</head>
 	<body>
@@ -79,7 +79,7 @@
 									$id = $veld->getId();
 									echo("<tr id='".$id."_".$locatie->getValue()."'><td class='edit' id='naamNL_$id'>".$veld->getnaamNL()."</td><td class='edit' id='naamEN_$id'>".$veld->getnaamEN()."</td><td class='select' id='categorie_$id'>".$veld->getCategorie()->getNaamNL()."</td><td class='img1'><img src='images/page_edit.gif' /></td><td class='img2'><img src='images/page_delete.gif' /></td></tr>");
 								}
-								echo("<tr><td class='edit'><input type='text'/></td><td class='edit'><input type='text'/></td><td class='cat'></td><td class='img'><img alt='bewerken' class='klik bewerk' title='Dit veld bewerken' src='images/page_edit.gif' /></td><td class='img'><img class='klik verwijder' alt='verwijderen' title='Dit veld verwijderen' src='images/page_delete.gif' /></td></tr>");
+								echo("<tr id='".$locatie->getValue()."_".$_GET['homeId']."'><td class='edit' id='naamNL_".$locatie->getValue()."'><input type='text'/></td><td class='edit' id='naamEN_".$locatie->getValue()."'><input type='text'/></td><td class='dd select' id='categorie_".$locatie->getValue()."'></td><td class='img'><img src='images/page_add.gif'/></td><td></td></tr>");
 							}
 							?>
 						</table>
