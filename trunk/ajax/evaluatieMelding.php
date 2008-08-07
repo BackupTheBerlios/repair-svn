@@ -11,5 +11,13 @@ if ($evaluatie == 1) {
 	$herstelformulier = new Herstelformulier($formid);
 	$herstelformulier->setStatus(new Status("afgesloten"));
 	$herstelformulier->save();
+} elseif ($evaluatie == 0) {
+	$opmerking = $_POST['opmerking'];
+	$mysqldate = date("Y-m-d H:i:s");
+	$herstelformulier = new Herstelformulier($formid);
+	$herstelformulier->setDatum($mysqldate);
+	$herstelformulier->setStatus(new Status("ongezien"));
+	$herstelformulier->setOpmerking($opmerking);
+	$herstelformulier->save();	
 }
 ?>

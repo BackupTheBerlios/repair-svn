@@ -53,27 +53,25 @@ require_once 'classes/Herstelformulier.class.php';
 					<? 
 					if($auth->isLoggedIn()) { 
 						if($auth->getUser()->isStudent()) {
-							$formid = $_GET['formid'];
-							if (!is_numeric($formid) || $formid < 1) {
 								// Toon listing van alle formulieren die als "gedaan" gemarkeerd zijn en die geevalueerd moeten worden
 								$list = HerstelformulierList::getList($auth->getUser()->getId(), new Status("gedaan"));
 								$evaluatielijst = Array();
 								?>
 								<table>
 									<tr class="tableheader">
-										<td colspan="3">Deze herstelformulieren werden uitgevoerd maar moeten nog geevalueerd worden. Klik op het groene vinkje om de herstelling aan te duiden als uitgevoerd en hersteld. Klik op het rode kruisje om aan te geven dat de herstelling niet opgelost is, en eventueel een extra opmerking toe te voegen. Let op: je keuze is finaal en onomkeerbaar!</td>
+										<td colspan="4">Deze herstelformulieren werden uitgevoerd maar moeten nog geevalueerd worden. Klik op het groene vinkje om de herstelling aan te duiden als uitgevoerd en hersteld. Klik op het rode kruisje om aan te geven dat de herstelling niet opgelost is, en eventueel een extra opmerking toe te voegen. Let op: je keuze is finaal en onomkeerbaar!</td>
 									</tr>
 									<tbody>
 										<tr class="legende">
 											<td>Datum</td>
 											<td>Inhoud</td>
-											<td></td>
+											<td colspan="2"></td>
 										</tr>
 										<?
 										foreach ($list as $formulier) {
 											if (strtotime($formulier->getDatum()) < (time() - (7 * 24 * 60 * 60))) { // aangepast langer dan 7 dagen geleden
 												?>
-												<tr id="row_<?=$formulier->getId();?>"><td><?=$formulier->getDatum();?></td><td><?=$formulier->getSamenvatting();?></td><td class="img klik"><img alt="doorgeven" class="bewerk" title="Dit herstelformulier positief evalueren" src="images/icon_accept.gif" onclick="evalueerPositief('<?=$formulier->getId();?>');"/></td><td class="img klik"><img alt="doorgeven" class="bewerk" title="Dit herstelformulier negatief evalueren" src="images/action_stop.gif" onclick="evalueerNegatief('<?=$formulier->getId;?>');"/></td></tr>
+												<tr id="row_<?=$formulier->getId();?>"><td><?=$formulier->getDatum();?></td><td><?=$formulier->getSamenvatting();?></td><td class="img klik"><img alt="doorgeven" class="bewerk" title="Dit herstelformulier positief evalueren" src="images/icon_accept.gif" onclick="evalueerPositief('<?=$formulier->getId();?>');"/></td><td class="img klik"><img alt="doorgeven" class="bewerk" title="Dit herstelformulier negatief evalueren" src="images/action_stop.gif" onclick="evalueerNegatief('<?=$formulier->getId();?>');"/></td></tr>
 												<?
 											}
 										}
@@ -81,12 +79,6 @@ require_once 'classes/Herstelformulier.class.php';
 									</tbody>
 								</table>
 								<?
-							} else {
-								$formulier = new Herstelformulier($formid);
-								?>
-								
-								<? 
-							}
 						} else throw new Exception("Unauthorized access!"); // TODO: gepaste exception
 					} else throw new Exception("Unauthorized access!"); // TODO: gepaste exception
 					?>
