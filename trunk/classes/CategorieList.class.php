@@ -6,7 +6,7 @@ class CategorieList{
 	
 	
 	/**
-	 * geeft een lijst van alle Categori‘n objecten uit de databankt terug
+	 * geeft een lijst van alle Categoriï¿½n objecten uit de databankt terug
 	 *
 	 * @param String $locatie
 	 * @return lijst van Categorie objecten met 

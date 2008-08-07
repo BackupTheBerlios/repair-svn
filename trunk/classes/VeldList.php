@@ -18,7 +18,7 @@ class VeldList {
 		$lijst = Array();
 		if (!is_a($home, "Home")) throw new BadParameterException();		
 		
-		$statement = $db->prepare("SELECT velden.id FROM velden INNER JOIN categorie ON (velden.categorieId = categorie.id) WHERE homeId = ? ORDER BY locatie, categorieId, velden.naamNL");
+		$statement = $db->prepare("SELECT velden.id FROM velden INNER JOIN categorie ON (velden.categorieId = categorie.id) WHERE homeId = ? AND verwijderd = 0 ORDER BY locatie, categorieId, velden.naamNL");
 		$statement->bind_param('i', $home->getId());
 		$statement->execute();
 		$statement->bind_result($id);
@@ -43,7 +43,7 @@ class VeldList {
 		if (!is_a($home, "Home")) throw new BadParameterException();
 		if (!is_a($locatie, "Locatie")) throw new BadParameterException();		
 		
-		$statement = $db->prepare("SELECT velden.id FROM velden INNER JOIN categorie ON (velden.categorieId = categorie.id) WHERE homeId = ? AND locatie = ? ORDER BY locatie, categorieId, velden.naamNL");
+		$statement = $db->prepare("SELECT velden.id FROM velden INNER JOIN categorie ON (velden.categorieId = categorie.id) WHERE homeId = ? AND locatie = ? AND verwijderd = 0 ORDER BY locatie, categorieId, velden.naamNL");
 		$statement->bind_param('is', $home->getId(), $locatie->getValue());
 		$statement->execute();
 		$statement->bind_result($id);
