@@ -12,6 +12,7 @@ class Home {
 	private $adres;
 	private $verdiepen;
 	private $kamerPrefix;
+	private $ldapNaam;
 	
 	private $updated;
 	
@@ -26,11 +27,11 @@ class Home {
 	public function __construct($veld, $value) {
 		if (strlen($veld) == 0) throw new BadParameterException();
 		$this->db = DB::getDB();
-		$statement = $this->db->prepare("SELECT id, korteNaam, langeNaam, adres, verdiepen, kamerPrefix FROM home WHERE $veld = ?");
+		$statement = $this->db->prepare("SELECT id, korteNaam, langeNaam, adres, verdiepen, kamerPrefix, ldapNaam FROM home WHERE $veld = ?");
 		$statement->bind_param('s', $value);
 		$statement->execute();
 		$statement->bind_result($this->id, $this->korteNaam, $this->langeNaam, 
-			$this->adres, $this->verdiepen, $this->kamerPrefix);
+			$this->adres, $this->verdiepen, $this->kamerPrefix, $this->ldapNaam);
 		$statement->fetch();
 		$statement->close();
 		
@@ -43,8 +44,8 @@ class Home {
 	
 	public function save() {
 		if ($this->updated == 1) {
-			$statement = $this->db->prepare("UPDATE home SET korteNaam = ?, langeNaam = ?, adres = ?, verdiepen = ?, kamerPrefix = ? WHERE id = ?");
-			$statement->bind_param('sssisi', $this->korteNaam, $this->langeNaam, $this->adres, $this->verdiepen, $this->kamerPrefix, $this->id);
+			$statement = $this->db->prepare("UPDATE home SET korteNaam = ?, langeNaam = ?, adres = ?, verdiepen = ?, kamerPrefix = ? , ldapNaam = ? WHERE id = ?");
+			$statement->bind_param('sssissi', $this->korteNaam, $this->langeNaam, $this->adres, $this->verdiepen, $this->kamerPrefix, $this->ldapNaam, $this->id);
 			$statement->execute();
 			$statement->close();
 			$this->updated = 0;
@@ -83,6 +84,10 @@ class Home {
 	 */
 	public function getLangeNaam() {
 		return $this->langeNaam;
+	}
+	
+	public function getLdapNaam() {
+		return $this->ldapNaam;
 	}
 	
 	/**
@@ -131,6 +136,17 @@ class Home {
 	public function setLangeNaam($langeNaam) {
 		if (strlen($langeNaam) > 0)
 			$this->langeNaam = $langeNaam;
+		else throw new BadParameterException();
+		
+		$this->updated = 1;
+	}
+	
+	/**
+	 * @param string $ldapNaam
+	 */
+	public function setLdapNaam($ldapNaam) {
+		if (strlen($ldapNaam) > 0)
+			$this->ldapNaam = $ldapNaam;
 		else throw new BadParameterException();
 		
 		$this->updated = 1;

@@ -22,9 +22,10 @@ class Leftmenu {
 						echo "<li><a href='personeelAdmin.php'>Beheer</a></li>";
 					if($type == "Beheer"){
 						echo("<li class='subnav'><ul>");
+						echo(self::generateSubMenuItem("personeelHomes.php","Beheer Homes"));
 						$lijst = HomeList::getHomes();
 						foreach($lijst as $home){
-							echo(self::generateSubMenuItem("personeelAdmin.php?homeId=".$home->getId(),"Home ".$home->getKorteNaam()));
+							echo(self::generateSubMenuItem("personeelAdmin.php?homeId=".$home->getId(),"Beheer Home ".$home->getKorteNaam()));
 						}
 						echo("</ul></li>");
 					}
