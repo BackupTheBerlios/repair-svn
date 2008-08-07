@@ -73,14 +73,14 @@ require_once 'classes/Herstelformulier.class.php';
 						</tr>
 						<tr><td colspan="4"class="unityheader">Gemelde defecten:</td></tr>
 						<?
-						foreach ($formulier->getVeldenlijst() as $key => $veldid) {
+						foreach ($formulier->getVeldenlijst() as $veldid) {
 							$veld = new Veld($veldid);
-						?>
+							?>
 							<tr class="unity">
 								<td></td>
 								<td colspan="3"><?=$veld->getNaamNL();?></td>
 							</tr>
-						<?
+							<?
 						}
 						?>
 						<tr>
