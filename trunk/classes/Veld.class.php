@@ -1,4 +1,5 @@
 <?php
+require_once("Taal.class.php");
 require_once("DB.class.php");
 require_once("Categorie.class.php");
 class Veld {
@@ -95,6 +96,14 @@ class Veld {
 	 */
 	public function getId() {
 		return $this->id;
+	}
+	
+	public function getNaam() {
+		$taal = new Taal();
+		if ($taal->getTaal() == "en")
+			return $this->getNaamEN();
+		else
+			return $this->getNaamNL();
 	}
 	
 	/**

@@ -1,4 +1,5 @@
 <?php
+require_once("Taal.class.php");
 require_once("exceptions/BadParameterException.class.php");
 require_once("DB.class.php");
 require_once("Locatie.class.php");
@@ -64,6 +65,14 @@ class Categorie {
 	 */
 	function getId() {
 		return $this->id;
+	}
+	
+	function getNaam() {
+		$taal = new Taal();
+		if ($taal->getTaal() == "en")
+			return $this->getNaamEN();
+		else
+			return $this->getNaamNL();
 	}
 	
 	/**

@@ -19,7 +19,22 @@ class Taal {
 						  'datum' => 'Datum',
 						  'inhoud' => 'Inhoud',
 						  'afmelden' => 'afmelden',
-						  'aanmelden' => 'aanmelden'
+						  'aanmelden' => 'aanmelden',
+						  'overzicht' => 'Overzicht',
+						  'welkom_overzicht_naam' => 'Welkom %1$s, op deze pagina kunt u een overzicht vinden van de reeds ingediende herstelformulieren.',
+						  'overzicht_herstellingen' => 'Overzicht van de voorbije herstellingen',
+						  'defect_melden' => 'Defect melden',
+						  'herstelformulier_homenaam' => 'Herstelformulier %1$s',
+						  'opmerking' => 'Opmerking',
+						  'verzenden' => 'Verzenden',
+						  'naam' => 'Naam',
+						  'ongezien' => "Ongezien: de homemanager heeft dit nog niet bekeken.",
+						  'gezien' => "Gezien: de homemanager heeft dit al bekeken.",
+						  'gedaan' => "Gedaan: de homemanager heeft dit doorgegeven.",
+						  'afgesloten' => "Afgesloten: dit euvel werd verholpen.",
+						  'kot' => "Kot",
+						  'verdiep' => "Verdiep",
+						  'gemeenschappelijk' => "Gemeenschappelijk"
 						  ),
 			'en' => array('titel' => 'Online Repairform',
 						  'dringende_herstellingen' => 'Urgent Repairs',
@@ -36,7 +51,22 @@ class Taal {
 						  'datum' => 'Date',
 						  'inhoud' => 'Content',
 						  'afmelden' => 'logout',
-						  'aanmelden' => 'login'
+						  'aanmelden' => 'login',
+						  'overzicht' => 'Listing',
+						  'welkom_overzicht_naam' => 'Welcome %1$s, on this page you\'ll find a listing of your reported repairforms and their status.',
+						  'overzicht_herstellingen' => 'Reported repairforms',
+						  'defect_melden' => 'Report defect',
+						  'herstelformulier_homenaam' => '%1$s repairform',
+						  'opmerking' => 'Comment',
+						  'verzenden' => 'Submit',
+						  'naam' => 'Name',
+						  'ongezien' => "Unseen: the homemanager hasn't seen it yet.",
+						  'gezien' => "Seen: the homemanager saw this.",
+						  'gedaan' => "Done: the homemanager already reported this.",
+						  'afgesloten' => "Finished: this was successfully repaired.",
+						  'kot' => "Room",
+						  'verdiep' => "Floor",
+						  'gemeenschappelijk' => "Common area"
 						  )
 	);
 	
@@ -52,9 +82,13 @@ class Taal {
 	
 	public function msg($key) {
 		if ($this->lang == "en" || $this->lang == "nl") {
-			return $this->messages[$this->lang][$key];
+			return $this->messages[$this->lang][strtolower($key)];
 		}
 		else throw new BadParameterException("Lang werd niet correct gebruikt."); // TODO: gepaste exception
+	}
+	
+	public function getTaal() {
+		return $this->lang;
 	}
 }
 

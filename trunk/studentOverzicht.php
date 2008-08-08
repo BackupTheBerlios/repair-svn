@@ -35,7 +35,7 @@
 		
 		<!--broodkruimeltjes-->
 		<div id="breadcrumb"> 
-			<a href='index.php'>Dringende Herstellingen</a> &gt; Overzicht
+			<a href='index.php'><?=$taal->msg('dringende_herstellingen') ?></a> &gt; <?=$taal->msg('overzicht') ?>
 		</div>
 		
 		<!--main content-->
@@ -49,10 +49,10 @@
 				
 				<? if($auth->getUser()->isStudent()){ ?>
 				<div>
-					<h1>Overzicht</h1>
-					<p>Welkom <?=$auth->getUser()->getVoornaam()?>, op deze pagina kunt u een overzicht vinden van de reeds ingediende herstelformulieren.</p>
+					<h1><?=$taal->msg('overzicht') ?></h1>
+					<p><? printf($taal->msg('welkom_overzicht_naam'),$auth->getUser()->getVoornaam()) ?></p>
 					<table>
-						<tr class="tabelheader"><td colspan="6">Overzicht van de voorbije herstellingen</td></tr>
+						<tr class="tabelheader"><td colspan="6"><?=$taal->msg('overzicht_herstellingen') ?></td></tr>
 						<?
 							$lijst = Herstelformulier::getLatest($auth->getUser()->getId());
 							for($i=0; $i < sizeof($lijst);$i++){
@@ -65,7 +65,7 @@
 									echo($huidigeStatus->getUitleg());
 									echo ("</td></tr>");
 									echo("<tbody id='group_status_".$huidigeStatus->getValue()."'>");
-									echo("<tr class='legende'><td></td><td>Datum</td><td>Inhoud</td></tr>");
+									echo("<tr class='legende'><td></td><td>".$taal->msg('datum')."</td><td>".$taal->msg('inhoud')."</td><td colspan='2'></td></tr>");
 								}
 								echo("<tr id='row_".$form->getId()."'><td></td><td>");
 								$timestamp = strtotime($form->getDatum());
@@ -88,14 +88,14 @@
 		</div>		
 		
 		<!--de footer-->
-		<div id="footer">&#169; 2008 Bart Mesuere &amp; Bert Vandeghinste in opdracht van de <a href="http://www.ugent.be/nl/voorzieningen/huisvesting">Afdeling Huisvesting</a></div>
+		<div id="footer"><?=$taal->msg('footer') ?></div>
 		
 		<!--navigatie aan de linkerkant-->
 		<div id="leftnav">
 					
 			<!--linkjes onderaan-->
 			<dl class="facet">
-				<dt>Handige links</dt>
+				<dt><?=$taal->msg('handige_links') ?></dt>
 				<dd><ul>
 					<li><a href="http://helpdesk.ugent.be">&#187; Helpdesk</a></li>
 					<li><a href="http://www.ugent.be/nl/voorzieningen/huisvesting">&#187; Huisvesting</a></li>
@@ -106,7 +106,7 @@
 		
 		<!--login aan de rechterkant-->
 		<div id="login-act">
-			<?=$auth->getUser()->getGebruikersnaam() ?>&nbsp;-&nbsp;<a href="logout.php" title="uitloggen" >afmelden</a>
+			<?=$auth->getUser()->getGebruikersnaam() ?>&nbsp;-&nbsp;<a href="logout.php" title="uitloggen" ><?=$taal->msg('afmelden') ?></a>
 		 </div>
 		 
 		 

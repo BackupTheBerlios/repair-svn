@@ -1,4 +1,5 @@
 <?php
+require_once("Taal.class.php");
 require_once("exceptions/BadParameterException.class.php");
 class Locatie {
 	
@@ -23,7 +24,8 @@ class Locatie {
 	}
 	
 	function getValue() {
-		return $this->value;
+		$taal = new Taal();
+		return $taal->msg($this->value);
 	}
 	
 	function setValue($value) {

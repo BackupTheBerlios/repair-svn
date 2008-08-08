@@ -1,12 +1,9 @@
 <?php
+require_once("Taal.class.php");
+require_once("exceptions/BadParameterException.class.php");
 
 class Status {
 	private $value;
-	
-	private $ongezien = "Ongezien: de homemanager heeft dit nog niet bekeken.";
-	private $gezien = "Gezien: de homemanager heeft dit al bekeken.";
-	private $gedaan = "Gedaan: de homemanager heeft dit doorgegeven.";
-	private $afgesloten = "Afgesloten: dit euvel werd verholpen.";
 	
 	function __construct($value) {
 		if (Status::isValid($value))
@@ -43,7 +40,8 @@ class Status {
 	
 	public function getUitleg() {
 		$temp = $this->value;
-		return $this->$temp;
+		$taal = new Taal();
+		return $taal->msg($temp);
 	}
 }
 

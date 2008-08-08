@@ -257,7 +257,7 @@ class Herstelformulier {
 		$output="";
 		for($i=0; $i < sizeof($this->veldenlijst); $i++){
 			$veld = new Veld($this->veldenlijst[$i]);
-			$output .= $veld->getNaamNL().", ";//TODO taal onafhankelijk maken
+			$output .= $veld->getNaam().", ";
 		}
 		return substr($output, 0, -2);
 	}
