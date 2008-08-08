@@ -62,7 +62,7 @@
 						//TODO dynamisch maken
 					<?}
 					else{ 
-						$currentHome = new Home("id", $_GET['homeId']);	
+						$currentHome = new Home($_GET['homeId']);	
 						$locaties = Locatie::getAllValues();
 						echo("<p>Hieronder kunt u het herstelformulier van Home ".$currentHome->getKorteNaam()." aanpassen.</p>");
 						?>

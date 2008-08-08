@@ -24,18 +24,35 @@ class Home {
 	 * @param String $veld veld van de home
 	 * @param String $value waarde van het veld
 	 */
-	public function __construct($veld, $value) {
-		if (strlen($veld) == 0) throw new BadParameterException();
+	public function __construct($id, $korteNaam="", $langeNaam="", $adres="", $verdiepen="", $kamerPrefix="", $ldapNaam="") {
 		$this->db = DB::getDB();
-		$statement = $this->db->prepare("SELECT id, korteNaam, langeNaam, adres, verdiepen, kamerPrefix, ldapNaam FROM home WHERE $veld = ?");
-		$statement->bind_param('s', $value);
-		$statement->execute();
-		$statement->bind_result($this->id, $this->korteNaam, $this->langeNaam, 
-			$this->adres, $this->verdiepen, $this->kamerPrefix, $this->ldapNaam);
-		$statement->fetch();
-		$statement->close();
-		
+		if($id==""){// nieuwe home
+			$this->korteNaam = $korteNaam;
+			$this->langeNaam = $langeNaam;
+			$this->adres = $adres;
+			$this->verdiepen = $verdiepen;
+			$this->kamerPrefix = $kamerPrefix;
+			$this->ldapNaam = $ldapNaam;
+			// bepalen van zijn userId
+			$statement = $this->db->prepare("INSERT INTO home (korteNaam, langeNaam, adres, verdiepen, kamerPrefix, ldapNaam) VALUES (?,?,?,?,?,?)");
+			$statement->bind_param('sssiss', $this->korteNaam, $this->langeNaam, $this->adres, $this->verdiepen, $this->kamerPrefix, $this->ldapNaam);
+			$statement->execute();
+			$this->id = $this->db->insert_id;
+			$statement->close();
+		}
+		else{//bestaande home
+			if (!is_numeric($id)) throw new BadParameterException();
+			$statement = $this->db->prepare("SELECT id, korteNaam, langeNaam, adres, verdiepen, kamerPrefix, ldapNaam FROM home WHERE id = ?");
+			$statement->bind_param('i', id);
+			$statement->execute();
+			$statement->bind_result($this->id, $this->korteNaam, $this->langeNaam, 
+				$this->adres, $this->verdiepen, $this->kamerPrefix, $this->ldapNaam);
+			$statement->fetch();
+			$statement->close();
+		}
+			
 		$this->updated = 0;
+		
 	}
 	
 	public function __destruct() {
@@ -161,6 +178,19 @@ class Home {
 		else throw new BadParameterException();
 		
 		$this->updated = 1;
+	}
+	
+	public static function getHome($veld, $value) {
+		if (strlen($veld) == 0) throw new BadParameterException();
+		$this->db = DB::getDB();
+		$statement = $this->db->prepare("SELECT id FROM home WHERE $veld = ?");
+		$statement->bind_param('s', $value);
+		$statement->execute();
+		$statement->bind_result($id);
+		$home = new Home($id);
+		$statement->fetch();
+		$statement->close();
+		return $home;
 	}
 
 }

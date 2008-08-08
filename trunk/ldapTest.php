@@ -71,7 +71,7 @@ function parseData($data){
 		if(strpos(" ".$kot[0], "HOME")){
 			//VUILE LDAP HACK :(
 			$kot[0] = $kot[0]=="HOME BERTHA DE VRIES"?"HOME BERTHA DE VRIESE":$kot[0];
-			$home = new Home("ldapNaam", $kot[0]);
+			$home = Home::getHome("ldapNaam", $kot[0]);
 			$result['homeId'] = $home->getId();
 			$result['home'] = $home->getLangeNaam();
 			$temp = explode(":", $kot[1]);

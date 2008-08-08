@@ -16,7 +16,7 @@ class Personeel extends User {
 		$statement->store_result();
 		$statement->bind_result($homeId);
 		while($statement->fetch())
-			$this->homeslijst[] = new Home("id", $homeId);
+			$this->homeslijst[] = new Home($homeId);
 		$statement->close();
 	}
 	

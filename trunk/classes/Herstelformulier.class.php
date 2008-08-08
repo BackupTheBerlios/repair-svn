@@ -122,7 +122,7 @@ class Herstelformulier {
 	 */
 	public function getHome() {
 		if (!isset($this->home))
-			$this->home = new Home("id", $this->homeId);
+			$this->home = new Home($this->homeId);
 		return $this->home;
 	}
 	

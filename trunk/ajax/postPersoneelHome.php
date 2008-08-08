@@ -14,7 +14,7 @@ if($_POST['actie'] == "edit"){
 	$waarden = json_decode(stripslashes($_POST['waarden']));
 	$waarden = array_combine($velden, $waarden);
 	
-	$home = new Home("id", $id);
+	$home = new Home($id);
 	$home->setKorteNaam($waarden["korteNaam"]);
 	$home->setLangeNaam($waarden["langeNaam"]);
 	$home->setAdres($waarden["adres"]);
@@ -28,7 +28,7 @@ else if($_POST['actie'] == "add"){
 	$waarden = json_decode(stripslashes($_POST['waarden']));
 	$waarden = array_combine($velden, $waarden);
 
-	$home = new Home("");//todo
+	$home = new Home("", $waarden["korteNaam"], $waarden["langeNaam"], $waarden["adres"], $waarden["verdiepen"], $waarden["kamerPrefix"], $waarden["ldapNaam"]);
 }
 else if($_POST['actie'] == "remove"){
 	$home = new Home($_POST["id"]);

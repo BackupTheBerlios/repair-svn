@@ -30,7 +30,7 @@ else if($_POST['actie'] == "add"){
 	$waarden = array_combine($velden, $waarden);
 	
 	$cat = new Categorie($waarden['categorie']);
-	$home = new Home("id", $_POST['home']);
+	$home = new Home($_POST['home']);
 	$veld = new Veld("", $waarden['naamNL'], $waarden['naamEN'], $cat, $home);
 }
 else if($_POST['actie'] == "select"){

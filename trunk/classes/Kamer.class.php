@@ -31,7 +31,7 @@ class Kamer {
 		$lokaal = substr ( $this->kamernummerLang, 10, 3 );
 		
 		//opzoeken van de naam van de home
-		$this->home = new Home ( "kamerPrefix", $gebouw );
+		$this->home = Home::getHome( "kamerPrefix", $gebouw );
 		
 		//instellen van het kamernummer
 		$this->kamernummerKort = (($verdiep / 10) - 10) . substr ( $lokaal, 1, 2 );
