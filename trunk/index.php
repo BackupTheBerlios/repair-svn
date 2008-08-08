@@ -1,6 +1,6 @@
-<? 
+<? require_once 'classes/Herstelformulier.class.php';
+
 require_once 'classes/Taal.class.php';
-require_once 'classes/HerstelformulierList.class.php';
 require_once 'classes/Topmenu.class.php';
 
 	session_start(); 
