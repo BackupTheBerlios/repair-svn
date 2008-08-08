@@ -2,11 +2,14 @@
 	session_start(); 
 	require_once 'classes/Topmenu.class.php';
 	require_once 'classes/Header.class.php';
+	require_once 'classes/Taal.class.php';
 	if(isset($_SESSION['error']))
 		$e = $_SESSION['error'];
 	else
 		$e = "No error found";
 	$_SESSION['error']=NULL;
+	
+	$taal = new Taal();
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -33,14 +36,14 @@
 		</div>		
 		
 		<!--de footer-->
-		<div id="footer">&#169; 2008 Bart Mesuere &amp; Bert Vandeghinste in opdracht van de <a href="http://www.ugent.be/nl/voorzieningen/huisvesting">Afdeling Huisvesting</a></div>
+		<div id="footer"><?=$taal->msg('footer') ?></div>
 		
 		<!--navigatie aan de linkerkant-->
 		<div id="leftnav">
 					
 			<!--linkjes onderaan-->
 			<dl class="facet">
-				<dt>Handige links</dt>
+				<dt><?=$taal->msg('handige_links') ?></dt>
 				<dd><ul>
 					<li><a href="http://helpdesk.ugent.be">&#187; Helpdesk</a></li>
 					<li><a href="http://www.ugent.be/nl/voorzieningen/huisvesting">&#187; Huisvesting</a></li>

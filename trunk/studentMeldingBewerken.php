@@ -91,14 +91,14 @@
 		</div>		
 		
 		<!--de footer-->
-		<div id="footer">&#169; 2008 Bart Mesuere &amp; Bert Vandeghinste in opdracht van de <a href="http://www.ugent.be/nl/voorzieningen/huisvesting">Afdeling Huisvesting</a></div>
+		<div id="footer"><?=$taal->msg('footer') ?></div>
 		
 		<!--navigatie aan de linkerkant-->
 		<div id="leftnav">
 					
 			<!--linkjes onderaan-->
 			<dl class="facet">
-				<dt>Handige links</dt>
+				<dt><?=$taal->msg('handige_links') ?></dt>
 				<dd><ul>
 					<li><a href="http://helpdesk.ugent.be">&#187; Helpdesk</a></li>
 					<li><a href="http://www.ugent.be/nl/voorzieningen/huisvesting">&#187; Huisvesting</a></li>
@@ -110,11 +110,11 @@
 		<!--login aan de rechterkant-->
 		<? if($auth->isLoggedIn()){ ?>
 			<div id="login-act">
-			 <?=$auth->getUser()->getGebruikersnaam() ?>&nbsp;-&nbsp;<a href="logout.php" title="uitloggen" >afmelden</a>
+			 <?=$auth->getUser()->getGebruikersnaam() ?>&nbsp;-&nbsp;<a href="logout.php" title="uitloggen" ><?=$taal->msg('afmelden') ?></a>
 		 	</div>
 		<? } else{ ?>
 			<div id="login">
-				<a href="<?=$auth->getLoginURL() ?>" title="inloggen">aanmelden</a>
+				<a href="<?=$auth->getLoginURL() ?>" title="inloggen"><?=$taal->msg('aanmelden') ?></a>
 		 	</div>
 		<?} ?>
 		 
