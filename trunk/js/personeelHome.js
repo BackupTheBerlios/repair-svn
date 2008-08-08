@@ -62,7 +62,7 @@ function voegtoe(){
 	var rij = $(this).parent().parent();
 	var velden = new Array();
 	var waarden = new Array();
-	var r = "<tr>";
+	var r = "<tr><td></td>";
 	
 	rij.find(".edit").each(function(){
 		var waarde = $(this).find("input[@type=text]").val();

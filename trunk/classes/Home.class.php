@@ -43,7 +43,7 @@ class Home {
 		else{//bestaande home
 			if (!is_numeric($id)) throw new BadParameterException();
 			$statement = $this->db->prepare("SELECT id, korteNaam, langeNaam, adres, verdiepen, kamerPrefix, ldapNaam FROM home WHERE id = ?");
-			$statement->bind_param('i', id);
+			$statement->bind_param('i', $id);
 			$statement->execute();
 			$statement->bind_result($this->id, $this->korteNaam, $this->langeNaam, 
 				$this->adres, $this->verdiepen, $this->kamerPrefix, $this->ldapNaam);
@@ -182,13 +182,14 @@ class Home {
 	
 	public static function getHome($veld, $value) {
 		if (strlen($veld) == 0) throw new BadParameterException();
-		$this->db = DB::getDB();
-		$statement = $this->db->prepare("SELECT id FROM home WHERE $veld = ?");
+		$db = DB::getDB();
+		$statement = $db->prepare("SELECT id FROM home WHERE $veld = ?");
 		$statement->bind_param('s', $value);
 		$statement->execute();
+		$statement->store_result();
 		$statement->bind_result($id);
-		$home = new Home($id);
 		$statement->fetch();
+		$home = new Home($id);
 		$statement->close();
 		return $home;
 	}
