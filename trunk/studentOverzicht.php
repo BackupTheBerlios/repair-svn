@@ -55,7 +55,7 @@
 									echo($huidigeStatus->getUitleg());
 									echo ("</td></tr>");
 									echo("<tbody id='group_status_".$huidigeStatus->getValue()."'>");
-									echo("<tr class='legende'><td></td><td>Datum</td><td>Inhoud</td></tr>");
+									echo("<tr class='legende'><td></td><td>".$taal->msg('datum')."</td><td colspan='3'>".$taal->msg('inhoud')."</td></tr>");
 								}
 								echo("<tr id='row_".$form->getId()."'><td></td><td>");
 								$timestamp = strtotime($form->getDatum());

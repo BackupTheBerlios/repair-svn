@@ -12,6 +12,8 @@
 	if (!$auth->getUser()->isStudent()) 
 		throw new AccessException();
 		
+	$taal = new Taal();
+		
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -56,38 +58,34 @@
 								$nieuweCategorie = $veld->getCategorie();
 								$nieuweLocatie = $nieuweCategorie->getLocatie();
 								if (!isset($huidigeLocatie) || ($huidigeLocatie->getValue() != $nieuweLocatie->getValue())) {
-									//if (isset($huidigeLocatie)) echo("</tbody>");
 									$huidigeLocatie = $nieuweLocatie;
-									//echo("<tr class='subheader klik' id='locatie_".$huidigeLocatie->getValue()."' onclick=\"showLocatie('".$huidigeLocatie->getValue()."');\"><td width='12px' id='collapse_".$huidigeLocatie->getValue()."'>+</td><td colspan='3'>".$huidigeLocatie->getValue()."</td></tr>");
 									echo("<tr class='subheader' id='locatie_".$huidigeLocatie->getValue()."'><td colspan='4'>".$huidigeLocatie->getValue()."</td></tr>");
 								}
 								if (!isset($huidigeCategorie) || ($huidigeCategorie->getNaamNL() != $nieuweCategorie->getNaamNL())) {
-									//if (isset($huidigeCategorie)) echo("</tbody>");
 									$huidigeCategorie = $nieuweCategorie;
-									echo("<tr class='subsubheader klik ".$huidigeLocatie->getValue()."' id='cat_".$huidigeCategorie->getId()."' onclick='showGroup(".$huidigeCategorie->getId().");'><td width='12px' id='collapse_".$huidigeCategorie->getId()."'>+</td><td colspan='3'>".$huidigeCategorie->getNaamNL()."/".$huidigeCategorie->getNaamEN()."</td></tr>");
-									//echo("<tbody id='group_cat_".$huidigeCategorie->getId()."' style='display:none'>");
-									echo("<tr class='legende ".$huidigeLocatie->getValue()." ".$huidigeCategorie->getId()."' style='display:none'><td></td><td>Defect</td><td>Naam Nederlands</td><td>Naam Engels</td></tr>");
+									echo("<tr class='subsubheader klik ".$huidigeLocatie->getValue()."' id='cat_".$huidigeCategorie->getId()."' onclick='showGroup(".$huidigeCategorie->getId().");'><td width='12px' id='collapse_".$huidigeCategorie->getId()."'>+</td><td colspan='3'>".$huidigeCategorie->getNaam()."</td></tr>");
+									echo("<tr class='legende ".$huidigeLocatie->getValue()." ".$huidigeCategorie->getId()."' style='display:none'><td></td><td>Defect</td><td>".$taal->msg('naam')."</td><td></td></tr>");
 								}
-								echo("<tr class='klik ".$huidigeLocatie->getValue()." ".$huidigeCategorie->getId()."' id='item_".$veld->getId()."' onclick='checkItem(".$veld->getId().");' style='display:none'><td></td><td><input id='check_".$veld->getId()."' type='checkbox' name='".$veld->getId()."' onclick='checkItem(".$veld->getId().");'/></td><td>".$veld->getnaamNL()."</td><td>".$veld->getnaamEN()."</td></tr>");
+								echo("<tr class='klik ".$huidigeLocatie->getValue()." ".$huidigeCategorie->getId()."' id='item_".$veld->getId()."' onclick='checkItem(".$veld->getId().");' style='display:none'><td></td><td><input id='check_".$veld->getId()."' type='checkbox' name='".$veld->getId()."' onclick='checkItem(".$veld->getId().");'/></td><td>".$veld->getNaam()."</td><td></td></tr>");
 							}
 						?>
 				</table>
-				<div><label for="opmerking">Opmerking:</label><div><textarea name="opmerking" id="opmerking" cols="50" rows="8"></textarea></div></div>
-				<div><button name="submit" id="submit" type="submit">Submit</button></div>
+				<div><label for="opmerking"><?=$taal->msg('opmerking') ?>:</label><div><textarea name="opmerking" id="opmerking" cols="50" rows="8"></textarea></div></div>
+				<div><button name="submit" id="submit" type="submit"><?=$taal->msg('verzenden') ?></button></div>
 				</form>
 				</div>				
 			</div>		
 		</div>		
 		
 		<!--de footer-->
-		<div id="footer">&#169; 2008 Bart Mesuere &amp; Bert Vandeghinste in opdracht van de <a href="http://www.ugent.be/nl/voorzieningen/huisvesting">Afdeling Huisvesting</a></div>
+		<div id="footer"><?=$taal->msg('footer') ?></div>
 		
 		<!--navigatie aan de linkerkant-->
 		<div id="leftnav">
 					
 			<!--linkjes onderaan-->
 			<dl class="facet">
-				<dt>Handige links</dt>
+				<dt><?=$taal->msg('handige_links') ?></dt>
 				<dd><ul>
 					<li><a href="http://helpdesk.ugent.be">&#187; Helpdesk</a></li>
 					<li><a href="http://www.ugent.be/nl/voorzieningen/huisvesting">&#187; Huisvesting</a></li>
@@ -99,11 +97,11 @@
 		<!--login aan de rechterkant-->
 		<? if($auth->isLoggedIn()){ ?>
 			<div id="login-act">
-			 <?=$auth->getUser()->getGebruikersnaam() ?>&nbsp;-&nbsp;<a href="logout.php" title="uitloggen" >afmelden</a>
+			 <?=$auth->getUser()->getGebruikersnaam() ?>&nbsp;-&nbsp;<a href="logout.php" title="uitloggen" ><?=$taal->msg('afmelden') ?></a>
 		 	</div>
 		<? } else{ ?>
 			<div id="login">
-				<a href="<?=$auth->getLoginURL() ?>" title="inloggen">aanmelden</a>
+				<a href="<?=$auth->getLoginURL() ?>" title="inloggen"><?=$taal->msg('aanmelden') ?></a>
 		 	</div>
 		<?} ?>
 		 
