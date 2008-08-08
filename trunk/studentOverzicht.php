@@ -1,19 +1,22 @@
-<? 
+<?
+
 	session_start(); 
 	require_once 'classes/exceptions/AccessException.php';
 	require_once 'classes/Herstelformulier.class.php';
 	require_once 'classes/Topmenu.class.php';
 	require_once 'classes/Auth.class.php';
+	require_once 'classes/Taal.class.php';
 	$auth = new Auth(true);
 	if(!$auth->getUser()->isStudent())
 		throw new AccessException();
+	$taal = new Taal();
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-	    <title>Online Herstelformulier</title>
+	    <title><?=$taal->msg('titel') ?></title>
 	    <link rel="stylesheet" type="text/css" href="style.css"/>
 	    <script type="text/javascript" src="js/jquery/jquery.js"></script>
 	    <script type="text/javascript" src="js/studentOverzicht.js"></script>
@@ -23,7 +26,7 @@
 		<div id="logo"><img src="images/logo.gif" width="200" height="60" alt="Logo Universiteit Gent" usemap="#linklogo" /><map name="linklogo" id="linklogo"><area shape="rect" coords="60,0,142,60" href="http://www.ugent.be" alt="Startpagina Universiteit Gent" /></map></div>
 		
 		<!--pagina titel-->
-		<div id="siteid"><img src="images/siteid-portal.jpg" width="300" height="80" alt="Portaalsite Universiteit Gent" /><a href="index.php" class="text" >Online Herstelformulier</a></div>
+		<div id="siteid"><img src="images/siteid-portal.jpg" width="300" height="80" alt="Portaalsite Universiteit Gent" /><a href="index.php" class="text" ><?=$taal->msg('titel') ?></a></div>
 		
 		<!--linkjes rechtsboven-->
 		<div id="utility">

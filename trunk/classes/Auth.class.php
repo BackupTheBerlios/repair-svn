@@ -66,10 +66,14 @@ class Auth{
 			        		$_SESSION['userid'] = $this->user->getId();
 			        		$this->isLoggedIn=true;
 			        		//doorsturen naar de juiste pagina
-			        		if($this->user->isStudent())
+			        		if($this->user->isStudent()) {
+			        			$_SESSION['taal'] = $this->user->getTaal();
 			        			echo("<meta http-equiv=\"Refresh\" content=\"0; URL=studentOverzicht.php\">"); 
-			        		else if($this->user->isPersoneel())
+			        		}
+			        		else if($this->user->isPersoneel()) {
+			        			$_SESSION['taal'] = "nl";
 			        			echo("<meta http-equiv=\"Refresh\" content=\"0; URL=personeelOverzicht.php\">");
+			        		}
 			        		else
 			        			throw new Exception("De ingelogde gebruiker is geen student en geen geregistreerd personeelslid");
 			        		die();//stoppen met de output
@@ -81,6 +85,7 @@ class Auth{
 			    else throw new Exception("InvalidKeyException");//TODO: custom InvalidKeyException
 			}
 			else{//nog niet ingelogd en niet bezig, dus we zwieren hem naar webauth
+				$_SESSION['taal'] = "nl";
 				if($automatisch){
 					echo("<meta http-equiv=\"Refresh\" content=\"0; URL=".self::getLoginURL()."\">");
 					die();//we stoppen de uitvoering

@@ -42,7 +42,8 @@ class Taal {
 	
 	private $lang;
 	
-	function __construct($lang = "nl") {
+	function __construct() {
+		$lang = $_SESSION['taal'];
 		$lang = strtolower($lang);
 		if ($lang == "nl" || $lang == "en")
 			$this->lang = $lang;
