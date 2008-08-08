@@ -5,6 +5,7 @@
 	require_once 'classes/UserList.class.php';
 	require_once 'classes/VeldList.php';
 	require_once 'classes/Auth.class.php';
+	require_once 'classes/Topmenu.class.php';
 	$auth = new Auth(true);
 	if (!$auth->isLoggedIn()) {
 		// throw new UnauthorizedException(); // TODO: gepaste exception
@@ -41,14 +42,7 @@
 		<div id="container">
 		
 			<!--horizontale navigatiebalk bovenaan-->
-			<div id="mainnav">
-				<ul>
-					<li class="first"><a href="overzicht.php">Overzicht</a></li>
-					<li><a href="nieuweMelding.php">Defect melden</a></li>
-					<li><a href="#">Statistieken</a></li>
-					<li><a href="personeelAdmin.php">TIJDELIJKE LINK NAAR BEHEER</a></li>
-				</ul>
-			</div>
+			<?new Topmenu("melding"); ?>
 			
 			<!--de inhoud van de pagina-->
 			<div id="contenthome">

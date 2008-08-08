@@ -4,6 +4,7 @@
 	require_once 'classes/Home.class.php';
 	require_once 'classes/Auth.class.php';
 	require_once 'classes/Leftmenu.class.php';
+	require_once 'classes/Topmenu.class.php';
 	$auth = new Auth(true);
 	if($auth->getUser()->isStudent()){
 		//throw new Exception("Access Violation Exception");//todo: aanzetten
@@ -42,14 +43,7 @@
 		<div id="container">
 		
 			<!--horizontale navigatiebalk bovenaan-->
-			<div id="mainnav">
-				<ul>
-					<li class="first"><a href="overzicht.php">Overzicht</a></li>
-					<li><a href="nieuweMelding.php">Defect melden</a></li>
-					<li><a href="#">Statistieken</a></li>
-					<li id="active"><a href="#">Beheer</a></li>
-				</ul>
-			</div>
+			<? new Topmenu("beheer"); ?>
 			
 			<!--de inhoud van de pagina-->
 			<div id="contenthome">

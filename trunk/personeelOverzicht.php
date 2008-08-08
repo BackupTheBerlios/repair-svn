@@ -3,6 +3,7 @@
 	require_once 'classes/Auth.class.php';
 	require_once 'classes/HerstelformulierList.class.php';
 	require_once 'classes/Personeel.class.php';
+	require_once 'classes/Topmenu.class.php';
 	$auth = new Auth(true);
 	//if ($auth->getUser()->isPersoneel())
 	//	throw new Exception("Unauthorized!"); // TODO: gepaste exception
@@ -36,13 +37,7 @@
 		<div id="container">
 		
 			<!--horizontale navigatiebalk bovenaan-->
-			<div id="mainnav">
-				<ul>
-					<li class="first" id="active"><a href="#">Overzicht</a></li>
-					<li><a href="nieuweMelding.php">Defect melden</a></li>
-					<li><a href="#">Statistieken</a></li>
-				</ul>
-			</div>
+			<?new Topmenu("overzicht"); ?>
 			
 			<!--de inhoud van de pagina-->
 			<div id="contenthome">

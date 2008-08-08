@@ -1,5 +1,6 @@
 <? 
 	session_start(); 
+	require_once 'classes/Topmenu.class.php';
 	//require_once 'classes/Auth.class.php';
 	//$auth = new Auth(false);
 	if(isset($_SESSION['error']))
@@ -37,13 +38,7 @@
 		<div id="container">
 		
 			<!--horizontale navigatiebalk bovenaan-->
-			<div id="mainnav">
-				<ul>
-					<li class="first"><a href="overzicht.php">Overzicht</a></li>
-					<li><a href="#">Defect melden</a></li>
-					<li><a href="#">Statistieken</a></li>
-				</ul>
-			</div>
+			<?new Topmenu(); ?>
 			
 			<!--de inhoud van de pagina-->
 			<div id="contenthome">
