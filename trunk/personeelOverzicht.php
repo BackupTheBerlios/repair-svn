@@ -1,13 +1,14 @@
-<? require_once 'classes/Herstelformulier.class.php';
-require_once 'classes/Status.class.php';
-
+<? 
 	session_start(); 
-	require_once 'classes/Auth.class.php';
+	require_once 'classes/exceptions/AccessException.php';
+	require_once 'classes/Herstelformulier.class.php';
+	require_once 'classes/Status.class.php';
 	require_once 'classes/Personeel.class.php';
 	require_once 'classes/Topmenu.class.php';
+	require_once 'classes/Auth.class.php';
 	$auth = new Auth(true);
-	//if ($auth->getUser()->isPersoneel())
-	//	throw new Exception("Unauthorized!"); // TODO: gepaste exception
+	if (!$auth->getUser()->isPersoneel())
+		throw new AccessException();
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
