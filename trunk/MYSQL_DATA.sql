@@ -17,12 +17,12 @@ INSERT INTO `categorie` (`id`, `naamNL`, `naamEN`, `locatie`) VALUES
 -- 
 
 INSERT INTO `home` (`id`, `korteNaam`, `langeNaam`, `adres`, `verdiepen`, `kamerPrefix`, `ldapNaam`) VALUES 
-(1, 'Boudewijn', 'Home Koning Boudewijn', 'Harelbekestraat 70', 14, '91.01', 'HOME BOUDEWIJN'),
-(2, 'Astrid', 'Home Koningin Astrid', 'Krijgslaan 250', 5, '53.01', 'HOME ASTRID'),
-(3, 'Fabiola', 'Home Koningin Fabiola', 'Stalhof 4', 7, '31.02', 'HOME FABIOLA'),
-(4, 'Vermeylen', 'Home August Vermeylen', 'Stalhof 6', 8, '55.01', 'HOME VERMEYLEN'),
-(5, 'Bertha', 'Home Bertha De Vriese', 'De Pintelaan 260B', 4, '40.13', 'HOME BERTHA DE VRIESE'),
-(6, 'Heymans', 'Home Corneel Heymans', 'Isabellakaai 120', 7, '55.02', 'HOME HEYMANS');
+(1, 'Boudewijn', 'Home Koning Boudewijn', 'Harelbekestraat 70', 14, '91.01', 'HOME BOUDEWIJN', 0),
+(2, 'Astrid', 'Home Koningin Astrid', 'Krijgslaan 250', 5, '53.01', 'HOME ASTRID', 0),
+(3, 'Fabiola', 'Home Koningin Fabiola', 'Stalhof 4', 7, '31.02', 'HOME FABIOLA', 0),
+(4, 'Vermeylen', 'Home August Vermeylen', 'Stalhof 6', 8, '55.01', 'HOME VERMEYLEN', 0),
+(5, 'Bertha', 'Home Bertha De Vriese', 'De Pintelaan 260B', 4, '40.13', 'HOME BERTHA DE VRIESE', 0),
+(6, 'Heymans', 'Home Corneel Heymans', 'Isabellakaai 120', 7, '55.02', 'HOME HEYMANS', 0);
 
 -- 
 -- Dumping data for table `user`

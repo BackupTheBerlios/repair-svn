@@ -13,6 +13,7 @@ class Home {
 	private $verdiepen;
 	private $kamerPrefix;
 	private $ldapNaam;
+	private $verwijderd;
 	
 	private $updated;
 	
@@ -24,7 +25,7 @@ class Home {
 	 * @param String $veld veld van de home
 	 * @param String $value waarde van het veld
 	 */
-	public function __construct($id, $korteNaam="", $langeNaam="", $adres="", $verdiepen="", $kamerPrefix="", $ldapNaam="") {
+	public function __construct($id, $korteNaam="", $langeNaam="", $adres="", $verdiepen="", $kamerPrefix="", $ldapNaam="", $verwijderd="0") {
 		$this->db = DB::getDB();
 		if($id==""){// nieuwe home
 			$this->korteNaam = $korteNaam;
@@ -33,20 +34,21 @@ class Home {
 			$this->verdiepen = $verdiepen;
 			$this->kamerPrefix = $kamerPrefix;
 			$this->ldapNaam = $ldapNaam;
+			$this->verwijder = $verwijderd;
 			// bepalen van zijn userId
-			$statement = $this->db->prepare("INSERT INTO home (korteNaam, langeNaam, adres, verdiepen, kamerPrefix, ldapNaam) VALUES (?,?,?,?,?,?)");
-			$statement->bind_param('sssiss', $this->korteNaam, $this->langeNaam, $this->adres, $this->verdiepen, $this->kamerPrefix, $this->ldapNaam);
+			$statement = $this->db->prepare("INSERT INTO home (korteNaam, langeNaam, adres, verdiepen, kamerPrefix, ldapNaam, verwijderd) VALUES (?,?,?,?,?,?,?)");
+			$statement->bind_param('sssissi', $this->korteNaam, $this->langeNaam, $this->adres, $this->verdiepen, $this->kamerPrefix, $this->ldapNaam, $this->verwijderd);
 			$statement->execute();
 			$this->id = $this->db->insert_id;
 			$statement->close();
 		}
 		else{//bestaande home
 			if (!is_numeric($id)) throw new BadParameterException();
-			$statement = $this->db->prepare("SELECT id, korteNaam, langeNaam, adres, verdiepen, kamerPrefix, ldapNaam FROM home WHERE id = ?");
+			$statement = $this->db->prepare("SELECT id, korteNaam, langeNaam, adres, verdiepen, kamerPrefix, ldapNaam, verwijderd FROM home WHERE id = ?");
 			$statement->bind_param('i', $id);
 			$statement->execute();
 			$statement->bind_result($this->id, $this->korteNaam, $this->langeNaam, 
-				$this->adres, $this->verdiepen, $this->kamerPrefix, $this->ldapNaam);
+				$this->adres, $this->verdiepen, $this->kamerPrefix, $this->ldapNaam, $this->verwijderd);
 			$statement->fetch();
 			$statement->close();
 		}
@@ -61,8 +63,8 @@ class Home {
 	
 	public function save() {
 		if ($this->updated == 1) {
-			$statement = $this->db->prepare("UPDATE home SET korteNaam = ?, langeNaam = ?, adres = ?, verdiepen = ?, kamerPrefix = ? , ldapNaam = ? WHERE id = ?");
-			$statement->bind_param('sssissi', $this->korteNaam, $this->langeNaam, $this->adres, $this->verdiepen, $this->kamerPrefix, $this->ldapNaam, $this->id);
+			$statement = $this->db->prepare("UPDATE home SET korteNaam = ?, langeNaam = ?, adres = ?, verdiepen = ?, kamerPrefix = ? , ldapNaam = ?, verwijderd = ? WHERE id = ?");
+			$statement->bind_param('sssissii', $this->korteNaam, $this->langeNaam, $this->adres, $this->verdiepen, $this->kamerPrefix, $this->ldapNaam, $this->verwijderd, $this->id);
 			$statement->execute();
 			$statement->close();
 			$this->updated = 0;
@@ -180,6 +182,21 @@ class Home {
 		$this->updated = 1;
 	}
 	
+	/**
+	 * @return unknown
+	 */
+	public function getVerwijderd() {
+		return $this->verwijderd;
+	}
+	
+	/**
+	 * @param unknown_type $verwijderd
+	 */
+	public function setVerwijderd($verwijderd) {
+		$this->verwijderd = $verwijderd;
+		$this->updated = 1;
+	}
+
 	public static function getHome($veld, $value) {
 		if (strlen($veld) == 0) throw new BadParameterException();
 		$db = DB::getDB();
