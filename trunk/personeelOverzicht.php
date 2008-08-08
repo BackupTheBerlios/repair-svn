@@ -68,7 +68,7 @@
 								$parsedDate = date("d-m-Y @ H:i",$timestamp);
 								echo($parsedDate);
 								echo("</td><td>".$form->getSamenvatting()."</td>");
-								echo("<td colspan='2' class='img'><a href='doorgevenMelding.php?formid=".$form->getId()."'><img alt='doorgeven' class='bewerk' title='Dit herstelformulier doorgeven' src='images/page_edit.gif'/></a></td></tr>");
+								echo("<td colspan='2' class='img'><a href='personeelMeldingDoorgeven.php?formid=".$form->getId()."'><img alt='doorgeven' class='bewerk' title='Dit herstelformulier doorgeven' src='images/page_edit.gif'/></a></td></tr>");
 							}
 						 ?>
 						</tbody>

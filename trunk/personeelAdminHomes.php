@@ -69,7 +69,7 @@
 		<div id="footer">&#169; 2008 Bart Mesuere &amp; Bert Vandeghinste in opdracht van de <a href="http://www.ugent.be/nl/voorzieningen/huisvesting">Afdeling Huisvesting</a></div>
 		
 		<!--navigatie aan de linkerkant-->
-		<? new Leftmenu("Beheer", "personeelHomes.php"); ?>
+		<? new Leftmenu("Beheer", "personeelAdminHomes.php"); ?>
 		
 		<!--login aan de rechterkant-->
 		<div id="login-act">

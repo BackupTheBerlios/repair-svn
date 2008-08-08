@@ -1,4 +1,4 @@
-<? 
+<?
 	session_start();
 	require_once 'classes/exceptions/BadParameterException.class.php';
 	require_once 'classes/exceptions/AccessException.php';

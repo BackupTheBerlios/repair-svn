@@ -16,7 +16,7 @@ class Topmenu {
 			}
 			else{//we zijn student
 				echo self::generateMenuItem("overzicht.php", "overzicht", "Overzicht", 1);
-				echo self::generateMenuItem("nieuweMelding.php", "melding", "Defect melden");
+				echo self::generateMenuItem("studentMeldingToevoegen.php", "melding", "Defect melden");
 			}
 		}
 		echo("</ul></div>");
