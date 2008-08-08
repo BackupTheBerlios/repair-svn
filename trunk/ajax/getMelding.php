@@ -5,7 +5,7 @@
 	require_once("../classes/Herstelformulier.class.php");
 	require_once '../classes/Auth.class.php';
 	$auth = new Auth(false);
-	if (!$auth->isLoggedIn() || !$auth->getUser()->isStudent()) //TODO: is deze pagina effectief voor studenten?
+	if (!$auth->isLoggedIn() || !$auth->getUser()->isStudent())
 		throw new AccessException();
 	
 	$formid = $_GET['formid'];

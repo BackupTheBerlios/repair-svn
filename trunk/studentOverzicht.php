@@ -4,6 +4,7 @@
 	require_once 'classes/exceptions/AccessException.php';
 	require_once 'classes/Herstelformulier.class.php';
 	require_once 'classes/Topmenu.class.php';
+	require_once 'classes/Header.class.php';
 	require_once 'classes/Auth.class.php';
 	require_once 'classes/Taal.class.php';
 	$auth = new Auth(true);
@@ -22,21 +23,7 @@
 	    <script type="text/javascript" src="js/studentOverzicht.js"></script>
 	</head>
 	<body>
-		<!--logo linksboven-->
-		<div id="logo"><img src="images/logo.gif" width="200" height="60" alt="Logo Universiteit Gent" usemap="#linklogo" /><map name="linklogo" id="linklogo"><area shape="rect" coords="60,0,142,60" href="http://www.ugent.be" alt="Startpagina Universiteit Gent" /></map></div>
-		
-		<!--pagina titel-->
-		<div id="siteid"><img src="images/siteid-portal.jpg" width="300" height="80" alt="Portaalsite Universiteit Gent" /><a href="index.php" class="text" ><?=$taal->msg('titel') ?></a></div>
-		
-		<!--linkjes rechtsboven-->
-		<div id="utility">
-			<a href="help.php">CSS</a> | <a href="#">English</a> | <a href="#">Contact</a> | <a href="#" onclick="window.print()">Print</a>
-		</div>
-		
-		<!--broodkruimeltjes-->
-		<div id="breadcrumb"> 
-			<a href='index.php'><?=$taal->msg('dringende_herstellingen') ?></a> &gt; <?=$taal->msg('overzicht') ?>
-		</div>
+		<?new Header(array("#"), array("Overzicht")); ?>
 		
 		<!--main content-->
 		<div id="container">
@@ -49,10 +36,10 @@
 				
 				<? if($auth->getUser()->isStudent()){ ?>
 				<div>
-					<h1><?=$taal->msg('overzicht') ?></h1>
-					<p><? printf($taal->msg('welkom_overzicht_naam'),$auth->getUser()->getVoornaam()) ?></p>
+					<h1>Overzicht</h1>
+					<p>Welkom <?=$auth->getUser()->getVoornaam()?>, op deze pagina kunt u een overzicht vinden van de reeds ingediende herstelformulieren.</p>
 					<table>
-						<tr class="tabelheader"><td colspan="6"><?=$taal->msg('overzicht_herstellingen') ?></td></tr>
+						<tr class="tabelheader"><td colspan="6">Overzicht van de voorbije herstellingen</td></tr>
 						<?
 							$lijst = Herstelformulier::getLatest($auth->getUser()->getId());
 							for($i=0; $i < sizeof($lijst);$i++){
@@ -65,7 +52,7 @@
 									echo($huidigeStatus->getUitleg());
 									echo ("</td></tr>");
 									echo("<tbody id='group_status_".$huidigeStatus->getValue()."'>");
-									echo("<tr class='legende'><td></td><td>".$taal->msg('datum')."</td><td>".$taal->msg('inhoud')."</td><td colspan='2'></td></tr>");
+									echo("<tr class='legende'><td></td><td>Datum</td><td>Inhoud</td></tr>");
 								}
 								echo("<tr id='row_".$form->getId()."'><td></td><td>");
 								$timestamp = strtotime($form->getDatum());
@@ -88,14 +75,14 @@
 		</div>		
 		
 		<!--de footer-->
-		<div id="footer"><?=$taal->msg('footer') ?></div>
+		<div id="footer">&#169; 2008 Bart Mesuere &amp; Bert Vandeghinste in opdracht van de <a href="http://www.ugent.be/nl/voorzieningen/huisvesting">Afdeling Huisvesting</a></div>
 		
 		<!--navigatie aan de linkerkant-->
 		<div id="leftnav">
 					
 			<!--linkjes onderaan-->
 			<dl class="facet">
-				<dt><?=$taal->msg('handige_links') ?></dt>
+				<dt>Handige links</dt>
 				<dd><ul>
 					<li><a href="http://helpdesk.ugent.be">&#187; Helpdesk</a></li>
 					<li><a href="http://www.ugent.be/nl/voorzieningen/huisvesting">&#187; Huisvesting</a></li>
@@ -106,7 +93,7 @@
 		
 		<!--login aan de rechterkant-->
 		<div id="login-act">
-			<?=$auth->getUser()->getGebruikersnaam() ?>&nbsp;-&nbsp;<a href="logout.php" title="uitloggen" ><?=$taal->msg('afmelden') ?></a>
+			<?=$auth->getUser()->getGebruikersnaam() ?>&nbsp;-&nbsp;<a href="logout.php" title="uitloggen" >afmelden</a>
 		 </div>
 		 
 		 

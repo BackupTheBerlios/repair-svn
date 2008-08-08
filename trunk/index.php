@@ -3,6 +3,7 @@
 	require_once 'classes/Herstelformulier.class.php';
 	require_once 'classes/Taal.class.php';
 	require_once 'classes/Topmenu.class.php';
+	require_once 'classes/Header.class.php';
 	require_once 'classes/Auth.class.php';
 	$auth = new Auth(false);
 	$taal = new Taal();
@@ -16,21 +17,7 @@
 	    <link rel="stylesheet" type="text/css" href="style.css"/>
 	</head>
 	<body>
-		<!--logo linksboven-->
-		<div id="logo"><img src="images/logo.gif" width="200" height="60" alt="Logo Universiteit Gent" usemap="#linklogo" /><map name="linklogo" id="linklogo"><area shape="rect" coords="60,0,142,60" href="http://www.ugent.be" alt="Startpagina Universiteit Gent" /></map></div>
-		
-		<!--pagina titel-->
-		<div id="siteid"><img src="images/siteid-portal.jpg" width="300" height="80" alt="Portaalsite Universiteit Gent" /><a href="index.php" class="text" ><?=$taal->msg('titel');?></a></div>
-		
-		<!--linkjes rechtsboven-->
-		<div id="utility">
-			<a href="help.php">CSS</a> | <a href="#">English</a> | <a href="#">Contact</a> | <a href="#" onclick="window.print()">Print</a>
-		</div>
-		
-		<!--broodkruimeltjes-->
-		<div id="breadcrumb"> 
-			<a href='index.php'><?=$taal->msg('dringende_herstellingen');?></a> &gt; Index
-		</div>
+		<?new Header(array("#"), array("Index")); ?>
 		
 		<!--main content-->
 		<div id="container">

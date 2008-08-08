@@ -7,6 +7,7 @@
 	require_once 'classes/Auth.class.php';
 	require_once 'classes/Leftmenu.class.php';
 	require_once 'classes/Topmenu.class.php';
+	require_once 'classes/Header.class.php';
 	$auth = new Auth(true);
 	if(!$auth->getUser()->isPersoneel())
 		throw new AccessException();
@@ -25,21 +26,7 @@
 	    
 	</head>
 	<body>
-		<!--logo linksboven-->
-		<div id="logo"><img src="images/logo.gif" width="200" height="60" alt="Logo Universiteit Gent" usemap="#linklogo" /><map name="linklogo" id="linklogo"><area shape="rect" coords="60,0,142,60" href="http://www.ugent.be" alt="Startpagina Universiteit Gent" /></map></div>
-		
-		<!--pagina titel-->
-		<div id="siteid"><img src="images/siteid-portal.jpg" width="300" height="80" alt="Portaalsite Universiteit Gent" /><a href="index.php" class="text" >Online Herstelformulier</a></div>
-		
-		<!--linkjes rechtsboven-->
-		<div id="utility">
-			<a href="help.php">CSS</a> | <a href="#">English</a> | <a href="#">Contact</a> | <a href="#" onclick="window.print()">Print</a>
-		</div>
-		
-		<!--broodkruimeltjes-->
-		<div id="breadcrumb"> 
-			<a href='index.php'>Dringende Herstellingen</a> &gt; Beheer
-		</div>
+		<?new Header(array("#"), array("Beheer")); ?>
 		
 		<!--main content-->
 		<div id="container">

@@ -8,6 +8,7 @@ class Topmenu {
 		echo("<div id='mainnav'><ul>");
 		if(!$a->isLoggedIn()){//we zijn niet ingelogd
 			echo self::generateMenuItem(Auth::getLoginURL(), "login", "Inloggen", 1);
+			echo self::generateMenuItem("studentMeldingToevoegen.php", "melding", "Defect melden");
 		}
 		else{
 			if($a->getUser()->isPersoneel()){//we zijn personeel
