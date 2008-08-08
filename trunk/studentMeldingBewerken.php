@@ -20,7 +20,7 @@
 		
 	$formulier = new Herstelformulier($formid);
 	if ($formulier->getStudent()->getId() != $auth->getUser()->getId())
-		throw new Exception(); // TODO: gepaste exception
+		throw new Exception(); // TODO: gepaste exception 
 		
 	if ($formulier->getStatus()->getValue() != "ongezien")
 		throw new Exception(); // TODO: gepaste exception
