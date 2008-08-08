@@ -1,11 +1,14 @@
 <? 
-require_once 'classes/exceptions/BadParameterException.class.php';
-require_once 'classes/Herstelformulier.class.php';
-require_once 'classes/Topmenu.class.php';
-
-	session_start(); 
+	session_start();
+	require_once 'classes/exceptions/BadParameterException.class.php';
+	require_once 'classes/exceptions/AccessException.php';
+	require_once 'classes/Herstelformulier.class.php';
+	require_once 'classes/Topmenu.class.php';
 	require_once 'classes/Auth.class.php';
 	$auth = new Auth(false);
+	if(!$auth->getUser()->isPersoneel())
+		throw new AccessException();
+	
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -43,9 +46,6 @@ require_once 'classes/Topmenu.class.php';
 			<!--de inhoud van de pagina-->
 			<div id="contenthome">
 				<div id='beforecontent'>
-					<? if($auth->isLoggedIn()){ 
-						//if($auth->getUser()->isPersoneel()){?>
-					<?
 					$formid = $_GET['formid'];
 					if (!is_numeric($formid) || $formid < 1) throw new BadParameterException("Formid werd foutief gebruikt");
 					$formulier = new Herstelformulier($formid);
@@ -85,9 +85,6 @@ require_once 'classes/Topmenu.class.php';
 							<td colspan="3"></td>
 							<td><button name="submit" id="submit" type="submit" onclick="geefDoor('<?=$formid;?>');">Doorgegeven</button></td>
 						</tr>
-						<?
-						//}
-						}?>
 						</table>
 					</div>
 				</div>

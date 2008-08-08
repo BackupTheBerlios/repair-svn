@@ -1,10 +1,13 @@
-<? require_once 'classes/exceptions/BadParameterException.class.php';
-require_once 'classes/Herstelformulier.class.php';
-require_once 'classes/Topmenu.class.php';
-
-	session_start(); 
+<? 
+	session_start();
+	require_once 'classes/exceptions/BadParameterException.class.php';
+	require_once 'classes/exceptions/AccessException.php';
+	require_once 'classes/Herstelformulier.class.php';
+	require_once 'classes/Topmenu.class.php';
 	require_once 'classes/Auth.class.php';
 	$auth = new Auth(true);
+	if(!$auth->getUser()->isStudent())
+		throw new AccessException();
 	$user = $auth->getUser();
 	$t = "";
 	if ($user->isStudent())

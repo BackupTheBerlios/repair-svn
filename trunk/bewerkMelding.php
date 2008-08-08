@@ -1,16 +1,17 @@
 <?
-require_once 'classes/Veld.class.php';
-require_once 'classes/exceptions/BadParameterException.class.php';
 	session_start(); 
+	require_once 'classes/exceptions/BadParameterException.class.php';
+	require_once 'classes/exceptions/AccessException.php';
+	require_once 'classes/Veld.class.php';
 	require_once 'classes/Herstelformulier.class.php';
 	require_once 'classes/Status.class.php';
 	require_once 'classes/UserList.class.php';
 	require_once 'classes/Auth.class.php';
 	require_once 'classes/Topmenu.class.php';
 	$auth = new Auth(true);
-	if (!$auth->isLoggedIn()) {
-		// throw new UnauthorizedException(); // TODO: gepaste exception
-	}
+	if (!$auth->getUser()->isStudent()) 
+		throw new AccessException();
+	
 	
 	// Input sanitizing
 	$formid = $_GET['formid'];

@@ -1,9 +1,8 @@
-<? require_once 'classes/Herstelformulier.class.php';
-
-require_once 'classes/Taal.class.php';
-require_once 'classes/Topmenu.class.php';
-
-	session_start(); 
+<? 
+	session_start(); 	
+	require_once 'classes/Herstelformulier.class.php';
+	require_once 'classes/Taal.class.php';
+	require_once 'classes/Topmenu.class.php';
 	require_once 'classes/Auth.class.php';
 	$auth = new Auth(false);
 	if ($auth) {
@@ -17,6 +16,7 @@ require_once 'classes/Topmenu.class.php';
 		$t = "NL";
 	}
 	$taal = new Taal($t);
+	$taal =  new Taal($auth->getUser()->getTaal());
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
