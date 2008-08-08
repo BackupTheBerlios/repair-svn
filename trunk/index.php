@@ -6,7 +6,17 @@ require_once 'classes/Topmenu.class.php';
 	session_start(); 
 	require_once 'classes/Auth.class.php';
 	$auth = new Auth(false);
-	$taal = new Taal("NL");
+	if ($auth) {
+		$user = $auth->getUser();
+		$t = "";
+		if ($user->isStudent())
+			$t = $user->getTaal();
+		else
+			$t = "NL"; // personeel
+	} else {
+		$t = "NL";
+	}
+	$taal = new Taal($t);
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -43,7 +53,7 @@ require_once 'classes/Topmenu.class.php';
 			<div id="contenthome">
 				<? if($auth->isLoggedIn()){ if($auth->getUser()->isStudent()){?>
 				<div>
-					<h1>Welkom</h1>
+					<h1><?=$taal->msg('welkom');?></h1>
 					<?
 					$list = Herstelformulier::getEvaluationList($auth->getUser()->getId());
 					if (sizeof($list) > 0)
@@ -51,7 +61,7 @@ require_once 'classes/Topmenu.class.php';
 					?>
 					<p>
 						<? printf($taal->msg('welkom_naam_home_kamer'),$auth->getUser()->getVoornaam(),$auth->getUser()->getHome()->getKorteNaam(),$auth->getUser()->getKamer()->getKamernummerKort());?>
-						<br><?=$taal->msg('keuze_opties'); ?>
+						<br/><?=$taal->msg('keuze_opties'); ?>
 					</p>
 					<ul>
 						<li><?=$taal->msg('meld_nieuw_defect');?></li>
@@ -60,8 +70,8 @@ require_once 'classes/Topmenu.class.php';
 				</div>
 				<?}} else{ ?>
 				<div>
-					<h1>Welkom</h1>
-					<p>Welkom op de online herstelformulier applicatie. Op deze website is het mogelijk om een herstelformulier digitaal in te vullen. Klik rechts op aanmelden om verder te gaan.</p>
+					<h1><?=$taal->msg('welkom');?></h1>
+					<p><?=$taal->msg('welkom_niet_aangemeld');?></p>
 				</div>				
 				<?}?>
 				
@@ -69,14 +79,14 @@ require_once 'classes/Topmenu.class.php';
 		</div>		
 		
 		<!--de footer-->
-		<div id="footer">&#169; 2008 Bart Mesuere &amp; Bert Vandeghinste in opdracht van de <a href="http://www.ugent.be/nl/voorzieningen/huisvesting">Afdeling Huisvesting</a></div>
+		<div id="footer"><?=$taal->msg('footer');?></div>
 		
 		<!--navigatie aan de linkerkant-->
 		<div id="leftnav">
 					
 			<!--linkjes onderaan-->
 			<dl class="facet">
-				<dt>Handige links</dt>
+				<dt><?=$taal->msg('handige_links'); ?></dt>
 				<dd><ul>
 					<li><a href="http://helpdesk.ugent.be">&#187; Helpdesk</a></li>
 					<li><a href="http://www.ugent.be/nl/voorzieningen/huisvesting">&#187; Huisvesting</a></li>
@@ -88,11 +98,11 @@ require_once 'classes/Topmenu.class.php';
 		<!--login aan de rechterkant-->
 		<? if($auth->isLoggedIn()){ ?>
 			<div id="login-act">
-			 <?=$auth->getUser()->getGebruikersnaam() ?>&nbsp;-&nbsp;<a href="logout.php" title="uitloggen" >afmelden</a>
+			 <?=$auth->getUser()->getGebruikersnaam() ?>&nbsp;-&nbsp;<a href="logout.php" title="uitloggen" ><?=$taal->msg('afmelden'); ?></a>
 		 	</div>
 		<? } else{ ?>
 			<div id="login">
-				<a href="<?=$auth->getLoginURL() ?>" title="inloggen">aanmelden</a>
+				<a href="<?=$auth->getLoginURL() ?>" title="inloggen"><?=$taal->msg('aanmelden');?></a>
 		 	</div>
 		<?} ?>
 		 
