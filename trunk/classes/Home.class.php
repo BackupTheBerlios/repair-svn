@@ -224,7 +224,7 @@ class Home {
 		$statement->store_result();
 		$statement->bind_result($id);
 		while($statement->fetch())
-			$lijst[] = new Home("id", $id);
+			$lijst[] = new Home($id);
 		$statement->close();
 		return $lijst;
 	}

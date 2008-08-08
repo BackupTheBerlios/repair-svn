@@ -4,6 +4,7 @@
 	require_once 'classes/Herstelformulier.class.php';
 	require_once 'classes/Status.class.php';
 	require_once 'classes/Personeel.class.php';
+	require_once 'classes/Leftmenu.class.php';
 	require_once 'classes/Topmenu.class.php';
 	require_once 'classes/Header.class.php';
 	require_once 'classes/Auth.class.php';
@@ -91,18 +92,7 @@
 		<div id="footer">&#169; 2008 Bart Mesuere &amp; Bert Vandeghinste in opdracht van de <a href="http://www.ugent.be/nl/voorzieningen/huisvesting">Afdeling Huisvesting</a></div>
 		
 		<!--navigatie aan de linkerkant-->
-		<div id="leftnav">
-					
-			<!--linkjes onderaan-->
-			<dl class="facet">
-				<dt>Handige links</dt>
-				<dd><ul>
-					<li><a href="http://helpdesk.ugent.be">&#187; Helpdesk</a></li>
-					<li><a href="http://www.ugent.be/nl/voorzieningen/huisvesting">&#187; Huisvesting</a></li>
-					<li><a href="https://minerva.ugent.be/">&#187; Minerva</a></li>
-				</ul></dd>
-			</dl>				
-		</div>
+		<?new Leftmenu("overzicht", "personeelOverzicht.php") ?>
 		
 		<!--login aan de rechterkant-->
 		<div id="login-act">
