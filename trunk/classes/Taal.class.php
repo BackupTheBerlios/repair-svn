@@ -37,7 +37,8 @@ class Taal {
 						  'gemeenschappelijk' => "Gemeenschappelijk",
 						  'succes_melding_bewerkt' => "<h1>Succes</h1><p>Uw melding werd aangepast.</p>",
 						  'succes_melding_toegevoegd' => "<h1>Succes</h1><p>Uw melding werd toegevoegd.</p>",
-						  'confirm_verwijder' => 'Wil je dit herstelformulier echt verwijderen?'
+						  'confirm_verwijder' => 'Wil je dit herstelformulier echt verwijderen?',
+						  'andere_taal' => 'English'
 						  ),
 			'en' => array('titel' => 'Online Repairform',
 						  'dringende_herstellingen' => 'Urgent Repairs',
@@ -73,6 +74,7 @@ class Taal {
 						  'succes_melding_bewerkt' => "<h1>Success</h1><p>Your report was editted.</p>",
 						  'succes_melding_toegevoegd' => "<h1>Success</h1><p>Your report was added.</p>",
 						  'confirm_verwijder' => 'Are you sure you want to delete this repairform?',
+						  'andere_taal' => 'Nederlands'
 						  )
 	);
 	

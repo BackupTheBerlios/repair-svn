@@ -23,7 +23,7 @@
 	    <script type="text/javascript" src="js/studentOverzicht.js"></script>
 	</head>
 	<body>
-		<?new Header(array("#"), array("Overzicht")); ?>
+		<?new Header(array("#"), array($taal->msg('overzicht'))); ?>
 		
 		<!--main content-->
 		<div id="container">
@@ -39,8 +39,8 @@
 				
 				<? if($auth->getUser()->isStudent()){ ?>
 				<div>
-					<h1>Overzicht</h1>
-					<p>Welkom <?=$auth->getUser()->getVoornaam()?>, op deze pagina kunt u een overzicht vinden van de reeds ingediende herstelformulieren.</p>
+					<h1><?=$taal->msg('overzicht') ?></h1>
+					<p><? printf($taal->msg('welkom_overzicht_naam'), $auth->getUser()->getVoornaam()); ?></p>
 					<table>
 						<tr class="tabelheader"><td colspan="6">Overzicht van de voorbije herstellingen</td></tr>
 						<?
@@ -78,14 +78,14 @@
 		</div>		
 		
 		<!--de footer-->
-		<div id="footer">&#169; 2008 Bart Mesuere &amp; Bert Vandeghinste in opdracht van de <a href="http://www.ugent.be/nl/voorzieningen/huisvesting">Afdeling Huisvesting</a></div>
+		<div id="footer"><?=$taal->msg('footer') ?></div>
 		
 		<!--navigatie aan de linkerkant-->
 		<div id="leftnav">
 					
 			<!--linkjes onderaan-->
 			<dl class="facet">
-				<dt>Handige links</dt>
+				<dt><?=$taal->msg('handige_links') ?></dt>
 				<dd><ul>
 					<li><a href="http://helpdesk.ugent.be">&#187; Helpdesk</a></li>
 					<li><a href="http://www.ugent.be/nl/voorzieningen/huisvesting">&#187; Huisvesting</a></li>
@@ -96,7 +96,7 @@
 		
 		<!--login aan de rechterkant-->
 		<div id="login-act">
-			<?=$auth->getUser()->getGebruikersnaam() ?>&nbsp;-&nbsp;<a href="logout.php" title="uitloggen" >afmelden</a>
+			<?=$auth->getUser()->getGebruikersnaam() ?>&nbsp;-&nbsp;<a href="logout.php" title="uitloggen" ><?=$taal->msg('afmelden') ?></a>
 		 </div>
 		 
 		 
