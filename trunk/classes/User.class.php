@@ -1,5 +1,7 @@
 <?php
 require_once("DB.class.php");
+require_once 'Student.class.php';
+require_once 'Personeel.class.php';
 class User {
 	
 	protected $db;
@@ -133,10 +135,10 @@ class User {
 	 */
 	public static function getUser($id) {
 		if (!array_key_exists($id, self::$array)) {
-			if(self::isExistingStudent($id))
-				self::$array[$id] = new Student($id);
-			else if(self::isExistingPersoneel($id))
+			if(self::isExistingPersoneel($id))
 				self::$array[$id] = new Personeel($id);
+			else if(self::isExistingStudent($id))
+				self::$array[$id] = new Student($id);
 			else{
 				throw new Exception("de gebruiker is geen student en geen personeel, er klopt iets niet");
 				die();

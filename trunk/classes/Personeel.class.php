@@ -4,20 +4,34 @@ require_once ('User.class.php');
 
 class Personeel extends User {
 	
+	protected $db;
 	private $homeslijst;
+	private $verwijderd;
 	
-	function __construct($id) {
-		if (!is_numeric($id)) throw new BadParameterException();
-		
-		parent::__construct ( $id );
-		$statement = $db->prepare("SELECT homeId FROM relatie_personeel_home WHERE personeelId = ?");
-		$statement->bind_param('i', $this->id);
-		$statement->execute();
-		$statement->store_result();
-		$statement->bind_result($homeId);
-		while($statement->fetch())
-			$this->homeslijst[] = new Home($homeId);
-		$statement->close();
+	private $updated;
+	
+	function __construct($id, $gebruikersnaam="", $voornaam="", $achternaam="", $laatsteOnline="", $email="", $verwijderd="0") {
+		if($id==""){//nieuw personeel
+			parent::__construct($id, $gebruikersnaam, $voornaam, $achternaam, $laatsteOnline, $email);
+			$this->verwijderd = $verwijderd;
+			$statement = $this->db->prepare("INSERT INTO personeel (userId, verwijderd) VALUES (?, ?)");
+			$statement->bind_param('ii', $this->id, $this->verwijderd);
+			$statement->execute();
+			$statement->close();
+		}
+		else{
+			if (!is_numeric($id)) throw new BadParameterException();
+			parent::__construct ($id);
+			$this->db =  DB::getDB();
+			$statement = $this->db->prepare("SELECT verwijderd FROM personeel WHERE userId = ?");
+			$statement->bind_param('i', $id);
+			$statement->execute();
+			$statement->store_result();
+			$statement->bind_result($this->verwijderd);
+			$statement->fetch();
+			$statement->close();
+		}
+		$this->updated = 0;
 	}
 	
 	function __destruct() {
@@ -26,16 +40,38 @@ class Personeel extends User {
 	}
 	
 	function save() {
+		if ($this->updated == 1) {
+			$statement = $this->db->prepare("UPDATE personeel SET verwijderd = ? WHERE userId = ?");
+			$statement->bind_param('ii', $this->verwijderd, $this->id);
+			$statement->execute();
+			$statement->close();
+		}
+		$this->updated = 0;
 	}
 	
+	/**
+	 * @return unknown
+	 */
+	public function getVerwijderd() {
+		return $this->verwijderd;
+	}
+	
+	/**
+	 * @param unknown_type $verwijderd
+	 */
+	public function setVerwijderd($verwijderd) {
+		$this->verwijderd = $verwijderd;
+		$this->updated = true;
+	}
+
 	/**
 	 * Geeft lijst van Homes voor deze Homemanager terug.
 	 *
 	 * @return list[Home]
 	 */
-	function getHomeslijst() {
+	/*function getHomeslijst() {
 		return $this->homeslijst;
-	}
+	}*/
 }
 
 ?>
