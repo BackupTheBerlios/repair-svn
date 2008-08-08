@@ -4,14 +4,16 @@ function evalueerPositief(formid) {
 		$.post("ajax/evaluatieMelding.php", 
 			{ "formid": formid, "evaluatie": 1 }, 
 			function(){
-				$("#beforecontent").before('<div><h1>Succes</h1><p>Uw melding werd aangepast.</p></div>').hide();
+				$("#success").show();
+				$("#beforecontent").hide();
 			}
 		);
 	}
 }
 
 function evalueerNegatief(formid) {
-	var velden = "<tr id='new_row_"+formid+"'><td>Voeg hier je opmerking toe:</td><td><textarea name='opmerking' cols='50' rows='8'/></textarea></td><td><img alt='doorgeven' class='bewerk klik' title='Deze opmerking doorsturen' src='images/icon_accept.gif' onclick=\"zendOpmerking("+formid+");\"/></td></tr>";
+	var vertaling = $("#opmerkingvertaling").text();
+	var velden = "<tr id='new_row_"+formid+"'><td>"+vertaling+":</td><td><textarea name='opmerking' cols='50' rows='8'/></textarea></td><td><img alt='doorgeven' class='bewerk klik' title='Deze opmerking doorsturen' src='images/icon_accept.gif' onclick=\"zendOpmerking("+formid+");\"/></td></tr>";
 	$("#row_"+formid).each(function(el){
 		$(this).after(velden);
 	});
@@ -25,7 +27,8 @@ function zendOpmerking(formid) {
 		$.post("ajax/evaluatieMelding.php", 
 				{ "formid": formid, "evaluatie": 0, "opmerking": opmerking }, 
 				function(){
-					$("#beforecontent").before('<div><h1>Success</h1><p>Uw melding werd aangepast.</p></div>').hide();
+					$("#success").show();
+					$("#beforecontent").hide();
 				}
 			);
 		$("#row_"+formid).hide();

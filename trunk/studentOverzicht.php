@@ -31,6 +31,9 @@
 			<!--horizontale navigatiebalk bovenaan-->
 			<? new Topmenu("overzicht"); ?>
 			
+			<!-- Inhoud van de confirm box voor verwijdering -->
+			<div id="verwijderconfirm" style="display:none"><?=$taal->msg('confirm_verwijder') ?></div>
+			
 			<!--de inhoud van de pagina-->
 			<div id="contenthome">
 				

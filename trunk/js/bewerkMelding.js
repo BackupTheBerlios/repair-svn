@@ -75,7 +75,7 @@ $(document).ready(function(){
 		if (hasError == false) {
 			$.post("ajax/bewerkMelding.php", { "formid": formid, "velden[]": arrayCheckbox, "opmerking": opmerking},
 				function (data){
-					$("#beforecontent").before('<div><h1>Success</h1><p>Uw melding werd aangepast.</p></div>');
+					$("#success").show();
 					$("#meldingform").hide();
 				});
 		}

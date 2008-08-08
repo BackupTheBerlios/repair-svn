@@ -10,7 +10,8 @@ function showGroup(a){
 }
 
 function verwijder(i){
-	var answer = confirm("Wil je dit herstelformulier echt verwijderen?");
+	var vertaling = $("#verwijderconfirm").text(); 
+	var answer = confirm(vertaling);
 	if (answer) {
 		$.post("ajax/verwijderHerstelformulier.php", 
 			{ formid: i }, 

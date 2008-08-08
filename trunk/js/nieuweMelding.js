@@ -61,7 +61,7 @@ $(document).ready(function(){
 		if (hasError == false) {
 			$.post("ajax/postNieuweMelding.php", { "velden[]": arrayCheckbox, "opmerking": opmerking},
 				function (data){
-					$("#beforecontent").before('<div><h1>Success</h1><p>Nieuwe melding werd ingevoerd.</p></div>');
+					$("#success").show();
 					$("#meldingform").hide();
 				});
 		}

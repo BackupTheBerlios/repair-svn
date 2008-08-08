@@ -34,6 +34,7 @@
 			
 			<!--de inhoud van de pagina-->
 			<div id="contenthome">
+				<div id="success" style="display:none"><?=$taal->msg('succes_melding_toegevoegd')?></div>
 				<div id="beforecontent">
 				<?
 				$user = NULL;

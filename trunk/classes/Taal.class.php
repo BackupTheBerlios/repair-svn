@@ -34,7 +34,10 @@ class Taal {
 						  'afgesloten' => "Afgesloten: dit euvel werd verholpen.",
 						  'kot' => "Kot",
 						  'verdiep' => "Verdiep",
-						  'gemeenschappelijk' => "Gemeenschappelijk"
+						  'gemeenschappelijk' => "Gemeenschappelijk",
+						  'succes_melding_bewerkt' => "<h1>Succes</h1><p>Uw melding werd aangepast.</p>",
+						  'succes_melding_toegevoegd' => "<h1>Succes</h1><p>Uw melding werd toegevoegd.</p>",
+						  'confirm_verwijder' => 'Wil je dit herstelformulier echt verwijderen?'
 						  ),
 			'en' => array('titel' => 'Online Repairform',
 						  'dringende_herstellingen' => 'Urgent Repairs',
@@ -66,7 +69,10 @@ class Taal {
 						  'afgesloten' => "Finished: this was successfully repaired.",
 						  'kot' => "Room",
 						  'verdiep' => "Floor",
-						  'gemeenschappelijk' => "Common area"
+						  'gemeenschappelijk' => "Common area",
+						  'succes_melding_bewerkt' => "<h1>Success</h1><p>Your report was editted.</p>",
+						  'succes_melding_toegevoegd' => "<h1>Success</h1><p>Your report was added.</p>",
+						  'confirm_verwijder' => 'Are you sure you want to delete this repairform?',
 						  )
 	);
 	
