@@ -1,7 +1,7 @@
-<? 
+<? require_once 'classes/Herstelformulier.class.php';
+
 	session_start(); 
 	require_once 'classes/Auth.class.php';
-	require_once 'classes/HerstelformulierList.class.php';
 	require_once 'classes/Topmenu.class.php';
 	$auth = new Auth(true);
 ?>
@@ -48,7 +48,7 @@
 					<table>
 						<tr class="tabelheader"><td colspan="6">Overzicht van de voorbije herstellingen</td></tr>
 						<?
-							$lijst = HerstelformulierList::getLatest($auth->getUser()->getId());
+							$lijst = Herstelformulier::getLatest($auth->getUser()->getId());
 							for($i=0; $i < sizeof($lijst);$i++){
 								$form = $lijst[$i];
 								$nieuweStatus = $form->getStatus();

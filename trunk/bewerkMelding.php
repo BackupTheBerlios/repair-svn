@@ -1,10 +1,10 @@
 <?
+require_once 'classes/Veld.class.php';
 require_once 'classes/exceptions/BadParameterException.class.php';
 	session_start(); 
 	require_once 'classes/Herstelformulier.class.php';
 	require_once 'classes/Status.class.php';
 	require_once 'classes/UserList.class.php';
-	require_once 'classes/VeldList.php';
 	require_once 'classes/Auth.class.php';
 	require_once 'classes/Topmenu.class.php';
 	$auth = new Auth(true);
@@ -74,7 +74,7 @@ require_once 'classes/exceptions/BadParameterException.class.php';
 				<table>
 						<tr class="tabelheader"><td colspan="4">Herstelformulier <?=$currentHome->getKorteNaam(); ?></td></tr>
 						<?
-							$lijst = VeldList::getHomeForm($currentHome);
+							$lijst = Veld::getHomeForm($currentHome);
 
 							for($i=0; $i < sizeof($lijst);$i++){
 								$veld = $lijst[$i];

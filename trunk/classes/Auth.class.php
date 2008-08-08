@@ -1,6 +1,7 @@
 <?php
+require_once 'Student.class.php';
+require_once 'Kamer.class.php';
 require_once 'exceptions/PublicKeyException.class.php';
-require_once 'UserList.class.php';
 require_once 'User.class.php';
 
 /**
@@ -24,7 +25,7 @@ class Auth{
 	 */
 	public function __construct($automatisch){
 		if(isset($_SESSION['userid'])){//is de gebruiker ingelogd?
-			$this->user=UserList::getUser($_SESSION['userid']);
+			$this->user=User::getUser($_SESSION['userid']);
 			$this->isLoggedIn=true;
 		}
 		else{//de gebruiker is nog niet ingelogd
@@ -50,9 +51,9 @@ class Auth{
 			        if($aid==self::$aid ){//klopt het application id?
 			        	if((time()-$time) < self::$threshold){//is het geen oude key?
 			        		//zit de gebruiker al in onze databank?
-			        		$id=UserList::isExistingUser($user);
+			        		$id=User::isExistingUser($user);
 			        		if($id!=0)//als dat zo is maak zijn object aan
-			        			$this->user=UserList::getUser($id);
+			        			$this->user=User::getUser($id);
 			        		else{ //anders, haal zen gegevens uit de ldap
 			        			require_once 'classes/LDAP.class.php';
 			        			$ldap = new LdapRepair();

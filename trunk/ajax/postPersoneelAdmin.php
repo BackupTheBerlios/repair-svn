@@ -1,10 +1,10 @@
 <?
+require_once '../classes/Locatie.class.php';
 session_start();
 require_once '../classes/Auth.class.php';
 require_once '../classes/Veld.class.php';
 require_once '../classes/Home.class.php';
 require_once '../classes/Categorie.class.php';
-require_once '../classes/CategorieList.class.php';
 $auth = new Auth(false);
 
 //if (!$auth->isLoggedIn() || !$auth->getUser()->isPersoneel()) throw new Exception("Unauthorized"); // TODO: gepaste exception
@@ -35,7 +35,7 @@ else if($_POST['actie'] == "add"){
 }
 else if($_POST['actie'] == "select"){
 	if($_POST['property'] == "categorie")
-		echo json_encode(CategorieList::getCategorien($_POST["locatie"]));
+		echo json_encode(Categorie::getCategorien($_POST["locatie"]));
 }
 else if($_POST['actie'] == "remove"){
 	$veld = new Veld($_POST["id"]);

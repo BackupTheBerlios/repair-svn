@@ -1,17 +1,19 @@
 <? 
+require_once 'classes/Taal.class.php';
 require_once 'classes/HerstelformulierList.class.php';
 require_once 'classes/Topmenu.class.php';
 
 	session_start(); 
 	require_once 'classes/Auth.class.php';
 	$auth = new Auth(false);
+	$taal = new Taal("NL");
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-	    <title>Online Herstelformulier</title>
+	    <title><?=$taal->msg('titel');?></title>
 	    <link rel="stylesheet" type="text/css" href="style.css"/>
 	</head>
 	<body>
@@ -19,7 +21,7 @@ require_once 'classes/Topmenu.class.php';
 		<div id="logo"><img src="images/logo.gif" width="200" height="60" alt="Logo Universiteit Gent" usemap="#linklogo" /><map name="linklogo" id="linklogo"><area shape="rect" coords="60,0,142,60" href="http://www.ugent.be" alt="Startpagina Universiteit Gent" /></map></div>
 		
 		<!--pagina titel-->
-		<div id="siteid"><img src="images/siteid-portal.jpg" width="300" height="80" alt="Portaalsite Universiteit Gent" /><a href="index.php" class="text" >Online Herstelformulier</a></div>
+		<div id="siteid"><img src="images/siteid-portal.jpg" width="300" height="80" alt="Portaalsite Universiteit Gent" /><a href="index.php" class="text" ><?=$taal->msg('titel');?></a></div>
 		
 		<!--linkjes rechtsboven-->
 		<div id="utility">
@@ -28,7 +30,7 @@ require_once 'classes/Topmenu.class.php';
 		
 		<!--broodkruimeltjes-->
 		<div id="breadcrumb"> 
-			<a href='index.php'>Dringende Herstellingen</a> &gt; Index
+			<a href='index.php'><?=$taal->msg('dringende_herstellingen');?></a> &gt; Index
 		</div>
 		
 		<!--main content-->
@@ -43,17 +45,17 @@ require_once 'classes/Topmenu.class.php';
 				<div>
 					<h1>Welkom</h1>
 					<?
-					$list = HerstelformulierList::getEvaluationList($auth->getUser()->getId());
+					$list = Herstelformulier::getEvaluationList($auth->getUser()->getId());
 					if (sizeof($list) > 0)
-						echo "<center><b>U heeft nog herstelformulieren die <a href='evaluatieMelding.php'>geevalueerd</a> moeten worden.</b></center>";
+						echo "<center><b>".$taal->msg('herstelformulieren_te_evalueren')."</b></center>";
 					?>
 					<p>
-						Welkom <?=$auth->getUser()->getVoornaam()?>, volgens onze gegevens woont u op Home <?=$auth->getUser()->getHome()->getKorteNaam() ?> op kamer <?=$auth->getUser()->getKamer()->getKamernummerKort() ?>. 
-						Indien deze gegevens niet correct zijn, neem contact op met de <a href="http://www.ugent.be/nl/voorzieningen/huisvesting">Afdeling Huisvesting</a>. Maak uw keuze uit de volgende opties:
+						<? printf($taal->msg('welkom_naam_home_kamer'),$auth->getUser()->getVoornaam(),$auth->getUser()->getHome()->getKorteNaam(),$auth->getUser()->getKamer()->getKamernummerKort());?>
+						<br><?=$taal->msg('keuze_opties'); ?>
 					</p>
 					<ul>
-						<li>Een <a href="nieuweMelding.php">defect</a> melden</li>
-						<li>Een <a href="studentOverzicht.php">overzicht</a> van de vorige aanvragen bekijken</li>
+						<li><?=$taal->msg('meld_nieuw_defect');?></li>
+						<li><?=$taal->msg('overzicht_aanvragen');?></li>
 					</ul>
 				</div>
 				<?}} else{ ?>

@@ -1,10 +1,9 @@
 <?
+require_once 'classes/Veld.class.php';
 	session_start(); 
-	require_once 'classes/HomeList.class.php';
 	require_once 'classes/Locatie.class.php';
 	require_once 'classes/Home.class.php';
 	require_once 'classes/Auth.class.php';
-	require_once 'classes/VeldList.php';
 	require_once 'classes/Leftmenu.class.php';
 	require_once 'classes/Topmenu.class.php';
 	$auth = new Auth(true);
@@ -68,7 +67,7 @@
 							<tr class="subheader"><td colspan="5"><?=$locatie->getValue(); ?></td></tr>
 							<tr class="legende"><td>Naam Nederlands</td><td>Naam Engels</td><td>Categorie</td><td></td><td></td></tr>
 							<?
-								$lijst = VeldList::getHomeLocationFields($currentHome,$locatie);
+								$lijst = Veld::getHomeLocationFields($currentHome,$locatie);
 								foreach($lijst as $veld){
 									$id = $veld->getId();
 									echo("<tr id='".$id."_".$locatie->getValue()."'><td class='edit' id='naamNL_$id'>".$veld->getnaamNL()."</td><td class='edit' id='naamEN_$id'>".$veld->getnaamEN()."</td><td class='select' id='categorie_$id'>".$veld->getCategorie()->getNaamNL()."</td><td class='img1'><img src='images/page_edit.gif' /></td><td class='img2'><img src='images/page_delete.gif' /></td></tr>");

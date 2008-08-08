@@ -1,7 +1,8 @@
-<? 
+<? require_once 'classes/Herstelformulier.class.php';
+require_once 'classes/Status.class.php';
+
 	session_start(); 
 	require_once 'classes/Auth.class.php';
-	require_once 'classes/HerstelformulierList.class.php';
 	require_once 'classes/Personeel.class.php';
 	require_once 'classes/Topmenu.class.php';
 	$auth = new Auth(true);
@@ -47,7 +48,7 @@
 					<table>
 						<tr class="tabelheader"><td colspan="6">Overzicht van herstellingen die niet afgewerkt zijn</td></tr>
 						<?
-						$lijst = HerstelformulierList::getList(0, new Status("ongezien"));
+						$lijst = Herstelformulier::getList(0, new Status("ongezien"));
 						$size = sizeof($lijst);
 						if ($size > 0) {
 						?>
@@ -73,7 +74,7 @@
 						<?
 						}
 						
-						$lijst = HerstelformulierList::getList(0, new Status("gedaan"));
+						$lijst = Herstelformulier::getList(0, new Status("gedaan"));
 						$size = sizeof($lijst);
 						if ($size > 0) {
  						?>

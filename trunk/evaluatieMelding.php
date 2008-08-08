@@ -1,6 +1,4 @@
-<? require_once 'classes/HerstelformulierList.class.php';
-
-require_once 'classes/exceptions/BadParameterException.class.php';
+<? require_once 'classes/exceptions/BadParameterException.class.php';
 require_once 'classes/Herstelformulier.class.php';
 require_once 'classes/Topmenu.class.php';
 
@@ -48,7 +46,7 @@ require_once 'classes/Topmenu.class.php';
 					if($auth->isLoggedIn()) { 
 						if($auth->getUser()->isStudent()) {
 								// Toon listing van alle formulieren die als "gedaan" gemarkeerd zijn en die geevalueerd moeten worden
-								$list = HerstelformulierList::getEvaluationList($auth->getUser()->getId());
+								$list = Herstelformulier::getEvaluationList($auth->getUser()->getId());
 								?>
 								<table>
 									<tr class="tableheader">
