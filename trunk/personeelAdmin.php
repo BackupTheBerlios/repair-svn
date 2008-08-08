@@ -1,15 +1,16 @@
 <?
-require_once 'classes/Veld.class.php';
 	session_start(); 
+	require_once 'classes/exceptions/AccessException.php';
+	require_once 'classes/Veld.class.php';
 	require_once 'classes/Locatie.class.php';
 	require_once 'classes/Home.class.php';
 	require_once 'classes/Auth.class.php';
 	require_once 'classes/Leftmenu.class.php';
 	require_once 'classes/Topmenu.class.php';
 	$auth = new Auth(true);
-	if($auth->getUser()->isStudent()){
-		//throw new Exception("Access Violation Exception");//todo: aanzetten
-	}
+	if(!$auth->getUser()->isPersoneel())
+		throw new AccessException();
+	
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">

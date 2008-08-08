@@ -5,7 +5,7 @@
 	if($auth->getUser()->isStudent()){
 		echo("<meta http-equiv=\"Refresh\" content=\"0; URL=studentOverzicht.php\">");
 	}
-	else{
+	else if($auth->getUser()->isPersoneel()){
 		echo("<meta http-equiv=\"Refresh\" content=\"0; URL=personeelOverzicht.php\">");
 	}
 ?>
