@@ -85,7 +85,8 @@ class Auth{
 			    else throw new Exception("InvalidKeyException");//TODO: custom InvalidKeyException
 			}
 			else{//nog niet ingelogd en niet bezig, dus we zwieren hem naar webauth
-				$_SESSION['taal'] = "nl";
+				if (!isset($_SESSION['taal']))
+					$_SESSION['taal'] = "nl";
 				if($automatisch){
 					echo("<meta http-equiv=\"Refresh\" content=\"0; URL=".self::getLoginURL()."\">");
 					die();//we stoppen de uitvoering
