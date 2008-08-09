@@ -62,6 +62,7 @@ CREATE TABLE `home` (
 DROP TABLE IF EXISTS `personeel`;
 CREATE TABLE `personeel` (
   `userId` int(11) NOT NULL,
+  `verwijderd` tinyint(1) NOT NULL,
   PRIMARY KEY  (`userId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
