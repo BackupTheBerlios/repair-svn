@@ -47,6 +47,7 @@
 								<td></td>
 								<td>Datum</td>
 								<td>Inhoud</td>
+								<td></td>
 							</tr>
 						<?
 							for($i=0; $i < $size;$i++){
@@ -69,7 +70,7 @@
  						?>
 						<tr class="subheader"><td colspan="6">Doorgegeven herstellingen die nog niet afgesloten zijn</td></tr>
 						<tbody>
-							<tr class="legende"><td></td><td>Datum</td><td>Inhoud</td></tr>
+							<tr class="legende"><td></td><td>Datum</td><td>Inhoud</td><td></td></tr>
 							<?
 							for($i=0; $i < $size; $i++){
 								$form = $lijst[$i];

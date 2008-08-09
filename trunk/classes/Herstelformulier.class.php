@@ -10,6 +10,7 @@ class Herstelformulier {
 	protected $db;
 	
 	private $id;
+	private $factuurnummer;
 	private $datum;
 	private $status;
 	private $studentId;
@@ -76,10 +77,10 @@ class Herstelformulier {
 			if (!is_numeric($id)) throw new BadParameterException();
 			
 			$this->id = $id;
-			$statement = $this->db->prepare("SELECT datum, status, userId, kamer, homeId, opmerking FROM herstelformulier WHERE id = ? LIMIT 1");
+			$statement = $this->db->prepare("SELECT datum, factuurnummer, status, userId, kamer, homeId, opmerking FROM herstelformulier WHERE id = ? LIMIT 1");
 			$statement->bind_param('i', $this->id);
 			$statement->execute();
-			$statement->bind_result($this->datum, $status, $this->studentId, $kamer, $this->homeId, $this->opmerking);
+			$statement->bind_result($this->datum, $this->factuurnummer, $status, $this->studentId, $kamer, $this->homeId, $this->opmerking);
 			$statement->fetch();
 			$statement->close();
 			$this->status = new Status($status);
@@ -103,8 +104,8 @@ class Herstelformulier {
 	
 	function save() {
 		if ($this->updated == 1) {
-			$statement = $this->db->prepare("UPDATE herstelformulier SET datum = ?, status = ?, userId = ?, kamer = ?, homeId = ?, opmerking = ? WHERE id = ?");
-			$statement->bind_param('ssisisi', $this->datum, $this->status->getValue(), $this->studentId, $this->kamer->getKamernummerLang(), $this->homeId, $this->opmerking, $this->id);
+			$statement = $this->db->prepare("UPDATE herstelformulier SET factuurnummer = ?, datum = ?, status = ?, userId = ?, kamer = ?, homeId = ?, opmerking = ? WHERE id = ?");
+			$statement->bind_param('issisisi', $this->factuurnummer, $this->datum, $this->status->getValue(), $this->studentId, $this->kamer->getKamernummerLang(), $this->homeId, $this->opmerking, $this->id);
 			$statement->execute();
 			$statement->close();
 		}
@@ -262,6 +263,16 @@ class Herstelformulier {
 		return substr($output, 0, -2);
 	}
 	
+	public function getFactuurnummer() {
+		return $this->factuurnummer;	
+	}
+	
+	public function setFactuurnummer($factuurnummer) {
+		if (!is_numeric($factuurnummer))
+			throw new BadParameterException("Factuurnummer is ongeldig.");
+		$this->factuurnummer = $factuurnummer;
+		$this->updated = 1;
+	}
 	
 	/**
 	 * Geeft een lijst van Herstelformulieren terug. Je kan zoeken op userId en/of status.

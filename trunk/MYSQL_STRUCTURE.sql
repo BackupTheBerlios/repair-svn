@@ -22,6 +22,7 @@ CREATE TABLE `categorie` (
 DROP TABLE IF EXISTS `herstelformulier`;
 CREATE TABLE `herstelformulier` (
   `id` int(11) NOT NULL auto_increment,
+  `factuurnummer` int(11) NOT NULL,
   `datum` datetime NOT NULL,
   `status` enum('ongezien','gezien','gedaan','afgesloten') NOT NULL,
   `userId` int(11) NOT NULL,

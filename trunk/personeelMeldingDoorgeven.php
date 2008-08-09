@@ -33,6 +33,7 @@
 			<!--de inhoud van de pagina-->
 			<div id="contenthome">
 				<div id='beforecontent'>
+					<?
 					$formid = $_GET['formid'];
 					if (!is_numeric($formid) || $formid < 1) throw new BadParameterException("Formid werd foutief gebruikt");
 					$formulier = new Herstelformulier($formid);
@@ -68,9 +69,9 @@
 							<td>Opmerking:</td>
 							<td colspan="3"><?=$formulier->getOpmerking();?></td>
 						</tr>
-						<tr>
+						<tr id="submitrow">
 							<td colspan="3"></td>
-							<td><button name="submit" id="submit" type="submit" onclick="geefDoor('<?=$formid;?>');">Doorgegeven</button></td>
+							<td><button name="submit" id="submit" type="submit" onclick="geefDoor('<?=$formid;?>', 0);">Doorgegeven</button></td>
 						</tr>
 						</table>
 					</div>
