@@ -52,7 +52,14 @@ $(document).ready(function(){
 		var i = 0;
 		for(item in data) {
 			if (i % 2 == 0) {
-				showGroup(data[item]);
+				var a = data[item];
+				var text = $("#collapse_"+a).text();
+				if (text == "+")
+					$("#collapse_"+a).text("-");
+				$("."+a).each(function(){
+						$(this).show();
+				});
+				
 			} else {
 				checkItem(data[item]);
 			}

@@ -8,8 +8,8 @@
 	require_once 'classes/Auth.class.php';
 	require_once 'classes/Topmenu.class.php';
 	require_once 'classes/Taal.class.php';
-	
 	require_once 'classes/Header.class.php';
+	
 	$auth = new Auth(true);
 	if (!$auth->getUser()->isStudent()) 
 		throw new AccessException();
@@ -32,7 +32,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-	    <title>Online Herstelformulier</title>
+	    <title><?=$taal->msg('titel') ?></title>
 	    <link rel="stylesheet" type="text/css" href="style.css"/>
 	    <script type="text/javascript" src="js/jquery/jquery.js"></script>
 	    <script type="text/javascript" src="js/jquery/jquery.getUrlParam.js"></script>
@@ -64,10 +64,26 @@
 				<table>
 						<tr class="tabelheader"><td colspan="4"><? printf($taal->msg('herstelformulier_homenaam'),$currentHome->getKorteNaam()); ?></td></tr>
 						<?
-							$lijst = Veld::getHomeForm($currentHome);
+							$huidigeLijst = Veld::getHomeForm($currentHome); // array<Veld>
+							$ingevuldeLijst = $formulier->getVeldenlijst(); // array<VeldID>
+							// vergelijking van huidigelijst met ingevuldeLijst. Alle velden van huidigeLijst moeten overblijven + velden die in ingevuldeLijst zitten zonder duplicates te maken
+							
+							// TODO: een treffelijk algoritme voor dit probleem
+							foreach($ingevuldeLijst as $veldid) {
+								$veld = new Veld($veldid);
+								$positie = 0; // positie om het Veld in te voegen in HuidigeLijst (adhv de Locatie en categorie)
+								if ($veld->getVerwijderd()) { // veld zal niet in huidigeLijst zitten
+									for ($i = 0; $i < sizeof($huidigeLijst); $i++) {
+										$huidigVeld = $huidigeLijst[$i];
+										if ($huidigVeld->getCategorie()->getLocatie() == $veld->getCategorie()->getLocatie() &&
+											$huidigVeld->getCategorie()->getNaamNL() == $veld->getCategorie()->getNaamNL())
+											$positie = $i;
+									}
+									array_splice($huidigeLijst, $positie, 0, array($veld));
+								}
+							}
 
-							for($i=0; $i < sizeof($lijst);$i++){
-								$veld = $lijst[$i];
+							foreach($huidigeLijst as $veld){
 								$nieuweCategorie = $veld->getCategorie();
 								$nieuweLocatie = $nieuweCategorie->getLocatie();
 								if (!isset($huidigeLocatie) || ($huidigeLocatie->getValue() != $nieuweLocatie->getValue())) {
