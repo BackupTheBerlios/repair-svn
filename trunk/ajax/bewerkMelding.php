@@ -1,7 +1,6 @@
 <?php
 	session_start();
 	require_once '../classes/exceptions/AccessException.php';
-	require_once '../classes/UserList.class.php';
 	require_once '../classes/Herstelformulier.class.php';
 	require_once '../classes/Status.class.php';
 	require_once '../classes/Auth.class.php';

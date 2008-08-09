@@ -1,12 +1,18 @@
 function showGroup(a){
-	var test = $("#group_status_"+a).css("display");
-	if (test == "none") {
-		$("#group_status_"+a).show();
-		$("#collapse_"+a).text("-");
-	} else {
-		$("#group_status_"+a).hide();
+	$("."+a).each(function(el){
+		var test = $(this).css("display");
+		if (test == "none") {
+			$(this).show();
+		} else {
+			$(this).hide();
+		}
+	});
+	
+	var text = $("#collapse_"+a).text();
+	if (text == "-")
 		$("#collapse_"+a).text("+");
-	}
+	else
+		$("#collapse_"+a).text("-");
 }
 
 function verwijder(i){

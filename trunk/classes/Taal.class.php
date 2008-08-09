@@ -90,7 +90,9 @@ class Taal {
 	
 	public function msg($key) {
 		if ($this->lang == "en" || $this->lang == "nl") {
-			return $this->messages[$this->lang][strtolower($key)];
+			$vertaling = $this->messages[$this->lang][strtolower($key)];
+			if ($vertaling == "") $vertaling = "#UNDEFINED";
+			return $vertaling;
 		}
 		else throw new BadParameterException("Lang werd niet correct gebruikt."); // TODO: gepaste exception
 	}

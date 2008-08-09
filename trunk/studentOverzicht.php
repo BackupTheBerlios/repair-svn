@@ -42,7 +42,7 @@
 					<h1><?=$taal->msg('overzicht') ?></h1>
 					<p><? printf($taal->msg('welkom_overzicht_naam'), $auth->getUser()->getVoornaam()); ?></p>
 					<table>
-						<tr class="tabelheader"><td colspan="6">Overzicht van de voorbije herstellingen</td></tr>
+						<tr class="tabelheader"><td colspan="6"><?=$taal->msg('overzicht_herstellingen') ?></td></tr>
 						<?
 							$lijst = Herstelformulier::getLatest($auth->getUser()->getId());
 							for($i=0; $i < sizeof($lijst);$i++){
@@ -51,22 +51,23 @@
 								if (!isset($huidigeStatus) || ($nieuweStatus->getValue() != $huidigeStatus->getValue())) {
 									if (isset($huidigeStatus)) echo("</tbody>");
 									$huidigeStatus = $nieuweStatus;
-									echo("<tr class='subheader klik' id='status_".$huidigeStatus->getValue()."' onclick=\"showGroup('".$huidigeStatus->getValue()."');\"><td width='12px' id='collapse_".$huidigeStatus->getValue()."'>-</td><td colspan='5'>");
+									echo("<tr class='subheader klik' onclick=\"showGroup('".$huidigeStatus->getValue()."');\"><td width='12px' id='collapse_".$huidigeStatus->getValue()."'>-</td><td colspan='5'>");
 									echo($huidigeStatus->getUitleg());
 									echo ("</td></tr>");
-									echo("<tbody id='group_status_".$huidigeStatus->getValue()."'>");
-									echo("<tr class='legende'><td></td><td>".$taal->msg('datum')."</td><td colspan='3'>".$taal->msg('inhoud')."</td></tr>");
+									echo("<tr class='legende ".$huidigeStatus->getValue()."'><td></td><td>".$taal->msg('datum')."</td><td colspan='3'>".$taal->msg('inhoud')."</td></tr>");
 								}
-								echo("<tr id='row_".$form->getId()."'><td></td><td>");
+								echo("<tr class='".$huidigeStatus->getValue()."' id='row_".$form->getId()."'><td></td><td>");
 								$timestamp = strtotime($form->getDatum());
 								$parsedDate = date("d-m-Y @ H:i",$timestamp);
 								echo($parsedDate);
 								echo("</td><td>".$form->getSamenvatting()."</td>");
 								if ($form->getStatus()->getChangeable())
-									echo("<td class='img'><a href='studentMeldingBewerken.php?formid=".$form->getId()."'><img alt='bewerken' class='bewerk' title='Dit herstelformulier bewerken' src='images/page_edit.gif'/></a></td><td class='img'><img class='klik verwijder' alt='verwijderen' title='Dit herstelformulier verwijderen' src='images/page_delete.gif' onclick=\"verwijder('".$form->getId()."');\"/></td></tr>");
+									echo("<td class='img'><a href='studentMeldingBewerken.php?formid=".$form->getId()."'><img alt='bewerken' class='bewerk' title='Dit herstelformulier bewerken' src='images/page_edit.gif'/></a></td><td class='img'><img class='klik verwijder' alt='verwijderen' title='Dit herstelformulier verwijderen' src='images/page_delete.gif' onclick=\"verwijder('".$form->getId()."');\"/></td>");
 								else
 									echo("<td colspan='4'></td>");
+								echo("</tr>");
 							}
+							echo("</tbody>");
 						 ?>
 					</table>
 				</div>
