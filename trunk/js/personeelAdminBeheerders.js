@@ -13,7 +13,26 @@ function bewerk(){
 	rij.find(".edit").each(function(){
 		var waarde = $(this).html();
 		$(this).html("<input type='hidden' value='"+waarde+"'/><input type='text' value='"+waarde+"'/>");
+	}).find("input").keyup(function(){
+		$.post("ajax/postPersoneelBeheerder.php", { "actie":"ldap", "waarde": $(this).val()}, function(data){
+			rij.find(".voornaam").html(data['voornaam']);
+			rij.find(".achternaam").html(data['achternaam']);
+		},"json");
 	});
+	
+	rij.find(".homes").each(function(){
+		$.post("ajax/postPersoneelBeheerder.php", {"actie":"lijst"}, function(data){
+			var waarde = rij.find(".homes").html();
+			var tekst = "<input type='hidden' value='"+waarde+"'/>";
+			for(var i in data){
+				tekst +="<label for='home_' ><input type='checkbox' ";
+				if(rij.find(".homes").html().indexOf(data[i])!=-1)
+					tekst += "checked=checked ";
+				tekst += "id='home_' name='home_' class='Home "+data[i]+"' value='"+i+"'/>Home "+data[i]+"</label><br/>";
+			}
+			rij.find(".homes").html(tekst);
+		},"json");
+	})
 	
 	rij.find(".img1").each(setOK);
 	rij.find(".img2").each(setCancel);
@@ -39,9 +58,24 @@ function OK(){
 		$(this).html(waarde);
 	});
 	
+	var lijstje = "";
+	var tekstjes = new Array();
+	$("input[@type=checkbox]:checked").each(function(){
+		lijstje +=$(this).val()+";";
+		tekstjes[tekstjes.length] = $(this).attr("class"); 
+	});
+	velden[velden.length] = "homes";
+	waarden[waarden.length] = lijstje;
+	
+	var h = "";
+	for ( var i in tekstjes ){
+		h +=tekstjes[i]+"<br/>";
+	}
+	rij.find(".homes").html(h);
+	
 	waarden = $.toJSON(waarden);
 	velden = $.toJSON(velden);
-	$.post("ajax/postPersoneelBeheerder.php", { "actie":"edit", "id": id, "waarden": waarden ,"velden": velden}, function(data){alert(data);});
+	$.post("ajax/postPersoneelBeheerder.php", { "actie":"edit", "id": id, "waarden": waarden ,"velden": velden});
 	
 	rij.find(".img1").each(setBewerk);
 	rij.find(".img2").each(setVerwijder);
@@ -51,7 +85,7 @@ function cancel(){
 	var rij = $(this).parent().parent();
 	
 	//tekst herstellen	
-	rij.find(".edit").each(function(){
+	rij.find(".edit, .homes").each(function(){
 		$(this).html($(this).find("input[@type=hidden]").val());
 	});
 	
@@ -72,11 +106,26 @@ function voegtoe(){
 		$(this).find("input[@type=text]").val("");
 		r += "<td>"+waarde+"</td>";
 	});
-	r += "<td></td><td></td></tr>";
+	var lijstje = "";
+	var tekstjes = new Array();
+	$("input[@type=checkbox]:checked").each(function(){
+		lijstje +=$(this).val()+";";
+		tekstjes[tekstjes.length] = $(this).attr("class"); 
+	});
+	velden[velden.length] = "homes";
+	waarden[waarden.length] = lijstje;
+	r += "<td>"+$("#voornaam").html()+"</td><td>"+$("#achternaam").html()+"</td><td>";
+	for ( var i in tekstjes ){
+		r +=tekstjes[i]+"<br/>";
+	}
+	r += "</td><td></td><td></td></tr>";
 	rij.before(r);
 	waarden = $.toJSON(waarden);
 	velden = $.toJSON(velden);
 	$.post("ajax/postPersoneelBeheerder.php", { "actie":"add", "waarden": waarden ,"velden": velden});
+	$("#voornaam").html("");
+	$("#achternaam").html("");
+	$("input[@type=checkbox]:checked").attr("checked","");
 }
 
 function ldapMagic(){

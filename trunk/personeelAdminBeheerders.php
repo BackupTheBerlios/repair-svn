@@ -40,14 +40,25 @@
 					<p>Hier kunt u personeelsleden toevoegen en bewerken.</p>
 					<table>
 						<tr class="tabelheader"><td colspan="9">Beheer Personeel</td></tr>
-						<tr class="legende"><td>id</td><td>UgentID</td><td>Voornaam</td><td>Familienaam</td><td></td><td></td></tr>
+						<tr class="legende"><td>id</td><td>UgentID</td><td>Voornaam</td><td>Familienaam</td><td>Homes</td><td></td><td></td></tr>
 						<?
 							$personeel = Personeel::getBeheerders();
 							foreach($personeel as $p){
 								$id = $p->getId();
-								echo("<tr id='".$id."_'><td>$id</td><td class='edit' id='gebruikersnaam_$id'>".$p->getGebruikersnaam()."</td><td>".$p->getVoornaam()."</td><td>".$p->getAchternaam()."</td><td class='img1'><img src='images/page_edit.gif' /></td><td class='img2'><img src='images/page_delete.gif' /></td></tr>");
+								echo("<tr id='".$id."_'><td>$id</td><td class='edit' id='gebruikersnaam_$id'>".$p->getGebruikersnaam()."</td><td class='voornaam'>".$p->getVoornaam()."</td><td class='achternaam'>".$p->getAchternaam()."</td><td class='homes'>");
+								$homes = $p->getHomesLijst();
+								foreach($homes as $home){
+									echo "Home ".$home->getKorteNaam()."<br/>";
+								}
+								echo("</td><td class='img1'><img src='images/page_edit.gif' /></td><td class='img2'><img src='images/page_delete.gif' /></td></tr>");
 							}
-							echo("<tr><td></td><td class='edit' id='gebruikersnaam'><input type='text'/></td><td id='voornaam'></td><td id='achternaam'></td><td class='img'><img src='images/page_add.gif'/></td><td></td></tr>");
+							echo("<tr><td>x</td><td class='edit' id='gebruikersnaam'><input type='text'/></td><td id='voornaam'></td><td id='achternaam'></td><td>");
+							$l = Home::getHomes();
+							foreach($l as $home){
+								echo("
+								<label for='home_".$home->getId()."' ><input type='checkbox' id='home_".$home->getId()."' name='home_".$home->getId()."' class='Home ".$home->getKorteNaam()."' value='".$home->getId()."'/>Home ".$home->getKorteNaam()."</label><br/>");
+							}
+							echo("</td><td class='img'><img src='images/page_add.gif'/></td><td></td></tr>");
 						?>
 					</table>
 				</div>

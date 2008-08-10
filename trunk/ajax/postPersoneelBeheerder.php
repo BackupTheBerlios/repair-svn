@@ -16,6 +16,13 @@
 		
 		$personeel = new Personeel($id);
 		$personeel->setGebruikersnaam($waarden["gebruikersnaam"]);
+		$l = explode(";", $waarden['homes']);
+		$lijst = array();
+		foreach ($l as $home){
+			if($home != "")
+				$lijst[] = $home;
+		}
+		$personeel->setHomes($lijst);
 	}
 	else if($_POST['actie'] == "add"){
 		//veldjes ophalen en omzetten
@@ -26,6 +33,13 @@
 		$l = new LdapRepair();
 		$extra = $l->getUserInfo($waarden['gebruikersnaam']);
 		$personeel = new Personeel("", $waarden['gebruikersnaam'], $extra['voornaam'], $extra['achternaam'], "", $extra['email']);
+		$l = explode(";", $waarden['homes']);
+		$lijst = array();
+		foreach ($l as $home){
+			if($home != "")
+				$lijst[] = $home;
+		}
+		$personeel->setHomes($lijst);
 	}
 	else if($_POST['actie'] == "remove"){
 		$home = new Personeel($_POST["id"]);
@@ -35,5 +49,13 @@
 		require_once 'classes/LDAP.class.php';
 		$l = new LdapRepair();
 		echo(json_encode($l->getUserInfo($_POST['waarde'])));
+	}
+	else if($_POST['actie'] == "lijst"){
+		$l = array();
+		require_once 'Home.class.php';
+		$h = Home::getHomes();
+		foreach($h as $home)
+			$l[$home->getId()] = $home->getKorteNaam();
+		echo(json_encode($l));
 	}
 ?>

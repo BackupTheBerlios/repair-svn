@@ -5,7 +5,6 @@ require_once ('User.class.php');
 class Personeel extends User {
 	
 	protected $db;
-	private $homeslijst;
 	private $verwijderd;
 	
 	function __construct($id, $gebruikersnaam="", $voornaam="", $achternaam="", $laatsteOnline="", $email="", $verwijderd="0") {
@@ -88,7 +87,6 @@ class Personeel extends User {
 	}
 	
 	public function setGebruikersnaam($uid){
-		echo "set";
 		$this->gebruikersnaam = $uid;
 		$this->updated = 1;
 	}
@@ -98,9 +96,30 @@ class Personeel extends User {
 	 *
 	 * @return list[Home]
 	 */
-	/*function getHomeslijst() {
-		return $this->homeslijst;
-	}*/
+	function getHomesLijst() {
+		$lijst = array();
+		$statement = $this->db->prepare("SELECT homeId FROM relatie_personeel_home WHERE personeelId=?");
+		$statement->bind_param('i', $this->id);
+		$statement->execute();
+		$statement->store_result();
+		$statement->bind_result($id);
+		while($statement->fetch())
+			$lijst[] = new Home($id);
+		$statement->close();
+		return $lijst;
+	}
+	
+	function setHomes($lijst){
+		//eerst huidige homes wissen
+		$statement = $this->db->prepare("DELETE FROM relatie_personeel_home WHERE personeelId=?");
+		$statement->bind_param('i', $this->id);
+		$statement->execute();
+		$statement = $this->db->prepare("INSERT INTO relatie_personeel_home (personeelId, homeId) VALUES (?, ?)");
+		foreach($lijst as $id){
+			$statement->bind_param('ii', $this->id, $id);
+			$statement->execute();
+		}
+	}
 }
 
 ?>
