@@ -12,10 +12,16 @@ class Personeel extends User {
 		if($id==""){//nieuw personeel
 			parent::__construct($id, $gebruikersnaam, $voornaam, $achternaam, $laatsteOnline, $email);
 			$this->verwijderd = $verwijderd;
-			$statement = $this->db->prepare("INSERT INTO personeel (userId, verwijderd) VALUES (?, ?)");
-			$statement->bind_param('ii', $this->id, $this->verwijderd);
-			$statement->execute();
-			$statement->close();
+			if(parent::isPersoneel($this->id)){
+				self::setVerwijderd(0);
+				self::save();
+			}
+			else{
+				$statement = $this->db->prepare("INSERT INTO personeel (userId, verwijderd) VALUES (?, ?)");
+				$statement->bind_param('ii', $this->id, $this->verwijderd);
+				$statement->execute();
+				$statement->close();
+			}
 		}
 		else{
 			if (!is_numeric($id)) throw new BadParameterException();
@@ -86,6 +92,7 @@ class Personeel extends User {
 		$this->gebruikersnaam = $uid;
 		$this->updated = 1;
 	}
+	
 	/**
 	 * Geeft lijst van Homes voor deze Homemanager terug.
 	 *

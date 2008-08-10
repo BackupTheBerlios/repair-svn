@@ -22,8 +22,10 @@
 		$velden = json_decode(stripslashes($_POST['velden']));
 		$waarden = json_decode(stripslashes($_POST['waarden']));
 		$waarden = array_combine($velden, $waarden);
-	
-		//$personeel = new Personeel(id, gebruikersnaam, voornaam, achternaam, laatstonline, email);
+		require_once 'LDAP.class.php';
+		$l = new LdapRepair();
+		$extra = $l->getUserInfo($waarden['gebruikersnaam']);
+		$personeel = new Personeel("", $waarden['gebruikersnaam'], $extra['voornaam'], $extra['achternaam'], "", $extra['email']);
 	}
 	else if($_POST['actie'] == "remove"){
 		$home = new Personeel($_POST["id"]);

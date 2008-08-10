@@ -18,7 +18,9 @@ class User {
 	
 	function __construct($id, $gebruikersnaam = "", $voornaam = "", $achternaam = "", $laatsteOnline = "", $email = "") {
 		$this->db = DB::getDB();
-		if ($id == "") {
+		if($id=="")
+			$id = self::isExistingUser($gebruikersnaam);
+		if ($id == 0) {
 			// Dit is een nieuwe User
 			if ($gebruikersnaam == "") throw new BadParameterException();
 			$this->gebruikersnaam = $gebruikersnaam;
