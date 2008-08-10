@@ -13,8 +13,7 @@ class Student extends User {
 	private $kamer;
 	private $telefoon;
 	
-	// Is er een veld geupdate? Dan moet er weggeschreven worden in __destruct(), anders niet.
-	private $updated;
+	
 	
 	function __construct($id, $gebruikersnaam = "", $voornaam = "", $achternaam = "", $laatsteOnline = "", $email = "", $taal = "nl", $homeId = "", $langkamernummer = "", $telefoon = "") {
 		if ($id == "") {
@@ -51,6 +50,7 @@ class Student extends User {
 	
 	function save() {
 		if ($this->updated == 1) {
+			parent::save();
 			$statement = $this->db->prepare("UPDATE student SET taal = ?, homeId = ?, kamer = ?, telefoon = ? WHERE userId = ?");
 			$statement->bind_param('sisii', $this->taal, $this->homeId, $this->kamer->getKamernummerLang(), $this->telefoon, $this->id);
 			$statement->execute();

@@ -1,11 +1,7 @@
 <?
 	session_start();
 	require_once '../classes/Config.class.php';
-	require_once 'AccessException.php';
-	require_once 'Locatie.class.php';
-	require_once 'Veld.class.php';
-	require_once 'Home.class.php';
-	require_once 'Categorie.class.php';
+	require_once 'Personeel.class.php';
 	require_once 'Auth.class.php';
 	$auth = new Auth(false);
 	if (!$auth->isLoggedIn() || !$auth->getUser()->isPersoneel()) 
@@ -18,28 +14,24 @@
 		$waarden = json_decode(stripslashes($_POST['waarden']));
 		$waarden = array_combine($velden, $waarden);
 		
-		$veld = new Veld($id);
-		$veld->setNaamNL($waarden['naamNL']);
-		$veld->setNaamEN($waarden['naamEN']);
-		$cat = new Categorie($waarden['categorie']);
-		$veld->setCategorie($cat);
+		$personeel = new Personeel($id);
+		$personeel->setGebruikersnaam($waarden["gebruikersnaam"]);
 	}
 	else if($_POST['actie'] == "add"){
 		//veldjes ophalen en omzetten
 		$velden = json_decode(stripslashes($_POST['velden']));
 		$waarden = json_decode(stripslashes($_POST['waarden']));
 		$waarden = array_combine($velden, $waarden);
-		
-		$cat = new Categorie($waarden['categorie']);
-		$home = new Home($_POST['home']);
-		$veld = new Veld("", $waarden['naamNL'], $waarden['naamEN'], $cat, $home);
-	}
-	else if($_POST['actie'] == "select"){
-		if($_POST['property'] == "categorie")
-			echo json_encode(Categorie::getCategorien($_POST["locatie"]));
+	
+		//$personeel = new Personeel(id, gebruikersnaam, voornaam, achternaam, laatstonline, email);
 	}
 	else if($_POST['actie'] == "remove"){
-		$veld = new Veld($_POST["id"]);
-		$veld->setVerwijderd(true);
+		$home = new Personeel($_POST["id"]);
+		$home->setVerwijderd(true);
+	}
+	else if($_POST['actie'] == "ldap"){
+		require_once 'classes/LDAP.class.php';
+		$l = new LdapRepair();
+		echo(json_encode($l->getUserInfo($_POST['waarde'])));
 	}
 ?>

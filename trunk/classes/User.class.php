@@ -14,7 +14,7 @@ class User {
 	protected $email;
 	
 	// Is er een veld geupdate? Dan moet er weggeschreven worden in __destruct(), anders niet.
-	private $updated;
+	protected $updated;
 	
 	function __construct($id, $gebruikersnaam = "", $voornaam = "", $achternaam = "", $laatsteOnline = "", $email = "") {
 		$this->db = DB::getDB();
@@ -53,8 +53,8 @@ class User {
 	
 	function save() {
 		if ($this->updated == 1) {
-			$statement = $this->db->prepare("UPDATE user SET laatsteOnline = ?, voornaam = ?, achternaam = ?, email = ? WHERE id = ?");
-			$statement->bind_param("ssssi", $this->laatsteOnline, $this->voornaam, $this->achternaam, $this->email, $this->id);
+			$statement = $this->db->prepare("UPDATE user SET gebruikersnaam = ?, laatsteOnline = ?, voornaam = ?, achternaam = ?, email = ? WHERE id = ?");
+			$statement->bind_param("sssssi", $this->gebruikersnaam, $this->laatsteOnline, $this->voornaam, $this->achternaam, $this->email, $this->id);
 			$statement->execute();
 			$statement->close();
 		}

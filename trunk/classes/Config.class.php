@@ -46,5 +46,7 @@ function showError($msg){
 error_reporting (E_ALL & ~ (E_NOTICE | E_USER_NOTICE));
 //set_error_handler('error_handler');
 //set_exception_handler('exception_handler');
+$path = "classes".PATH_SEPARATOR."classes/exceptions".PATH_SEPARATOR."ajax".PATH_SEPARATOR."..".PATH_SEPARATOR."../classes".PATH_SEPARATOR."../classes/exceptions";
+set_include_path(get_include_path() . PATH_SEPARATOR . $path);
 
 ?>

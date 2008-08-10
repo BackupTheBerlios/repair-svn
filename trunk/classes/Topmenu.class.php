@@ -14,6 +14,7 @@ class Topmenu {
 			if($a->getUser()->isPersoneel()){//we zijn personeel
 				echo self::generateMenuItem("personeelAdmin.php", "beheer", "Beheer", 1);
 				echo self::generateMenuItem("#", "statistieken", "Statistieken");
+				echo self::generateMenuItem("personeelOverzicht.php", "overzicht", "Overzicht");
 			}
 			else{//we zijn student
 				echo self::generateMenuItem("overzicht.php", "overzicht", "Overzicht", 1);

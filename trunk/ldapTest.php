@@ -3,8 +3,9 @@
 //vervolgens gaan we zo proberen parsen (home en kamernummer) de gevallen die problemen
 //geven worden geoutput.
 //PAS OP: dit script is waarschijnlijk redelijk zwaar
-require_once 'classes/LDAP.class.php';
-require_once 'classes/Home.class.php';
+require_once 'classes/Config.class.php';
+require_once 'LDAP.class.php';
+require_once 'Home.class.php';
 
 session_start();
 

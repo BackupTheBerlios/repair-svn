@@ -1,11 +1,12 @@
 <?
 	session_start(); 
-	require_once 'classes/exceptions/AccessException.php';
-	require_once 'classes/Home.class.php';
-	require_once 'classes/Auth.class.php';
-	require_once 'classes/Leftmenu.class.php';
-	require_once 'classes/Topmenu.class.php';
-	require_once 'classes/Header.class.php';
+	require_once 'classes/Config.class.php';
+	require_once 'AccessException.php';
+	require_once 'Home.class.php';
+	require_once 'Auth.class.php';
+	require_once 'Leftmenu.class.php';
+	require_once 'Topmenu.class.php';
+	require_once 'Header.class.php';
 	$auth = new Auth(true);
 	if(!$auth->getUser()->isPersoneel())
 		throw new AccessException();
@@ -19,7 +20,7 @@
 	    <link rel="stylesheet" type="text/css" href="style.css"/>
 	    <script type="text/javascript" src="js/jquery/jquery.js"></script>
 	    <script type="text/javascript" src="js/jquery/json.js"></script>
-	    <script type="text/javascript" src="js/personeelHome.js"></script>
+	    <script type="text/javascript" src="js/personeelAdminHomes.js"></script>
 	    
 	</head>
 	<body>

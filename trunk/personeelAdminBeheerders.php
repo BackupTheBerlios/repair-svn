@@ -1,11 +1,13 @@
 <?
 	session_start(); 
-	require_once 'classes/exceptions/AccessException.php';
-	require_once 'classes/Home.class.php';
-	require_once 'classes/Auth.class.php';
-	require_once 'classes/Leftmenu.class.php';
-	require_once 'classes/Topmenu.class.php';
-	require_once 'classes/Header.class.php';
+	require_once 'classes/Config.class.php';
+	require_once 'AccessException.php';
+	require_once 'Home.class.php';
+	require_once 'Personeel.class.php';
+	require_once 'Auth.class.php';
+	require_once 'Leftmenu.class.php';
+	require_once 'Topmenu.class.php';
+	require_once 'Header.class.php';
 	$auth = new Auth(true);
 	if(!$auth->getUser()->isPersoneel())
 		throw new AccessException();
@@ -19,11 +21,11 @@
 	    <link rel="stylesheet" type="text/css" href="style.css"/>
 	    <script type="text/javascript" src="js/jquery/jquery.js"></script>
 	    <script type="text/javascript" src="js/jquery/json.js"></script>
-	    <script type="text/javascript" src="js/personeelHome.js"></script>
+	    <script type="text/javascript" src="js/personeelAdminBeheerders.js"></script>
 	    
 	</head>
 	<body>
-		<?new Header(array("personeelAdmin.php", "#"), array("Beheer", "Homes")); ?>
+		<?new Header(array("personeelAdmin.php", "#"), array("Beheer", "Personeel")); ?>
 		
 		<!--main content-->
 		<div id="container">
@@ -34,18 +36,18 @@
 			<!--de inhoud van de pagina-->
 			<div id="contenthome">
 				<div>
-					<h1>Beheer Homes</h1>
-					<p>Hier kunt u homes toevoegen en bewerken.</p>
+					<h1>Beheer Personeel</h1>
+					<p>Hier kunt u personeelsleden toevoegen en bewerken.</p>
 					<table>
-						<tr class="tabelheader"><td colspan="9">Beheer Homes</td></tr>
-						<tr class="legende"><td>id</td><td>Korte naam</td><td>Lange naam</td><td>Adres</td><td>Verdiepen</td><td>Kamer prefix</td><td>LDAP naam</td><td></td><td></td></tr>
+						<tr class="tabelheader"><td colspan="9">Beheer Personeel</td></tr>
+						<tr class="legende"><td>id</td><td>UgentID</td><td>Voornaam</td><td>Familienaam</td><td></td><td></td></tr>
 						<?
-							$homes = Home::getHomes();
-							foreach($homes as $home){
-								$id = $home->getId();
-								echo("<tr id='".$id."_'><td>$id</td><td class='edit' id='korteNaam_$id'>".$home->getKorteNaam()."</td><td class='edit' id='langeNaam_$id'>".$home->getLangeNaam()."</td><td class='edit' id='adres_$id'>".$home->getAdres()."</td><td class='edit' id='verdiepen_$id'>".$home->getVerdiepen()."</td><td class='edit' id='kamerPrefix_$id'>".$home->getKamerPrefix()."</td><td class='edit' id='ldapNaam_$id'>".$home->getLdapNaam()."</td><td class='img1'><img src='images/page_edit.gif' /></td><td class='img2'><img src='images/page_delete.gif' /></td></tr>");
+							$personeel = Personeel::getBeheerders();
+							foreach($personeel as $p){
+								$id = $p->getId();
+								echo("<tr id='".$id."_'><td>$id</td><td class='edit' id='gebruikersnaam_$id'>".$p->getGebruikersnaam()."</td><td>".$p->getVoornaam()."</td><td>".$p->getAchternaam()."</td><td class='img1'><img src='images/page_edit.gif' /></td><td class='img2'><img src='images/page_delete.gif' /></td></tr>");
 							}
-							echo("<tr><td></td><td class='edit' id='korteNaam'><input type='text'/></td><td class='edit' id='langeNaam'><input type='text'/></td><td class='edit' id='adres'><input type='text'/></td><td class='edit' id='verdiepen'><input class='verdiep' type='text'/></td><td class='edit' id='kamerPrefix'><input class='prefix' type='text'/></td><td class='edit' id='ldapNaam'><input type='text'/></td><td class='img'><img src='images/page_add.gif'/></td><td></td></tr>");
+							echo("<tr><td></td><td class='edit' id='gebruikersnaam'><input type='text'/></td><td id='voornaam'></td><td id='achternaam'></td><td class='img'><img src='images/page_add.gif'/></td><td></td></tr>");
 						?>
 					</table>
 				</div>

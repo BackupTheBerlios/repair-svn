@@ -1,10 +1,11 @@
 <?php
 	session_start();
-	require_once '../classes/exceptions/AccessException.php';
-	require_once '../classes/User.class.php';
-	require_once '../classes/Herstelformulier.class.php';
-	require_once '../classes/Status.class.php';
-	require_once '../classes/Auth.class.php';
+	require_once '../classes/Config.class.php';
+	require_once 'AccessException.php';
+	require_once 'User.class.php';
+	require_once 'Herstelformulier.class.php';
+	require_once 'Status.class.php';
+	require_once 'Auth.class.php';
 	$auth = new Auth(false);
 	if (!$auth->isLoggedIn() || !$auth->getUser()->isStudent()) 
 		throw new AccessException();

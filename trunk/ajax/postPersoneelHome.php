@@ -1,7 +1,8 @@
 <?
 	session_start();
-	require_once '../classes/Home.class.php';
-	require_once '../classes/Auth.class.php';
+	require_once '../classes/Config.class.php';
+	require_once 'Home.class.php';
+	require_once 'Auth.class.php';
 	$auth = new Auth(false);
 	if (!$auth->isLoggedIn() || !$auth->getUser()->isPersoneel()) 
 		throw new AccessException();

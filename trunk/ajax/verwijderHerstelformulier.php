@@ -1,9 +1,10 @@
 <?php
 	session_start();
-	require_once '../classes/exceptions/BadParameterException.class.php';
-	require_once '../classes/exceptions/AccessException.php';
-	require_once '../classes/DB.class.php';
-	require_once '../classes/Auth.class.php';
+	require_once '../classes/Config.class.php';
+	require_once 'exceptions/BadParameterException.class.php';
+	require_once 'exceptions/AccessException.php';
+	require_once 'DB.class.php';
+	require_once 'Auth.class.php';
 	$auth = new Auth(false);
 	if (!$auth->isLoggedIn() || !$auth->getUser()->isStudent()) 
 		throw new AccessException();

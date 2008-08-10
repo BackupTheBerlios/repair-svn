@@ -1,8 +1,9 @@
 <? 
 	session_start(); 
-	require_once 'classes/Topmenu.class.php';
-	require_once 'classes/Header.class.php';
-	require_once 'classes/Taal.class.php';
+	require_once 'classes/Config.class.php';
+	require_once 'Topmenu.class.php';
+	require_once 'Header.class.php';
+	require_once 'Taal.class.php';
 	if(isset($_SESSION['error']))
 		$e = $_SESSION['error'];
 	else

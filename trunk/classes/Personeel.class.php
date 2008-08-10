@@ -8,8 +8,6 @@ class Personeel extends User {
 	private $homeslijst;
 	private $verwijderd;
 	
-	private $updated;
-	
 	function __construct($id, $gebruikersnaam="", $voornaam="", $achternaam="", $laatsteOnline="", $email="", $verwijderd="0") {
 		if($id==""){//nieuw personeel
 			parent::__construct($id, $gebruikersnaam, $voornaam, $achternaam, $laatsteOnline, $email);
@@ -41,6 +39,7 @@ class Personeel extends User {
 	
 	function save() {
 		if ($this->updated == 1) {
+			parent::save();
 			$statement = $this->db->prepare("UPDATE personeel SET verwijderd = ? WHERE userId = ?");
 			$statement->bind_param('ii', $this->verwijderd, $this->id);
 			$statement->execute();
@@ -63,7 +62,30 @@ class Personeel extends User {
 		$this->verwijderd = $verwijderd;
 		$this->updated = true;
 	}
-
+	
+	/**
+	 * geeft een lijst van alle beheerders terug
+	 *
+	 * @return array[Personeel]
+	 */
+	public static function getBeheerders(){
+		$lijst = array();
+		$db = DB::getDB();
+		$statement = $db->prepare("SELECT userId FROM personeel WHERE verwijderd='0'");
+		$statement->execute();
+		$statement->store_result();
+		$statement->bind_result($id);
+		while($statement->fetch())
+			$lijst[] = new Personeel($id);
+		$statement->close();
+		return $lijst;
+	}
+	
+	public function setGebruikersnaam($uid){
+		echo "set";
+		$this->gebruikersnaam = $uid;
+		$this->updated = 1;
+	}
 	/**
 	 * Geeft lijst van Homes voor deze Homemanager terug.
 	 *

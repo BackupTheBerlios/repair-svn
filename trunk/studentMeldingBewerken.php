@@ -1,14 +1,16 @@
 <?
 	session_start(); 
-	require_once 'classes/exceptions/BadParameterException.class.php';
-	require_once 'classes/exceptions/AccessException.php';
-	require_once 'classes/Veld.class.php';
-	require_once 'classes/Herstelformulier.class.php';
-	require_once 'classes/Status.class.php';
-	require_once 'classes/Auth.class.php';
-	require_once 'classes/Topmenu.class.php';
-	require_once 'classes/Taal.class.php';
-	require_once 'classes/Header.class.php';
+	require_once 'classes/Config.class.php';
+	require_once 'BadParameterException.class.php';
+	require_once 'AccessException.php';
+	require_once 'Veld.class.php';
+	require_once 'Herstelformulier.class.php';
+	require_once 'Status.class.php';
+	require_once 'Auth.class.php';
+	require_once 'Topmenu.class.php';
+	require_once 'Taal.class.php';
+	require_once 'Header.class.php';
+	
 	
 	$auth = new Auth(true);
 	if (!$auth->getUser()->isStudent()) 
@@ -32,7 +34,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-	    <title><?=$taal->msg('titel') ?></title>
+	    <title>Online Herstelformulier</title>
 	    <link rel="stylesheet" type="text/css" href="style.css"/>
 	    <script type="text/javascript" src="js/jquery/jquery.js"></script>
 	    <script type="text/javascript" src="js/jquery/jquery.getUrlParam.js"></script>
@@ -64,26 +66,10 @@
 				<table>
 						<tr class="tabelheader"><td colspan="4"><? printf($taal->msg('herstelformulier_homenaam'),$currentHome->getKorteNaam()); ?></td></tr>
 						<?
-							$huidigeLijst = Veld::getHomeForm($currentHome); // array<Veld>
-							$ingevuldeLijst = $formulier->getVeldenlijst(); // array<VeldID>
-							// vergelijking van huidigelijst met ingevuldeLijst. Alle velden van huidigeLijst moeten overblijven + velden die in ingevuldeLijst zitten zonder duplicates te maken
-							
-							// TODO: een treffelijk algoritme voor dit probleem
-							foreach($ingevuldeLijst as $veldid) {
-								$veld = new Veld($veldid);
-								$positie = 0; // positie om het Veld in te voegen in HuidigeLijst (adhv de Locatie en categorie)
-								if ($veld->getVerwijderd()) { // veld zal niet in huidigeLijst zitten
-									for ($i = 0; $i < sizeof($huidigeLijst); $i++) {
-										$huidigVeld = $huidigeLijst[$i];
-										if ($huidigVeld->getCategorie()->getLocatie() == $veld->getCategorie()->getLocatie() &&
-											$huidigVeld->getCategorie()->getNaamNL() == $veld->getCategorie()->getNaamNL())
-											$positie = $i;
-									}
-									array_splice($huidigeLijst, $positie, 0, array($veld));
-								}
-							}
+							$lijst = Veld::getHomeForm($currentHome);
 
-							foreach($huidigeLijst as $veld){
+							for($i=0; $i < sizeof($lijst);$i++){
+								$veld = $lijst[$i];
 								$nieuweCategorie = $veld->getCategorie();
 								$nieuweLocatie = $nieuweCategorie->getLocatie();
 								if (!isset($huidigeLocatie) || ($huidigeLocatie->getValue() != $nieuweLocatie->getValue())) {

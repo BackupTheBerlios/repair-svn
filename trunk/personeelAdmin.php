@@ -1,13 +1,14 @@
 <?
 	session_start(); 
-	require_once 'classes/exceptions/AccessException.php';
-	require_once 'classes/Veld.class.php';
-	require_once 'classes/Locatie.class.php';
-	require_once 'classes/Home.class.php';
-	require_once 'classes/Auth.class.php';
-	require_once 'classes/Leftmenu.class.php';
-	require_once 'classes/Topmenu.class.php';
-	require_once 'classes/Header.class.php';
+	require_once 'classes/Config.class.php';
+	require_once 'AccessException.php';
+	require_once 'Veld.class.php';
+	require_once 'Locatie.class.php';
+	require_once 'Home.class.php';
+	require_once 'Auth.class.php';
+	require_once 'Leftmenu.class.php';
+	require_once 'Topmenu.class.php';
+	require_once 'Header.class.php';
 	$auth = new Auth(true);
 	if(!$auth->getUser()->isPersoneel())
 		throw new AccessException();

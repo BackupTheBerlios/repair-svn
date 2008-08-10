@@ -1,13 +1,14 @@
 <?
 	session_start(); 
-	require_once 'classes/exceptions/AccessException.php';
-	require_once 'classes/Veld.class.php';
-	require_once 'classes/Herstelformulier.class.php';
-	require_once 'classes/Status.class.php';
-	require_once 'classes/Auth.class.php';
-	require_once 'classes/Topmenu.class.php';
-	require_once 'classes/Header.class.php';
-	require_once 'classes/Taal.class.php';
+	require_once 'classes/Config.class.php';
+	require_once 'AccessException.php';
+	require_once 'Veld.class.php';
+	require_once 'Herstelformulier.class.php';
+	require_once 'Status.class.php';
+	require_once 'Auth.class.php';
+	require_once 'Topmenu.class.php';
+	require_once 'Header.class.php';
+	require_once 'Taal.class.php';
 	$auth = new Auth(true);
 	if (!$auth->getUser()->isStudent()) 
 		throw new AccessException();

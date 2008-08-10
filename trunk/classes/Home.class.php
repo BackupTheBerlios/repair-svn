@@ -219,7 +219,7 @@ class Home {
 	public static function getHomes(){
 		$lijst = array();
 		$db = DB::getDB();
-		$statement = $db->prepare("SELECT id FROM home");
+		$statement = $db->prepare("SELECT id FROM home WHERE verwijderd='0'");
 		$statement->execute();
 		$statement->store_result();
 		$statement->bind_result($id);
