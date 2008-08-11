@@ -57,7 +57,7 @@ class Kamer {
 	}
 	
 	public function getTelefoonnummer() {
-		return $this->telefoonnummer;//TODO
+		return $this->telefoonnummer; //TODO: algoritme om telefoonnummers te berekenen
 	}
 }
 ?>

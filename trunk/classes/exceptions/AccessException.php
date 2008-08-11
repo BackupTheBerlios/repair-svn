@@ -1,4 +1,5 @@
 <?php
+require_once 'classes/Config.class.php';
 require_once 'Taal.class.php';
 
 class AccessException extends Exception {
