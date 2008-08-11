@@ -195,7 +195,7 @@ class User {
 	 */
 	private static function isExistingPersoneel($id){
 		$db = DB::getDB();
-		$statement = $db->prepare("SELECT userId FROM personeel WHERE userId = ?");
+		$statement = $db->prepare("SELECT userId FROM personeel WHERE userId = ? AND verwijderd='0'");
 		$statement->bind_param('i', $id);
 		$statement->execute();
 		$statement->store_result();
