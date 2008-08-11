@@ -72,7 +72,7 @@ class Auth{
 			        		}
 			        		else if($this->user->isPersoneel()) {
 			        			$_SESSION['taal'] = "nl";
-			        			echo("<meta http-equiv=\"Refresh\" content=\"0; URL=personeelOverzicht.php\">");
+			        			echo("<meta http-equiv=\"Refresh\" content=\"0; URL=index.php\">");
 			        		}
 			        		else
 			        			throw new Exception("De ingelogde gebruiker is geen student en geen geregistreerd personeelslid");

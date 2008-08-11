@@ -1,5 +1,6 @@
 <?
 	session_start();
+	require_once 'classes/Config.class.php';
 	require_once 'BadParameterException.class.php';
 	require_once 'AccessException.php';
 	require_once 'Herstelformulier.class.php';

@@ -28,28 +28,85 @@
 			
 			<!--de inhoud van de pagina-->
 			<div id="contenthome">
-				<? if($auth->isLoggedIn()){ if($auth->getUser()->isStudent()){?>
-				<div>
-					<h1><?=$taal->msg('welkom');?></h1>
-					<?
-					$list = Herstelformulier::getEvaluationList($auth->getUser()->getId());
-					if (sizeof($list) > 0)
-						echo "<center><b>".$taal->msg('herstelformulieren_te_evalueren')."</b></center>";
-					?>
-					<p>
-						<? printf($taal->msg('welkom_naam_home_kamer'),$auth->getUser()->getVoornaam(),$auth->getUser()->getHome()->getKorteNaam(),$auth->getUser()->getKamer()->getKamernummerKort());?>
-						<br/><?=$taal->msg('keuze_opties'); ?>
-					</p>
-					<ul>
-						<li><?=$taal->msg('meld_nieuw_defect');?></li>
-						<li><?=$taal->msg('overzicht_aanvragen');?></li>
-					</ul>
-				</div>
-				<?}} else{ ?>
-				<div>
-					<h1><?=$taal->msg('welkom');?></h1>
-					<p><?=$taal->msg('welkom_niet_aangemeld');?></p>
-				</div>				
+				<? if($auth->isLoggedIn()){ //we zijn ingelogd
+					if($auth->getUser()->isStudent()){//Student?>
+						<div>
+							<h1><?=$taal->msg('welkom');?></h1>
+							<?
+							$list = Herstelformulier::getEvaluationList($auth->getUser()->getId());
+							if (sizeof($list) > 0)
+								echo "<center><b>".$taal->msg('herstelformulieren_te_evalueren')."</b></center>";
+							?>
+							<p>
+								<? printf($taal->msg('welkom_naam_home_kamer'),$auth->getUser()->getVoornaam(),$auth->getUser()->getHome()->getKorteNaam(),$auth->getUser()->getKamer()->getKamernummerKort());?>
+								<br/><?=$taal->msg('keuze_opties'); ?>
+							</p>
+							<ul>
+								<li><?=$taal->msg('meld_nieuw_defect');?></li>
+								<li><?=$taal->msg('overzicht_aanvragen');?></li>
+							</ul>
+						</div>
+					<?}
+					else{//personeel?>
+						<h1>Welkom <?=$auth->getUser()->getVoornaam() ?></h1>
+						<table>
+							<tr class="tabelheader"><td colspan="6">Overzicht van herstellingen die niet afgewerkt zijn</td></tr>
+							<?
+							$lijst = Herstelformulier::getList(0, new Status("ongezien"));
+							$size = sizeof($lijst);
+							if ($size > 0) {
+							?>
+							<tr class="subheader"><td colspan="6">Ongeziene herstellingen</td></tr>
+							<tbody>
+								<tr class="legende">
+									<td></td>
+									<td>Datum</td>
+									<td>Inhoud</td>
+									<td></td>
+								</tr>
+							<?
+								for($i=0; $i < $size;$i++){
+									$form = $lijst[$i];
+									echo("<tr id='row_".$form->getId()."'><td></td><td>");
+									$timestamp = strtotime($form->getDatum());
+									$parsedDate = date("d-m-Y @ H:i",$timestamp);
+									echo($parsedDate);
+									echo("</td><td>".$form->getSamenvatting()."</td>");
+									echo("<td colspan='2' class='img'><a href='personeelMeldingDoorgeven.php?formid=".$form->getId()."'><img alt='doorgeven' class='bewerk' title='Dit herstelformulier doorgeven' src='images/page_edit.gif'/></a></td></tr>");
+								}
+							 ?>
+							</tbody>
+							<?
+							}
+							
+							$lijst = Herstelformulier::getList(0, new Status("gedaan"));
+							$size = sizeof($lijst);
+							if ($size > 0) {
+	 						?>
+							<tr class="subheader"><td colspan="6">Doorgegeven herstellingen die nog niet afgesloten zijn</td></tr>
+							<tbody>
+								<tr class="legende"><td></td><td>Datum</td><td>Inhoud</td><td></td></tr>
+								<?
+								for($i=0; $i < $size; $i++){
+									$form = $lijst[$i];
+									echo("<tr id='row_".$form->getId()."'><td></td><td>");
+									$timestamp = strtotime($form->getDatum());
+									$parsedDate = date("d-m-Y @ H:i",$timestamp);
+									echo($parsedDate);
+									echo("</td><td>".$form->getSamenvatting()."</td>");
+									echo("<td colspan='4'></td>");
+								}
+							 ?>
+							</tbody>
+							<? } ?>
+						</table>
+					<?}
+				} 
+				else{ //niet ingelogd?>
+					<div>
+						<h1><?=$taal->msg('welkom');?></h1>
+						<p><?=$taal->msg('welkom_niet_aangemeld');?></p>
+					</div>				
 				<?}?>
 				
 			</div>		
