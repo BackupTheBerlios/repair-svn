@@ -4,7 +4,9 @@
 	require_once 'LeftMenu.class.php';
 	require_once 'Header.class.php';
 	require_once 'Auth.class.php';
+	require_once 'Taal.class.php';
 	$auth = new Auth(true);
+	$taal = new Taal();
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -29,12 +31,11 @@
 						<tbody id="inhoud"></tbody>
 				</table>
 				<p id="paginering"></p>
-				<p><a href="backendExport.php">Exporteer deze gegevens!</a></p>
+				<p><a href="personeelExporteer.php">Exporteer deze gegevens!</a></p>
 			</div>				
-					
-			<!--de footer-->
-			<div id="footer">&#169; 2008 Bart Mesuere in opdracht van het <a href="http://www.knokke-heist.be">Gemeentebestuur Knokke-Heist</a></div>
 		</div>
+		<!--de footer-->
+		<div id="footer"><?=$taal->msg('footer') ?></div>
 		<? new LeftMenu("overzicht", "personeelOverzicht.php"); ?>
 	</body>
 </html>
