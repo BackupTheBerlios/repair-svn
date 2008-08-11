@@ -39,6 +39,14 @@ class Leftmenu {
 					if($type == "statistieken"){
 					}
 					
+					//overzicht
+					if($huidigePagina=="personeelOverzicht.php")
+						echo "<li id='selected'><a href='personeelOverzicht.php'>Overzicht</a></li>";
+					else
+						echo "<li><a href='personeelOverzicht.php'>Overzicht</a></li>";
+					if($type == "Overzicht"){
+					}
+					
 				echo "</ul></dd>
 			</dl>
 			
