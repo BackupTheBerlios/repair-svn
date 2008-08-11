@@ -4,20 +4,24 @@
 	require_once 'Topmenu.class.php';
 	require_once 'Header.class.php';
 	require_once 'Taal.class.php';
-	if(isset($_SESSION['error']))
-		$e = $_SESSION['error'];
-	else
-		$e = "No error found";
-	$_SESSION['error']=NULL;
 	
 	$taal = new Taal();
+	
+	if(isset($_SESSION['error'])) {
+		$e = $_SESSION['error'];
+		// TODO: zend mail
+	}
+	else
+		$e = $taal->msg('geen_error');
+		
+	$_SESSION['error']=NULL;
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-	    <title>Online Herstelformulier</title>
+	    <title><?=$taal->msg('titel') ?></title>
 	    <link rel="stylesheet" type="text/css" href="style.css"/>
 	</head>
 	<body>
@@ -31,8 +35,9 @@
 			
 			<!--de inhoud van de pagina-->
 			<div id="contenthome">
-				<h1>Error</h1>
+				<h1><?=$taal->msg('fout') ?></h1>
 				<p><?=$e ?></p>
+				<p><?=$taal->msg('fout_disclaimer') ?></p>
 			</div>		
 		</div>		
 		

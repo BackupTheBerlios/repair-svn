@@ -38,7 +38,14 @@ class Taal {
 						  'succes_melding_bewerkt' => "<h1>Succes</h1><p>Uw melding werd aangepast.</p>",
 						  'succes_melding_toegevoegd' => "<h1>Succes</h1><p>Uw melding werd toegevoegd.</p>",
 						  'confirm_verwijder' => 'Wil je dit herstelformulier echt verwijderen?',
-						  'andere_taal' => 'English'
+						  'andere_taal' => 'English',
+						  'exception_ontoegankelijk' => 'U heeft onvoldoende rechten om deze pagina te bekijken',
+						  'exception_badparameter' => 'Er werd een foutieve parameter doorgegeven',
+						  'exception_ongeldigemail' => 'Het opgegeven emailadres is geen geldig emailadres',
+						  'exception_publickey' => 'De opgegeven sleutel om in te loggen is ongeldig',
+						  'geen_error' => 'Er werd geen foutboodschap doorgegeven.',
+						  'fout' => 'Er is een onvoorziene fout opgetreden.',
+						  'fout_disclaimer' => 'De beheerders van deze applicatie werden op de hoogte gebracht.'
 						  ),
 			'en' => array('titel' => 'Online Repairform',
 						  'dringende_herstellingen' => 'Urgent Repairs',
@@ -74,7 +81,14 @@ class Taal {
 						  'succes_melding_bewerkt' => "<h1>Success</h1><p>Your report was editted.</p>",
 						  'succes_melding_toegevoegd' => "<h1>Success</h1><p>Your report was added.</p>",
 						  'confirm_verwijder' => 'Are you sure you want to delete this repairform?',
-						  'andere_taal' => 'Nederlands'
+						  'andere_taal' => 'Nederlands',
+						  'exception_ontoegankelijk' => 'You do not have sufficient rights to access this page',
+						  'exception_badparameter' => 'A wrong parameter was supplied',
+						  'exception_ongeldigemail' => 'The supplied emailaddress is invalid',
+						  'exception_publickey' => 'The supplied loginkey is invalid',
+						  'geen_error' => 'There was no errormessage specified.',
+						  'fout' => 'Error',
+						  'fout_disclaimer' => 'The application\'s administrators were notified of this problem.'
 						  )
 	);
 	

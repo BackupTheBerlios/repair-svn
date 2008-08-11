@@ -33,7 +33,7 @@ function error_handler($severity, $message, $filename, $lineno) {
  * @param Exception $exception de exception
  */
 function exception_handler($exception){
-	$error = "<p><em>".$exception->getMessage().":</em> ".$exception->getFile()." op lijn ".$exception->getLine()."</p>";
+	$error = "<em>".$exception->getMessage()."</em><br/>(line ".$exception->getLine()." in ".$exception->getFile().")";
 	showError($error);
 }
 
@@ -44,8 +44,8 @@ function showError($msg){
 }
 
 error_reporting (E_ALL & ~ (E_NOTICE | E_USER_NOTICE));
-//set_error_handler('error_handler');
-//set_exception_handler('exception_handler');
+set_error_handler('error_handler');
+set_exception_handler('exception_handler');
 $path = "classes".PATH_SEPARATOR."classes/exceptions".PATH_SEPARATOR."ajax".PATH_SEPARATOR."..".PATH_SEPARATOR."../classes".PATH_SEPARATOR."../classes/exceptions";
 set_include_path(get_include_path() . PATH_SEPARATOR . $path);
 
