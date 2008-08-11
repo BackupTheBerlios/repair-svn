@@ -19,6 +19,6 @@
 	$melding->setOpmerking($opmerking);
 	$melding->setStatus(new Status("ongezien"));
 	$melding->save();
-	// TODO: aanpassing gedaan, geef melding aan gebruiker	
-
+	
+	echo "SUCCESS";
 ?>

@@ -38,6 +38,7 @@
 			<!--de inhoud van de pagina-->
 			<div id="contenthome">
 				<div id="success" style="display:none"><?=$taal->msg('succes_melding_toegevoegd')?></div>
+				<div id="error" style="display:none"><h1><?=$taal->msg('fout')?></h1><?=$taal->msg('error_melding_toevoegen') ?></div>
 				<div id="beforecontent">
 				<?
 				$user = NULL;

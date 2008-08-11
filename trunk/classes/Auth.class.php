@@ -78,11 +78,11 @@ class Auth{
 			        			throw new Exception("De ingelogde gebruiker is geen student en geen geregistreerd personeelslid");
 			        		die();//stoppen met de output
 			        	}
-			        	else throw new Exception("InvalidKeyException");//TODO: custom InvalidKeyException		        	
+			        	else throw new InvalidKeyException("key is too old");		        	
 			        }
-			        else throw new Exception("InvalidKeyException");//TODO: custom InvalidKeyException
+			        else throw new InvalidKeyException("wrong application id");
 			    }
-			    else throw new Exception("InvalidKeyException");//TODO: custom InvalidKeyException
+			    else throw new PublicKeyException();
 			}
 			else{//nog niet ingelogd en niet bezig, dus we zwieren hem naar webauth
 				if (!isset($_SESSION['taal']))

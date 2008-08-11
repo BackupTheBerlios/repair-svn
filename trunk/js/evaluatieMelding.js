@@ -26,8 +26,11 @@ function zendOpmerking(formid) {
 		var opmerking = $('textarea[name="opmerking"]').val();
 		$.post("ajax/evaluatieMelding.php", 
 				{ "formid": formid, "evaluatie": 0, "opmerking": opmerking }, 
-				function(){
-					$("#success").show();
+				function(data){
+					if (data != "SUCCESS")
+						$("#error").show();
+					else
+						$("#success").show();
 					$("#beforecontent").hide();
 				}
 			);

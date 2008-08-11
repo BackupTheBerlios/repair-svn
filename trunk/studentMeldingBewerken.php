@@ -24,17 +24,17 @@
 		
 	$formulier = new Herstelformulier($formid);
 	if ($formulier->getStudent()->getId() != $auth->getUser()->getId())
-		throw new Exception(); // TODO: gepaste exception 
+		throw new AccessException("editting student should be original author");
 		
 	if ($formulier->getStatus()->getValue() != "ongezien")
-		throw new Exception(); // TODO: gepaste exception
+		throw new BadParameterException("only unseen repairforms can be editted");
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-	    <title>Online Herstelformulier</title>
+	    <title><?=$taal->msg('titel') ?></title>
 	    <link rel="stylesheet" type="text/css" href="style.css"/>
 	    <script type="text/javascript" src="js/jquery/jquery.js"></script>
 	    <script type="text/javascript" src="js/jquery/jquery.getUrlParam.js"></script>
@@ -52,6 +52,7 @@
 			<!--de inhoud van de pagina-->
 			<div id="contenthome">
 				<div id="success" style="display:none"><?=$taal->msg('succes_melding_bewerkt') ?></div>
+				<div id="error" style="display:none"><h1><?=$taal->msg('fout')?></h1><?=$taal->msg('error_melding_bewerkt') ?></div>
 				<div id="beforecontent">
 				<?
 				$user = NULL;

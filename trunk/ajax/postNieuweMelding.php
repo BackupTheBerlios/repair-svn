@@ -14,5 +14,7 @@
 	$opmerking = $_POST['opmerking'];
 	$mysqldate = date("Y-m-d H:i:s");
 	$melding = new Herstelformulier("", $mysqldate, new Status("ongezien"), User::getUser($auth->getUser()->getId()), $opmerking, $veldenlijst);
-	// TODO: submit gedaan, geef melding aan gebruiker	
+	$melding->save();
+	
+	echo "SUCCESS";
 ?>

@@ -43,9 +43,13 @@ class Taal {
 						  'exception_badparameter' => 'Er werd een foutieve parameter doorgegeven',
 						  'exception_ongeldigemail' => 'Het opgegeven emailadres is geen geldig emailadres',
 						  'exception_publickey' => 'De opgegeven sleutel om in te loggen is ongeldig',
+						  'exception_invalidkey' => 'De opgegeven sleutel om in te loggen is ongeldig',
 						  'geen_error' => 'Er werd geen foutboodschap doorgegeven.',
 						  'fout' => 'Er is een onvoorziene fout opgetreden.',
-						  'fout_disclaimer' => 'De beheerders van deze applicatie werden op de hoogte gebracht.'
+						  'fout_disclaimer' => 'De beheerders van deze applicatie werden op de hoogte gebracht.',
+						  'error_melding_bewerken' => 'Het bewerken van dit herstelformulier is mislukt. Onze excuses voor het ongemak. Gelieve het later nog eens te proberen.',
+						  'error_melding_toevoegen' => 'Het toevoegen van dit herstelformulier is mislukt. Onze excuses voor het ongemak. Gelieve het later nog eens te proberen.',
+						  'error_melding_evaluatie' => 'Het evalueren van dit herstelformulier is mislukt. Onze excuses voor het ongemak. Gelieve het later nog eens te proberen.'
 						  ),
 			'en' => array('titel' => 'Online Repairform',
 						  'dringende_herstellingen' => 'Urgent Repairs',
@@ -85,10 +89,14 @@ class Taal {
 						  'exception_ontoegankelijk' => 'You do not have sufficient rights to access this page',
 						  'exception_badparameter' => 'A wrong parameter was supplied',
 						  'exception_ongeldigemail' => 'The supplied emailaddress is invalid',
-						  'exception_publickey' => 'The supplied loginkey is invalid',
+						  'exception_publickey' => 'The suplied loginkey is invalid',
+						  'exception_invalidkey' => 'The suplied login key is invalid',
 						  'geen_error' => 'There was no errormessage specified.',
 						  'fout' => 'Error',
-						  'fout_disclaimer' => 'The application\'s administrators were notified of this problem.'
+						  'fout_disclaimer' => 'The application\'s administrators were notified of this problem.',
+						  'error_melding_bewerken' => 'The editting of this repairform failed. Our apologies for the inconvenience, please try again later.',
+						  'error_melding_toevoegen' => 'There was an error while adding this repairform. Our apologies for the inconvenience, please try again later.',
+						  'error_melding_evaluatie' => 'There was an error while evaluating this repairform. Our apologies for the inconvenience, please try again later.'
 						  )
 	);
 	
@@ -99,7 +107,7 @@ class Taal {
 		$lang = strtolower($lang);
 		if ($lang == "nl" || $lang == "en")
 			$this->lang = $lang;
-		else throw new BadParameterException("Lang werd niet correct gebruikt."); // TODO: gepaste exception
+		else throw new BadParameterException("this language hasn't been implemented.");
 	}
 	
 	public function msg($key) {
@@ -108,7 +116,7 @@ class Taal {
 			if ($vertaling == "") $vertaling = "#UNDEFINED";
 			return $vertaling;
 		}
-		else throw new BadParameterException("Lang werd niet correct gebruikt."); // TODO: gepaste exception
+		else throw new BadParameterException("this language hasn't been implemented.");
 	}
 	
 	public function getTaal() {

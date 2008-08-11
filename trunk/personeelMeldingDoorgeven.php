@@ -39,7 +39,7 @@
 					if (!is_numeric($formid) || $formid < 1) throw new BadParameterException("Formid werd foutief gebruikt");
 					$formulier = new Herstelformulier($formid);
 					?>
-					<div id='test'>
+					<div id='tabel'>
 						<table>
 						<tr class="tabelheader"><td colspan="4">Melding</td></tr>
 						<tr class="legende">

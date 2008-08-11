@@ -34,6 +34,7 @@
 			<!--de inhoud van de pagina-->
 			<div id="contenthome">
 				<div id="success" style="display:none"><?=$taal->msg('succes_melding_bewerkt') ?></div>
+				<div id="error" style="display:none"><h1><?=$taal->msg('fout')?></h1><?=$taal->msg('error_melding_evalueren') ?></div>
 				<div id="opmerkingvertaling" style="display:none"><?=$taal->msg('opmerking') ?></div>
 				<div id='beforecontent'>
 					<? 
@@ -62,8 +63,8 @@
 									</tbody>
 								</table>
 								<?
-						} else throw new Exception("Unauthorized access!"); // TODO: gepaste exception
-					} else throw new Exception("Unauthorized access!"); // TODO: gepaste exception
+						} else throw new AccessException("only students can evaluate repairforms");
+					} else throw new AccessException("you have to be logged in");
 					?>
 				</div>
 			</div>	

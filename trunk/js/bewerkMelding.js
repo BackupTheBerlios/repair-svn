@@ -82,7 +82,10 @@ $(document).ready(function(){
 		if (hasError == false) {
 			$.post("ajax/bewerkMelding.php", { "formid": formid, "velden[]": arrayCheckbox, "opmerking": opmerking},
 				function (data){
-					$("#success").show();
+					if (data != "SUCCESS")
+						$("#error").show();
+					else
+						$("#success").show();
 					$("#meldingform").hide();
 				});
 		}

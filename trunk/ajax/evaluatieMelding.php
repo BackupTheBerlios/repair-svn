@@ -12,11 +12,11 @@
 	
 	$formid = $_POST['formid'];
 	if (!is_numeric($formid) || $formid < 1) 
-		throw new BadParameterException("Formid is ongeldig."); // TODO: gepaste exception
+		throw new BadParameterException("formid is invalid");
 		
 	$evaluatie = $_POST['evaluatie'];
 	if (!is_numeric($evaluatie) || ($evaluatie != 0 && $evaluatie != 1)) 
-		throw new BadParameterException("Evaluatie is ongeldig."); // TODO: gepaste exception
+		throw new BadParameterException("evaluatie is invalid");
 	
 	if ($evaluatie == 1) {
 		$herstelformulier = new Herstelformulier($formid);
@@ -32,4 +32,6 @@
 		$herstelformulier->setOpmerking($opmerking);
 		$herstelformulier->save();	
 	}
+	
+	echo "SUCCESS";
 ?>
