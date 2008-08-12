@@ -71,7 +71,7 @@ class Auth{
 			        		//doorsturen naar de juiste pagina
 			        		if($this->user->isStudent()) {
 			        			$_SESSION['taal'] = $this->user->getTaal();
-			        			echo("<meta http-equiv=\"Refresh\" content=\"0; URL=studentOverzicht.php\">"); 
+			        			echo("<meta http-equiv=\"Refresh\" content=\"0; URL=index.php\">"); 
 			        		}
 			        		else if($this->user->isPersoneel()) {
 			        			$_SESSION['taal'] = "nl";

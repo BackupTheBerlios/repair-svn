@@ -340,7 +340,7 @@ class Herstelformulier {
 		$lijst = Array();
 		if (!is_numeric($userId) || $userId < 1 || !is_numeric($aantal)) throw new BadParameterException("userId or aantal is invalid");		
 		
-		$statement = $db->prepare("SELECT id FROM herstelformulier WHERE userId = ? ORDER BY status, datum DESC LIMIT ?");
+		$statement = $db->prepare("SELECT id FROM herstelformulier WHERE userId = ? AND (status = 'ongezien' OR status = 'gedaan' ) ORDER BY status, datum DESC LIMIT ?");
 		$statement->bind_param('ii', $userId, $aantal);
 		$statement->execute();
 		$statement->bind_result($id);

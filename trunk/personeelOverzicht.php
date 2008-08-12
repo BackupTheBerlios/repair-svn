@@ -3,6 +3,7 @@
 	require_once 'classes/Config.class.php';
 	require_once 'LeftMenu.class.php';
 	require_once 'Header.class.php';
+	require_once 'Topmenu.class.php';
 	require_once 'Auth.class.php';
 	require_once 'Taal.class.php';
 	$auth = new Auth(true);
@@ -22,6 +23,9 @@
 	<body>	
 		<?new Header(array("#"), array("Overzicht")); ?>	
 		<div id="container">
+		
+			<!--horizontale navigatiebalk bovenaan-->
+			<? new Topmenu(); ?>
 			<div id="contenthome">
 				<h1>Overzicht Herstelformulieren</h1>
 				<table>

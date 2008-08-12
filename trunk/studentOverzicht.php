@@ -44,7 +44,11 @@
 					<table>
 						<tr class="tabelheader"><td colspan="6"><?=$taal->msg('overzicht_herstellingen') ?></td></tr>
 						<?
-							$lijst = Herstelformulier::getLatest($auth->getUser()->getId());
+							$l = Herstelformulier::getList($auth->getUser()->getId());
+							$lijst = array();
+							foreach ($l as $subl){
+								$lijst = array_merge($lijst, $subl);
+							}
 							for($i=0; $i < sizeof($lijst);$i++){
 								$form = $lijst[$i];
 								$nieuweStatus = $form->getStatus();

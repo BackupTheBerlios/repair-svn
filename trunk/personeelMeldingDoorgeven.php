@@ -51,7 +51,7 @@
 						<tr>
 							<td><?=$formulier->getDatum();?></td>
 							<td><?=$formulier->getStudent()->getAchternaam()." ".$formulier->getStudent()->getVoornaam();?></td>
-							<td><?=$formulier->getKamer()->getKamernummerKort();?></td>
+							<td>Home <?=$formulier->getKamer()->getHome()->getKorteNaam();?> kamer <?=$formulier->getKamer()->getKamernummerKort();?></td>
 							<td><?=$formulier->getKamer()->getTelefoonnummer();?></td>
 						</tr>
 						<tr><td colspan="4"class="unityheader">Gemelde defecten:</td></tr>
@@ -61,7 +61,15 @@
 							?>
 							<tr class="unity">
 								<td></td>
-								<td colspan="3"><?=$veld->getNaamNL();?></td>
+								<td><? 
+									if($veld->getCategorie()->getLocatie()->getValue()=="Kot") 
+										echo "Kamer ".$formulier->getKamer()->getKamernummerKort();
+									else if($veld->getCategorie()->getLocatie()->getValue()=="Verdiep") 
+										echo $veld->getCategorie()->getNaamNL()." ".$formulier->getKamer()->getVerdiep()."e";
+									else
+										echo $veld->getCategorie()->getNaamNL() ; 
+								?></td>
+								<td colspan="2"><?=$veld->getNaamNL();?></td>
 							</tr>
 							<?
 						}

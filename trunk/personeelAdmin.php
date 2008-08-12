@@ -40,8 +40,14 @@
 				<div>
 					<h1>Beheer</h1>
 					<?if($_GET['homeId']=="") {?>
-						Volgens onze gegevens bent u beheerder van volgende homes:
-						//TODO dynamisch maken
+						<p>U kunt de herstelformulieren van volgende homes aanpassen:</p><ul>
+						<?
+							$lijst = $auth->getUser()->getHomesLijst();
+							foreach($lijst as $home)
+								echo "<li><a href='personeelAdmin?homeId=".$home->getId()."'>Home ".$home->getKorteNaam()."</a></li>"
+						 ?>
+						 </ul>
+						 <p>U kunt ook <a href='personeelAdminBeheerders.php'>beheerders aanmaken</a> en <a href='personeelAdminHomes.php'>homes aanmaken en bewerken</a></p>
 					<?}
 					else{ 
 						$currentHome = new Home($_GET['homeId']);	

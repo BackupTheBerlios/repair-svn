@@ -3,6 +3,7 @@
 	require_once 'classes/Config.class.php';
 	require_once 'AccessException.php';
 	require_once 'LeftMenu.class.php';
+	require_once 'TopMenu.class.php';
 	require_once 'Header.class.php';
 	require_once 'DB.class.php';
 	require_once 'Herstelformulier.class.php';
@@ -74,6 +75,8 @@
 			<body>	
 				<?new Header(array("#"), array("Exporteren")); ?>	
 				<div id="container">
+					<!--horizontale navigatiebalk bovenaan-->
+					<? new Topmenu(); ?>
 					<div id="contenthome">
 						<h1>Exporteren</h1>	
 						<?
