@@ -39,8 +39,12 @@ function exception_handler($exception){
 
 function showError($msg){
 	$_SESSION['error']=$msg;
-    echo("<meta http-equiv=\"Refresh\" content=\"0; URL=error.php\">");
-	die();
+	if(strpos(" ".$_SERVER['PHP_SELF'],"error.php"))
+		echo $msg;
+	else{
+    	echo("<meta http-equiv=\"Refresh\" content=\"0; URL=error.php\">");
+		die();
+	}
 }
 
 error_reporting (E_ALL & ~ (E_NOTICE | E_USER_NOTICE));

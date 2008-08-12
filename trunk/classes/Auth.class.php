@@ -52,8 +52,11 @@ class Auth{
 			        	if((time()-$time) < self::$threshold){//is het geen oude key?
 			        		//zit de gebruiker al in onze databank?
 			        		$id=User::isExistingUser($user);
-			        		if($id!=0)//als dat zo is maak zijn object aan
+			        		if($id!=0){//als dat zo is maak zijn object aan
 			        			$this->user=User::getUser($id);
+			        			if($this->user->isStudent())
+			        				$this->user->syncLDAP();//gegevens updaten als hij student is
+			        		}
 			        		else{ //anders, haal zen gegevens uit de ldap
 			        			require_once 'classes/LDAP.class.php';
 			        			$ldap = new LdapRepair();

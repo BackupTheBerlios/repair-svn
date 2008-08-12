@@ -108,6 +108,7 @@ CREATE TABLE `student` (
   `homeId` int(11) NOT NULL,
   `kamer` varchar(13) NOT NULL,
   `telefoon` int(5) NOT NULL,
+  `verwijderd` tinyint(1) NOT NULL,
   UNIQUE KEY `userId` (`userId`,`kamer`,`telefoon`),
   KEY `homeId` (`homeId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;

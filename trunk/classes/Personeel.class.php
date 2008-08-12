@@ -11,7 +11,7 @@ class Personeel extends User {
 		if($id==""){//nieuw personeel
 			parent::__construct($id, $gebruikersnaam, $voornaam, $achternaam, $laatsteOnline, $email);
 			$this->verwijderd = $verwijderd;
-			if(parent::isPersoneel($this->id)){
+			if(this::isInPersoneelDatabase($this->id)){
 				self::setVerwijderd(0);
 				self::save();
 			}
@@ -119,6 +119,15 @@ class Personeel extends User {
 			$statement->bind_param('ii', $this->id, $id);
 			$statement->execute();
 		}
+	}
+	
+	function isInPersoneelDatabase($id){
+		$db = DB::getDB();
+		$statement = $db->prepare("SELECT userId FROM personeel WHERE userId = ?");
+		$statement->bind_param('i', $id);
+		$statement->execute();
+		$statement->store_result();
+		return $statement->num_rows==1;
 	}
 }
 

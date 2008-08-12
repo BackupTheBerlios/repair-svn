@@ -19,7 +19,7 @@ class User {
 	function __construct($id, $gebruikersnaam = "", $voornaam = "", $achternaam = "", $laatsteOnline = "", $email = "") {
 		$this->db = DB::getDB();
 		if($id=="")
-			$id = self::isExistingUser($gebruikersnaam);
+			$id = self::isInDatabase($gebruikersnaam);
 		if ($id == 0) {
 			// Dit is een nieuwe User
 			if ($gebruikersnaam == "") throw new BadParameterException();
@@ -99,6 +99,21 @@ class User {
 		return $this->id;
 	}
 	
+	/**
+	 * @param unknown_type $achternaam
+	 */
+	public function setAchternaam($achternaam) {
+		$this->achternaam = $achternaam;
+	}
+	
+	/**
+	 * @param unknown_type $voornaam
+	 */
+	public function setVoornaam($voornaam) {
+		$this->voornaam = $voornaam;
+	}
+
+	
 	function getGebruikersnaam() {
 		return $this->gebruikersnaam;
 	}
@@ -159,7 +174,22 @@ class User {
 	 */
 	public static function isExistingUser($username){
 		$db = DB::getDB();
-		$statement = $db->prepare("SELECT id FROM user WHERE gebruikersnaam = ?");
+		$statement = $db->prepare("SELECT id FROM user INNER JOIN personeel ON (user.id=personeel.userId) WHERE gebruikersnaam = ? AND verwijderd = '0' UNION SELECT id FROM user INNER JOIN student ON (user.id=student.userId) WHERE gebruikersnaam = ? AND verwijderd = '0' ");
+		$statement->bind_param('ss', $username, $username);
+		$statement->execute();
+		$statement->store_result();
+		if($statement->num_rows==1){
+			$statement->bind_result($id);
+			$statement->fetch();
+			return $id;
+		}
+		else
+			return 0;
+	}
+	
+	public static function isInDatabase($username){
+		$db = DB::getDB();
+		$statement = $db->prepare("SELECT id FROM user WHERE gebruikersnaam = ? ");
 		$statement->bind_param('s', $username);
 		$statement->execute();
 		$statement->store_result();
@@ -180,7 +210,7 @@ class User {
 	 */
 	private static function isExistingStudent($id){
 		$db = DB::getDB();
-		$statement = $db->prepare("SELECT userId FROM student WHERE userId = ?");
+		$statement = $db->prepare("SELECT userId FROM student WHERE userId = ? AND verwijderd='0'");
 		$statement->bind_param('i', $id);
 		$statement->execute();
 		$statement->store_result();
