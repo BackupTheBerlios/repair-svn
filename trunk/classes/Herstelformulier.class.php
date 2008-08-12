@@ -46,11 +46,11 @@ class Herstelformulier {
 			
 			if (is_a($status, "Status"))
 				$this->status = $status;
-			else throw new BadParameterException();
+			else throw new BadParameterException("supplied Status is not a Status object");
 			
 			if (is_a($student, "Student"))
 				$this->student = $student;
-			else throw new BadParameterException();
+			else throw new BadParameterException("supplied Student is not a Student object");
 			$this->studentId = $this->student->getId();
 			
 			$this->kamer = $this->student->getKamer();
@@ -171,8 +171,8 @@ class Herstelformulier {
 		if (preg_match("/^(\d{4})-(\d{2})-(\d{2}) ([01][0-9]|2[0-3]):([0-5][0-9]):([0-5][0-9])$/", $datum, $matches)) {
 	        if (checkdate($matches[2], $matches[3], $matches[1])) {
 	            $this->datum = $datum;
-	        } else throw new BadParameterException();
-	    } else throw new BadParameterException();
+	        } else throw new BadParameterException("supplied date is invalid");
+	    } else throw new BadParameterException("supplied date is invalid");
 	    
 	    $this->updated = 1;
 	}
@@ -183,7 +183,7 @@ class Herstelformulier {
 	public function setHome($home) {
 		if (is_a($home, "Home"))
 			$this->home = $home;
-		else throw new BadParameterException();
+		else throw new BadParameterException("supplied Home is not a Home object");
 		
 		$this->homeId = $this->home->getId();
 		
@@ -197,7 +197,7 @@ class Herstelformulier {
 	public function setKamer($kamer) {
 		if (is_a($kamer, "Kamer"))
 			$this->kamer = $kamer;
-		else throw new BadParameterException();
+		else throw new BadParameterException("supplied Kamer is not a Kamer object");
 		
 		$this->updated = 1;
 	}
@@ -217,7 +217,7 @@ class Herstelformulier {
 	public function setStatus($status) {
 		if (is_a($status, "Status"))
 			$this->status = $status;
-		else throw new BadParameterException();
+		else throw new BadParameterException("supplied status is no Status object");
 		
 		$this->updated = 1;
 	}
@@ -228,7 +228,7 @@ class Herstelformulier {
 	public function setStudent($student) {
 		if (is_a($student, "Student"))
 			$this->student = $student;
-		else throw new BadParameterException();
+		else throw new BadParameterException("supplied student is no Student object");
 		
 		$this->studentId = $this->student->getId();
 		
@@ -241,7 +241,7 @@ class Herstelformulier {
 		$statement->execute();
 		
 		$statement = $this->db->prepare("INSERT INTO relatie_herstelformulier_velden (herstelformulierId, veldId) VALUES (?, ?)");
-		foreach ($veldenlijst as $key => $veldId) {
+		foreach ($veldenlijst as $veldId) {
 			$statement->bind_param('ii', $this->id, $veldId);
 			$statement->execute();
 		}
@@ -268,8 +268,9 @@ class Herstelformulier {
 	}
 	
 	public function setFactuurnummer($factuurnummer) {
+		// TODO: kijken of $factuurnummer aan het juiste formaat voldoet
 		if (!is_numeric($factuurnummer))
-			throw new BadParameterException("Factuurnummer is ongeldig.");
+			throw new BadParameterException("Factuurnummer is invalid.");
 		$this->factuurnummer = $factuurnummer;
 		$this->updated = 1;
 	}
@@ -285,16 +286,16 @@ class Herstelformulier {
 	}
 	
 	/**
-	 * Geeft een lijst van Herstelformulieren terug. Je kan zoeken op userId en/of status.
+	 * Geeft een lijst van Herstelformulieren terug. Je kan zoeken op userId en/of status. Indien enkel userId opgegeven is, zal je alle herstelformulieren terugkrijgen voor deze gebruiker. Indien je enkel de status opgeeft, zal je alle herstelformulieren terugkrijgen van alle gebruikers met die status.
 	 *
-	 * @param integer $userId
+	 * @param integer(optioneel) $userId
 	 * @param Status(optioneel) $status
 	 * @return list<Status=>Herstelformulier>
 	 */
 	static function getList($userId = 0, $searchStatus = "") {
 		$db = DB::getDB();
 		$lijst = Array();
-		if (!is_numeric($userId) || $userId < 0) throw new BadParameterException();
+		if (!is_numeric($userId) || $userId < 0) throw new BadParameterException("userId is invalid");
 		
 		if ($searchStatus == "") {
 			$statement = $db->prepare("SELECT id, status FROM herstelformulier WHERE userId = ? ORDER BY status, datum DESC");
@@ -304,7 +305,8 @@ class Herstelformulier {
 			$statement = $db->prepare("SELECT id, status FROM herstelformulier WHERE status = ? ORDER BY datum DESC");
 			$statement->bind_param('s', $searchStatus->getValue());
 		} else {
-			if (!is_a($searchStatus, "Status")) throw new BadParameterException();
+			if (!is_a($searchStatus, "Status")) throw new BadParameterException("supplied status is no Status object");
+			
 			$statement = $db->prepare("SELECT id, status FROM herstelformulier WHERE userId = ? AND status = ? ORDER BY datum DESC");
 			$statement->bind_param('is', $userId, $searchStatus->getValue());
 		}
@@ -336,7 +338,7 @@ class Herstelformulier {
 	static function getLatest($userId, $aantal = -1){
 		$db = DB::getDB();
 		$lijst = Array();
-		if (!is_numeric($userId) || $userId < 1 || !is_numeric($aantal)) throw new BadParameterException();		
+		if (!is_numeric($userId) || $userId < 1 || !is_numeric($aantal)) throw new BadParameterException("userId or aantal is invalid");		
 		
 		$statement = $db->prepare("SELECT id FROM herstelformulier WHERE userId = ? ORDER BY status, datum DESC LIMIT ?");
 		$statement->bind_param('ii', $userId, $aantal);
@@ -354,28 +356,28 @@ class Herstelformulier {
 	 * Geeft een lijst van door studenten te evalueren herstelformulieren terug.
 	 *
 	 * @param int $userId
-	 * @return array<herstelformulier>
+	 * @return array<Herstelformulier>
 	 */
-	static function getEvaluationList($userId) {
+	static function getEvaluationList($userId = 0) {
 		$db = DB::getDB();
 		$lijst = Array();
-		if (!is_numeric($userId) || $userId < 0) throw new BadParameterException();
+		if (!is_numeric($userId) || $userId < 0) throw new BadParameterException("userId is invalid");
 		
-		$statement = $db->prepare("SELECT id, status FROM herstelformulier WHERE userId = ? AND status = 'gedaan' AND datum < SUBDATE(NOW(), INTERVAL 7 DAY) ORDER BY datum DESC");
-		$statement->bind_param('i', $userId);
-		$statement->execute();
-		$statement->bind_result($id, $status);
-		$statement->store_result();
-		while ($statement->fetch()) {
-			if (!isset($lijst[$status])) $lijst[$status] = Array();
-			$tmp = $lijst[$status];
-			$tmp[] = new Herstelformulier($id);
-			$lijst[$status] = $tmp;
+		if ($userId == 0)
+			$statement = $db->prepare("SELECT id FROM herstelformulier WHERE status = 'gedaan' AND datum < SUBDATE(NOW(), INTERVAL 7 DAY) ORDER BY datum DESC");
+		else {
+			$statement = $db->prepare("SELECT id FROM herstelformulier WHERE userId = ? AND status = 'gedaan' AND datum < SUBDATE(NOW(), INTERVAL 7 DAY) ORDER BY datum DESC");
+			$statement->bind_param('i', $userId);
 		}
+		$statement->execute();
+		$statement->bind_result($id);
+		$statement->store_result();
+		while ($statement->fetch())
+			$lijst[] = new Herstelformulier($id);
 		$statement->free_result();
 		$statement->close();
 		
-		return $lijst["gedaan"];
+		return $lijst;
 	}
 }
 

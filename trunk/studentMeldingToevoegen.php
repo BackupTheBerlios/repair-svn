@@ -21,7 +21,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-	    <title>Online Herstelformulier</title>
+	    <title><?=$taal->msg('titel') ?></title>
 	    <link rel="stylesheet" type="text/css" href="style.css"/>
 	    <script type="text/javascript" src="js/jquery/jquery.js"></script>
 		<script type="text/javascript" src="js/nieuweMelding.js"></script>	    
@@ -51,12 +51,11 @@
 				?>
 				<form id='meldingform'>
 				<table>
-						<tr class="tabelheader"><td colspan="4">Herstelformulier <?=$currentHome->getKorteNaam(); ?></td></tr>
+						<tr class="tabelheader"><td colspan="4"><? printf($taal->msg('herstelformulier_homenaam'),$currentHome->getKorteNaam()); ?></td></tr>
 						<?
 							$lijst = Veld::getHomeForm($currentHome);
 
-							for($i=0; $i < sizeof($lijst);$i++){
-								$veld = $lijst[$i];
+							foreach($lijst as $veld) {
 								$nieuweCategorie = $veld->getCategorie();
 								$nieuweLocatie = $nieuweCategorie->getLocatie();
 								if (!isset($huidigeLocatie) || ($huidigeLocatie->getValue() != $nieuweLocatie->getValue())) {

@@ -14,24 +14,19 @@ function checkItem(a){
 
 function showGroup(a){
 	var text = $("#collapse_"+a).text();
-	if (text == "-")
+	if (text == "-") {
 		$("#collapse_"+a).text("+");
-	else
-		$("#collapse_"+a).text("-");
-	
-	flipCategorie(a);
-}
-
-function flipCategorie(a){
-	$("."+a).each(function(){
-		var test = $(this).css("display");
-		if (test == "none") {
-			$(this).show();
-		} else {
-			if (!$(this).hasClass("selected"))
+		$("."+a).each(function(){
+			if (!$(this).hasClass("selected")) // alles hiden behalve de geselecteerde
 				$(this).hide();
-		}
-	});
+		});	
+	}
+	else {
+		$("#collapse_"+a).text("-");
+		$("."+a).each(function(){ // alles tonen
+			$(this).show();
+		});
+	}
 }
 
 function showLocatie(a){
