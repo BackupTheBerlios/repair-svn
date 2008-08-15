@@ -379,6 +379,29 @@ class Herstelformulier {
 		
 		return $lijst;
 	}
+
+	/**
+	 * Geeft een lijst van herstelformulieren terug voor een kamer.
+	 *
+	 * @param Kamer $kamer
+	 * @return array<Herstelformulier>
+	 */
+	static function getKamerList($kamer) {
+		if (!is_a($kamer, "Kamer")) throw new BadParameterException("kamer is geen Kamer object");
+		
+		$db = DB::getDB();
+		$statement = $db->prepare("SELECT id FROM herstelformulier WHERE kamer = ? ORDER BY datum DESC");
+		$statement->bind_param('i', $kamer->getKamernummerLang());
+		$statement->execute();
+		$statement->bind_result($id);
+		$statement->store_result();
+		while ($statement->fetch())
+			$lijst[] = new Herstelformulier($id);
+		$statement->free_result();
+		$statement->close();
+		
+		return $lijst;
+	}
 }
 
 ?>
