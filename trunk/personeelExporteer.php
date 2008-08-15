@@ -17,11 +17,14 @@
 		$export = array();
 		//eerste rij
 		$rij = array();
+						
 		if(in_array("herstelformulier.id", $waarden)) $rij[] = "Herstelformulier ID";
-		if(in_array("herstelformulier.datum", $waarden)) $rij[] = "Herstelformulier Datum";
-		if(in_array("herstelformulier.status", $waarden)) $rij[] = "Herstelformulier Status";
-		if(in_array("herstelformulier.kamer", $waarden)) $rij[] = "Herstelformulier Kamer";
-		if(in_array("herstelformulier.factuurnummer", $waarden)) $rij[] = "Herstelformulier Factuurnummer";
+		if(in_array("herstelformulier.datum", $waarden)) $rij[] = "Datum";
+		if(in_array("herstelformulier.kamer", $waarden)) $rij[] = "Kamer";
+		if(in_array("herstelformulier.home", $waarden)) $rij[] = "Home";
+		if(in_array("herstelformulier.persoon", $waarden)) $rij[] = "Persoon";
+		if(in_array("herstelformulier.status", $waarden)) $rij[] = "Status";
+		if(in_array("herstelformulier.factuurnummer", $waarden)) $rij[] = "Factuurnummer";
 		
 		$export[]=$rij;	
 		
@@ -32,11 +35,14 @@
 		while($statement->fetch()){
 			$rij = array();
 			$herstelformulier = new Herstelformulier($id);
+			$persoon = $herstelformulier->getStudent();
 				
 			if(in_array("herstelformulier.id", $waarden)) $rij[] = $herstelformulier->getId();
 			if(in_array("herstelformulier.datum", $waarden)) $rij[] = $herstelformulier->getDatum();
-			if(in_array("herstelformulier.status", $waarden)) $rij[] = $herstelformulier->getStatus()->getValue();
 			if(in_array("herstelformulier.kamer", $waarden)) $rij[] = $herstelformulier->getKamer()->getKamernummerLang();
+			if(in_array("herstelformulier.home", $waarden)) $rij[] = $herstelformulier->getHome()->getKorteNaam();
+			if(in_array("herstelformulier.persoon", $waarden)) $rij[] = $persoon->getVoornaam()." ".$persoon->getAchternaam();
+			if(in_array("herstelformulier.status", $waarden)) $rij[] = $herstelformulier->getStatus()->getValue();
 			if(in_array("herstelformulier.factuurnummer", $waarden)) $rij[] = $herstelformulier->getFactuurnummer();
 			
 			$export[]=$rij;	
@@ -85,10 +91,13 @@
 							echo "<form method='post' id='formulier'>";
 							echo("<h2>Herstelformulier gegevens</h2>");
 							generateCheckbox('herstelformulier.id', 'Herstelformulier ID');
-							generateCheckbox('herstelformulier.datum', 'Herstelformulier Datum');
-							generateCheckbox('herstelformulier.status', 'Herstelformulier Status');
-							generateCheckbox('herstelformulier.kamer', 'Herstelformulier Kamer');
-							generateCheckbox('herstelformulier.factuurnummer', 'Herstelformulier Factuurnummer');
+							generateCheckbox('herstelformulier.datum', 'Datum');
+							generateCheckbox('herstelformulier.kamer', 'Kamer');
+							generateCheckbox('herstelformulier.home', 'Home');
+							generateCheckbox('herstelformulier.persoon', 'Persoon');
+							generateCheckbox('herstelformulier.status', 'Status');
+							generateCheckbox('herstelformulier.factuurnummer', 'Factuurnummer');
+							
 							
 							echo "<input type='button' id='doorsturen' value='exporteren'/></form>";
 						?>
