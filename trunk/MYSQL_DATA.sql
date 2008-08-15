@@ -100,7 +100,7 @@ INSERT INTO `relatie_herstelformulier_velden` (`herstelformulierId`, `veldId`) V
 (3, 4),
 (2, 4),
 (1, 15),
-(1, 6),
+(1, 7),
 (4, 1);
 
 -- 
