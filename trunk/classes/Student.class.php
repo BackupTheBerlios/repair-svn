@@ -134,7 +134,7 @@ class Student extends User {
 		$l = new LdapRepair();
 		$gegevens = $l->getUserInfo($this->gebruikersnaam);
 		if($gegevens['homeId']=="" || $gegevens['homeId']=="0")//geen homebewoner meer
-			setVerwijderd(1);
+			self::setVerwijderd(1);
 		if($gegevens['homeId']!=$this->homeId) //andere home
 			self::setHome(new Home($gegevens['homeId']));
 		if($gegevens['kamer']!=$this->kamer->getKamernummerLang()) //andere kamer
