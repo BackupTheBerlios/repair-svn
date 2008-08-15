@@ -18,6 +18,7 @@ class Kamer {
 	public function __construct($kamernummerLang) {
 		$this->kamernummerLang = $kamernummerLang;
 		self::calculateHome ();
+		self::calculateTelefoonnummer();
 	}
 	
 	/**
@@ -56,8 +57,17 @@ class Kamer {
 		return $this->kamernummerLang;
 	}
 	
+	private function calculateTelefoonnummer() {
+		$basis = $this->home->getBasisTelefoonnummer();
+		$v = substr($this->kamernummerKort, 0, -2);
+		$basis += $v * $this->home->getKamersPerVerdiep();
+		$v = substr($this->kamernummerKort, -2);
+		$basis += $v;
+		$this->telefoonnummer = $basis;
+	}
+	
 	public function getTelefoonnummer() {
-		return $this->telefoonnummer; //TODO: algoritme om telefoonnummers te berekenen
+		return $this->telefoonnummer;
 	}
 }
 ?>

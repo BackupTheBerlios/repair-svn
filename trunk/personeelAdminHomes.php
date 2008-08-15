@@ -44,6 +44,7 @@
 							$homes = Home::getHomes();
 							foreach($homes as $home){
 								$id = $home->getId();
+								// TODO: aantalKamersPerVerdiep en basisTelefoonnummer toevoegen
 								echo("<tr id='".$id."_'><td>$id</td><td class='edit' id='korteNaam_$id'>".$home->getKorteNaam()."</td><td class='edit' id='langeNaam_$id'>".$home->getLangeNaam()."</td><td class='edit' id='adres_$id'>".$home->getAdres()."</td><td class='edit' id='verdiepen_$id'>".$home->getVerdiepen()."</td><td class='edit' id='kamerPrefix_$id'>".$home->getKamerPrefix()."</td><td class='edit' id='ldapNaam_$id'>".$home->getLdapNaam()."</td><td class='img1'><img src='images/page_edit.gif' /></td><td class='img2'><img src='images/page_delete.gif' /></td></tr>");
 							}
 							echo("<tr><td></td><td class='edit' id='korteNaam'><input type='text'/></td><td class='edit' id='langeNaam'><input type='text'/></td><td class='edit' id='adres'><input type='text'/></td><td class='edit' id='verdiepen'><input class='verdiep' type='text'/></td><td class='edit' id='kamerPrefix'><input class='prefix' type='text'/></td><td class='edit' id='ldapNaam'><input type='text'/></td><td class='img'><img src='images/page_add.gif'/></td><td></td></tr>");

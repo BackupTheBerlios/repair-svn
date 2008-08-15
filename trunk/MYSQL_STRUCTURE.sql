@@ -50,6 +50,8 @@ CREATE TABLE `home` (
   `kamerPrefix` varchar(5) NOT NULL,
   `ldapNaam` varchar(255) NOT NULL,
   `verwijderd` tinyint(1) NOT NULL,
+  `basistelefoonnummer` int(5) NOT NULL,
+  `kamersperverdiep` int(3) NOT NULL,
   PRIMARY KEY  (`id`),
   UNIQUE KEY `korteNaam` (`korteNaam`,`adres`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
