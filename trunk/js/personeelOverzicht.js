@@ -9,11 +9,13 @@ function parse(alle_data){
 	var result="";
 	for(key in data){
 		result += "<tr>";
-		result += "<td><a href='personeelMeldingDoorgeven.php?formid="+data[key]['id']+"'><img src='images/page_edit.gif'/></a></td>";
+		result += "<td><a href='personeelMeldingInformatie.php?formid="+data[key]['id']+"'><img src='images/page_edit.gif'/></a></td>";
 		result += "<td>"+data[key]['id']+"</td>";		
-		result += "<td>"+data[key]['datum']+"</td>";	
+		result += "<td>"+data[key]['datum']+"</td>";
+		result += "<td>"+data[key]['kamer']+"</td>";
+		result += "<td>"+data[key]['home']+"</td>";	
+		result += "<td>"+data[key]['persoon']+"</td>";		
 		result += "<td>"+data[key]['status']+"</td>";	
-		result += "<td>"+data[key]['kamer']+"</td>";	
 		result += "<td>"+data[key]['factuurnummer']+"</td>";
 		result += "</tr>";
 	}
@@ -57,7 +59,7 @@ function doorsturen2(){
 	});
 	var v = $.toJSON(velden);
 	var w = $.toJSON(waarden);
-	$.get("ajax/postPersoneelOverzicht.php", {type:$("table").attr("class"), velden:v, waarden:w, page:pagina}, parse, "json");
+	$.get("ajax/postPersoneelOverzicht.php", {type:$("table").attr("class"), velden:v, waarden:w, page:pagina}, parse);
 }
 
 function update(data){

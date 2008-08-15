@@ -28,10 +28,10 @@
 			<? new Topmenu(); ?>
 			<div id="contenthome">
 				<h1>Overzicht Herstelformulieren</h1>
-				<table>
-						<tr class="tabelheader"><td colspan="6">Herstelformulieren</td></tr>
-						<tr class="legende"><td></td><td>id</td><td>Datum</td><td>Status</td><td>Kamer</td><td>Factuurnummer</td></tr>
-						<tr class="filter"><td></td><td></td><td><input type="text" id="datum"/></td><td><input type="text" id="status"/></td><td><input type="text" id="kamer"/></td><td><input type="text" id="factuurnummer"/></td></tr>
+				<table class="overzicht">
+						<tr class="tabelheader"><td colspan="8">Herstelformulieren</td></tr>
+						<tr class="legende"><td></td><td>id</td><td>Datum</td><td>Kamer</td><td>Home</td><td>Persoon</td><td>Status</td><td>Factuurnummer</td></tr>
+						<tr class="filter"><td></td><td></td><td><input type="text" id="datum"/></td><td><input type="text" id="kamer"/></td><td><input type="text" id="korteNaam"/></td><td><input type="text" id="concat(voornaam, ' ',achternaam)"/></td><td><input type="text" id="status"/></td><td><input type="text" id="factuurnummer"/></td></tr>
 						<tbody id="inhoud"></tbody>
 				</table>
 				<p id="paginering"></p>

@@ -24,11 +24,11 @@
 		$velden = json_decode(stripslashes($_GET["velden"]));
 		$waarden = json_decode(stripslashes($_GET["waarden"]));
 		//query opbouwen
-		$q = "SELECT id FROM herstelformulier WHERE ";
+		$q = "SELECT herstelformulier.id FROM herstelformulier INNER JOIN user ON (herstelformulier.userId=user.id) INNER JOIN home ON (herstelformulier.homeId=home.id)WHERE ";
 		foreach ($waarden as $key =>$value){
-			$q .= $velden[$key]." LIKE '%".$value."%' AND ";
+			$q .= $velden[$key]." LIKE '%".$value."%' AND  ";
 		}
-		$q = substr($q, 0, -5);
+		$q = substr($q, 0, -6);
 	}	
 	$q .= " ORDER BY datum DESC";
 	$_SESSION["query"] = $q;

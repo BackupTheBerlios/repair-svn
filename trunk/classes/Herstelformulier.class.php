@@ -278,10 +278,12 @@ class Herstelformulier {
 	public function toArray(){
 		$lijst = array();
 		$lijst['id'] = $this->id;
-		$lijst['datum'] = $this->datum;
+		$lijst['datum'] = date("Y-m-d",strtotime($this->datum));
 		$lijst['status'] = $this->status->getValue();
 		$lijst['kamer'] = $this->kamer->getKamernummerLang();
 		$lijst['factuurnummer'] = $this->factuurnummer==null?"":$this->factuurnummer;
+		$lijst['persoon'] = $this->getStudent()->getVoornaam()." ".$this->getStudent()->getAchternaam();
+		$lijst['home'] = $this->getHome()->getKorteNaam();
 		return $lijst;
 	}
 	
