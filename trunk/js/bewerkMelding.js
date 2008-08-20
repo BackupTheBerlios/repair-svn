@@ -1,8 +1,11 @@
 function checkVeld(a, checked){
-	if (checked)
+	if (checked) {
 		$("#item_"+a).addClass("selected");
-	else
+		$("#item_"+a).removeClass("DONTPrint");
+	} else {
 		$("#item_"+a).removeClass("selected");
+		$("#item_"+a).addClass("DONTPrint");
+	}
 }
 
 function checkItem(a){

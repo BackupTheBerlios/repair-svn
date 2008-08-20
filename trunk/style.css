@@ -292,3 +292,7 @@ input.pagina{width: 25px;}
 img.page{vertical-align: middle}
 .filter input{width:80px;}
 table.overzicht{width: 800px;}
+@media print {
+  .DONTPrint{ display:none }
+  .DOPrint        { display:table}
+}

@@ -45,7 +45,7 @@
 		<div id="footer"><?=$taal->msg('footer') ?></div>
 		
 		<!--navigatie aan de linkerkant-->
-		<div id="leftnav">
+		<div id="leftnav" class="DONTPrint">
 					
 			<!--linkjes onderaan-->
 			<dl class="facet">

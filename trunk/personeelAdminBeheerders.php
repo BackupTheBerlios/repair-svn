@@ -72,7 +72,7 @@
 		<? new Leftmenu("Beheer", "personeelAdminBeheerders.php"); ?>
 		
 		<!--login aan de rechterkant-->
-		<div id="login-act">
+		<div id="login-act" class="DONTPrint">
 			<?=$auth->getUser()->getGebruikersnaam() ?>&nbsp;-&nbsp;<a href="logout.php" title="uitloggen" >afmelden</a>
 		</div>
 		 

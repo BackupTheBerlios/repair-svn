@@ -86,7 +86,7 @@
 		<div id="footer"><?=$taal->msg('footer') ?></div>
 		
 		<!--navigatie aan de linkerkant-->
-		<div id="leftnav">
+		<div id="leftnav" class="DONTPrint">
 					
 			<!--linkjes onderaan-->
 			<dl class="facet">
@@ -100,7 +100,7 @@
 		</div>
 		
 		<!--login aan de rechterkant-->
-		<div id="login-act">
+		<div id="login-act" class="DONTPrint">
 			<?=$auth->getUser()->getGebruikersnaam() ?>&nbsp;-&nbsp;<a href="logout.php" title="uitloggen" ><?=$taal->msg('afmelden') ?></a>
 		 </div>
 		 

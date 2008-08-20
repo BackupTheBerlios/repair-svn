@@ -92,7 +92,7 @@
 		<div id="footer">&#169; 2008 Bart Mesuere &amp; Bert Vandeghinste in opdracht van de <a href="http://www.ugent.be/nl/voorzieningen/huisvesting">Afdeling Huisvesting</a></div>
 		
 		<!--navigatie aan de linkerkant-->
-		<div id="leftnav">
+		<div id="leftnav" class="DONTPrint">
 					
 			<!--linkjes onderaan-->
 			<dl class="facet">
@@ -107,11 +107,11 @@
 		
 		<!--login aan de rechterkant-->
 		<? if($auth->isLoggedIn()){ ?>
-			<div id="login-act">
+			<div id="login-act" class="DONTPrint">
 			 <?=$auth->getUser()->getGebruikersnaam() ?>&nbsp;-&nbsp;<a href="logout.php" title="uitloggen" >afmelden</a>
 		 	</div>
 		<? } else{ ?>
-			<div id="login">
+			<div id="login" class="DONTPrint">
 				<a href="<?=$auth->getLoginURL() ?>" title="inloggen">aanmelden</a>
 		 	</div>
 		<?} ?>

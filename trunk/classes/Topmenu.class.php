@@ -6,7 +6,7 @@ class Topmenu {
 		$this->type = $type;
 		try {
 			$a = new Auth(false);
-			echo("<div id='mainnav'><ul>");
+			echo("<div id='mainnav' class='DONTPrint'><ul>");
 			if(!$a->isLoggedIn()){//we zijn niet ingelogd
 				echo self::generateMenuItem(Auth::getLoginURL(), "login", "Inloggen", 1);
 				echo self::generateMenuItem("studentMeldingToevoegen.php", "melding", "Defect melden");

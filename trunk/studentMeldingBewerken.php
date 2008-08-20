@@ -82,7 +82,7 @@
 									echo("<tr class='subsubheader klik ".$huidigeLocatie->getValue()."' id='cat_".$huidigeCategorie->getId()."' onclick='showGroup(".$huidigeCategorie->getId().");'><td width='12px' id='collapse_".$huidigeCategorie->getId()."'>+</td><td colspan='3'>".$huidigeCategorie->getNaam()."</td></tr>");
 									echo("<tr class='legende ".$huidigeLocatie->getValue()." ".$huidigeCategorie->getId()."' style='display:none'><td></td><td>Defect</td><td>".$taal->msg('naam')."</td><td></td></tr>");
 								}
-								echo("<tr class='klik ".$huidigeLocatie->getValue()." ".$huidigeCategorie->getId()."' id='item_".$veld->getId()."' onclick='checkItem(".$veld->getId().");' style='display:none'><td></td><td><input id='check_".$veld->getId()."' type='checkbox' name='".$veld->getId()."' onclick='checkItem(".$veld->getId().");'/></td><td>".$veld->getNaam()."<td></tr>");
+								echo("<tr class='klik ".$huidigeLocatie->getValue()." ".$huidigeCategorie->getId()." DONTPrint' id='item_".$veld->getId()."' onclick='checkItem(".$veld->getId().");' style='display:none'><td></td><td><input id='check_".$veld->getId()."' type='checkbox' name='".$veld->getId()."' onclick='checkItem(".$veld->getId().");'/></td><td>".$veld->getNaam()."<td></tr>");
 							}
 						?>
 				</table>
@@ -97,7 +97,7 @@
 		<div id="footer"><?=$taal->msg('footer') ?></div>
 		
 		<!--navigatie aan de linkerkant-->
-		<div id="leftnav">
+		<div id="leftnav" class="DONTPrint">
 					
 			<!--linkjes onderaan-->
 			<dl class="facet">
@@ -112,11 +112,11 @@
 		
 		<!--login aan de rechterkant-->
 		<? if($auth->isLoggedIn()){ ?>
-			<div id="login-act">
+			<div id="login-act" class="DONTPrint">
 			 <?=$auth->getUser()->getGebruikersnaam() ?>&nbsp;-&nbsp;<a href="logout.php" title="uitloggen" ><?=$taal->msg('afmelden') ?></a>
 		 	</div>
 		<? } else{ ?>
-			<div id="login">
+			<div id="login" class="DONTPrint">
 				<a href="<?=$auth->getLoginURL() ?>" title="inloggen"><?=$taal->msg('aanmelden') ?></a>
 		 	</div>
 		<?} ?>

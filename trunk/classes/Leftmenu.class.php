@@ -11,7 +11,7 @@ class Leftmenu {
 		if(!$a->isLoggedIn()) die();//TODO: eventueel de opsplitsing maken tussen personeel en studenten menu
 		$this->huidigePagina = $huidigePagina;
 		$this->type = $type;
-		echo "<div id='leftnav'>
+		echo "<div id='leftnav' class='DONTPrint'>
 			<dl id='nav'>
 				<dt>Herstelformulier</dt>
 				<dd><ul>";

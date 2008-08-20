@@ -44,7 +44,7 @@
 						<?
 							$lijst = $auth->getUser()->getHomesLijst();
 							foreach($lijst as $home)
-								echo "<li><a href='personeelAdmin?homeId=".$home->getId()."'>Home ".$home->getKorteNaam()."</a></li>"
+								echo "<li><a href='personeelAdmin.php?homeId=".$home->getId()."'>Home ".$home->getKorteNaam()."</a></li>"
 						 ?>
 						 </ul>
 						 <p>U kunt ook <a href='personeelAdminBeheerders.php'>beheerders aanmaken</a> en <a href='personeelAdminHomes.php'>homes aanmaken en bewerken</a></p>
@@ -83,7 +83,7 @@
 		<? new Leftmenu("Beheer", "personeelAdmin.php"); ?>
 		
 		<!--login aan de rechterkant-->
-		<div id="login-act">
+		<div id="login-act" class="DONTPrint">
 			<?=$auth->getUser()->getGebruikersnaam() ?>&nbsp;-&nbsp;<a href="logout.php" title="uitloggen" >afmelden</a>
 		</div>
 		 
