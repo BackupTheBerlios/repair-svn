@@ -1,0 +1,42 @@
+/* IE6 Clearfix ( @see http://www.positioniseverything.net/easyclearing.html )*/
+
+.clearfix, .section, #footer, #footer-wrap, #topbar, #user ul, #header, #main, .columns, .facet, .facet ul, .clickthrough, div.newsarticle, .sectiontitle, ul.gts, #utility ul {
+	display: inline-block !important;
+}
+
+/* Give the main nav widths */
+
+#mainnav ul li a {
+	display: inline-block !important;
+	width: 140px;
+}
+
+#mainnav ul li.open a {
+	width: 138px;
+}
+
+#mainnav ul li.open li a {
+	width: 138px;
+}
+
+#mainnav ul li.open li li a {
+	width: 118px;
+}
+
+ul.gts li a, ul.gts li span {
+	display: inline-block;
+	background: transparent;
+}
+
+.facet li a, .facet li span {
+	display: inline-block;
+	word-wrap: break-word;
+}
+
+#search {
+	width: 205px;
+}
+
+#container {
+	overflow-x: hidden;
+}

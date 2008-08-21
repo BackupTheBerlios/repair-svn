@@ -1,0 +1,10 @@
+/**
+ * = IE7 Clearfix
+ * ----------------------------------------------------------
+ * @see http://www.456bereastreet.com/archive/200603/new_clearing_method_needed_for_ie7/
+ */
+
+.clearfix, .section, #footer, #footer-wrap, #topbar, #user ul, #header, #main, .columns, .facet, .facet ul, .clickthrough, div.newsarticle, .sectiontitle, ul.gts, #utility ul {
+	/*height: 1%;*/
+	zoom: 1;
+}

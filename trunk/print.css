@@ -1,0 +1,25 @@
+/*
+-------------------------------------------------------
+Universiteit Gent - Stylesheet for UGent portal
+== print.css ==
+[Print stylesheet for UGent portal]
+Author: Universiteit Gent, Namahn.com
+Layout and css by namahn.com (inspired by layout vanlooveren-gobert.be),  copyright 2005  
+Version: 10 August 2005
+-------------------------------------------------------
+*/
+
+body, html { color: #000; background:#FFFFFF; font-family: "Times New Roman", serif; font-size:12pt;}
+
+/* hide the following divs */
+div#utility,  div#search, div#login, div#login-act, div#breadcrumb, 
+div#mainnav, div#leftnav, div.facet, div#related, div.author,
+div#navigationhome, div#sidebar,div.documentActions,div#language,div#user  { display: none; }
+
+/* deeper level pages */
+
+div#container div#main { width:95% !important; margin-top:80px;background-image:url('images/universiteit_gent.gif');}
+div#container div#main div#content { width:95% !important;}
+h1 {font-family: Verdana, Arial, sans-serif; color: #000;font-size: 16pt; }
+h2 {font-family: Verdana, Arial, sans-serif; color: #000; font-size: 14pt;}
+h3 { color: #000; font-size: 12pt;}
