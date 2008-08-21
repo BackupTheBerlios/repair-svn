@@ -87,12 +87,13 @@
 							$size = sizeof($lijst);
 							if ($size > 0) {
 							?>
-							<tr class="subheader"><td colspan="6">Ongeziene herstellingen</td></tr>
+							<tr class="subheader"><td colspan="5">Ongeziene herstellingen</td></tr>
 							<tbody>
 								<tr class="legende">
 									<td></td>
 									<td>Datum</td>
 									<td>Inhoud</td>
+									<td></td>
 									<td></td>
 								</tr>
 							<?
@@ -103,7 +104,9 @@
 									$parsedDate = date("d-m-Y @ H:i",$timestamp);
 									echo($parsedDate);
 									echo("</td><td>".$form->getSamenvatting()."</td>");
-									echo("<td colspan='2' class='img'><a href='personeelMeldingDoorgeven.php?formid=".$form->getId()."'><img alt='doorgeven' class='bewerk' title='Dit herstelformulier doorgeven' src='images/page_edit.gif'/></a></td></tr>");
+									echo("<td class='img'><a href='personeelMeldingDoorgeven.php?formid=".$form->getId()."'><img alt='Doorgeven Herstelformulier' class='bewerk' title='Dit herstelformulier doorgeven' src='images/page_edit.gif'/></a></td>");
+									echo("<td></td>");
+									echo("</tr>");
 								}
 							 ?>
 							</tbody>
@@ -114,9 +117,9 @@
 							$size = sizeof($lijst);
 							if ($size > 0) {
 	 						?>
-							<tr class="subheader"><td colspan="6">Doorgegeven herstellingen die nog niet afgesloten zijn</td></tr>
+							<tr class="subheader"><td colspan="5">Doorgegeven herstellingen die nog niet afgesloten zijn</td></tr>
 							<tbody>
-								<tr class="legende"><td></td><td>Datum</td><td>Inhoud</td><td></td></tr>
+								<tr class="legende"><td></td><td>Datum</td><td>Inhoud</td><td></td><td></td></tr>
 								<?
 								for($i=0; $i < $size; $i++){
 									$form = $lijst[$i];
@@ -125,7 +128,9 @@
 									$parsedDate = date("d-m-Y @ H:i",$timestamp);
 									echo($parsedDate);
 									echo("</td><td>".$form->getSamenvatting()."</td>");
-									echo("<td colspan='4'></td>");
+									echo("<td></td>");
+									echo("<td class='img'><a href='personeelMeldingInformatie.php?formid=".$form->getId()."'><img alt='Meer Informatie' title='Meer informatie over dit herstelformulier' src='images/externesite.gif'/></a></td>");
+									echo("</tr>");
 								}
 							 ?>
 							</tbody>
