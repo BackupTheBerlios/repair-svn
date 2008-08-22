@@ -1,7 +1,7 @@
 <? 
 	session_start(); 
 	require_once 'classes/Config.class.php';
-	require_once 'LeftMenu.class.php';
+	require_once 'Menu.class.php';
 	require_once 'Header.class.php';
 	require_once 'Footer.class.php';
 	require_once 'Menu.class.php';
@@ -35,6 +35,10 @@
 		<!-- meta (http-equiv) -->
 		<!-- Disable IE6 image toolbar -->
 		<meta http-equiv="imagetoolbar" content="no" />
+		<script type="text/javascript" src="js/jquery/jquery.js"></script>
+		<script type="text/javascript" src="js/jquery/json.js"></script>
+		<script type="text/javascript" src="js/jquery/jquery.getUrlParam.js"></script>
+		<script type="text/javascript" src="js/personeelOverzicht.js"></script>
 	</head>
 	<body>
 		<!--main content-->

@@ -55,6 +55,10 @@
 		<!-- meta (http-equiv) -->
 		<!-- Disable IE6 image toolbar -->
 		<meta http-equiv="imagetoolbar" content="no" />
+		<script type="text/javascript" src="js/jquery/jquery.js"></script>
+		<script type="text/javascript" src="js/jquery/json.js"></script>
+		<script type="text/javascript" src="js/jquery/jquery.getUrlParam.js"></script>
+		<script type="text/javascript" src="js/bewerkMelding.js"></script>
 	</head>
 	<body>
 		<!--main content-->
