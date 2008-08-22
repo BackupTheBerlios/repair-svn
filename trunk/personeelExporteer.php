@@ -5,6 +5,7 @@
 	require_once 'LeftMenu.class.php';
 	require_once 'TopMenu.class.php';
 	require_once 'Header.class.php';
+	require_once 'Footer.class.php';
 	require_once 'DB.class.php';
 	require_once 'Herstelformulier.class.php';
 	require_once 'Auth.class.php';
@@ -68,47 +69,65 @@
 			throw new Exception("Er is niets om te exporteren");
 		?>
 		<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-		"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-		<html xmlns="http://www.w3.org/1999/xhtml">
-			<head>
-				<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-			    <title>Online Herstelformulier</title>
-			    <link rel="stylesheet" type="text/css" href="style.css"/>
-			    <script type="text/javascript" src="js/jquery/jquery.js"></script>
-			    <script type="text/javascript" src="js/jquery/json.js"></script>
-			    <script type="text/javascript" src="js/personeelExporteer.js"></script>
-			</head>
-			<body>	
-				<?new Header(array("#"), array("Exporteren")); ?>	
-				<div id="container">
-					<!--horizontale navigatiebalk bovenaan-->
-					<? new Topmenu(); ?>
-					<div id="contenthome">
-						<h1>Exporteren</h1>	
-						<?
-							echo("<p>U staat op het punt om een lijst van herstelformulieren te exporteren. Selecteer hieronder de velden die u wil exporteren. <a href='#' id='selecteer_alles'>Selecteer alles</a>. </p>");
-							
-							echo "<form method='post' id='formulier'>";
-							echo("<h2>Herstelformulier gegevens</h2>");
-							generateCheckbox('herstelformulier.id', 'Herstelformulier ID');
-							generateCheckbox('herstelformulier.datum', 'Datum');
-							generateCheckbox('herstelformulier.kamer', 'Kamer');
-							generateCheckbox('herstelformulier.home', 'Home');
-							generateCheckbox('herstelformulier.persoon', 'Persoon');
-							generateCheckbox('herstelformulier.status', 'Status');
-							generateCheckbox('herstelformulier.factuurnummer', 'Factuurnummer');
-							
-							
-							echo "<input type='button' id='doorsturen' value='exporteren'/></form>";
-						?>
-					</div>	
-				</div>
-				<!--de footer-->
-				<div id="footer"><?=$taal->msg('footer') ?></div>
-				<? new LeftMenu("overzicht", "personeelExporteer.php") ?>
-			</body>
-		</html>		
-		<?
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+	    <title><?=$taal->msg('titel');?></title>
+	    <style type="text/css" media="all">@import url(reset.css);</style>
+		<style type="text/css" media="all">@import url(screen.css);</style>
+		<style type="text/css" media="print">@import url(print.css);</style>
+		<style type="text/css" media="all">@import url(ploneCustom.css);</style>
+		
+		<!-- Internet Explorer 6 CSS Fixes -->
+		<!--[if IE 6]>
+			        <style type="text/css" media="all">@import url(ie6.css);</style>
+		<![endif]-->
+		
+		<!-- Internet Explorer 7 CSS Fixes -->
+		<!--[if IE 7]>
+			        <style type="text/css" media="all">@import url(ie7.css);</style>
+		<![endif]-->
+		
+		<!-- syndication -->
+		<!-- meta (http-equiv) -->
+		<!-- Disable IE6 image toolbar -->
+		<meta http-equiv="imagetoolbar" content="no" />
+	</head>
+	<body>
+		<!--main content-->
+		<div id="container">
+			<?new Header(array("#"), array("Index")); ?>
+			<div id="main">
+				<!--horizontale navigatiebalk bovenaan-->
+				<?new Menu("Exporteren", "personeelExporteer.php"); ?>
+				<!--de inhoud van de pagina-->
+				<div id="content" class="small">
+					<h1>Exporteren</h1>	
+					<?
+					echo("<p>U staat op het punt om een lijst van herstelformulieren te exporteren. Selecteer hieronder de velden die u wil exporteren. <a href='#' id='selecteer_alles'>Selecteer alles</a>. </p>");
+					
+					echo "<form method='post' id='formulier'>";
+					echo("<h2>Herstelformulier gegevens</h2>");
+					generateCheckbox('herstelformulier.id', 'Herstelformulier ID');
+					generateCheckbox('herstelformulier.datum', 'Datum');
+					generateCheckbox('herstelformulier.kamer', 'Kamer');
+					generateCheckbox('herstelformulier.home', 'Home');
+					generateCheckbox('herstelformulier.persoon', 'Persoon');
+					generateCheckbox('herstelformulier.status', 'Status');
+					generateCheckbox('herstelformulier.factuurnummer', 'Factuurnummer');
+					
+					
+					echo "<input type='button' id='doorsturen' value='exporteren'/></form>";
+					?>
+				</div>	
+			</div>
+		</div>	
+		<div class="visualClear"></div>
+		<? new Footer(); ?>
+	</body>
+</html>		
+	<?
 	}
 	
 	function generateCheckbox($id, $tekst){

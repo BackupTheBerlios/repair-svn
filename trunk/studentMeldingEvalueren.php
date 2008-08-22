@@ -4,8 +4,9 @@
 	require_once 'BadParameterException.class.php';
 	require_once 'AccessException.php';
 	require_once 'Herstelformulier.class.php';
-	require_once 'Topmenu.class.php';
+	require_once 'Menu.class.php';
 	require_once 'Header.class.php';
+	require_once 'Footer.class.php';
 	require_once 'Auth.class.php';
 	$auth = new Auth(true);
 	if(!$auth->getUser()->isStudent())
@@ -18,88 +19,73 @@
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
 	    <title><?=$taal->msg('titel');?></title>
-	    <link rel="stylesheet" type="text/css" href="style.css"/>
-	    <script type="text/javascript" src="js/jquery/jquery.js"></script>
-	    <script type="text/javascript" src="js/evaluatieMelding.js"></script>
+	    <style type="text/css" media="all">@import url(reset.css);</style>
+		<style type="text/css" media="all">@import url(screen.css);</style>
+		<style type="text/css" media="print">@import url(print.css);</style>
+		<style type="text/css" media="all">@import url(ploneCustom.css);</style>
+		
+		<!-- Internet Explorer 6 CSS Fixes -->
+		<!--[if IE 6]>
+			        <style type="text/css" media="all">@import url(ie6.css);</style>
+		<![endif]-->
+		
+		<!-- Internet Explorer 7 CSS Fixes -->
+		<!--[if IE 7]>
+			        <style type="text/css" media="all">@import url(ie7.css);</style>
+		<![endif]-->
+		
+		<!-- syndication -->
+		<!-- meta (http-equiv) -->
+		<!-- Disable IE6 image toolbar -->
+		<meta http-equiv="imagetoolbar" content="no" />
 	</head>
 	<body>
-		<?new Header(array("#"), array("Melding evalueren")); ?>
-		
 		<!--main content-->
 		<div id="container">
-		
-			<!--horizontale navigatiebalk bovenaan-->
-			<?new Topmenu(); ?>
-			
-			<!--de inhoud van de pagina-->
-			<div id="contenthome">
-				<div id="success" style="display:none"><?=$taal->msg('succes_melding_bewerkt') ?></div>
-				<div id="error" style="display:none"><h1><?=$taal->msg('fout')?></h1><?=$taal->msg('error_melding_evalueren') ?></div>
-				<div id="opmerkingvertaling" style="display:none"><?=$taal->msg('opmerking') ?></div>
-				<div id='beforecontent'>
-					<? 
-					if($auth->isLoggedIn()) { 
-						if($auth->getUser()->isStudent()) {
-								// Toon listing van alle formulieren die als "gedaan" gemarkeerd zijn en die geevalueerd moeten worden
-								$list = Herstelformulier::getEvaluationList($auth->getUser()->getId());
-								?>
-								<table>
-									<tr class="tableheader">
-										<td colspan="4"><?=$taal->msg('disclaimer_evaluatie_melding');?></td>
-									</tr>
-									<tbody>
-										<tr class="legende">
-											<td><?=$taal->msg('datum');?></td>
-											<td><?=$taal->msg('inhoud');?></td>
-											<td colspan="2"></td>
+			<?new Header(array("#"), array("Index")); ?>
+			<div id="main">
+				<!--horizontale navigatiebalk bovenaan-->
+				<?new Menu("Melding", "studentMeldingEvalueren.php"); ?>
+				<!--de inhoud van de pagina-->
+				<div id="content" class="small">
+					<div id="success" style="display:none"><?=$taal->msg('succes_melding_bewerkt') ?></div>
+					<div id="error" style="display:none"><h1><?=$taal->msg('fout')?></h1><?=$taal->msg('error_melding_evalueren') ?></div>
+					<div id="opmerkingvertaling" style="display:none"><?=$taal->msg('opmerking') ?></div>
+					<div id='beforecontent'>
+						<? 
+						if($auth->isLoggedIn()) { 
+							if($auth->getUser()->isStudent()) {
+									// Toon listing van alle formulieren die als "gedaan" gemarkeerd zijn en die geevalueerd moeten worden
+									$list = Herstelformulier::getEvaluationList($auth->getUser()->getId());
+									?>
+									<table>
+										<tr class="tableheader">
+											<td colspan="4"><?=$taal->msg('disclaimer_evaluatie_melding');?></td>
 										</tr>
-										<?
-										foreach ($list as $formulier) {
+										<tbody>
+											<tr class="legende">
+												<td><?=$taal->msg('datum');?></td>
+												<td><?=$taal->msg('inhoud');?></td>
+												<td colspan="2"></td>
+											</tr>
+											<?
+											foreach ($list as $formulier) {
+												?>
+													<tr id="row_<?=$formulier->getId();?>"><td><?=$formulier->getDatum();?></td><td><?=$formulier->getSamenvatting();?></td><td class="img klik"><img alt="doorgeven" class="bewerk" title="Dit herstelformulier positief evalueren" src="images/icon_accept.gif" onclick="evalueerPositief('<?=$formulier->getId();?>');"/></td><td class="img klik"><img alt="doorgeven" class="bewerk" title="Dit herstelformulier negatief evalueren" src="images/action_stop.gif" onclick="evalueerNegatief('<?=$formulier->getId();?>');"/></td></tr>
+													<?
+											}
 											?>
-												<tr id="row_<?=$formulier->getId();?>"><td><?=$formulier->getDatum();?></td><td><?=$formulier->getSamenvatting();?></td><td class="img klik"><img alt="doorgeven" class="bewerk" title="Dit herstelformulier positief evalueren" src="images/icon_accept.gif" onclick="evalueerPositief('<?=$formulier->getId();?>');"/></td><td class="img klik"><img alt="doorgeven" class="bewerk" title="Dit herstelformulier negatief evalueren" src="images/action_stop.gif" onclick="evalueerNegatief('<?=$formulier->getId();?>');"/></td></tr>
-												<?
-										}
-										?>
-									</tbody>
-								</table>
-								<?
-						} else throw new AccessException("only students can evaluate repairforms");
-					} else throw new AccessException("you have to be logged in");
-					?>
-				</div>
+										</tbody>
+									</table>
+									<?
+							} else throw new AccessException("only students can evaluate repairforms");
+						} else throw new AccessException("you have to be logged in");
+						?>
+					</div>
+				</div>	
 			</div>	
-		</div>		
-		
-		<!--de footer-->
-		<div id="footer"><?=$taal->msg('footer');?></div>
-		
-		<!--navigatie aan de linkerkant-->
-		<div id="leftnav" class="DONTPrint">
-					
-			<!--linkjes onderaan-->
-			<dl class="facet">
-				<dt><?=$taal->msg('handige_links');?></dt>
-				<dd><ul>
-					<li><a href="http://helpdesk.ugent.be">&#187; Helpdesk</a></li>
-					<li><a href="http://www.ugent.be/nl/voorzieningen/huisvesting">&#187; Huisvesting</a></li>
-					<li><a href="https://minerva.ugent.be/">&#187; Minerva</a></li>
-				</ul></dd>
-			</dl>				
-		</div>
-		
-		<!--login aan de rechterkant-->
-		<? if($auth->isLoggedIn()){ ?>
-			<div id="login-act" class="DONTPrint">
-			 <?=$auth->getUser()->getGebruikersnaam() ?>&nbsp;-&nbsp;<a href="logout.php" title="uitloggen" ><?=$taal->msg('afmelden');?></a>
-		 	</div>
-		<? } else{ ?>
-			<div id="login" class="DONTPrint">
-				<a href="<?=$auth->getLoginURL() ?>" title="inloggen"><?=$taal->msg('aanmelden');?></a>
-		 	</div>
-		<?} ?>
-		 
-		 
-		
-		<div id="topanchor"><a name="top" id="top">&nbsp;</a></div>		
+		</div>	
+		<div class="visualClear"></div>
+		<? new Footer(); ?>	
 	</body>
 </html>

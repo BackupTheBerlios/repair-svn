@@ -4,9 +4,12 @@
 	require_once 'BadParameterException.class.php';
 	require_once 'AccessException.php';
 	require_once 'Herstelformulier.class.php';
-	require_once 'Topmenu.class.php';
+	require_once 'Menu.class.php';
 	require_once 'Header.class.php';
+	require_once 'Footer.class.php';
 	require_once 'Auth.class.php';
+	require_once 'Taal.class.php';
+	$taal = new Taal();
 	$auth = new Auth(false);
 	if(!$auth->getUser()->isPersoneel())
 		throw new AccessException();
@@ -17,107 +20,92 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-	    <title>Online Herstelformulier</title>
-	    <link rel="stylesheet" type="text/css" href="style.css"/>
-	    <script type="text/javascript" src="js/jquery/jquery.js"></script>
-	    <script type="text/javascript" src="js/doorgevenMelding.js"></script>
+	    <title><?=$taal->msg('titel');?></title>
+	    <style type="text/css" media="all">@import url(reset.css);</style>
+		<style type="text/css" media="all">@import url(screen.css);</style>
+		<style type="text/css" media="print">@import url(print.css);</style>
+		<style type="text/css" media="all">@import url(ploneCustom.css);</style>
+		
+		<!-- Internet Explorer 6 CSS Fixes -->
+		<!--[if IE 6]>
+			        <style type="text/css" media="all">@import url(ie6.css);</style>
+		<![endif]-->
+		
+		<!-- Internet Explorer 7 CSS Fixes -->
+		<!--[if IE 7]>
+			        <style type="text/css" media="all">@import url(ie7.css);</style>
+		<![endif]-->
+		
+		<!-- syndication -->
+		<!-- meta (http-equiv) -->
+		<!-- Disable IE6 image toolbar -->
+		<meta http-equiv="imagetoolbar" content="no" />
 	</head>
 	<body>
-		<?new Header(array("#"), array("Melding Doorgeven")); ?>
-		
 		<!--main content-->
 		<div id="container">
-		
-			<!--horizontale navigatiebalk bovenaan-->
-			<? new Topmenu(); ?>
-			
-			<!--de inhoud van de pagina-->
-			<div id="contenthome">
-				<div id='beforecontent'>
-					<?
-					$formid = $_GET['formid'];
-					if (!is_numeric($formid) || $formid < 1) throw new BadParameterException("Formid werd foutief gebruikt");
-					$formulier = new Herstelformulier($formid);
-					?>
-					<div id='tabel'>
-						<table>
-						<tr class="tabelheader"><td colspan="4">Melding</td></tr>
-						<tr class="legende">
-							<td>Datum ingave</td>
-							<td>Student</td>
-							<td>Kamer</td>
-							<td>Telefoon</td>
-						</tr>
-						<tr>
-							<td><?=$formulier->getDatum();?></td>
-							<td><?=$formulier->getStudent()->getAchternaam()." ".$formulier->getStudent()->getVoornaam();?></td>
-							<td>Home <?=$formulier->getKamer()->getHome()->getKorteNaam();?> kamer <?=$formulier->getKamer()->getKamernummerKort();?></td>
-							<td><?=$formulier->getKamer()->getTelefoonnummer();?></td>
-						</tr>
-						<tr><td colspan="4"class="unityheader">Gemelde defecten:</td></tr>
+			<?new Header(array("#"), array("Index")); ?>
+			<div id="main">
+				<!--horizontale navigatiebalk bovenaan-->
+				<?new Menu("", "personeelMeldingDoorgeven.php"); ?>
+				<!--de inhoud van de pagina-->
+				<div id="content" class="small">
+					<div id='beforecontent'>
 						<?
-						foreach ($formulier->getVeldenlijst() as $veldid) {
-							$veld = new Veld($veldid);
-							?>
-							<tr class="unity">
-								<td></td>
-								<td><? 
-									if($veld->getCategorie()->getLocatie()->getValue()=="Kot") 
-										echo "Kamer ".$formulier->getKamer()->getKamernummerKort();
-									else if($veld->getCategorie()->getLocatie()->getValue()=="Verdiep") 
-										echo $veld->getCategorie()->getNaamNL()." ".$formulier->getKamer()->getVerdiep()."e";
-									else
-										echo $veld->getCategorie()->getNaamNL() ; 
-								?></td>
-								<td colspan="2"><?=$veld->getNaamNL();?></td>
-							</tr>
-							<?
-						}
+						$formid = $_GET['formid'];
+						if (!is_numeric($formid) || $formid < 1) throw new BadParameterException("Formid werd foutief gebruikt");
+						$formulier = new Herstelformulier($formid);
 						?>
-						<tr>
-							<td>Opmerking:</td>
-							<td colspan="3"><?=$formulier->getOpmerking();?></td>
-						</tr>
-						<tr id="submitrow">
-							<td colspan="3"></td>
-							<td><button name="submit" id="submit" type="submit" onclick="geefDoor('<?=$formid;?>', 0);">Doorgegeven</button></td>
-						</tr>
-						</table>
+						<div id='tabel'>
+							<table>
+							<tr class="tabelheader"><td colspan="4">Melding</td></tr>
+							<tr class="legende">
+								<td>Datum ingave</td>
+								<td>Student</td>
+								<td>Kamer</td>
+								<td>Telefoon</td>
+							</tr>
+							<tr>
+								<td><?=$formulier->getDatum();?></td>
+								<td><?=$formulier->getStudent()->getAchternaam()." ".$formulier->getStudent()->getVoornaam();?></td>
+								<td>Home <?=$formulier->getKamer()->getHome()->getKorteNaam();?> kamer <?=$formulier->getKamer()->getKamernummerKort();?></td>
+								<td><?=$formulier->getKamer()->getTelefoonnummer();?></td>
+							</tr>
+							<tr><td colspan="4"class="unityheader">Gemelde defecten:</td></tr>
+							<?
+							foreach ($formulier->getVeldenlijst() as $veldid) {
+								$veld = new Veld($veldid);
+								?>
+								<tr class="unity">
+									<td></td>
+									<td><? 
+										if($veld->getCategorie()->getLocatie()->getValue()=="Kot") 
+											echo "Kamer ".$formulier->getKamer()->getKamernummerKort();
+										else if($veld->getCategorie()->getLocatie()->getValue()=="Verdiep") 
+											echo $veld->getCategorie()->getNaamNL()." ".$formulier->getKamer()->getVerdiep()."e";
+										else
+											echo $veld->getCategorie()->getNaamNL() ; 
+									?></td>
+									<td colspan="2"><?=$veld->getNaamNL();?></td>
+								</tr>
+								<?
+							}
+							?>
+							<tr>
+								<td>Opmerking:</td>
+								<td colspan="3"><?=$formulier->getOpmerking();?></td>
+							</tr>
+							<tr id="submitrow">
+								<td colspan="3"></td>
+								<td><button name="submit" id="submit" type="submit" onclick="geefDoor('<?=$formid;?>', 0);">Doorgegeven</button></td>
+							</tr>
+							</table>
+						</div>
 					</div>
-				</div>
+				</div>		
 			</div>		
-		</div>		
-		
-		<!--de footer-->
-		<div id="footer">&#169; 2008 Bart Mesuere &amp; Bert Vandeghinste in opdracht van de <a href="http://www.ugent.be/nl/voorzieningen/huisvesting">Afdeling Huisvesting</a></div>
-		
-		<!--navigatie aan de linkerkant-->
-		<div id="leftnav" class="DONTPrint">
-					
-			<!--linkjes onderaan-->
-			<dl class="facet">
-				<dt>Handige links</dt>
-				<dd><ul>
-					<li><a href="http://helpdesk.ugent.be">&#187; Helpdesk</a></li>
-					<li><a href="http://www.ugent.be/nl/voorzieningen/huisvesting">&#187; Huisvesting</a></li>
-					<li><a href="https://minerva.ugent.be/">&#187; Minerva</a></li>
-				</ul></dd>
-			</dl>				
-		</div>
-		
-		<!--login aan de rechterkant-->
-		<? if($auth->isLoggedIn()){ ?>
-			<div id="login-act" class="DONTPrint">
-			 <?=$auth->getUser()->getGebruikersnaam() ?>&nbsp;-&nbsp;<a href="logout.php" title="uitloggen" >afmelden</a>
-		 	</div>
-		<? } else{ ?>
-			<div id="login" class="DONTPrint">
-				<a href="<?=$auth->getLoginURL() ?>" title="inloggen">aanmelden</a>
-		 	</div>
-		<?} ?>
-		 
-		 
-		
-		<div id="topanchor"><a name="top" id="top">&nbsp;</a></div>		
+		</div>	
+		<div class="visualClear"></div>
+		<? new Footer(); ?>	
 	</body>
 </html>
