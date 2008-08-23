@@ -56,7 +56,7 @@
 					<? if($auth->getUser()->isStudent()){ ?>
 					<div>
 						<h1><?=$taal->msg('overzicht') ?></h1>
-						<p><? printf($taal->msg('welkom_overzicht_naam'), $auth->getUser()->getVoornaam()); ?></p>
+						<p align="justify"><? printf($taal->msg('welkom_overzicht_naam'), $auth->getUser()->getVoornaam()); ?></p>
 						<table>
 							<tr class="tabelheader"><td colspan="6"><?=$taal->msg('overzicht_herstellingen') ?></td></tr>
 							<?

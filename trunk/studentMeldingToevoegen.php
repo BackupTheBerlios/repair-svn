@@ -60,7 +60,7 @@
 					<div id="error" style="display:none"><h1><?=$taal->msg('fout')?></h1><?=$taal->msg('error_melding_toevoegen') ?></div>
 					<div id="beforecontent">
 					<h1><?=$taal->msg('herstelformulier_nieuw') ?></h1>
-					<p><?=$taal->msg('herstelformulier_nieuw_disclaimer') ?></p>
+					<p align="justify"><?=$taal->msg('herstelformulier_nieuw_disclaimer') ?></p>
 					<?
 					$user = NULL;
 					$currentHome = NULL;
