@@ -38,6 +38,9 @@
 		<!-- meta (http-equiv) -->
 		<!-- Disable IE6 image toolbar -->
 		<meta http-equiv="imagetoolbar" content="no" />
+		
+		<script type="text/javascript" src="js/jquery/jquery.js"></script>
+		<script type="text/javascript" src="js/studentOverzicht.js"></script>
 	</head>
 	<body>
 		<!--main content-->
@@ -47,6 +50,7 @@
 				<!--horizontale navigatiebalk bovenaan-->
 				<?new Menu("Overzicht", "studentOverzicht.php"); ?>
 				<!--de inhoud van de pagina-->
+				<div id="verwijderconfirm" style="display:none"><?=$taal->msg('confirm_verwijder') ?></div>
 				<div id="content" class="small">
 				
 					<? if($auth->getUser()->isStudent()){ ?>

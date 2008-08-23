@@ -23,3 +23,9 @@ div#container div#main div#content { width:95% !important;}
 h1 {font-family: Verdana, Arial, sans-serif; color: #000;font-size: 16pt; }
 h2 {font-family: Verdana, Arial, sans-serif; color: #000; font-size: 14pt;}
 h3 { color: #000; font-size: 12pt;}
+
+/* zelf toegevoegde brol */
+@media print {
+  .DONTPrint{ display:none }
+  .DOPrint        { display:table}
+}
