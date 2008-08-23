@@ -2,17 +2,19 @@
 	session_start();
 	require_once 'classes/Config.class.php';
 	require_once 'AccessException.php';
-	require_once 'LeftMenu.class.php';
-	require_once 'TopMenu.class.php';
 	require_once 'Header.class.php';
 	require_once 'Footer.class.php';
 	require_once 'DB.class.php';
 	require_once 'Herstelformulier.class.php';
 	require_once 'Auth.class.php';
 	require_once 'Taal.class.php';
+	require_once 'Menu.class.php';
+	
 	$auth = new Auth(false);
 	$taal = new Taal();
-	if(!$auth->isLoggedIn() || !$auth->getUser()->isPersoneel()) throw new AccessException();
+	if(!$auth->isLoggedIn() || !$auth->getUser()->isPersoneel()) 
+		throw new AccessException();
+		
 	if($_POST['waarden']!=""){
 		$waarden = explode(";", $_POST['waarden']);
 		$export = array();
@@ -106,7 +108,7 @@
 				<!--horizontale navigatiebalk bovenaan-->
 				<?new Menu("Exporteren", "personeelExporteer.php"); ?>
 				<!--de inhoud van de pagina-->
-				<div id="content" class="small">
+				<div id="content" class="normal">
 					<h1>Exporteren</h1>	
 					<?
 					echo("<p>U staat op het punt om een lijst van herstelformulieren te exporteren. Selecteer hieronder de velden die u wil exporteren. <a href='#' id='selecteer_alles'>Selecteer alles</a>. </p>");

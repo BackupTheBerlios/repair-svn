@@ -1304,9 +1304,12 @@ checkbox, select, option, radio{
 table tr.selected td { background-color: #fdb812; }/*#FFCC00*/
 table tr.deleted td { background-color: #cccccc; }
 
-input.verdiep{width:40px;}
+input.verdiep{width:20px;}
 input.prefix{width:40px;}
 input.pagina{width: 25px;}
+input.adres{width: 140px;}
+input.naam{width: 110px;}
 img.page{vertical-align: middle}
 .filter input{width:80px;}
-table.overzicht{width: 800px;}
+/*table.overzicht{width: 800px;}
+*/

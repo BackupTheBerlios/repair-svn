@@ -54,7 +54,7 @@
 				<!--horizontale navigatiebalk bovenaan-->
 				<?new Menu("Beheer", "personeelAdmin.php"); ?>
 				<!--de inhoud van de pagina-->
-				<div id="content" class="small">
+				<div id="content" class="normal">
 					<div>
 						<h1>Beheer</h1>
 						<?if($_GET['homeId']=="") {?>
@@ -70,7 +70,7 @@
 						else{ 
 							$currentHome = new Home($_GET['homeId']);	
 							$locaties = Locatie::getAllValues();
-							echo("<p>Hieronder kunt u het herstelformulier van Home ".$currentHome->getKorteNaam()." aanpassen.</p>");
+							echo("<p align='justify'>Hieronder kunt u het herstelformulier van Home ".$currentHome->getKorteNaam()." aanpassen. Klik op het <img src='images/page_edit.gif'/>-icoon om een veld op het herstelformulier aan te passen, klik op het <img src='images/page_delete.gif'/>-icoon om een veld van dit herstelformulier te verwijderen. Onderaan heeft u ook telkens de mogelijkheid om een nieuw veld toe te voegen en toe te kennen aan een categorie.</p>");
 							?>
 							<table>
 								<tr class="tabelheader"><td colspan="5">Herstelformulier <?=$currentHome->getKorteNaam(); ?></td></tr>

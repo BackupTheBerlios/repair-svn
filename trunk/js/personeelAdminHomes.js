@@ -11,7 +11,16 @@ function bewerk(){
 	//tekst velden omzetten
 	rij.find(".edit").each(function(){
 		var waarde = $(this).html();
-		$(this).html("<input type='hidden' value='"+waarde+"'/><input type='text' value='"+waarde+"'/>");
+		var klasse = "";
+		if ($(this).hasClass('verdiep'))
+			klasse = "verdiep";
+		else if ($(this).hasClass('prefix'))
+			klasse = "prefix";
+		else if ($(this).hasClass('adres'))
+			klasse = "adres";
+		else
+			klasse = "naam";
+		$(this).html("<input type='hidden' value='"+waarde+"'/><input class='"+klasse+"' type='text' value='"+waarde+"'/>");
 	});
 	
 	rij.find(".img1").each(setOK);

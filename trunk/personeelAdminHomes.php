@@ -51,10 +51,10 @@
 				<!--horizontale navigatiebalk bovenaan-->
 				<?new Menu("Beheer", "personeelAdminHomes.php"); ?>
 				<!--de inhoud van de pagina-->
-				<div id="content" class="small">
+				<div id="content" class="normal">
 					<div>
 						<h1>Beheer Homes</h1>
-						<p>Hier kunt u homes toevoegen en bewerken.</p>
+						<p align="justify">Hier kunt u homes toevoegen en bewerken. Klik op het <img src="images/page_edit.gif"/>-icoon om een bestaande Home aan te passen, klik op het <img src="images/page_delete.gif"/>-icoon om een bestaande Home te verwijderen. Onderaan heeft u ook de mogelijkheid om een nieuwe Home toe te voegen.</p>
 						<table>
 							<tr class="tabelheader"><td colspan="9">Beheer Homes</td></tr>
 							<tr class="legende"><td>id</td><td>Korte naam</td><td>Lange naam</td><td>Adres</td><td>Verdiepen</td><td>Kamer prefix</td><td>LDAP naam</td><td></td><td></td></tr>
@@ -63,9 +63,9 @@
 								foreach($homes as $home){
 									$id = $home->getId();
 									// TODO: aantalKamersPerVerdiep en basisTelefoonnummer toevoegen
-									echo("<tr id='".$id."_'><td>$id</td><td class='edit' id='korteNaam_$id'>".$home->getKorteNaam()."</td><td class='edit' id='langeNaam_$id'>".$home->getLangeNaam()."</td><td class='edit' id='adres_$id'>".$home->getAdres()."</td><td class='edit' id='verdiepen_$id'>".$home->getVerdiepen()."</td><td class='edit' id='kamerPrefix_$id'>".$home->getKamerPrefix()."</td><td class='edit' id='ldapNaam_$id'>".$home->getLdapNaam()."</td><td class='img1'><img src='images/page_edit.gif' /></td><td class='img2'><img src='images/page_delete.gif' /></td></tr>");
+									echo("<tr id='".$id."_'><td>$id</td><td class='edit' id='korteNaam_$id'>".$home->getKorteNaam()."</td><td class='edit' id='langeNaam_$id'>".$home->getLangeNaam()."</td><td class='edit adres' id='adres_$id'>".$home->getAdres()."</td><td class='edit verdiep' id='verdiepen_$id'>".$home->getVerdiepen()."</td><td class='edit prefix' id='kamerPrefix_$id'>".$home->getKamerPrefix()."</td><td class='edit' id='ldapNaam_$id'>".$home->getLdapNaam()."</td><td class='img1'><img src='images/page_edit.gif' /></td><td class='img2'><img src='images/page_delete.gif' /></td></tr>");
 								}
-								echo("<tr><td></td><td class='edit' id='korteNaam'><input type='text'/></td><td class='edit' id='langeNaam'><input type='text'/></td><td class='edit' id='adres'><input type='text'/></td><td class='edit' id='verdiepen'><input class='verdiep' type='text'/></td><td class='edit' id='kamerPrefix'><input class='prefix' type='text'/></td><td class='edit' id='ldapNaam'><input type='text'/></td><td class='img'><img src='images/page_add.gif'/></td><td></td></tr>");
+								echo("<tr><td></td><td class='edit' id='korteNaam'><input class='naam' type='text'/></td><td class='edit' id='langeNaam'><input class='naam' type='text'/></td><td class='edit' id='adres'><input class='adres' type='text'/></td><td class='edit' id='verdiepen'><input class='verdiep' type='text'/></td><td class='edit' id='kamerPrefix'><input class='prefix' type='text'/></td><td class='edit' id='ldapNaam'><input class='naam' type='text'/></td><td class='img'><img src='images/page_add.gif'/></td><td></td></tr>");
 							?>
 						</table>
 					</div>

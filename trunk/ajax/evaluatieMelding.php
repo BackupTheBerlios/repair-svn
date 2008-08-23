@@ -7,7 +7,7 @@
 	require_once("Status.class.php");
 	require_once 'Auth.class.php';
 	$auth = new Auth(false);
-	if (!$auth->isLoggedIn() || !$auth->getUser()->isStudent()) 
+	if (!$auth->isLoggedIn()) 
 		throw new AccessException();
 	
 	$formid = $_POST['formid'];

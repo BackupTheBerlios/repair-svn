@@ -53,7 +53,7 @@
 				<!--horizontale navigatiebalk bovenaan-->
 				<?new Menu("", "personeelMeldingDoorgeven.php"); ?>
 				<!--de inhoud van de pagina-->
-				<div id="content" class="small">
+				<div id="content" class="normal">
 					<div id='beforecontent'>
 						<?
 						$formid = $_GET['formid'];

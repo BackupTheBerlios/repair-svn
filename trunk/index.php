@@ -97,6 +97,7 @@
 						<?}
 						else{//personeel?>
 							<h1>Welkom <?=$auth->getUser()->getVoornaam() ?></h1>
+							<p align="justify">Hier ziet u eerst en vooral de herstellingen die u nog niet doorgegeven heeft. Klik op het <img src="images/page_edit.gif"/>-icoontje om het herstelformulier te bekijken, en het eventueel door te geven. Helemaal onderaan vindt u de herstellingen die al doorgegeven zijn, maar die nog niet ge&#235valueerd werden door de student. Indien nodig voor het type probleem, kan u die evaluatie zelf doen via het <img src="images/externesite.gif"/>-icoontje.</p>
 							<table>
 								<tr class="tabelheader"><td colspan="6">Overzicht van herstellingen die niet afgewerkt zijn</td></tr>
 								<?

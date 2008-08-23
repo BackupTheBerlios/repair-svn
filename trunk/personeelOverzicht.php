@@ -48,8 +48,9 @@
 				<!--horizontale navigatiebalk bovenaan-->
 				<?new Menu("Overzicht", "personeelOverzicht.php"); ?>
 				<!--de inhoud van de pagina-->
-				<div id="content" class="small">
+				<div id="content" class="normal">
 					<h1>Overzicht Herstelformulieren</h1>
+					<p align="justify">Hier kunt u alle herstelformulieren opvragen, ook diegene die al afgehandeld zijn. Door in een veld bovenaan te typen, kan u filteren in de resultatenlijst.</p>
 					<table class="overzicht">
 							<tr class="tabelheader"><td colspan="8">Herstelformulieren</td></tr>
 							<tr class="legende"><td></td><td>id</td><td>Datum</td><td>Kamer</td><td>Home</td><td>Persoon</td><td>Status</td><td>Factuurnummer</td></tr>

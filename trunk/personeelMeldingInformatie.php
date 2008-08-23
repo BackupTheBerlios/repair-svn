@@ -40,6 +40,9 @@
 		<!-- meta (http-equiv) -->
 		<!-- Disable IE6 image toolbar -->
 		<meta http-equiv="imagetoolbar" content="no" />
+		
+		<script type="text/javascript" src="js/jquery/jquery.js"></script>
+		<script type="text/javascript" src="js/personeelMeldingInformatie.js"></script>
 	</head>
 	<body>
 		<!--main content-->
@@ -49,10 +52,13 @@
 				<!--horizontale navigatiebalk bovenaan-->
 				<?new Menu("Overzicht", "personeelMeldingInformatie.php"); ?>
 				<!--de inhoud van de pagina-->
-				<div id="content" class="small">
+				<div id="content" class="normal">
+					<div id="success" style="display:none"><h1>Succes</h1><p>Dit herstelformulier werd als hersteld ge&#235valueerd. Klik <a href="personeelOverzicht.php">hier</a> om terug te gaan naar het overzicht.</p></div>
+					<div id="negatiefsuccess" style="display:none"><h1>Succes</h1><p>Dit herstelformulier werd als niet-hersteld ge&#235valueerd. Klik <a href="personeelOverzicht.php">hier</a> om terug te gaan naar het overzicht.</p></div>
+					<div id="error" style="display:none"><h1>Fout</h1><p>Er is een fout opgetreden bij het evalueren van dit herstelformulier, probeer het later opnieuw.</p></div>
 					<div id='beforecontent'>
 						<h1>Meer informatie</h1>
-						<p>Hier ziet u meer informatie over het geselecteerde herstelformulier, met bijhorende informatie over dezelfde student en/of dezelfde kamer</p>
+						<p align="justify">Hier vindt u meer informatie over het geselecteerde herstelformulier, met bijhorende informatie over dezelfde student en/of dezelfde kamer. Indien er nog acties beschikbaar zijn voor het herstelformulier wordt dit aangegeven door &#233&#233n of meerdere icoontjes: het doorgeven-icoontje (<img src="images/page_edit.gif"/>), positief-evalueren-icoontje (<img src="images/icon_accept.gif"/>) en het negatief-evalueren-icoontje (<img src="images/action_stop.gif"/>). Indien er geen acties zichtbaar zijn, is dit herstelformulier afgewerkt.</p>
 						<?
 						$formid = $_GET['formid'];
 						if (!is_numeric($formid) || $formid < 1) throw new BadParameterException("Formid werd foutief gebruikt");
@@ -73,7 +79,7 @@
 								<td>Home <?=$formulier->getKamer()->getHome()->getKorteNaam();?> kamer <?=$formulier->getKamer()->getKamernummerKort();?></td>
 								<td><?=$formulier->getKamer()->getTelefoonnummer();?></td>
 							</tr>
-							<tr><td colspan="4"class="unityheader">Gemelde defecten:</td></tr>
+							<tr><td colspan="4" class="unityheader">Gemelde defecten:</td></tr>
 							<?
 							foreach ($formulier->getVeldenlijst() as $veldid) {
 								$veld = new Veld($veldid);
@@ -94,9 +100,41 @@
 							}
 							?>
 							<tr>
-								<td>Opmerking:</td>
+								<td>Opmerking door student:</td>
 								<td colspan="3"><?=$formulier->getOpmerking();?></td>
 							</tr>
+							<?
+							if ($formulier->getStatus()->getValue() == "ongezien" || $formulier->getStatus()->getValue() == "gedaan") {
+							?>
+							<tr id="acties">
+								<td colspan="3"><p align="right">Meer acties:</p></td>
+								<td><a href='personeelMeldingDoorgeven.php?formid=<?=$formulier->getId()?>'>
+								<?
+								if ($formulier->getStatus()->getValue() == "ongezien") {
+								?>
+								<img class="klik" src="images/page_edit.gif" alt="Dit herstelformulier doorgeven" title="Dit herstelformulier doorgeven"/></a>&nbsp;&nbsp;
+								<? 
+								} 
+								if ($formulier->getStatus()->getValue() == "gedaan") {
+								?>
+								<img class="klik" src="images/icon_accept.gif" alt="Dit herstelformulier positief evalueren" title="Dit herstelformulier positief evalueren" onclick="evalueerPositief('<?=$formulier->getId();?>');"/>&nbsp;&nbsp;<img class="klik" src="images/action_stop.gif" alt="Dit herstelformulier negatief evalueren" title="Dit herstelformulier negatief evalueren" onclick="evalueerNegatief('<?=$formulier->getId() ?>');"/>
+								<?
+								}
+								?>
+								</td>
+							</tr>
+							<tr id="new_row" style="display:none">
+								<td>Aangepaste opmerking:</td>
+								<td colspan="2"><textarea name="opmerking" cols="50" rows="8"><?=$formulier->getOpmerking() ?></textarea></td>
+								<td><img alt="doorgeven" class="bewerk klik" title="Deze opmerking doorsturen" src="images/icon_accept.gif" onclick="zendOpmerking('<?=$formulier->getId()?>');"/></td>
+							</tr>
+							<? 
+							} else {
+							?>
+							<tr id="acties">
+								<td colspan="4"><p align="right">Dit herstelformulier is afgewerkt.</td>
+							</tr>
+							<? } ?>
 							</table>
 						</div>
 						<?

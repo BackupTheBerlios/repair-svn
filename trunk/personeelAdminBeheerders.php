@@ -52,10 +52,10 @@
 				<!--horizontale navigatiebalk bovenaan-->
 				<?new Menu("Beheer", "personeeladminBeheerders.php"); ?>
 				<!--de inhoud van de pagina-->
-				<div id="content" class="small">
+				<div id="content" class="normal">
 					<div>
 						<h1>Beheer Personeel</h1>
-						<p>Hier kunt u personeelsleden toevoegen en bewerken.</p>
+						<p align="justify">Hier kunt u personeelsleden toevoegen en bewerken. Klik op het <img src="images/page_edit.gif"/>-icoon om de rechten van een beheerder aan te passen, klik op het <img src="images/page_delete.gif"/>-icoon om een bestaande beheerder deze rechten te ontnemen. Onderaan heeft u ook de mogelijkheid om een nieuwe beheerder toe te voegen. Daarvoor moet de volledige naam niet ingevuld worden, enkel de gebruikersnaam geleverd door DICT is genoeg.</p>
 						<table>
 							<tr class="tabelheader"><td colspan="9">Beheer Personeel</td></tr>
 							<tr class="legende"><td>id</td><td>UgentID</td><td>Voornaam</td><td>Familienaam</td><td>Homes</td><td></td><td></td></tr>
