@@ -51,6 +51,8 @@
 				<!--de inhoud van de pagina-->
 				<div id="content" class="small">
 					<div id='beforecontent'>
+						<h1>Meer informatie</h1>
+						<p>Hier ziet u meer informatie over het geselecteerde herstelformulier, met bijhorende informatie over dezelfde student en/of dezelfde kamer</p>
 						<?
 						$formid = $_GET['formid'];
 						if (!is_numeric($formid) || $formid < 1) throw new BadParameterException("Formid werd foutief gebruikt");

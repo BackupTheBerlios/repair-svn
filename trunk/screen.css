@@ -1301,7 +1301,7 @@ checkbox, select, option, radio{
 	/*background-color:#FFFFFF;*/
 /*}*/
 /*table tr.subsubheader td { font-weight:bold; background-color: #F2F5FE; padding-left: 30px; padding-top: 7px; padding-bottom: 10px; text-align: left;}*/
-table tr.selected td { background-color: #FFCC00; }
+table tr.selected td { background-color: #fdb812; }/*#FFCC00*/
 table tr.deleted td { background-color: #cccccc; }
 
 input.verdiep{width:40px;}

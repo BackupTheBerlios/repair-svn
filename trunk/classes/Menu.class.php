@@ -31,8 +31,8 @@ class Menu{
 						echo self::generateItem("personeelOverzicht.php", "Overzicht");
 					}
 					else{//we zijn student
-						echo self::generateItem("overzicht.php", "Overzicht");
-						echo self::generateItem("studentMeldingToevoegen.php", "Defect melden");
+						echo self::generateItem("studentOverzicht.php", $taal->msg('Overzicht'));
+						echo self::generateItem("studentMeldingToevoegen.php", $taal->msg('defect_melden'));
 					}
 			}
 			else{//we zijn niet ingelogd

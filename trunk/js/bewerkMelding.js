@@ -51,7 +51,7 @@ function showLocatie(a){
 $(document).ready(function(){
 	var formid = $(document).getUrlParam("formid");  
 	
-	$.get("ajax/getMelding.php", { "formid": formid }, function(data) {
+	$.get("ajax/getMelding.php", { "formid": formid,"opmerking": 0 }, function(data) {
 		var i = 0;
 		for(item in data) {
 			if (i % 2 == 0) {
@@ -68,6 +68,10 @@ $(document).ready(function(){
 			}
 			i++;
 		}
+	},"json");
+	
+	$.get("ajax/getMelding.php", { "formid": formid, "opmerking": 1 }, function(data) {
+		$("#opmerking").val(data);
 	},"json");
 	
 	$("#submit").click(function(){

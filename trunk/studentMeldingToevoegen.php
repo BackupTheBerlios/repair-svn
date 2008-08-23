@@ -56,9 +56,11 @@
 				<?new Menu("Melding", "studentMeldingToevoegen.php"); ?>
 				<!--de inhoud van de pagina-->
 				<div id="content" class="small">
-					<div id="success" style="display:none"><?=$taal->msg('succes_melding_toegevoegd')?></div>
+					<div id="success" style="display:none"><? printf($taal->msg('succes_melding_toegevoegd_url'),"studentOverzicht.php"); ?></div>
 					<div id="error" style="display:none"><h1><?=$taal->msg('fout')?></h1><?=$taal->msg('error_melding_toevoegen') ?></div>
 					<div id="beforecontent">
+					<h1><?=$taal->msg('herstelformulier_nieuw') ?></h1>
+					<p><?=$taal->msg('herstelformulier_nieuw_disclaimer') ?></p>
 					<?
 					$user = NULL;
 					$currentHome = NULL;
