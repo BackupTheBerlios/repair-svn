@@ -68,7 +68,7 @@
 				<!--horizontale navigatiebalk bovenaan-->
 				<?new Menu("Melding", "studentMeldingBewerken.php"); ?>
 				<!--de inhoud van de pagina-->
-				<div id="content" class="small">
+				<div id="content" class="normal">
 					<div id="success" style="display:none"><?=$taal->msg('succes_melding_bewerkt') ?></div>
 					<div id="error" style="display:none"><h1><?=$taal->msg('fout')?></h1><?=$taal->msg('error_melding_bewerkt') ?></div>
 					<div id="beforecontent">
@@ -81,6 +81,8 @@
 					}
 					
 					?>
+					<h1><?=$taal->msg('herstelformulier_bewerken') ?></h1>
+					<p align="justify"><?=$taal->msg('herstelformulier_bewerken_disclaimer') ?></p>
 					<form id='meldingform'>
 					<table>
 							<tr class="tabelheader"><td colspan="4"><? printf($taal->msg('herstelformulier_homenaam'),$currentHome->getKorteNaam()); ?></td></tr>

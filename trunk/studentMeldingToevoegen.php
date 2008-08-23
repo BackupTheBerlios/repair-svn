@@ -55,7 +55,7 @@
 				<!--horizontale navigatiebalk bovenaan-->
 				<?new Menu("Melding", "studentMeldingToevoegen.php"); ?>
 				<!--de inhoud van de pagina-->
-				<div id="content" class="small">
+				<div id="content" class="normal">
 					<div id="success" style="display:none"><? printf($taal->msg('succes_melding_toegevoegd_url'),"studentOverzicht.php"); ?></div>
 					<div id="error" style="display:none"><h1><?=$taal->msg('fout')?></h1><?=$taal->msg('error_melding_toevoegen') ?></div>
 					<div id="beforecontent">

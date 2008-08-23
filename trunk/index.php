@@ -44,7 +44,7 @@
 				<!--horizontale navigatiebalk bovenaan-->
 				<?new Menu("", "index.php"); ?>
 				<!--de inhoud van de pagina-->
-				<div id="content" class="small">
+				<div id="content" class="normal">
 					<? if($auth->isLoggedIn()){ //we zijn ingelogd
 						if($auth->getUser()->isStudent()){//Student?>
 							<div>
