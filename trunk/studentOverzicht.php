@@ -51,20 +51,23 @@
 				<?new Menu("Overzicht", "studentOverzicht.php"); ?>
 				<!--de inhoud van de pagina-->
 				<div id="verwijderconfirm" style="display:none"><?=$taal->msg('confirm_verwijder') ?></div>
-				<div id="content" class="small">
+				<div id="content" class="normal">
 				
 					<? if($auth->getUser()->isStudent()){ ?>
 					<div>
 						<h1><?=$taal->msg('overzicht') ?></h1>
+						<? 
+						$l = Herstelformulier::getList($auth->getUser()->getId());
+						$lijst = array();
+						foreach ($l as $subl){
+							$lijst = array_merge($lijst, $subl);
+						}
+						if (sizeof($lijst) > 0) {
+						?>
 						<p align="justify"><? printf($taal->msg('welkom_overzicht_naam'), $auth->getUser()->getVoornaam()); ?></p>
 						<table>
 							<tr class="tabelheader"><td colspan="6"><?=$taal->msg('overzicht_herstellingen') ?></td></tr>
 							<?
-								$l = Herstelformulier::getList($auth->getUser()->getId());
-								$lijst = array();
-								foreach ($l as $subl){
-									$lijst = array_merge($lijst, $subl);
-								}
 								for($i=0; $i < sizeof($lijst);$i++){
 									$form = $lijst[$i];
 									$nieuweStatus = $form->getStatus();
@@ -90,6 +93,9 @@
 								echo("</tbody>");
 							 ?>
 						</table>
+						<? } else { ?>
+						<p align="justify"><?=$taal->msg('overzicht_niets') ?></p>
+						<? } ?>
 					</div>
 					<?} else{ ?>
 						<meta http-equiv="Refresh" content="0; URL=personeelOverzicht.php">			

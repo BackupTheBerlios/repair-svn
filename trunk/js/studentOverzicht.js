@@ -1,7 +1,7 @@
 function showGroup(a){
 	$("."+a).each(function(el){
 		var test = $(this).css("display");
-		if (test == "none") {
+		if (test == "none" && !$(this).hasClass("deleted")) {
 			$(this).show();
 		} else {
 			$(this).hide();
@@ -22,7 +22,8 @@ function verwijder(i){
 		$.post("ajax/verwijderHerstelformulier.php", 
 			{ formid: i }, 
 			function(){
-				$("#row_"+i).hide();
+				$("#row_"+i).addClass("deleted");
+				$("#row_"+i).hide();	
 			}
 		);
 	}

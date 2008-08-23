@@ -47,7 +47,7 @@ class Auth{
 			        list($user,$time,$aid) = $_data;
 			        //$user = "sidooms";//DIT aanzetten als je met een andere user wil inloggen
 			        
-			        //gedecrypteerde data verifi�ren
+			        //gedecrypteerde data verifieren
 			        if($aid==self::$aid ){//klopt het application id?
 			        	if((time()-$time) < self::$threshold){//is het geen oude key?
 			        		//zit de gebruiker al in onze databank?
