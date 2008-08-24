@@ -1315,6 +1315,6 @@ img.page{vertical-align: middle}
 */
 
 #content p.disclaimer {
-	align: justify;
+	text-align: justify;
 	margin-bottom: 1em;
 }
