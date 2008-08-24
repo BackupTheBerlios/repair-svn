@@ -93,7 +93,7 @@ $(document).ready(function(){
 						$("#error").show();
 					else
 						$("#success").show();
-					$("#meldingform").hide();
+					$("#beforecontent").hide();
 				});
 		}
 		return false;
