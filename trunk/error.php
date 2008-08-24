@@ -49,7 +49,7 @@
 			<?new Header(array("#"), array("Index")); ?>
 			<div id="main">
 				<!--horizontale navigatiebalk bovenaan-->
-				<?new Menu("", "error.php"); ?>
+				<?new Menu(""); ?>
 				<!--de inhoud van de pagina-->
 				<div id="content" class="small">
 					<h1><?=$taal->msg('fout') ?></h1>

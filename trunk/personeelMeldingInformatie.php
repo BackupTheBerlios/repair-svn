@@ -43,6 +43,10 @@
 		
 		<script type="text/javascript" src="js/jquery/jquery.js"></script>
 		<script type="text/javascript" src="js/personeelMeldingInformatie.js"></script>
+		<? if ($_GET['formid']==""){
+				echo("<meta http-equiv='refresh' content='0;url=personeelOverzicht.php'>");
+				die();
+			}?>
 	</head>
 	<body>
 		<!--main content-->
@@ -50,7 +54,7 @@
 			<?new Header(array("#"), array("Index")); ?>
 			<div id="main">
 				<!--horizontale navigatiebalk bovenaan-->
-				<?new Menu("Overzicht", "personeelMeldingInformatie.php"); ?>
+				<?new Menu("Overzicht"); ?>
 				<!--de inhoud van de pagina-->
 				<div id="content" class="normal">
 					<div class="documentActions">                 

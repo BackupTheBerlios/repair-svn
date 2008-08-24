@@ -50,7 +50,7 @@
 			<?new Header(array("#"), array("Index")); ?>
 			<div id="main">
 				<!--horizontale navigatiebalk bovenaan-->
-				<?new Menu("Beheer", "personeeladminBeheerders.php"); ?>
+				<?new Menu("Beheer"); ?>
 				<!--de inhoud van de pagina-->
 				<div id="content" class="normal">
 					<div class="documentActions">                 

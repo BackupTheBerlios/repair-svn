@@ -45,7 +45,7 @@
 			<?new Header(array("#"), array("Index")); ?>
 			<div id="main">
 				<!--horizontale navigatiebalk bovenaan-->
-				<?new Menu("", "index.php"); ?>
+				<?new Menu(""); ?>
 				<!--de inhoud van de pagina-->
 				<div id="content" class="normal">
 					<div class="documentActions">                 

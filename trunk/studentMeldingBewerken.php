@@ -66,7 +66,7 @@
 			<?new Header(array("#"), array("Index")); ?>
 			<div id="main">
 				<!--horizontale navigatiebalk bovenaan-->
-				<?new Menu("Melding", "studentMeldingBewerken.php"); ?>
+				<?new Menu("Melding"); ?>
 				<!--de inhoud van de pagina-->
 				<div id="content" class="normal">
 					<div class="documentActions">                 

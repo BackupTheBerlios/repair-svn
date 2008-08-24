@@ -48,7 +48,7 @@
 			<?new Header(array("#"), array("Index")); ?>
 			<div id="main">
 				<!--horizontale navigatiebalk bovenaan-->
-				<?new Menu("Overzicht", "studentOverzicht.php"); ?>
+				<?new Menu("Overzicht"); ?>
 				<!--de inhoud van de pagina-->
 				<div id="verwijderconfirm" style="display:none"><?=$taal->msg('confirm_verwijder') ?></div>
 				<div id="content" class="normal">

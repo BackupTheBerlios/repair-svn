@@ -7,13 +7,14 @@ require_once 'Taal.class.php';
 class Menu{
 	private $categorie;
 	private $huidigePagina;
-	public function __construct($categorie, $huidigePagina) {
-		$this->huidigePagina = $huidigePagina;
+	public function __construct($categorie) {
+		$this->huidigePagina = basename($_SERVER['REQUEST_URI']);
 		$this->categorie = $categorie;
 		try{
 			$a = new Auth(false);
 			$taal = new Taal();
 			echo("<div id='navigationhome'><div id='mainnav'><ul>");
+			echo self::generateItem("index.php", "Home");
 			if($a->isLoggedIn()){//zijn we ingelogd?
 				if($a->getUser()->isPersoneel()){//zijn we personeel?
 						echo self::generateItem("personeelAdmin.php", "Beheer", true);
@@ -23,12 +24,17 @@ class Menu{
 							echo(self::generateItem("personeelAdminBeheerders.php","Beheer Beheerders"));
 							$lijst = $a->getUser()->getHomesLijst();
 							foreach($lijst as $home){
-								echo(self::generateItem("personeelAdmin.php?homeId=".$home->getId(),"Beheer Home ".$home->getKorteNaam()));
+								echo(self::generateItem("personeelAdmin.php?homeId=".$home->getId(),"Beheer Home ".$home->getKorteNaam(), false, true));
 							}
 							echo"</ul></li>";
 						}
 						echo self::generateItem("#", "Statistieken");
-						echo self::generateItem("personeelOverzicht.php", "Overzicht");
+						echo self::generateItem("personeelOverzicht.php", "Overzicht", true);
+						if($categorie == "Overzicht"){//submenu beheer
+							echo"<ul>";
+							echo(self::generateItem("personeelMeldingInformatie.php","Formulier"));
+							echo"</ul></li>";
+						}
 					}
 					else{//we zijn student
 						echo self::generateItem("index.php", $taal->msg('Index'));
@@ -47,8 +53,14 @@ class Menu{
 		}
 	}
 	
-	public function generateItem($url, $naam, $open=false){
-		$active = $url == $this->huidigePagina ? "active" : "";
+	public function generateItem($url, $naam, $open=false, $parameters=false){
+		if($parameters)
+			$u = $this->huidigePagina;
+		else{
+			$u = explode("?", $this->huidigePagina);
+			$u=$u[0];
+		}
+		$active = $url == $u ? "active" : "";
 		$open = ($naam == $this->categorie) && $open ? "open" : "";
 		$sluitTag = !$open ? "</li>" : "";
 		return "<li class='$active $open'><a href='$url'>$naam</a>$sluitTag";

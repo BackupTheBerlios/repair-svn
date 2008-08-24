@@ -1,5 +1,6 @@
 <?php
 	session_start();
+	
 	require_once 'classes/Config.class.php';
 	require_once 'AccessException.php';
 	require_once 'Header.class.php';
@@ -16,6 +17,14 @@
 		throw new AccessException();
 		
 	if($_POST['waarden']!=""){
+	
+		//headers
+		header("Expires: 0");
+		header("Cache-control: private");
+		header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
+		header("Content-Description: File Transfer");
+		header('Content-Type: text/csv; charset="utf-8"');
+		header("Content-disposition: attachment; filename=herstelformulier_export.csv");
 		$waarden = explode(";", $_POST['waarden']);
 		$export = array();
 		//eerste rij
@@ -51,14 +60,6 @@
 			$export[]=$rij;	
 		}
 		$statement->close();
-		
-		//headers
-		header("Expires: 0");
-		header("Cache-control: private");
-		header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
-		header("Content-Description: File Transfer");
-		header('Content-Type: text/csv; charset="utf-8"');
-		header("Content-disposition: attachment; filename=herstelformulier_export.csv");
 		
 		//de output
 		$out = fopen('php://output','w');
@@ -106,7 +107,7 @@
 			<?new Header(array("#"), array("Index")); ?>
 			<div id="main">
 				<!--horizontale navigatiebalk bovenaan-->
-				<?new Menu("Exporteren", "personeelExporteer.php"); ?>
+				<?new Menu("Exporteren"); ?>
 				<!--de inhoud van de pagina-->
 				<div id="content" class="normal">
 					<h1>Exporteren</h1>	

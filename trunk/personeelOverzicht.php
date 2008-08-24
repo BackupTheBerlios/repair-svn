@@ -46,7 +46,7 @@
 			<?new Header(array("#"), array("Index")); ?>
 			<div id="main">
 				<!--horizontale navigatiebalk bovenaan-->
-				<?new Menu("Overzicht", "personeelOverzicht.php"); ?>
+				<?new Menu("Overzicht"); ?>
 				<!--de inhoud van de pagina-->
 				<div id="content" class="normal">
 					<div class="documentActions">                 
