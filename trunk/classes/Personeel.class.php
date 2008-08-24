@@ -11,12 +11,14 @@ class Personeel extends User {
 		if($id==""){//nieuw personeel
 			parent::__construct($id, $gebruikersnaam, $voornaam, $achternaam, $laatsteOnline, $email);
 			$this->verwijderd = $verwijderd;
-			if(this::isInPersoneelDatabase($this->id)){
+			if(self::isInPersoneelDatabase($this->id)){
 				self::setVerwijderd(0);
 				self::save();
 			}
 			else{
+				echo"ik ga personeel toevoegen aan de databank";
 				$statement = $this->db->prepare("INSERT INTO personeel (userId, verwijderd) VALUES (?, ?)");
+				echo $this->db->error;
 				$statement->bind_param('ii', $this->id, $this->verwijderd);
 				$statement->execute();
 				$statement->close();
