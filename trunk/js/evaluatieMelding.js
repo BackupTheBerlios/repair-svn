@@ -13,7 +13,7 @@ function evalueerPositief(formid) {
 
 function evalueerNegatief(formid) {
 	var vertaling = $("#opmerkingvertaling").text();
-	var velden = "<tr id='new_row_"+formid+"'><td>"+vertaling+":</td><td><textarea name='opmerking' cols='50' rows='8'/></textarea></td><td><img alt='doorgeven' class='bewerk klik' title='Deze opmerking doorsturen' src='images/icon_accept.gif' onclick=\"zendOpmerking("+formid+");\"/><img alt='Cancel' class='bewerk klik' title='Annuleer' src='images/action_stop.gif' onclick=\"annuleer("+formid+");\"/></td></tr>";
+	var velden = "<tr id='new_row_"+formid+"'><td>"+vertaling+":</td><td><textarea name='opmerking' cols='50' rows='8'/></textarea></td><td><img alt='doorgeven' class='bewerk klik' title='Deze opmerking doorsturen' src='images/icon_accept.gif' onclick=\"zendOpmerking("+formid+");\"/></td><td><img alt='Cancel' class='bewerk klik' title='Annuleer' src='images/action_stop.gif' onclick=\"annuleer("+formid+");\"/></td></tr>";
 	$("#row_"+formid).each(function(el){
 		$(this).after(velden);
 	});

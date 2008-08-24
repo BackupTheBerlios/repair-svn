@@ -31,6 +31,7 @@ class Menu{
 						echo self::generateItem("personeelOverzicht.php", "Overzicht");
 					}
 					else{//we zijn student
+						echo self::generateItem("index.php", $taal->msg('Index'));
 						echo self::generateItem("studentOverzicht.php", $taal->msg('Overzicht'));
 						echo self::generateItem("studentMeldingToevoegen.php", $taal->msg('defect_melden'));
 					}
