@@ -14,7 +14,7 @@ class Menu{
 			$a = new Auth(false);
 			$taal = new Taal();
 			echo("<div id='navigationhome'><div id='mainnav'><ul>");
-			echo self::generateItem("index.php", "Home");
+			echo self::generateItem("index.php", $taal->msg('Index'));
 			if($a->isLoggedIn()){//zijn we ingelogd?
 				if($a->getUser()->isPersoneel()){//zijn we personeel?
 						echo self::generateItem("personeelAdmin.php", "Beheer", true);
@@ -37,7 +37,6 @@ class Menu{
 						}
 					}
 					else{//we zijn student
-						echo self::generateItem("index.php", $taal->msg('Index'));
 						echo self::generateItem("studentOverzicht.php", $taal->msg('Overzicht'));
 						echo self::generateItem("studentMeldingToevoegen.php", $taal->msg('defect_melden'));
 					}
