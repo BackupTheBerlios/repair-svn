@@ -12,7 +12,7 @@ body {
 
 /* Container is the wrapper div */
 #container {
-	background: #FFF url(http://www.ugent.be/images/containerbg2.png) repeat-y;
+	background: #FFF url(images/containerbg2.png) repeat-y;
 	width: 972px;
 	padding: 0 6px;
 	margin: 0 auto; 
@@ -84,7 +84,7 @@ body {
 
 
 #header {
-	background: url(http://www.ugent.be/images/sprieten_s.gif) no-repeat 0 0;
+	background: url(images/sprieten_s.gif) no-repeat 0 0;
 	height: 48px;
 }
 
@@ -195,7 +195,7 @@ input, textarea {
 #mainnav ul li a:link,
 #mainnav ul li a:visited {
 	display: block;
-	background: #DCDFE4 url(http://www.ugent.be/images/plus.gif) no-repeat 7px 10px;
+	background: #DCDFE4 url(images/plus.gif) no-repeat 7px 10px;
 	font-weight: 700;
 	padding: 5px 20px;
 	border-bottom: 1px solid white;
@@ -210,12 +210,12 @@ input, textarea {
 
 #mainnav ul li a:hover,
 #mainnav ul li a:active {
-	background: #EDEFF1 url(http://www.ugent.be/images/plus.gif) no-repeat 7px 10px;
+	background: #EDEFF1 url(images/plus.gif) no-repeat 7px 10px;
 }
 
 #mainnav ul li.open a:link,
 #mainnav ul li.open a:visited {
-	background: #DCDFE4 url(http://www.ugent.be/images/min_blue.gif) no-repeat 7px 10px;
+	background: #DCDFE4 url(images/min_blue.gif) no-repeat 7px 10px;
 }
 
 #mainnav ul li.open a:hover,
@@ -233,7 +233,7 @@ input, textarea {
 
 #mainnav ul li.open li a:link,
 #mainnav ul li.open li a:visited {
-	background: #F5F5F5 url(http://www.ugent.be/images/square.gif) no-repeat 7px 8px;
+	background: #F5F5F5 url(images/square.gif) no-repeat 7px 8px;
 	font-weight: 300;
 	padding: 3px 20px;
 	margin: 0;
@@ -249,7 +249,7 @@ input, textarea {
 
 #mainnav ul li.open li.active a:link,
 #mainnav ul li.open li.active a:visited {
-	background: #FDB812 url(http://www.ugent.be/images/min.gif) no-repeat 7px 10px;
+	background: #FDB812 url(images/min.gif) no-repeat 7px 10px;
 	border: none;
 	color: #FFF;
 	font-weight: 700;
@@ -258,7 +258,7 @@ input, textarea {
 #mainnav ul li.open li.open a:link,
 
 #mainnav ul li.open li.open a:visited {
-	background: #F5F5F5 url(http://www.ugent.be/images/min_blue.gif) no-repeat 7px 8px;
+	background: #F5F5F5 url(images/min_blue.gif) no-repeat 7px 8px;
 
 
 
@@ -266,7 +266,7 @@ input, textarea {
 
 #mainnav ul li.open li.active a:link,
 #mainnav ul li.open li.active a:visited {
-	background: #FDB812 url(http://www.ugent.be/images/min.gif) no-repeat 7px 8px;
+	background: #FDB812 url(images/min.gif) no-repeat 7px 8px;
 	border: none;
 	color: #FFF;
 }
@@ -275,7 +275,7 @@ input, textarea {
 
 #mainnav ul li.open li a.haschild:link,
 #mainnav ul li.open li a.haschild:visited {
-	background: #f5f5f5 url(http://www.ugent.be/images/plus.gif) no-repeat 7px 8px;
+	background: #f5f5f5 url(images/plus.gif) no-repeat 7px 8px;
 	color: #369;
 }
 
@@ -286,7 +286,7 @@ input, textarea {
 #mainnav ul li.open li.open li a:link,
 #mainnav ul li.open li.open li a:visited {
 	padding: 3px 20px 3px 40px;
-	background: #F5F5F5 url(http://www.ugent.be/images/chevron-dubbel.gif) no-repeat 27px 9px;
+	background: #F5F5F5 url(images/chevron-dubbel.gif) no-repeat 27px 9px;
 	border: none;
 	color: #369;
         font-weight:normal;
@@ -299,7 +299,7 @@ input, textarea {
 
 #mainnav ul li.open li.open li.active a:link,
 #mainnav ul li.open li.open li.active a:visited {
-	background: #FDB812 url(http://www.ugent.be/images/chevron-dubbel-wit.gif) no-repeat 7px 9px;
+	background: #FDB812 url(images/chevron-dubbel-wit.gif) no-repeat 7px 9px;
 	margin: 0 0 0 20px;
 	padding-left: 20px;
 	color: white;
@@ -385,7 +385,7 @@ div.wide  { width: 920px !important; }
 		#content .sectiontitle a:link,
 		#content .sectiontitle a:visited {
 			text-decoration: none;
-			background: url(http://www.ugent.be/images/chevron-dubbel.gif) no-repeat 0 0.5em;
+			background: url(images/chevron-dubbel.gif) no-repeat 0 0.5em;
 			padding-left: 12px;
                         position:relative;
                         top:0.6em;
@@ -562,7 +562,7 @@ p.readmore {
 #content p.readmore a:link,
 #content p.readmore a:visited {
 	padding-left: 7px;
-	background: #FFF url(http://www.ugent.be/images/chevron.gif) no-repeat 0 5px;
+	background: #FFF url(images/chevron.gif) no-repeat 0 5px;
 	text-decoration: none;
 
 }
@@ -612,12 +612,12 @@ padding-right:8px;
 	margin-bottom: 1.2em;
 	width: 178px;
 }
-.box-img { background: transparent url(http://www.ugent.be/images/fancygradient.png) repeat-x left bottom; }
+.box-img { background: transparent url(images/fancygradient.png) repeat-x left bottom; }
 .box-img .caption { padding:0.5em; }
 .box dt,
 .facet dt {
 	font-size: 1.2em;
-	background: #EAECF0 url(http://www.ugent.be/images/facetbg.png) repeat-x;
+	background: #EAECF0 url(images/facetbg.png) repeat-x;
 	color: #0870a1;
 	font-family: Arial, sans-serif;
 	padding: 0.4em 0.5em 0.2em 0.5em;
@@ -642,7 +642,7 @@ padding-right:8px;
 .facet ul li {
 	font-size: 1.1em;
 	padding: 1px 0 1px 1.5em;
-	background: url(http://www.ugent.be/images/chevron-dubbel.gif) no-repeat 4px 7px;
+	background: url(images/chevron-dubbel.gif) no-repeat 4px 7px;
 }
 .box a:link,
 .box a:visited,
@@ -667,14 +667,14 @@ padding-right:8px;
 	background-color:#fff;
 }
 
-.box a.pdf,.facet a.pdf { background: #FFF url(http://www.ugent.be/img/algemeen/pdf.gif) no-repeat right 50%; }
-.box a.external,.facet a.external { background: #FFF url(http://www.ugent.be/img/algemeen/externesite.gif) no-repeat right 50%; }
-.box a.doc,.facet a.doc { background: #FFF url(http://www.ugent.be/img/algemeen/doc.gif) no-repeat right 50%; }
-.box a.ppt,.facet a.ppt { background: #FFF url(http://www.ugent.be/img/algemeen/ppt.gif) no-repeat right 50%; }
-.box a.xls,.facet a.xls { background: #FFF url(http://www.ugent.be/img/algemeen/xls.gif) no-repeat right 50%; }
-.box a.audio,.facet a.audio { background: #FFF url(http://www.ugent.be/img/algemeen/aud.gif) no-repeat right 50%; }
-.box a.video,.facet a.video { background: #FFF url(http://www.ugent.be/img/algemeen/vid.gif) no-repeat right 50%; }
-.box a.beveiligd,.facet a.beveiligd { background: #FFF url(http://www.ugent.be/img/algemeen/sleutel.gif) no-repeat right 50%; }
+.box a.pdf,.facet a.pdf { background: #FFF url(images/pdf.gif) no-repeat right 50%; }
+.box a.external,.facet a.external { background: #FFF url(images/externesite.gif) no-repeat right 50%; }
+.box a.doc,.facet a.doc { background: #FFF url(images/doc.gif) no-repeat right 50%; }
+.box a.ppt,.facet a.ppt { background: #FFF url(images/ppt.gif) no-repeat right 50%; }
+.box a.xls,.facet a.xls { background: #FFF url(images/xls.gif) no-repeat right 50%; }
+.box a.audio,.facet a.audio { background: #FFF url(images/aud.gif) no-repeat right 50%; }
+.box a.video,.facet a.video { background: #FFF url(images/vid.gif) no-repeat right 50%; }
+.box a.beveiligd,.facet a.beveiligd { background: #FFF url(images/sleutel.gif) no-repeat right 50%; }
 
 #navigation dl.portlet { 
 overflow:hidden !important;
@@ -696,7 +696,7 @@ border:0 !important;
 }
 
 .clickthrough a {
-	background: url(http://www.ugent.be/images/chevron-dubbel.gif) no-repeat 0 0.5em;
+	background: url(images/chevron-dubbel.gif) no-repeat 0 0.5em;
 	padding-left: 12px;
 }
 
@@ -754,7 +754,7 @@ a:active, #content a:active { color: #69C; }
 }
 
 #footer {
-	background: #104b7d url(http://www.ugent.be/images/footerbg.png) repeat-y;
+	background: #104b7d url(images/footerbg.png) repeat-y;
 	width: 972px;
 	padding: 0 6px;
 	height: 64px;
@@ -811,7 +811,7 @@ a:active, #content a:active { color: #69C; }
 }
 
 #call-to-action {
-	background: #ecedf2 url(http://www.ugent.be/images/fancygradient.png) repeat-x;
+	background: #ecedf2 url(images/fancygradient.png) repeat-x;
 	border: 1px solid #dcdfe4;
 	padding: 1em;
 }
@@ -822,13 +822,13 @@ ul.chevrons {
 }
 
 ul.chevrons li {
-	background: url(http://www.ugent.be/images/chevron-dubbel.gif) no-repeat 4px 6px;
+	background: url(images/chevron-dubbel.gif) no-repeat 4px 6px;
 	padding: 0 0 0 1.5em;
         margin-left:-30px;
 }
 
 a.advanced {
-	background: transparent url(http://www.ugent.be/images/sleutel.gif) no-repeat right 50%;
+	background: transparent url(images/sleutel.gif) no-repeat right 50%;
 	padding-right:25px;
 	line-height:normal;
 	padding-top:0;
@@ -841,7 +841,7 @@ a.advanced {
 }
 
 a.shortcut {
-	background: #FFF url(http://www.ugent.be/images/shortcut.gif) no-repeat right 50%;
+	background: #FFF url(images/shortcut.gif) no-repeat right 50%;
 }
 
 
@@ -912,8 +912,8 @@ background-position: left center;
 background-repeat:no-repeat;
 display:block;
 }
-span.anchor { background-image:url("http://www.ugent.be/img/DBZ/arrow.jpg"); }
-span.top { background-image:url("http://www.ugent.be/img/top.gif"); }
+span.anchor { background-image:url("images/arrow.jpg"); }
+span.top { background-image:url("images/top.gif"); }
 
 /* Rechtse iconen */
 span.pdf,
@@ -939,23 +939,23 @@ background-position: right center;
 background-repeat:no-repeat;
 }
 
-span.pdf { background-image:url("http://www.ugent.be/img/algemeen/pdf.gif"); }
-span.external { background-image:url("http://www.ugent.be/img/algemeen/externesite.gif"); }
-span.doc { background-image:url("http://www.ugent.be/img/algemeen/doc.gif"); }
-span.ppt { background-image:url("http://www.ugent.be/img/algemeen/ppt.gif"); }
-span.xls { background-image:url("http://www.ugent.be/img/algemeen/xls.gif"); }
-span.audio { background-image:url("http://www.ugent.be/img/algemeen/aud.gif"); }
-span.video { background-image:url("http://www.ugent.be/img/algemeen/vid.gif"); }
-span.beveiligd { background-image:url("http://www.ugent.be/img/algemeen/sleutel.gif"); }
+span.pdf { background-image:url("images/pdf.gif"); }
+span.external { background-image:url("images/externesite.gif"); }
+span.doc { background-image:url("images/doc.gif"); }
+span.ppt { background-image:url("images/ppt.gif"); }
+span.xls { background-image:url("images/xls.gif"); }
+span.audio { background-image:url("images/aud.gif"); }
+span.video { background-image:url("images/vid.gif"); }
+span.beveiligd { background-image:url("images/sleutel.gif"); }
 
-dl a.pdf { background: #FFF url("http://www.ugent.be/img/algemeen/pdf.gif") no-repeat right 50%; }
-dl a.external { background: #FFF url("http://www.ugent.be/img/algemeen/externesite.gif") no-repeat right 50%; }
-dl a.doc { background: #FFF url("http://www.ugent.be/img/algemeen/doc.gif") no-repeat right 50%; }
-dl a.ppt { background: #FFF url("http://www.ugent.be/img/algemeen/ppt.gif") no-repeat right 50%; }
-dl a.xls { background: #FFF url("http://www.ugent.be/img/algemeen/xls.gif") no-repeat right 50%; }
-dl a.audio { background: #FFF url("http://www.ugent.be/img/algemeen/aud.gif") no-repeat right 50%; }
-dl a.video { background: #FFF url("http://www.ugent.be/img/algemeen/vid.gif") no-repeat right 50%; }
-dl a.beveiligd { background: #FFF url("http://www.ugent.be/img/algemeen/sleutel.gif") no-repeat right 50%; }
+dl a.pdf { background: #FFF url("images/pdf.gif") no-repeat right 50%; }
+dl a.external { background: #FFF url("images/externesite.gif") no-repeat right 50%; }
+dl a.doc { background: #FFF url("images/doc.gif") no-repeat right 50%; }
+dl a.ppt { background: #FFF url("images/ppt.gif") no-repeat right 50%; }
+dl a.xls { background: #FFF url("images/xls.gif") no-repeat right 50%; }
+dl a.audio { background: #FFF url("images/aud.gif") no-repeat right 50%; }
+dl a.video { background: #FFF url("images/vid.gif") no-repeat right 50%; }
+dl a.beveiligd { background: #FFF url("images/sleutel.gif") no-repeat right 50%; }
 
 
 /* RSS portlet and smart portlet */
@@ -1301,20 +1301,19 @@ table tr.bottom td { border-bottom: 1px solid #369; padding-bottom:10px;}
 
 /*zelf toegevoegde brol*/
 .klik { cursor: pointer;}
-/*input, textarea{
+input, textarea{
 	font-family: Verdana, Tahoma, sans-serif;
 	font-size: 8pt;
 	color: black;
 	border: 1px solid black;
 	background-color: white;
-}*/
-/*
+}
 checkbox, select, option, radio{
 	font-family: Verdana, Tahoma, sans-serif;
 	font-size: 8pt;
 	color: black;
 	/*background-color:#FFFFFF;*/
-/*}*/
+}
 /*table tr.subsubheader td { font-weight:bold; background-color: #F2F5FE; padding-left: 30px; padding-top: 7px; padding-bottom: 10px; text-align: left;}*/
 table tr.selected td { background-color: #fdb812; }/*#FFCC00*/
 table tr.deleted td { background-color: #cccccc; }
@@ -1326,8 +1325,6 @@ input.adres{width: 140px;}
 input.naam{width: 110px;}
 img.page{vertical-align: middle}
 .filter input{width:80px;}
-/*table.overzicht{width: 800px;}
-*/
 
 #content p.disclaimer {
 	text-align: justify;
