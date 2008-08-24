@@ -52,6 +52,12 @@
 				<?new Menu("Melding", "studentMeldingEvalueren.php"); ?>
 				<!--de inhoud van de pagina-->
 				<div id="content" class="normal">
+					<div class="documentActions">                 
+						<ul> 
+					        <li><a href="javascript:this.print();"><img src="http://www.ugent.be/print_icon.gif" alt="<?=$taal->msg('afdrukken')?>" title="<?=$taal->msg('afdrukken')?>" id="icon-print"/></a></li> 
+    					</ul> 
+   					</div>
+   					
 					<div id="success" style="display:none"><?=$taal->msg('succes_melding_bewerkt') ?></div>
 					<div id="error" style="display:none"><h1><?=$taal->msg('fout')?></h1><?=$taal->msg('error_melding_evalueren') ?></div>
 					<div id="opmerkingvertaling" style="display:none"><?=$taal->msg('opmerking') ?></div>
