@@ -13,13 +13,15 @@ class Header{
 			echo(" &gt; <a href='$url'>".$namen[$key]."</a>");
 		echo("</div>");*/
 		echo("<div id='topbar'> <div id='language'><ul class='swapUnderline'>");
-		if($taal->getTaal()=="nl"){
-			echo("<li class='selected'> NL</li>");
-			echo("<li class='last-child'><a href='veranderTaal.php?vorige=".$_SERVER['PHP_SELF']."?".$_SERVER['QUERY_STRING']."'>EN</a></li>");
-		}
-		else{
-			echo("<li><a href='veranderTaal.php?vorige=".$_SERVER['PHP_SELF']."?".$_SERVER['QUERY_STRING']."'>NL</a></li>");
-			echo("<li class='selected last-child'> EN</li>");
+		if ($auth->isLoggedIn() && !$auth->getUser()->isPersoneel()) {
+			if($taal->getTaal()=="nl"){
+				echo("<li class='selected'> NL</li>");
+				echo("<li class='last-child'><a href='veranderTaal.php?vorige=".$_SERVER['PHP_SELF']."?".$_SERVER['QUERY_STRING']."'>EN</a></li>");
+			}
+			else{
+				echo("<li><a href='veranderTaal.php?vorige=".$_SERVER['PHP_SELF']."?".$_SERVER['QUERY_STRING']."'>NL</a></li>");
+				echo("<li class='selected last-child'> EN</li>");
+			}
 		}
 		echo("</ul></div><div id='user'><ul class='swapUnderline'>");
 		if(!$auth->isLoggedIn())

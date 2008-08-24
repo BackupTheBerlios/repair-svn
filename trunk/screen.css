@@ -1313,3 +1313,8 @@ img.page{vertical-align: middle}
 .filter input{width:80px;}
 /*table.overzicht{width: 800px;}
 */
+
+#content p.disclaimer {
+	align: justify;
+	margin-bottom: 1em;
+}

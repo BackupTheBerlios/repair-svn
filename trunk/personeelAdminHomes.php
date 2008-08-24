@@ -52,9 +52,15 @@
 				<?new Menu("Beheer", "personeelAdminHomes.php"); ?>
 				<!--de inhoud van de pagina-->
 				<div id="content" class="normal">
+					<div class="documentActions">                 
+						<ul> 
+					        <li><a href="javascript:this.print();"><img src="http://www.ugent.be/print_icon.gif" alt="<?=$taal->msg('afdrukken')?>" title="<?=$taal->msg('afdrukken')?>" id="icon-print"/></a></li> 
+    					</ul> 
+   					</div>
+   					
 					<div>
 						<h1>Beheer Homes</h1>
-						<p align="justify">Hier kunt u homes toevoegen en bewerken. Klik op het <img src="images/page_edit.gif"/>-icoon om een bestaande Home aan te passen, klik op het <img src="images/page_delete.gif"/>-icoon om een bestaande Home te verwijderen. Onderaan heeft u ook de mogelijkheid om een nieuwe Home toe te voegen.</p>
+						<p class='disclaimer'>Hier kunt u homes toevoegen en bewerken. Klik op het <img src="images/page_edit.gif"/>-icoon om een bestaande Home aan te passen, klik op het <img src="images/page_delete.gif"/>-icoon om een bestaande Home te verwijderen. Onderaan heeft u ook de mogelijkheid om een nieuwe Home toe te voegen.</p>
 						<table>
 							<tr class="tabelheader"><td colspan="9">Beheer Homes</td></tr>
 							<tr class="legende"><td>id</td><td>Korte naam</td><td>Lange naam</td><td>Adres</td><td>Verdiepen</td><td>Kamer prefix</td><td>LDAP naam</td><td></td><td></td></tr>

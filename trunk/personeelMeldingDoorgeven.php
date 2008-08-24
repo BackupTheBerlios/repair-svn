@@ -54,7 +54,15 @@
 				<?new Menu("", "personeelMeldingDoorgeven.php"); ?>
 				<!--de inhoud van de pagina-->
 				<div id="content" class="normal">
+					<div class="documentActions">                 
+						<ul> 
+					        <li><a href="javascript:this.print();"><img src="http://www.ugent.be/print_icon.gif" alt="<?=$taal->msg('afdrukken')?>" title="<?=$taal->msg('afdrukken')?>" id="icon-print"/></a></li> 
+    					</ul> 
+   					</div>
+   					
 					<div id='beforecontent'>
+						<h1>Melding doorgeven</h1>
+						<p class="disclaimer">Hier kan u een melding doorgeven. Vul onderstaande gegevens in in het bestaande programma van DGFB. Wanneer dat gebeurd is, en je het factuurnummer gekregen hebt, klik hier dan onderaan op 'Doorgeven', en vul het nummer in. Klik daarna op het <img src="images/icon_accept.gif"/>-icoontje.</p>
 						<?
 						$formid = $_GET['formid'];
 						if (!is_numeric($formid) || $formid < 1) throw new BadParameterException("Formid werd foutief gebruikt");

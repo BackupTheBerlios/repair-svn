@@ -52,6 +52,12 @@
 				<!--de inhoud van de pagina-->
 				<div id="verwijderconfirm" style="display:none"><?=$taal->msg('confirm_verwijder') ?></div>
 				<div id="content" class="normal">
+					<div class="documentActions">                 
+						<ul> 
+					        <li><a href="javascript:this.print();"><img src="http://www.ugent.be/print_icon.gif" alt="<?=$taal->msg('afdrukken')?>" title="<?=$taal->msg('afdrukken')?>" id="icon-print"/></a></li> 
+    					</ul> 
+   					</div>
+   					
 				
 					<? if($auth->getUser()->isStudent()){ ?>
 					<div>
@@ -64,7 +70,7 @@
 						}
 						if (sizeof($lijst) > 0) {
 						?>
-						<p align="justify"><? printf($taal->msg('welkom_overzicht_naam'), $auth->getUser()->getVoornaam()); ?></p>
+						<p class="disclaimer"><? printf($taal->msg('welkom_overzicht_naam'), $auth->getUser()->getVoornaam()); ?></p>
 						<table>
 							<tr class="tabelheader"><td colspan="6"><?=$taal->msg('overzicht_herstellingen') ?></td></tr>
 							<?

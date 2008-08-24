@@ -53,12 +53,18 @@
 				<?new Menu("Overzicht", "personeelMeldingInformatie.php"); ?>
 				<!--de inhoud van de pagina-->
 				<div id="content" class="normal">
+					<div class="documentActions">                 
+						<ul> 
+					        <li><a href="javascript:this.print();"><img src="http://www.ugent.be/print_icon.gif" alt="<?=$taal->msg('afdrukken')?>" title="<?=$taal->msg('afdrukken')?>" id="icon-print"/></a></li> 
+    					</ul> 
+   					</div>
+   					
 					<div id="success" style="display:none"><h1>Succes</h1><p>Dit herstelformulier werd als hersteld ge&#235valueerd. Klik <a href="personeelOverzicht.php">hier</a> om terug te gaan naar het overzicht.</p></div>
 					<div id="negatiefsuccess" style="display:none"><h1>Succes</h1><p>Dit herstelformulier werd als niet-hersteld ge&#235valueerd. Klik <a href="personeelOverzicht.php">hier</a> om terug te gaan naar het overzicht.</p></div>
 					<div id="error" style="display:none"><h1>Fout</h1><p>Er is een fout opgetreden bij het evalueren van dit herstelformulier, probeer het later opnieuw.</p></div>
 					<div id='beforecontent'>
 						<h1>Meer informatie</h1>
-						<p align="justify">Hier vindt u meer informatie over het geselecteerde herstelformulier, met bijhorende informatie over dezelfde student en/of dezelfde kamer. Indien er nog acties beschikbaar zijn voor het herstelformulier wordt dit aangegeven door &#233&#233n of meerdere icoontjes: het doorgeven-icoontje (<img src="images/page_edit.gif"/>), positief-evalueren-icoontje (<img src="images/icon_accept.gif"/>) en het negatief-evalueren-icoontje (<img src="images/action_stop.gif"/>). Indien er geen acties zichtbaar zijn, is dit herstelformulier afgewerkt.</p>
+						<p class="disclaimer">Hier vindt u meer informatie over het geselecteerde herstelformulier, met bijhorende informatie over dezelfde student en/of dezelfde kamer. Indien er nog acties beschikbaar zijn voor het herstelformulier wordt dit aangegeven door &#233&#233n of meerdere icoontjes: het doorgeven-icoontje (<img src="images/page_edit.gif"/>), positief-evalueren-icoontje (<img src="images/icon_accept.gif"/>) en het negatief-evalueren-icoontje (<img src="images/action_stop.gif"/>). Indien er geen acties zichtbaar zijn, is dit herstelformulier afgewerkt.</p>
 						<?
 						$formid = $_GET['formid'];
 						if (!is_numeric($formid) || $formid < 1) throw new BadParameterException("Formid werd foutief gebruikt");
@@ -108,11 +114,11 @@
 							?>
 							<tr id="acties">
 								<td colspan="3"><p align="right">Meer acties:</p></td>
-								<td><a href='personeelMeldingDoorgeven.php?formid=<?=$formulier->getId()?>'>
+								<td>
 								<?
 								if ($formulier->getStatus()->getValue() == "ongezien") {
 								?>
-								<img class="klik" src="images/page_edit.gif" alt="Dit herstelformulier doorgeven" title="Dit herstelformulier doorgeven"/></a>&nbsp;&nbsp;
+								<a href='personeelMeldingDoorgeven.php?formid=<?=$formulier->getId()?>'><img class="klik" src="images/page_edit.gif" alt="Dit herstelformulier doorgeven" title="Dit herstelformulier doorgeven"/></a>&nbsp;&nbsp;
 								<? 
 								} 
 								if ($formulier->getStatus()->getValue() == "gedaan") {

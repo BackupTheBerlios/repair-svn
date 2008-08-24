@@ -55,7 +55,8 @@ class Taal {
 						  'fout_disclaimer' => 'De beheerders van deze applicatie werden op de hoogte gebracht.',
 						  'error_melding_bewerken' => 'Het bewerken van dit herstelformulier is mislukt. Onze excuses voor het ongemak. Gelieve het later nog eens te proberen.',
 						  'error_melding_toevoegen' => 'Het toevoegen van dit herstelformulier is mislukt. Onze excuses voor het ongemak. Gelieve het later nog eens te proberen.',
-						  'error_melding_evaluatie' => 'Het evalueren van dit herstelformulier is mislukt. Onze excuses voor het ongemak. Gelieve het later nog eens te proberen.'
+						  'error_melding_evaluatie' => 'Het evalueren van dit herstelformulier is mislukt. Onze excuses voor het ongemak. Gelieve het later nog eens te proberen.',
+						  'afdrukken' => 'Deze pagina afdrukken'
 						  ),
 			'en' => array('titel' => 'Online Repairform',
 						  'dringende_herstellingen' => 'Urgent Repairs',
@@ -108,7 +109,8 @@ class Taal {
 						  'fout_disclaimer' => 'The application\'s administrators were notified of this problem.',
 						  'error_melding_bewerken' => 'The editting of this repairform failed. Our apologies for the inconvenience, please try again later.',
 						  'error_melding_toevoegen' => 'There was an error while adding this repairform. Our apologies for the inconvenience, please try again later.',
-						  'error_melding_evaluatie' => 'There was an error while evaluating this repairform. Our apologies for the inconvenience, please try again later.'
+						  'error_melding_evaluatie' => 'There was an error while evaluating this repairform. Our apologies for the inconvenience, please try again later.',
+						  'afdrukken' => 'Print this page'
 						  )
 	);
 	

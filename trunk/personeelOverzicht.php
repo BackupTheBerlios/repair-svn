@@ -49,8 +49,14 @@
 				<?new Menu("Overzicht", "personeelOverzicht.php"); ?>
 				<!--de inhoud van de pagina-->
 				<div id="content" class="normal">
+					<div class="documentActions">                 
+						<ul> 
+					        <li><a href="javascript:this.print();"><img src="http://www.ugent.be/print_icon.gif" alt="<?=$taal->msg('afdrukken')?>" title="<?=$taal->msg('afdrukken')?>" id="icon-print"/></a></li> 
+    					</ul> 
+   					</div>
+   					
 					<h1>Overzicht Herstelformulieren</h1>
-					<p align="justify">Hier kunt u alle herstelformulieren opvragen, ook diegene die al afgehandeld zijn. Door in een veld bovenaan te typen, kan u filteren in de resultatenlijst.</p>
+					<p class="disclaimer">Hier kunt u alle herstelformulieren opvragen, ook diegene die al afgehandeld zijn. Door in &#233&#233n van de velden bovenaan te typen, kan u filteren in de resultatenlijst.</p>
 					<table class="overzicht">
 							<tr class="tabelheader"><td colspan="8">Herstelformulieren</td></tr>
 							<tr class="legende"><td></td><td>id</td><td>Datum</td><td>Kamer</td><td>Home</td><td>Persoon</td><td>Status</td><td>Factuurnummer</td></tr>
@@ -58,7 +64,7 @@
 							<tbody id="inhoud"></tbody>
 					</table>
 					<p id="paginering"></p>
-					<p><a href="personeelExporteer.php">Exporteer deze gegevens!</a></p>
+					<p class="DONTPrint"><a href="personeelExporteer.php">Exporteer deze gegevens!</a></p>
 				</div>				
 			</div>
 		</div>	

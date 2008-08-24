@@ -35,6 +35,9 @@
 		<!-- meta (http-equiv) -->
 		<!-- Disable IE6 image toolbar -->
 		<meta http-equiv="imagetoolbar" content="no" />
+		
+		<script type="text/javascript" src="js/jquery/jquery.js"></script>
+		<script type="text/javascript" src="js/studentOverzicht.js"></script>
 	</head>
 	<body>
 		<!--main content-->
@@ -45,6 +48,12 @@
 				<?new Menu("", "index.php"); ?>
 				<!--de inhoud van de pagina-->
 				<div id="content" class="normal">
+					<div class="documentActions">                 
+						<ul> 
+					        <li><a href="javascript:this.print();"><img src="http://www.ugent.be/print_icon.gif" alt="<?=$taal->msg('afdrukken')?>" title="<?=$taal->msg('afdrukken')?>" id="icon-print"/></a></li> 
+    					</ul> 
+   					</div>
+   					
 					<? if($auth->isLoggedIn()){ //we zijn ingelogd
 						if($auth->getUser()->isStudent()){//Student?>
 							<div>
@@ -62,7 +71,7 @@
 									<li><?=$taal->msg('meld_nieuw_defect');?></li>
 									<li><?=$taal->msg('overzicht_aanvragen');?></li>
 								</ul>
-								
+							
 								<table>
 									<tr class="tabelheader"><td colspan="6"><?=$taal->msg('overzicht_herstellingen') ?></td></tr>
 									<?
@@ -97,7 +106,7 @@
 						<?}
 						else{//personeel?>
 							<h1>Welkom <?=$auth->getUser()->getVoornaam() ?></h1>
-							<p align="justify">Hier ziet u eerst en vooral de herstellingen die u nog niet doorgegeven heeft. Klik op het <img src="images/page_edit.gif"/>-icoontje om het herstelformulier te bekijken, en het eventueel door te geven. Helemaal onderaan vindt u de herstellingen die al doorgegeven zijn, maar die nog niet ge&#235valueerd werden door de student. Indien nodig voor het type probleem, kan u die evaluatie zelf doen via het <img src="images/externesite.gif"/>-icoontje.</p>
+							<p class="disclaimer">Hier ziet u eerst en vooral de herstellingen die u nog niet doorgegeven heeft. Klik op het <img src="images/page_edit.gif"/>-icoontje om het herstelformulier te bekijken, en het eventueel door te geven. Helemaal onderaan vindt u de herstellingen die al doorgegeven zijn, maar die nog niet ge&#235valueerd werden door de student. Indien nodig voor het type probleem, kan u die evaluatie zelf doen via het <img src="images/externesite.gif"/>-icoontje.</p>
 							<table>
 								<tr class="tabelheader"><td colspan="6">Overzicht van herstellingen die niet afgewerkt zijn</td></tr>
 								<?
