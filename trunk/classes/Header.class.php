@@ -6,7 +6,7 @@ class Header{
 		$taal = new Taal();
 		$auth = new Auth(false);
 		echo("<div id='topbar'> <div id='language'><ul class='swapUnderline'>");
-		if ($auth->isLoggedIn() && !$auth->getUser()->isPersoneel()) {
+		if (!$auth->isLoggedIn() || ($auth->isLoggedIn() && !$auth->getUser()->isPersoneel())) {
 			if($taal->getTaal()=="nl"){
 				echo("<li class='selected'> NL</li>");
 				echo("<li class='last-child'><a href='veranderTaal.php?vorige=".$_SERVER['PHP_SELF']."?".$_SERVER['QUERY_STRING']."'>EN</a></li>");
