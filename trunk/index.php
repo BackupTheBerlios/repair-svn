@@ -60,8 +60,21 @@
 								<h1><?=$taal->msg('welkom');?></h1>
 								<?
 								$list = Herstelformulier::getEvaluationList($auth->getUser()->getId());
-								if (sizeof($list) > 0)
-									echo "<center><b>".$taal->msg('herstelformulieren_te_evalueren')."</b></center>";
+								if (sizeof($list) > 0) {
+								?>
+								<div id="spotlight" class="spotlight">
+									<div class="sectiontitle">
+        								<h2><?=$taal->msg('herstelformulieren_te_evalueren_titel')?></h2>
+    								</div>
+    								<div class="columns">		
+		       							<p class="disclaimer"><?=$taal->msg('herstelformulieren_te_evalueren_disclaimer') ?></p>
+	  	  								<p class="readmore">
+	           								<a href="studentMeldingEvalueren.php"><?=$taal->msg('herstelformulieren_te_evalueren_evalueer') ?></a>	
+	        							</p>
+									</div>
+								</div>
+								<?
+								}
 								?>
 								<p>
 									<? printf($taal->msg('welkom_naam_home_kamer'),$auth->getUser()->getVoornaam(),$auth->getUser()->getHome()->getKorteNaam(),$auth->getUser()->getKamer()->getKamernummerKort());?>
