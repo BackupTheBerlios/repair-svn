@@ -51,7 +51,7 @@
 				<!--horizontale navigatiebalk bovenaan-->
 				<?new Menu("Melding", "studentMeldingEvalueren.php"); ?>
 				<!--de inhoud van de pagina-->
-				<div id="content" class="small">
+				<div id="content" class="normal">
 					<div id="success" style="display:none"><?=$taal->msg('succes_melding_bewerkt') ?></div>
 					<div id="error" style="display:none"><h1><?=$taal->msg('fout')?></h1><?=$taal->msg('error_melding_evalueren') ?></div>
 					<div id="opmerkingvertaling" style="display:none"><?=$taal->msg('opmerking') ?></div>
@@ -62,10 +62,9 @@
 									// Toon listing van alle formulieren die als "gedaan" gemarkeerd zijn en die geevalueerd moeten worden
 									$list = Herstelformulier::getEvaluationList($auth->getUser()->getId());
 									?>
+									<h1><?=$taal->msg('evaluatie_titel') ?></h1>
+									<p class="disclaimer"><?=$taal->msg('disclaimer_evaluatie_melding') ?></p>
 									<table>
-										<tr class="tableheader">
-											<td colspan="4"><?=$taal->msg('disclaimer_evaluatie_melding');?></td>
-										</tr>
 										<tbody>
 											<tr class="legende">
 												<td><?=$taal->msg('datum');?></td>
