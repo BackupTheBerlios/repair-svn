@@ -260,7 +260,12 @@ class Herstelformulier {
 			$veld = new Veld($this->veldenlijst[$i]);
 			$output .= $veld->getNaam().", ";
 		}
-		return substr($output, 0, -2);
+		$opmerking = self::getOpmerking();
+		if ($opmerking != "") {
+			$output .= $opmerking;
+			return $output;
+		} else
+			return substr($output, 0, -2);
 	}
 	
 	public function getFactuurnummer() {
