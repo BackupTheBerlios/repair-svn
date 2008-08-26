@@ -37,20 +37,13 @@
 		<!--[if IE 7]>
 			        <style type="text/css" media="all">@import url(ie7.css);</style>
 		<![endif]-->
-		
-		<!-- syndication -->
-		<!-- meta (http-equiv) -->
-		<!-- Disable IE6 image toolbar -->
 		<meta http-equiv="imagetoolbar" content="no" />
 	</head>
 	<body>
-		<!--main content-->
 		<div id="container">
 			<?new Header(array("#"), array("Index")); ?>
 			<div id="main">
-				<!--horizontale navigatiebalk bovenaan-->
 				<?new Menu(""); ?>
-				<!--de inhoud van de pagina-->
 				<div id="content" class="small">
 					<h1><?=$taal->msg('fout') ?></h1>
 					<p><?=$e ?></p>

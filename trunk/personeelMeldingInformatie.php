@@ -36,9 +36,6 @@
 			        <style type="text/css" media="all">@import url(ie7.css);</style>
 		<![endif]-->
 		
-		<!-- syndication -->
-		<!-- meta (http-equiv) -->
-		<!-- Disable IE6 image toolbar -->
 		<meta http-equiv="imagetoolbar" content="no" />
 		
 		<script type="text/javascript" src="js/jquery/jquery.js"></script>
@@ -49,17 +46,14 @@
 			}?>
 	</head>
 	<body>
-		<!--main content-->
 		<div id="container">
 			<?new Header(array("#"), array("Index")); ?>
 			<div id="main">
-				<!--horizontale navigatiebalk bovenaan-->
 				<?new Menu("Overzicht"); ?>
-				<!--de inhoud van de pagina-->
 				<div id="content" class="normal">
 					<div class="documentActions">                 
 						<ul> 
-					        <li><a href="javascript:this.print();"><img src="http://www.ugent.be/print_icon.gif" alt="<?=$taal->msg('afdrukken')?>" title="<?=$taal->msg('afdrukken')?>" id="icon-print"/></a></li> 
+					        <li><a href="javascript:this.print();"><img src="images/print_icon.gif" alt="<?=$taal->msg('afdrukken')?>" title="<?=$taal->msg('afdrukken')?>" id="icon-print"/></a></li> 
     					</ul> 
    					</div>
    					

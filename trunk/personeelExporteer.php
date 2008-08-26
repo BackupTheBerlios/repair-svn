@@ -92,9 +92,6 @@
 			        <style type="text/css" media="all">@import url(ie7.css);</style>
 		<![endif]-->
 		
-		<!-- syndication -->
-		<!-- meta (http-equiv) -->
-		<!-- Disable IE6 image toolbar -->
 		<meta http-equiv="imagetoolbar" content="no" />
 		<script type="text/javascript" src="js/jquery/jquery.js"></script>
 		<script type="text/javascript" src="js/jquery/json.js"></script>
@@ -102,13 +99,10 @@
 		<script type="text/javascript" src="js/personeelExporteer.js"></script>
 	</head>
 	<body>
-		<!--main content-->
 		<div id="container">
 			<?new Header(array("#"), array("Index")); ?>
 			<div id="main">
-				<!--horizontale navigatiebalk bovenaan-->
 				<?new Menu("Exporteren"); ?>
-				<!--de inhoud van de pagina-->
 				<div id="content" class="normal">
 					<h1>Exporteren</h1>	
 					<?

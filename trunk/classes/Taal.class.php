@@ -7,7 +7,7 @@ class Taal {
 			'nl' => array('titel' => 'Online Herstelformulier',
 						  'dringende_herstellingen' => 'Dringende Herstellingen',
 						  'herstelformulieren_te_evalueren_titel' => "Evaluatie herstelformulieren",
-						  'herstelformulieren_te_evalueren_disclaimer' => "E&#233n van uw herstellingen werd een eindje geleden uitgevoerd door de herstellingsdienst. Wij hebben echter nog niet gehoord van u of deze herstelling gelukt is, of dat u nog opmerkingen heeft. Met deze informatie kunnen we onze diensten verbeteren.",
+						  'herstelformulieren_te_evalueren_disclaimer' => "E&#233n van uw herstellingen werd een eindje geleden doorgegeven aan de herstellingsdienst. Wij hebben echter nog niet gehoord van u of deze herstelling uitgevoerd is, of dat u nog opmerkingen heeft. Met deze informatie kunnen we onze diensten verbeteren.",
 						  'herstelformulieren_te_evalueren_evalueer' => "Evalueer",
 						  'welkom_naam_home_kamer' => 'Welkom %1$s, volgens onze gegevens woont u op Home %2$s op kamer %3$s.<br>Indien deze gegevens niet correct zijn, neem dan contact op met de <a href="http://www.ugent.be/nl/voorzieningen/huisvesting">Afdeling Huisvesting</a>.',
 						  'keuze_opties' => 'Maak uw keuze uit de volgende opties:',

@@ -3,8 +3,7 @@ class Footer{
 	function __construct(){
 		require_once 'Taal.class.php';
 		$taal = new Taal();
-		echo("<!--de footer-->
-		<div id='footer-wrap'>
+		echo("<div id='footer-wrap'>
 			<div id='footer'>
 				<ul id='copyright' class='swapUnderline'>
 					<li>
