@@ -33,7 +33,7 @@ class Auth{
 			if(isset($_GET['key'])){//is hij aan het inloggen?
 				
 				//we beginnen met de key public key in te lezen
-				$pubkey = openssl_get_publickey(file_get_contents('ugent.pub')); 
+				$pubkey = openssl_get_publickey(file_get_contents('UGent.pub')); 
 				if(!$pubkey)//er loopt iets fout
 					throw new PublicKeyException();
 					

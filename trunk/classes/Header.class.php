@@ -26,7 +26,7 @@ class Header{
 		</div> ");
 		echo("<div id='header'> 
 			<div id='headerleft'> 
-				<h1> <a href='http://www.ugent.be/nl' title='Universiteit Gent'><img src='http://www.ugent.be/images/universiteit_gent.gif' /> </a> </h1> 
+				<h1> <a href='http://www.ugent.be/nl' title='Universiteit Gent'><img src='images/universiteit_gent.gif' alt='Universiteit Gent'/> </a> </h1> 
 				<h2> <a href='index.php'>Online Herstelformulier</a></h2>
 			</div> 
 			<div id='headerright'> </div> 
