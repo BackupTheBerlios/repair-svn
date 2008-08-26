@@ -43,14 +43,14 @@
 			<?new Header(array("#"), array("Index")); ?>
 			<div id="main">
 				<?new Menu("Overzicht"); ?>
-				<div id="verwijderconfirm" style="display:none"><?=$taal->msg('confirm_verwijder') ?></div>
+				
 				<div id="content" class="normal">
 					<div class="documentActions">                 
 						<ul> 
 					        <li><a href="javascript:this.print();"><img src="images/print_icon.gif" alt="<?=$taal->msg('afdrukken')?>" title="<?=$taal->msg('afdrukken')?>" id="icon-print"/></a></li> 
     					</ul> 
    					</div>
-   					
+   					<div id="verwijderconfirm" style="display:none"><?=$taal->msg('confirm_verwijder') ?></div>
 				
 					<? if($auth->getUser()->isStudent()){ ?>
 					<div>
