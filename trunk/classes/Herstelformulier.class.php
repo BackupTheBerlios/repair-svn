@@ -371,9 +371,9 @@ class Herstelformulier {
 		if (!is_numeric($userId) || $userId < 0) throw new BadParameterException("userId is invalid");
 		
 		if ($userId == 0)
-			$statement = $db->prepare("SELECT id FROM herstelformulier WHERE status = 'gedaan' AND datum < SUBDATE(NOW(), INTERVAL 7 DAY) ORDER BY datum DESC");
+			$statement = $db->prepare("SELECT id FROM herstelformulier WHERE status = 'gedaan' AND datum < SUBDATE(NOW(), INTERVAL 1 DAY) ORDER BY datum DESC");
 		else {
-			$statement = $db->prepare("SELECT id FROM herstelformulier WHERE userId = ? AND status = 'gedaan' AND datum < SUBDATE(NOW(), INTERVAL 7 DAY) ORDER BY datum DESC");
+			$statement = $db->prepare("SELECT id FROM herstelformulier WHERE userId = ? AND status = 'gedaan' AND datum < SUBDATE(NOW(), INTERVAL 1 DAY) ORDER BY datum DESC");
 			$statement->bind_param('i', $userId);
 		}
 		$statement->execute();
