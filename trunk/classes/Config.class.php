@@ -8,6 +8,11 @@ final class Config {
 	public static $DB_PASSWORD = "r3p@1r";
 	public static $DB_DATABASE = "repair";
 	
+	/*
+	 * Evaluatie nodig voor welke formulieren
+	 */
+	public static $DAYS_FOR_EVAL = "1";
+	
 	/**
 	 * Debug
 	 */

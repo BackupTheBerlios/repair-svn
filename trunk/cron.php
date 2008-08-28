@@ -17,16 +17,22 @@ $email_student_body_en = "Dear,\n\nWe notified the repairteam of the defects you
 // overloop alle herstelformulieren die voldoen aan evaluatiecriteria
 $list = Herstelformulier::getEvaluationList();
 // mail user
-$mailer = new Mailer();
-$mailer->setCc("bert.vandeghinste+herstel@gmail.com,mesuerebart+herstel@gmail.com");
-$mailer->setHTMLCharset("UTF-8");
-$mailer->setFrom($from);
 foreach ($list as $formulier) {
-	$email_student_subject = ($formulier->getStudent()->getTaal() == "nl")?$email_student_subject_nl:$email_student_subject_en;
-	$email_student_body = ($formulier->getStudent()->getTaal() == "nl")?$email_student_body_nl:$email_student_body_en;
-	$mailer->setSubject($email_student_subject);
-	$mailer->setText($email_student_body);
-	$mailer->send(array($formulier->getStudent()->getEmail()));
+	$student = $formulier->getStudent();
+	$ldap = new LdapRepair();
+	$userinfo = $ldap->getUserInfo($student->getGebruikersnaam());
+	if (isset($userinfo['homeId'])) { // deze student zit hier nog 
+		$mailer = new Mailer();
+		$mailer->setCc("bert.vandeghinste+herstel@gmail.com,mesuerebart+herstel@gmail.com");
+		$mailer->setHTMLCharset("UTF-8");
+		$mailer->setFrom($from);
+		$email_student_subject = ($student->getTaal() == "nl")?$email_student_subject_nl:$email_student_subject_en;
+		$email_student_body = ($student->getTaal() == "nl")?$email_student_body_nl:$email_student_body_en;
+		
+		$mailer->setSubject($email_student_subject);
+		$mailer->setText($email_student_body);
+		//$mailer->send(array($student->getEmail()));
+	}
 }
 
 // doorzenden naar Homemanager als er nieuwe herstelformulieren zijn
@@ -36,12 +42,12 @@ foreach ($list as $formulier) {
 	$count[$formulier->getHome()->getId()] = $count[$formulier->getHome()->getId()] + 1;
 }
 
-$mailer = new Mailer();
-$mailer->setHTMLCharset("UTF-8");
-$mailer->setFrom($from);
-
 $beheerders = Personeel::getBeheerders();
 foreach ($beheerders as $personeel) {
+	$mailer = new Mailer();
+	$mailer->setHTMLCharset("UTF-8");
+	$mailer->setFrom($from);
+
 	$homes = $personeel->getHomesLijst();
 	foreach ($homes as $home) {
 		$id = $home->getId();
@@ -49,7 +55,7 @@ foreach ($beheerders as $personeel) {
 			// $personeel is homemanager van een home die een mail moet krijgen over $count[$id] ongeziene formulieren
 			$mailer->setSubject("[Herstelformulieren] ".$count[$id]." ongezien");
 			$mailer->setText("Beste,\n\nEr zijn sinds gisteren ".$count[$id]." herstelformulieren bijgekomen uit ".$home->getLangeNaam()." die nog bekeken moeten worden. Gelieve hiervoor in te loggen op https://chaos.ugent.be/test_herstelformulier/repair/index.php .");
-			$mailer->send(array($personeel->getEmail()));
+			//$mailer->send(array($personeel->getEmail()));
 		}			
 	}
 }
