@@ -28,7 +28,7 @@ class Menu{
 							}
 							echo"</ul></li>";
 						}
-						echo self::generateItem("#", "Statistieken");
+						echo self::generateItem("personeelStatistiek.php", "Statistieken");
 						echo self::generateItem("personeelOverzicht.php", "Overzicht", true);
 						if($categorie == "Overzicht"){//submenu beheer
 							echo"<ul>";

@@ -129,7 +129,8 @@ class Taal {
 		$lang = strtolower($lang);
 		if ($lang == "nl" || $lang == "en")
 			$this->lang = $lang;
-		else throw new BadParameterException("this language hasn't been implemented.");
+		else
+			$this->lang = "nl";
 	}
 	
 	public function msg($key) {

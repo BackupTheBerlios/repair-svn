@@ -2,6 +2,7 @@
 require_once 'Student.class.php';
 require_once 'Kamer.class.php';
 require_once 'exceptions/PublicKeyException.class.php';
+require_once 'exceptions/InvalidKeyException.class.php';
 require_once 'User.class.php';
 
 /**

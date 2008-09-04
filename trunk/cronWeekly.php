@@ -36,7 +36,7 @@ foreach ($list as $formulier) {
 }
 
 // doorzenden naar Homemanager als er nieuwe herstelformulieren zijn
-$list = Herstelformulier::getList(0, new Status("ongezien"));
+/*$list = Herstelformulier::getList(0, new Status("ongezien"));
 $count = array();
 foreach ($list as $formulier) {
 	$count[$formulier->getHome()->getId()] = $count[$formulier->getHome()->getId()] + 1;
@@ -58,5 +58,5 @@ foreach ($beheerders as $personeel) {
 			//$mailer->send(array($personeel->getEmail()));
 		}			
 	}
-}
+}*/
 ?>
