@@ -94,6 +94,9 @@
 									$ingevuldeLijst = $formulier->getVeldenlijst(); // array<VeldID>
 									// vergelijking van huidigelijst met ingevuldeLijst. Alle velden van huidigeLijst moeten overblijven + velden die in ingevuldeLijst zitten zonder duplicates te maken
 									
+									$allesok = true;
+									foreach($ingevuldeLijst as $veldid)
+									
 									// TODO: een treffelijk algoritme voor dit probleem
 									foreach($ingevuldeLijst as $veldid) {
 										$veld = new Veld($veldid);

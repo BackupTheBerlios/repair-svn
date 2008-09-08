@@ -68,14 +68,14 @@
 							<tr class="legende">
 								<td>Datum ingave</td>
 								<td>Student</td>
+								<td>Home</td>
 								<td>Kamer</td>
-								<td>Telefoon</td>
 							</tr>
 							<tr>
 								<td><?=$formulier->getDatum();?></td>
 								<td><?=$formulier->getStudent()->getAchternaam()." ".$formulier->getStudent()->getVoornaam();?></td>
-								<td>Home <?=$formulier->getKamer()->getHome()->getKorteNaam();?> kamer <?=$formulier->getKamer()->getKamernummerKort();?></td>
-								<td><?=$formulier->getKamer()->getTelefoonnummer();?></td>
+								<td>Home <?=$formulier->getKamer()->getHome()->getKorteNaam();?></td>
+								<td><?=$formulier->getKamer()->getKamernummerLang();?></td>
 							</tr>
 							<tr><td colspan="4"class="unityheader">Gemelde defecten:</td></tr>
 							<?
@@ -86,7 +86,7 @@
 									<td></td>
 									<td><? 
 										if($veld->getCategorie()->getLocatie()->getValue()=="Kot") 
-											echo "Kamer ".$formulier->getKamer()->getKamernummerKort();
+											echo "Kamer ".$formulier->getKamer()->getKamernummerLang();
 										else if($veld->getCategorie()->getLocatie()->getValue()=="Verdiep") 
 											echo $veld->getCategorie()->getNaamNL()." ".$formulier->getKamer()->getVerdiep()."e";
 										else

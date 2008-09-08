@@ -71,7 +71,7 @@
 								}
 								?>
 								<p>
-									<? printf($taal->msg('welkom_naam_home_kamer'),$auth->getUser()->getVoornaam(),$auth->getUser()->getHome()->getKorteNaam(),$auth->getUser()->getKamer()->getKamernummerKort());?>
+									<? printf($taal->msg('welkom_naam_home_kamer'),$auth->getUser()->getVoornaam(),$auth->getUser()->getHome()->getKorteNaam(),$auth->getUser()->getKamer()->getKamernummerLang());?>
 									<br/><?=$taal->msg('keuze_opties'); ?>
 								</p>
 								<ul>

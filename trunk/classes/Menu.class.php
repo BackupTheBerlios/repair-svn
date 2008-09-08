@@ -1,5 +1,4 @@
 <?
-//TODO: de 2 klassen hierboven mergen
 require_once 'classes/Home.class.php';
 require_once 'Auth.class.php';
 require_once 'Taal.class.php';
