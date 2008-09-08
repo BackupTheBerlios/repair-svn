@@ -6,20 +6,23 @@ class Personeel extends User {
 	
 	protected $db;
 	private $verwijderd;
+	private $mails;
 	
-	function __construct($id, $gebruikersnaam="", $voornaam="", $achternaam="", $laatsteOnline="", $email="", $verwijderd="0") {
+	function __construct($id, $gebruikersnaam="", $voornaam="", $achternaam="", $laatsteOnline="", $email="", $mails=1, $verwijderd="0") {
 		if($id==""){//nieuw personeel
 			parent::__construct($id, $gebruikersnaam, $voornaam, $achternaam, $laatsteOnline, $email);
 			$this->verwijderd = $verwijderd;
+			$this->mails = $mails;
 			if(self::isInPersoneelDatabase($this->id)){
 				self::setVerwijderd(0);
+				self::setMails($this->mails);
 				self::save();
 			}
 			else{
 				echo"ik ga personeel toevoegen aan de databank";
-				$statement = $this->db->prepare("INSERT INTO personeel (userId, verwijderd) VALUES (?, ?)");
+				$statement = $this->db->prepare("INSERT INTO personeel (userId, mails, verwijderd) VALUES (?, ?, ?)");
 				echo $this->db->error;
-				$statement->bind_param('ii', $this->id, $this->verwijderd);
+				$statement->bind_param('iii', $this->id, $this->mails, $this->verwijderd);
 				$statement->execute();
 				$statement->close();
 			}
@@ -28,11 +31,11 @@ class Personeel extends User {
 			if (!is_numeric($id)) throw new BadParameterException();
 			parent::__construct ($id);
 			$this->db =  DB::getDB();
-			$statement = $this->db->prepare("SELECT verwijderd FROM personeel WHERE userId = ?");
+			$statement = $this->db->prepare("SELECT verwijderd, mails FROM personeel WHERE userId = ?");
 			$statement->bind_param('i', $id);
 			$statement->execute();
 			$statement->store_result();
-			$statement->bind_result($this->verwijderd);
+			$statement->bind_result($this->verwijderd, $this->mails);
 			$statement->fetch();
 			$statement->close();
 		}
@@ -47,8 +50,8 @@ class Personeel extends User {
 	function save() {
 		if ($this->updated == 1) {
 			parent::save();
-			$statement = $this->db->prepare("UPDATE personeel SET verwijderd = ? WHERE userId = ?");
-			$statement->bind_param('ii', $this->verwijderd, $this->id);
+			$statement = $this->db->prepare("UPDATE personeel SET verwijderd = ?, mails=? WHERE userId = ?");
+			$statement->bind_param('iii', $this->verwijderd, $this->mails, $this->id);
 			$statement->execute();
 			$statement->close();
 		}
@@ -70,6 +73,21 @@ class Personeel extends User {
 		$this->updated = true;
 	}
 	
+	/**
+	 * @return unknown
+	 */
+	public function getMails() {
+		return $this->mails;
+	}
+	
+	/**
+	 * @param unknown_type $mails
+	 */
+	public function setMails($mails) {
+		$this->mails = $mails;
+		$this->updated = true;
+	}
+
 	/**
 	 * geeft een lijst van alle beheerders terug
 	 *

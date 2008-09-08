@@ -20,6 +20,12 @@ function bewerk(){
 		},"json");
 	});
 	
+	rij.find(".mails").each(function(){
+		var waarde = $(this).find("input").attr("value");
+		$(this).find("input").removeAttr("disabled");
+		$(this).append("<input type='hidden' value='"+waarde+"'/>");
+	});
+	
 	rij.find(".homes").each(function(){
 		$.post("ajax/postPersoneelBeheerder.php", {"actie":"lijst"}, function(data){
 			var waarde = rij.find(".homes").html();
@@ -58,9 +64,21 @@ function OK(){
 		$(this).html(waarde);
 	});
 	
+	rij.find(".mails").each(function(){
+		$(this).find("input[@type=hidden]").remove();
+		var waarde = $(this).find("input[@type=checkbox]").attr("checked");
+		if(waarde!="")
+			waarde=1;
+		else
+			waarde=0;
+		$(this).find("input[@type=checkbox]").attr("value", waarde).attr("disabled", "disables");
+		velden[velden.length] = $(this).find("input[@type=checkbox]").attr("id").split("_")[0];
+		waarden[waarden.length] = waarde;
+	});
+	
 	var lijstje = "";
 	var tekstjes = new Array();
-	$("input[@type=checkbox]:checked").each(function(){
+	$(".homes input[@type=checkbox]:checked").each(function(){
 		lijstje +=$(this).val()+";";
 		tekstjes[tekstjes.length] = $(this).attr("class"); 
 	});
@@ -88,6 +106,15 @@ function cancel(){
 	rij.find(".edit, .homes").each(function(){
 		$(this).html($(this).find("input[@type=hidden]").val());
 	});
+	rij.find(".mails").each(function(){
+		var oorspronkelijk = $(this).find("input[@type=hidden]").val();
+		if(oorspronkelijk=="1")
+			$(this).find("input[@type=checkbox]").attr("disabled", "disabled").attr("checked", "checked");
+		else
+			$(this).find("input[@type=checkbox]").attr("disabled", "disabled").removeAttr("checked");
+			
+		$(this).find("input[@type=hidden]").remove();
+	});
 	
 	rij.find(".img1").each(setBewerk);
 	rij.find(".img2").each(setVerwijder);
@@ -106,9 +133,21 @@ function voegtoe(){
 		$(this).find("input[@type=text]").val("");
 		r += "<td>"+waarde+"</td>";
 	});
+	var mails = 0;
+	rij.find(".mails").each(function(){
+		$(this).find("input[@type=hidden]").remove();
+		mails = $(this).find("input[@type=checkbox]").attr("checked");
+		if(mails!="")
+			mails=1;
+		else
+			mails=0;
+		$(this).find("input[@type=checkbox]").attr("value", mails);
+		velden[velden.length] = "mails";
+		waarden[waarden.length] = mails;
+	});
 	var lijstje = "";
 	var tekstjes = new Array();
-	$("input[@type=checkbox]:checked").each(function(){
+	rij.find(".homes input[@type=checkbox]:checked").each(function(){
 		lijstje +=$(this).val()+";";
 		tekstjes[tekstjes.length] = $(this).attr("class"); 
 	});
@@ -118,14 +157,17 @@ function voegtoe(){
 	for ( var i in tekstjes ){
 		r +=tekstjes[i]+"<br/>";
 	}
-	r += "</td><td></td><td></td></tr>";
+	if(mails=="1")
+		r += "</td><td><input type='checkbox' checked='checked' disabled='disabled'/></td><td></td><td></td></tr>";
+	else
+		r += "</td><td><input type='checkbox' disabled='disabled'/></td><td></td><td></td></tr>";
 	rij.before(r);
 	waarden = $.toJSON(waarden);
 	velden = $.toJSON(velden);
 	$.post("ajax/postPersoneelBeheerder.php", { "actie":"add", "waarden": waarden ,"velden": velden});
 	$("#voornaam").html("");
 	$("#achternaam").html("");
-	$("input[@type=checkbox]:checked").attr("checked","");
+	rij.find("input[@type=checkbox]:checked").attr("checked","");
 }
 
 function ldapMagic(){
@@ -138,11 +180,11 @@ function ldapMagic(){
 //functies om de prentjes in te stellen
 function setBewerk(){
 	var img = $(this).html("<img/>").find("img");
-	img.attr("src", "images/page_edit.gif").addClass("klik").attr("title", "Deze home bewerken").attr("alt", "Deze home bewerken").click(bewerk);
+	img.attr("src", "images/page_edit.gif").addClass("klik").attr("title", "Deze home bewerken").attr("alt", "Deze beheerder bewerken").click(bewerk);
 }
 function setVerwijder(){
 	var img = $(this).html("<img/>").find("img");
-	img.attr("src", "images/page_delete.gif").addClass("klik").attr("title", "Deze home verwijderen").attr("alt", "Deze home verwijderen").click(verwijder);
+	img.attr("src", "images/page_delete.gif").addClass("klik").attr("title", "Deze home verwijderen").attr("alt", "Deze beheerder verwijderen").click(verwijder);
 }
 function setOK(){
 	var img = $(this).html("<img/>").find("img");

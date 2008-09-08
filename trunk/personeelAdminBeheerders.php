@@ -57,8 +57,8 @@
 						<h1>Beheer Personeel</h1>
 						<p class='disclaimer'>Hier kunt u personeelsleden toevoegen en bewerken. Klik op het <img src="images/page_edit.gif"/>-icoon om de rechten van een beheerder aan te passen, klik op het <img src="images/page_delete.gif"/>-icoon om een bestaande beheerder deze rechten te ontnemen. Onderaan heeft u ook de mogelijkheid om een nieuwe beheerder toe te voegen. Daarvoor moet de volledige naam niet ingevuld worden, enkel de gebruikersnaam geleverd door DICT is genoeg.</p>
 						<table>
-							<tr class="tabelheader"><td colspan="9">Beheer Personeel</td></tr>
-							<tr class="legende"><td>id</td><td>UgentID</td><td>Voornaam</td><td>Familienaam</td><td>Homes</td><td></td><td></td></tr>
+							<tr class="tabelheader"><td colspan="8">Beheer Personeel</td></tr>
+							<tr class="legende"><td>id</td><td>UgentID</td><td>Voornaam</td><td>Familienaam</td><td>Homes</td><td>email</td><td></td><td></td></tr>
 							<?
 								$personeel = Personeel::getBeheerders();
 								foreach($personeel as $p){
@@ -68,15 +68,17 @@
 									foreach($homes as $home){
 										echo "Home ".$home->getKorteNaam()."<br/>";
 									}
+									echo("</td><td class='mails'>");
+									echo("<input type='checkbox' disabled='true' id='mails_$id' value='".$p->getMails()."' "); echo $p->getMails()?"checked='".$p->getMails()."'":"" ; echo("/>");
 									echo("</td><td class='img1'><img src='images/page_edit.gif' /></td><td class='img2'><img src='images/page_delete.gif' /></td></tr>");
 								}
-								echo("<tr><td>x</td><td class='edit' id='gebruikersnaam'><input type='text'/></td><td id='voornaam'></td><td id='achternaam'></td><td>");
+								echo("<tr><td>x</td><td class='edit' id='gebruikersnaam'><input type='text'/></td><td id='voornaam'></td><td id='achternaam'></td><td class='homes'>");
 								$l = Home::getHomes();
 								foreach($l as $home){
 									echo("
 									<label for='home_".$home->getId()."' ><input type='checkbox' id='home_".$home->getId()."' name='home_".$home->getId()."' class='Home ".$home->getKorteNaam()."' value='".$home->getId()."'/>Home ".$home->getKorteNaam()."</label><br/>");
 								}
-								echo("</td><td class='img'><img src='images/page_add.gif'/></td><td></td></tr>");
+								echo("</td><td class='mails' id='mails'><input type='checkbox'/></td><td class='img'><img src='images/page_add.gif'/></td><td></td></tr>");
 							?>
 						</table>
 					</div>

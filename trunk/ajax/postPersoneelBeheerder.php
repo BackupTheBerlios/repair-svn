@@ -16,6 +16,8 @@
 		
 		$personeel = new Personeel($id);
 		$personeel->setGebruikersnaam($waarden["gebruikersnaam"]);
+		$personeel->setMails($waarden["mails"]);
+		echo$waarden["mails"];
 		$l = explode(";", $waarden['homes']);
 		$lijst = array();
 		foreach ($l as $home){
@@ -32,7 +34,7 @@
 		require_once 'LDAP.class.php';
 		$l = new LdapRepair();
 		$extra = $l->getUserInfo($waarden['gebruikersnaam']);
-		$personeel = new Personeel("", $waarden['gebruikersnaam'], $extra['voornaam'], $extra['achternaam'], "", $extra['email']);
+		$personeel = new Personeel("", $waarden['gebruikersnaam'], $extra['voornaam'], $extra['achternaam'], "", $extra['email'],$waarden['mails']);
 		$l = explode(";", $waarden['homes']);
 		$lijst = array();
 		foreach ($l as $home){
