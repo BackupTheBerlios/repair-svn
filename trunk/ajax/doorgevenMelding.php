@@ -15,8 +15,6 @@
 		throw new BadParameterException("Formid is ongeldig");
 		
 	$factuurnummer = $_POST['factuurnummer'];
-	if (!is_numeric($factuurnummer))
-		throw new BadParameterException("Factuurnummer is ongeldig");
 		
 	$herstelformulier = new Herstelformulier($formid);
 	$herstelformulier->setFactuurnummer($factuurnummer);

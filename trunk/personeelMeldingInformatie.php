@@ -91,7 +91,7 @@
 								<tr class="unity">
 									<td></td>
 									<td><? 
-										if($veld->getCategorie()->getLocatie()->getValue()=="Kot") 
+										if($veld->getCategorie()->getLocatie()->getValue()=="Kamer") 
 											echo "Kamer ".$formulier->getKamer()->getKamernummerLang();
 										else if($veld->getCategorie()->getLocatie()->getValue()=="Verdiep") 
 											echo $veld->getCategorie()->getNaamNL()." ".$formulier->getKamer()->getVerdiep()."e";

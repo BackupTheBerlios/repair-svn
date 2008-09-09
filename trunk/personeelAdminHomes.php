@@ -57,7 +57,7 @@
 						<p class='disclaimer'>Hier kunt u homes toevoegen en bewerken. Klik op het <img src="images/page_edit.gif"/>-icoon om een bestaande Home aan te passen, klik op het <img src="images/page_delete.gif"/>-icoon om een bestaande Home te verwijderen. Onderaan heeft u ook de mogelijkheid om een nieuwe Home toe te voegen.</p>
 						<table>
 							<tr class="tabelheader"><td colspan="9">Beheer Homes</td></tr>
-							<tr class="legende"><td>id</td><td>Korte naam</td><td>Lange naam</td><td>Adres</td><td>Verdiepen</td><td>Kamer prefix</td><td>LDAP naam</td><td></td><td></td></tr>
+							<tr class="legende"><td>id</td><td>Korte naam</td><td>Lange naam</td><td>Adres</td><td>Verdiepingen</td><td>Kamer prefix</td><td>LDAP naam</td><td></td><td></td></tr>
 							<?
 								$homes = Home::getHomes();
 								foreach($homes as $home){

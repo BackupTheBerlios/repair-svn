@@ -56,7 +56,7 @@
    					
 					<div id='beforecontent'>
 						<h1>Melding doorgeven</h1>
-						<p class="disclaimer">Hier kan u een melding doorgeven. Vul onderstaande gegevens in in het bestaande programma van DGFB. Wanneer dat gebeurd is, en je het factuurnummer gekregen hebt, klik hier dan onderaan op 'Doorgeven', en vul het nummer in. Klik daarna op het <img src="images/icon_accept.gif"/>-icoontje.</p>
+						<p class="disclaimer">Hier kan u een melding doorgeven. Vul onderstaande gegevens in in het bestaande programma van DGFB. Wanneer dat gebeurd is, en je het referentienummer gekregen hebt, klik hier dan onderaan op 'Doorgeven', en vul het nummer in. Klik daarna op het <img src="images/icon_accept.gif"/>-icoontje.</p>
 						<?
 						$formid = $_GET['formid'];
 						if (!is_numeric($formid) || $formid < 1) throw new BadParameterException("Formid werd foutief gebruikt");
@@ -85,7 +85,7 @@
 								<tr class="unity">
 									<td></td>
 									<td><? 
-										if($veld->getCategorie()->getLocatie()->getValue()=="Kot") 
+										if($veld->getCategorie()->getLocatie()->getValue()=="Kamer") 
 											echo "Kamer ".$formulier->getKamer()->getKamernummerLang();
 										else if($veld->getCategorie()->getLocatie()->getValue()=="Verdiep") 
 											echo $veld->getCategorie()->getNaamNL()." ".$formulier->getKamer()->getVerdiep()."e";

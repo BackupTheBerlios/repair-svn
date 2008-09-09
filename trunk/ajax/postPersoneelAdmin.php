@@ -35,8 +35,10 @@
 		$veld = new Veld("", $waarden['naamNL'], $waarden['naamEN'], $cat, $home);
 	}
 	else if($_POST['actie'] == "select"){
-		if($_POST['property'] == "categorie")
+		if($_POST['property'] == "categorie"){
 			echo json_encode(Categorie::getCategorien($_POST["locatie"]));
+		}
+			
 	}
 	else if($_POST['actie'] == "remove"){
 		$veld = new Veld($_POST["id"]);

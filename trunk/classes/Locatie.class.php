@@ -8,16 +8,16 @@ class Locatie {
 	function __construct($locatie) {
 		if (self::isValid($locatie))
 			$this->value = $locatie;
-		else throw new BadParameterException();
+		else throw new BadParameterException($locatie);
 	}
 	
 	static function getAllValues() {
-		return Array(0 => new Locatie("kot"), 1 => new Locatie("verdiep"), 2 => new Locatie("gemeenschappelijk"));
+		return Array(0 => new Locatie("kamer"), 1 => new Locatie("verdiep"), 2 => new Locatie("gemeenschappelijk"));
 	}
 	
 	function isValid($locatie) {
 		$locatie = strtolower($locatie);
-		if ($locatie == "kot" || $locatie == "verdiep" || $locatie == "gemeenschappelijk")
+		if ($locatie == "kamer" || $locatie == "verdiep" || $locatie == "gemeenschappelijk")
 			return true;
 		else
 			return false;

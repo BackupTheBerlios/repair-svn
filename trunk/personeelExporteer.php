@@ -36,7 +36,7 @@
 		if(in_array("herstelformulier.home", $waarden)) $rij[] = "Home";
 		if(in_array("herstelformulier.persoon", $waarden)) $rij[] = "Persoon";
 		if(in_array("herstelformulier.status", $waarden)) $rij[] = "Status";
-		if(in_array("herstelformulier.factuurnummer", $waarden)) $rij[] = "Factuurnummer";
+		if(in_array("herstelformulier.factuurnummer", $waarden)) $rij[] = "Referentienummer";
 		
 		$export[]=$rij;	
 		
@@ -116,7 +116,7 @@
 					generateCheckbox('herstelformulier.home', 'Home');
 					generateCheckbox('herstelformulier.persoon', 'Persoon');
 					generateCheckbox('herstelformulier.status', 'Status');
-					generateCheckbox('herstelformulier.factuurnummer', 'Factuurnummer');
+					generateCheckbox('herstelformulier.factuurnummer', 'Referentienummer');
 					
 					
 					echo "<input type='button' id='doorsturen' value='exporteren'/></form>";

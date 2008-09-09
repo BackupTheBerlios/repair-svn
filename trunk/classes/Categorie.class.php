@@ -15,7 +15,7 @@ class Categorie {
 	
 	private $updated;
 	
-	function __construct($id, $naamNL = "", $naamEN = "", $locatie = "kot") {
+	function __construct($id, $naamNL = "", $naamEN = "", $locatie = "kamer") {
 		$this->db = DB::getDB();
 		$this->id = $id;
 		

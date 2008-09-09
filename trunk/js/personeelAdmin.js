@@ -112,6 +112,7 @@ function setDropDownValues(property, waarde, cel, content, locatie){
 		r += "</select>";
 		cel.html(content+r);
 	},"json");
+	//$.post("ajax/postPersoneelAdmin.php", {actie:"select", property:property, locatie:locatie}, function(data){alert(data);});
 } 
 
 //functies om de prentjes in te stellen
