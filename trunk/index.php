@@ -94,7 +94,7 @@
 												echo ("</td></tr>");
 												echo("<tr class='legende ".$huidigeStatus->getValue()."'><td></td><td>".$taal->msg('datum')."</td><td colspan='3'>".$taal->msg('inhoud')."</td></tr>");
 											}
-											echo("<tr class='".$huidigeStatus->getValue()."' id='row_".$form->getId()."'><td></td><td>");
+											echo("<tr class='".$huidigeStatus->getValue()."' id='row_".$form->getId()."'><td></td><td class='langedatum'>");
 											$timestamp = strtotime($form->getDatum());
 											$parsedDate = date("d-m-Y @ H:i",$timestamp);
 											echo($parsedDate);
@@ -133,7 +133,7 @@
 								<?
 									for($i=0; $i < $size;$i++){
 										$form = $lijst[$i];
-										echo("<tr id='row_".$form->getId()."'><td></td><td>");
+										echo("<tr id='row_".$form->getId()."'><td></td><td class='langedatum'>");
 										$timestamp = strtotime($form->getDatum());
 										$parsedDate = date("d-m-Y @ H:i",$timestamp);
 										echo($parsedDate);
@@ -157,7 +157,7 @@
 									<?
 									for($i=0; $i < $size; $i++){
 										$form = $lijst[$i];
-										echo("<tr id='row_".$form->getId()."'><td></td><td>");
+										echo("<tr id='row_".$form->getId()."'><td></td><td class='langedatum'>");
 										$timestamp = strtotime($form->getDatum());
 										$parsedDate = date("d-m-Y @ H:i",$timestamp);
 										echo($parsedDate);
