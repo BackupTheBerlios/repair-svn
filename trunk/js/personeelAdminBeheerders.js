@@ -31,10 +31,10 @@ function bewerk(){
 			var waarde = rij.find(".homes").html();
 			var tekst = "<input type='hidden' value='"+waarde+"'/>";
 			for(var i in data){
-				tekst +="<label for='home_"+i+"' ><input class='inputCheckbox' type='checkbox' ";
+				tekst +="<label for='home_"+i+"' ><input type='checkbox' ";
 				if(rij.find(".homes").html().indexOf(data[i])!=-1)
 					tekst += "checked=checked ";
-				tekst += "id='home_"+i+"' name='home_"+i+"' class='Home "+data[i]+"' value='"+i+"'/>Home "+data[i]+"</label><br/>";
+				tekst += "id='home_"+i+"' name='home_"+i+"' class='Home "+data[i]+"_ inputCheckbox' value='"+i+"'/>Home "+data[i]+"</label><br/>";
 			}
 			rij.find(".homes").html(tekst);
 		},"json");
@@ -80,7 +80,7 @@ function OK(){
 	var tekstjes = new Array();
 	$(".homes input[@type=checkbox]:checked").each(function(){
 		lijstje +=$(this).val()+";";
-		tekstjes[tekstjes.length] = $(this).attr("class"); 
+		tekstjes[tekstjes.length] = $(this).attr("class").split("_")[0]; 
 	});
 	velden[velden.length] = "homes";
 	waarden[waarden.length] = lijstje;
