@@ -30,7 +30,7 @@ function bewerk(){
 function verwijder(){
 	if(confirm("Bent u zeker dat u deze home wilt verwijderen?")){
 		$.post("ajax/postPersoneelHome.php", { "actie":"remove", "id": $(this).parent().parent().attr("id").split("_")[0]});
-		$(this).parent().html("").parent().addClass("deleted");
+		$(this).parent().html("").parent().addClass("deleted").find(".img1").html("");
 	}
 }
 
@@ -105,5 +105,5 @@ function setCancel(){
 	img.attr("src", "images/action_stop.gif").addClass("klik").attr("title", "Cancel").attr("alt", "Cancel").click(cancel);
 }
 function setVoegtoe(){
-	$(this).find("img").addClass("klik").attr("title", "Voeg dit veld toe").attr("alt", "Voeg deze home toe").click(voegtoe);
+	$(this).find("img").addClass("klik").attr("title", "Voeg deze home toe").attr("alt", "Voeg deze home toe").click(voegtoe);
 }

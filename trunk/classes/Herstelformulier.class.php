@@ -273,9 +273,6 @@ class Herstelformulier {
 	}
 	
 	public function setFactuurnummer($factuurnummer) {
-		// TODO: kijken of $factuurnummer aan het juiste formaat voldoet
-		if (!is_numeric($factuurnummer))
-			throw new BadParameterException("Factuurnummer is invalid.");
 		$this->factuurnummer = $factuurnummer;
 		$this->updated = 1;
 	}

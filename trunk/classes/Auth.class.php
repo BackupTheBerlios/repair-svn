@@ -129,11 +129,12 @@ class Auth{
 	
 	/**
 	 * functie om uit te loggen. Wist alle session data en stuurt de gebruiker terug naar de index
-	 * TODO: eventueel zorgen dat de taal ed. blijft opgeslaan
 	 *
 	 */
 	public function logOut(){
+		$taal = $_SESSION['taal'];
 		session_destroy();
+		$_SESSION['taal'] = $taal;
 		$this->isLoggedIn=false;
 		echo("<meta http-equiv=\"Refresh\" content=\"0; URL=index.php\">");
 		die();

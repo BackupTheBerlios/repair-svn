@@ -29,7 +29,7 @@ function bewerk(){
 function verwijder(){
 	if(confirm("Bent u zeker dat u dit veld wilt verwijderen?")){
 		$.post("ajax/postPersoneelAdmin.php", { "actie":"remove", "id": $(this).parent().parent().attr("id").split("_")[0]});
-		$(this).parent().html("").parent().addClass("deleted");
+		$(this).parent().html("").parent().addClass("deleted").find(".img1").html("");
 	}
 }
 

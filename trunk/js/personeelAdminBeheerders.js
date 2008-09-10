@@ -47,7 +47,7 @@ function bewerk(){
 function verwijder(){
 	if(confirm("Bent u zeker dat u deze beheerder wilt verwijderen?")){
 		$.post("ajax/postPersoneelBeheerder.php", { "actie":"remove", "id": $(this).parent().parent().attr("id").split("_")[0]});
-		$(this).parent().html("").parent().addClass("deleted");
+		$(this).parent().html("").parent().addClass("deleted").find(".img1").html("");
 	}
 }
 
@@ -180,11 +180,11 @@ function ldapMagic(){
 //functies om de prentjes in te stellen
 function setBewerk(){
 	var img = $(this).html("<img/>").find("img");
-	img.attr("src", "images/page_edit.gif").addClass("klik").attr("title", "Deze home bewerken").attr("alt", "Deze beheerder bewerken").click(bewerk);
+	img.attr("src", "images/page_edit.gif").addClass("klik").attr("title", "Deze beheerder bewerken").attr("alt", "Deze beheerder bewerken").click(bewerk);
 }
 function setVerwijder(){
 	var img = $(this).html("<img/>").find("img");
-	img.attr("src", "images/page_delete.gif").addClass("klik").attr("title", "Deze home verwijderen").attr("alt", "Deze beheerder verwijderen").click(verwijder);
+	img.attr("src", "images/page_delete.gif").addClass("klik").attr("title", "Deze beheerder verwijderen").attr("alt", "Deze beheerder verwijderen").click(verwijder);
 }
 function setOK(){
 	var img = $(this).html("<img/>").find("img");
@@ -195,5 +195,5 @@ function setCancel(){
 	img.attr("src", "images/action_stop.gif").addClass("klik").attr("title", "Cancel").attr("alt", "Cancel").click(cancel);
 }
 function setVoegtoe(){
-	$(this).find("img").addClass("klik").attr("title", "Voeg dit veld toe").attr("alt", "Voeg deze home toe").click(voegtoe);
+	$(this).find("img").addClass("klik").attr("title", "Voeg deze beheerder toe").attr("alt", "Voeg deze beheerder toe").click(voegtoe);
 }
