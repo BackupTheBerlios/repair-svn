@@ -129,17 +129,40 @@ class Categorie {
 	 * @param String $locatie
 	 * @return array<CategorieId,CategorieNaamNL>
 	 */
-	public static function getCategorien($locatie){
+	public static function getCategorien($locatie=""){
 		$lijst = array();
 		$db = DB::getDB();
-		$statement = $db->prepare("SELECT id FROM categorie WHERE locatie=?");
-		$statement->bind_param('s', $locatie);
+		if($locatie=="")
+			$statement = $db->prepare("SELECT id FROM categorie");
+		else{
+			$statement = $db->prepare("SELECT id FROM categorie WHERE locatie=?");
+			$statement->bind_param('s', $locatie);
+		}
 		$statement->execute();
 		$statement->store_result();
 		$statement->bind_result($id);
 		while($statement->fetch()){
 			$cat = new Categorie($id);
 			$lijst[$cat->getId()] = $cat->getNaamNL();
+		}
+		$statement->close();
+		return $lijst;
+	}
+	
+	public static function getCategorieObjects($locatie=""){
+		$lijst = array();
+		$db = DB::getDB();
+		if($locatie=="")
+			$statement = $db->prepare("SELECT id FROM categorie");
+		else{
+			$statement = $db->prepare("SELECT id FROM categorie WHERE locatie=?");
+			$statement->bind_param('s', $locatie);
+		}
+		$statement->execute();
+		$statement->store_result();
+		$statement->bind_result($id);
+		while($statement->fetch()){
+			$lijst[] = new Categorie($id);
 		}
 		$statement->close();
 		return $lijst;
