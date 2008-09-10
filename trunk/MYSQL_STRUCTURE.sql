@@ -3,6 +3,23 @@
 -- 
 -- Table structure for table `categorie`
 -- 
+DROP TABLE IF EXISTS `error`;
+CREATE TABLE `error` (
+  `id` int(11) NOT NULL auto_increment,
+  `datum` datetime default NULL,
+  `melding` text,
+  `file` varchar(256) default NULL,
+  `lijn` varchar(8) default NULL,
+  `user` varchar(16) default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+
+-- --------------------------------------------------------
+
+-- 
+-- Table structure for table `categorie`
+-- 
 
 DROP TABLE IF EXISTS `categorie`;
 CREATE TABLE `categorie` (

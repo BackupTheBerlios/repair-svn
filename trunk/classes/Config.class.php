@@ -1,4 +1,5 @@
 <?php
+require_once 'Error.class.php';
 final class Config {
 	/*
 	 * Constanten voor databank
@@ -27,6 +28,17 @@ function error_handler($severity, $message, $filename, $lineno) {
 	if ( ! ($error_level & error_reporting ()) || ! (ini_get ('display_errors') || ini_get ('log_errors')))
         return;
     $error = "<p><em>".$message.":</em> ". $filename." op lijn".$lineno;
+    try{
+	    $user = "";
+	    if(isset($_SESSION['userid'])){
+	    	$user = new User($_SESSION['userid']);
+	    	$user = $user->getGebruikersnaam();
+	    }
+	    new Error("", $message, $filename, $lineno, $user);
+    }
+    catch (Exception $e){
+    	//doe niets anders is er een oneindige error lus :(
+    }
     showError($error);
 }
 
@@ -39,6 +51,17 @@ function error_handler($severity, $message, $filename, $lineno) {
  */
 function exception_handler($exception){
 	$error = "<em>".$exception->getMessage()."</em><br/>(line ".$exception->getLine()." in ".$exception->getFile().")";
+	try{
+	    $user = "";
+	    if(isset($_SESSION['userid'])){
+	    	$user = new User($_SESSION['userid']);
+	    	$user = $user->getGebruikersnaam();
+	    }
+	    new Error("", $exception->getMessage(), $exception->getFile(), $exception->getLine(), $user);
+    }
+    catch (Exception $e){
+    	//doe niets anders is er een oneindige error lus :(
+    }
 	showError($error);
 }
 
