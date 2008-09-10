@@ -65,7 +65,7 @@
 									echo "<li><a href='personeelAdmin.php?homeId=".$home->getId()."'>Home ".$home->getKorteNaam()."</a></li>"
 							 ?>
 							 </ul>
-							 <p>U kunt ook <a href='personeelAdminBeheerders.php'>beheerders aanmaken</a> en <a href='personeelAdminHomes.php'>homes aanmaken en bewerken</a></p>
+							 <p>U kunt ook <a href='personeelAdminBeheerders.php'>beheerders aanmaken</a> en <a href='personeelAdminHomes.php'>homes</a> en <a href='personeelAdminCategorie.php'>categorieën</a> aanmaken en bewerken</p>
 						<?}
 						else{ 
 							$currentHome = new Home($_GET['homeId']);	

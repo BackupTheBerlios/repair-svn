@@ -95,20 +95,26 @@
 									// vergelijking van huidigelijst met ingevuldeLijst. Alle velden van huidigeLijst moeten overblijven + velden die in ingevuldeLijst zitten zonder duplicates te maken
 									
 									$allesok = true;
-									foreach($ingevuldeLijst as $veldid)
-									
-									// TODO: een treffelijk algoritme voor dit probleem
-									foreach($ingevuldeLijst as $veldid) {
+									foreach($ingevuldeLijst as $veldid){
 										$veld = new Veld($veldid);
-										$positie = 0; // positie om het Veld in te voegen in HuidigeLijst (adhv de Locatie en categorie)
-										if ($veld->getVerwijderd()) { // veld zal niet in huidigeLijst zitten
-											for ($i = 0; $i < sizeof($huidigeLijst); $i++) {
-												$huidigVeld = $huidigeLijst[$i];
-												if ($huidigVeld->getCategorie()->getLocatie() == $veld->getCategorie()->getLocatie() &&
-													$huidigVeld->getCategorie()->getNaamNL() == $veld->getCategorie()->getNaamNL())
-													$positie = $i;
+										if ($veld->getVerwijderd())
+											$allesok = false;
+									}
+									
+									if(!$allesok){
+										// TODO: een treffelijk algoritme voor dit probleem
+										foreach($ingevuldeLijst as $veldid) {
+											$veld = new Veld($veldid);
+											$positie = 0; // positie om het Veld in te voegen in HuidigeLijst (adhv de Locatie en categorie)
+											if ($veld->getVerwijderd()) { // veld zal niet in huidigeLijst zitten
+												for ($i = 0; $i < sizeof($huidigeLijst); $i++) {
+													$huidigVeld = $huidigeLijst[$i];
+													if ($huidigVeld->getCategorie()->getLocatie() == $veld->getCategorie()->getLocatie() &&
+														$huidigVeld->getCategorie()->getNaamNL() == $veld->getCategorie()->getNaamNL())
+														$positie = $i;
+												}
+												array_splice($huidigeLijst, $positie, 0, array($veld));
 											}
-											array_splice($huidigeLijst, $positie, 0, array($veld));
 										}
 									}
 									
