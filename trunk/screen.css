@@ -1324,6 +1324,7 @@ input.prefix{width:40px;}
 input.pagina{width: 25px;}
 input.adres{width: 140px;}
 input.naam{width: 110px;}
+input.inputCheckbox{border: 0px;}
 img.page{vertical-align: middle}
 .filter input{width:80px;}
 .langedatum{width: 130px;}

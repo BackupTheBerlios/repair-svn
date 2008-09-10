@@ -69,7 +69,7 @@
 										echo "Home ".$home->getKorteNaam()."<br/>";
 									}
 									echo("</td><td class='mails'>");
-									echo("<input type='checkbox' disabled='true' id='mails_$id' value='".$p->getMails()."' "); echo $p->getMails()?"checked='".$p->getMails()."'":"" ; echo("/>");
+									echo("<input type='checkbox' class='inputCheckbox' disabled='true' id='mails_$id' value='".$p->getMails()."' "); echo $p->getMails()?"checked='".$p->getMails()."'":"" ; echo("/>");
 									echo("</td><td class='img1'><img src='images/page_edit.gif' /></td><td class='img2'><img src='images/page_delete.gif' /></td></tr>");
 								}
 								echo("<tr><td>x</td><td class='edit' id='gebruikersnaam'><input type='text'/></td><td id='voornaam'></td><td id='achternaam'></td><td class='homes'>");

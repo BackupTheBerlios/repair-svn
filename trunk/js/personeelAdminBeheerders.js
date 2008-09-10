@@ -31,7 +31,7 @@ function bewerk(){
 			var waarde = rij.find(".homes").html();
 			var tekst = "<input type='hidden' value='"+waarde+"'/>";
 			for(var i in data){
-				tekst +="<label for='home_"+i+"' ><input type='checkbox' ";
+				tekst +="<label for='home_"+i+"' ><input class='inputCheckbox' type='checkbox' ";
 				if(rij.find(".homes").html().indexOf(data[i])!=-1)
 					tekst += "checked=checked ";
 				tekst += "id='home_"+i+"' name='home_"+i+"' class='Home "+data[i]+"' value='"+i+"'/>Home "+data[i]+"</label><br/>";
