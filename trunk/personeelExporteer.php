@@ -20,6 +20,8 @@
 	
 		//headers
 		header("Expires: 0");
+		header("Pragma: public");
+		header("Cache-Control: max-age=0");
 		header("Cache-control: private");
 		header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
 		header("Content-Description: File Transfer");

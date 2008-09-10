@@ -76,9 +76,9 @@
 								$l = Home::getHomes();
 								foreach($l as $home){
 									echo("
-									<label for='home_".$home->getId()."' ><input type='checkbox' id='home_".$home->getId()."' name='home_".$home->getId()."' class='Home ".$home->getKorteNaam()."' value='".$home->getId()."'/>Home ".$home->getKorteNaam()."</label><br/>");
+									<label for='home_".$home->getId()."' ><input type='checkbox' id='home_".$home->getId()."' name='home_".$home->getId()."' class='Home ".$home->getKorteNaam()." inputCheckbox' value='".$home->getId()."'/>Home ".$home->getKorteNaam()."</label><br/>");
 								}
-								echo("</td><td class='mails' id='mails'><input type='checkbox'/></td><td class='img'><img src='images/page_add.gif'/></td><td></td></tr>");
+								echo("</td><td class='mails' id='mails'><input type='checkbox' class='inputCheckbox'/></td><td class='img'><img src='images/page_add.gif'/></td><td></td></tr>");
 							?>
 						</table>
 					</div>
