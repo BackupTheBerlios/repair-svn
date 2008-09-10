@@ -39,6 +39,60 @@ class Error {
 		}
 	}
 	
+	/**
+	 * @return unknown
+	 */
+	public function getDatum() {
+		return $this->datum;
+	}
+	
+	/**
+	 * @return unknown
+	 */
+	public function getFile() {
+		return $this->file;
+	}
+	
+	/**
+	 * @return unknown
+	 */
+	public function getId() {
+		return $this->id;
+	}
+	
+	/**
+	 * @return unknown
+	 */
+	public function getLijn() {
+		return $this->lijn;
+	}
+	
+	/**
+	 * @return unknown
+	 */
+	public function getMelding() {
+		return $this->melding;
+	}
+	
+	/**
+	 * @return unknown
+	 */
+	public function getUser() {
+		return $this->user;
+	}
+
+public function toArray(){
+		$lijst = array();
+		$lijst['id'] = $this->id;
+		$lijst['datum'] = date("Y-m-d",strtotime($this->datum));
+		$lijst['melding'] = $this->melding;
+		$f = explode("/", $this->file);
+		$lijst['file'] = $f[sizeof($f)-1];
+		$lijst['lijn'] = $this->lijn;
+		$lijst['user'] = $this->user;
+		return $lijst;
+	}
+	
 }
 
 ?>
