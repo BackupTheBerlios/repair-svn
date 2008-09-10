@@ -41,7 +41,7 @@
 	</head>
 	<body>
 		<div id="container">
-			<?new Header(array("#"), array("Index")); ?>
+			<?new Header(array("index.php","#"), array("Index", "Error")); ?>
 			<div id="main">
 				<?new Menu(""); ?>
 				<div id="content" class="small">

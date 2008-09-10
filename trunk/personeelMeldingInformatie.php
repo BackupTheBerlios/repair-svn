@@ -47,7 +47,7 @@
 	</head>
 	<body>
 		<div id="container">
-			<?new Header(array("#"), array("Index")); ?>
+			<?new Header(array("index.php","personeelOverzicht.php", "#"), array("Index", "Overzicht", "Formulier")); ?>
 			<div id="main">
 				<?new Menu("Overzicht"); ?>
 				<div id="content" class="normal">

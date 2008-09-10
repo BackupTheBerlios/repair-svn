@@ -44,7 +44,7 @@
 	</head>
 	<body>
 		<div id="container">
-			<?new Header(array("#"), array("Index")); ?>
+			<?new Header(array("index.php","#"), array("Index", "Melding doorgeven")); ?>
 			<div id="main">
 				<?new Menu(""); ?>
 				<div id="content" class="normal">

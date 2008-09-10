@@ -45,7 +45,14 @@
 	</head>
 	<body>
 		<div id="container">
-			<?new Header(array("#"), array("Index")); ?>
+			<?
+			if($_GET['homeId']=="") 
+				new Header(array("index.php","#"), array("Index", "Beheer")); 
+			else{
+				$h = new Home($_GET['homeId']);
+				new Header(array("index.php","personeelAdmin.php","#"), array("Index", "Beheer", "Home ".$h->getKorteNaam()));
+			}	
+			?>
 			<div id="main">
 				<?new Menu("Beheer"); ?>
 				<div id="content" class="normal">

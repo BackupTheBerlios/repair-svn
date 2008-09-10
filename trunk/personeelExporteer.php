@@ -102,7 +102,7 @@
 	</head>
 	<body>
 		<div id="container">
-			<?new Header(array("#"), array("Index")); ?>
+			<?new Header(array("index.php","personeelOverzicht.php","#"), array("Index", "Overzicht", "Exporteer")); ?>
 			<div id="main">
 				<?new Menu("Exporteren"); ?>
 				<div id="content" class="normal">

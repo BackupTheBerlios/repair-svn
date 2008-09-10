@@ -2,7 +2,7 @@
 require_once 'Taal.class.php';
 require_once 'Auth.class.php';
 class Header{
-	public function __construct(){
+	public function __construct($pagina, $naam){
 		$taal = new Taal();
 		$auth = new Auth(false);
 		echo("<div id='topbar'> <div id='language'><ul class='swapUnderline'>");
@@ -32,9 +32,13 @@ class Header{
 			<div id='headerright'> </div> 
 		</div> ");
 		echo("<div id='breadcrumb' class='swapUnderline'>
-			<span>".$taal->msg('u_bent_hier')."</span>
-			<a class='br-act' href='#'>Home</a> 
-		</div> ");
+			<span>".$taal->msg('u_bent_hier')."</span>");
+		$r="";
+		foreach($pagina as $key => $value){
+			$r.=" <a class='br-act' href='$value'>".$taal->msg($naam[$key])."</a> >";
+		}
+		echo substr($r, 0, -2);
+		echo("</div> ");
 		
 	}
 }

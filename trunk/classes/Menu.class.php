@@ -16,7 +16,7 @@ class Menu{
 			echo self::generateItem("index.php", $taal->msg('Index'));
 			if($a->isLoggedIn()){//zijn we ingelogd?
 				if($a->getUser()->isPersoneel()){//zijn we personeel?
-						echo self::generateItem("personeelAdmin.php", "Beheer", true);
+						echo self::generateItem("personeelAdmin.php", "Beheer", true, true);
 						if($categorie == "Beheer"){//submenu beheer
 							echo"<ul>";
 							echo(self::generateItem("personeelAdminHomes.php","Beheer Homes"));

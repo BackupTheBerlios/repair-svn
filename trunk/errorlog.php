@@ -1,6 +1,7 @@
 <? 
 	session_start(); 
 	require_once 'classes/Config.class.php';
+	require_once 'AccessException.php';
 	require_once 'Menu.class.php';
 	require_once 'Header.class.php';
 	require_once 'Footer.class.php';

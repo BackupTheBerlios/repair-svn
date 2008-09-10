@@ -62,7 +62,7 @@
 	</head>
 	<body>
 		<div id="container">
-			<?new Header(array("#"), array("Index")); ?>
+			<?new Header(array("index.php","#"), array("Index", "Melding_bewerken")); ?>
 			<div id="main">
 				<?new Menu("Melding"); ?>
 				<div id="content" class="normal">

@@ -43,7 +43,7 @@
 	</head>
 	<body>
 		<div id="container">
-			<?new Header(array("#"), array("Index")); ?>
+			<?new Header(array("index.php","personeelAdmin.php","#"), array("Index", "Beheer", "Categorieën")); ?>
 			<div id="main">
 				<?new Menu("Beheer"); ?>
 				<div id="content" class="normal">

@@ -41,7 +41,7 @@
 	</head>
 	<body>
 		<div id="container">
-			<?new Header(array("#"), array("Index")); ?>
+			<?new Header(array("index.php","#"), array("Index", "Statistieken")); ?>
 			<div id="main">
 				<?new Menu(""); ?>
 				<div id="content" class="normal">
@@ -55,7 +55,7 @@
 						if ($auth->getUser()->isPersoneel()) { // personeel
 						?>
 							<h1>Statistieken</h1>
-							<p class="disclaimer">Hier vindt u de statistieken over deze applicatie.</p>
+							<p class="disclaimer">Hier vindt u binnenkort de statistieken over deze applicatie.</p>
 						<?
 						}
 					}
