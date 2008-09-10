@@ -9,6 +9,8 @@
 	require_once 'Taal.class.php';
 	require_once 'Error.class.php';
 	$auth = new Auth(true);
+	if(!$auth->getUser()->isPersoneel())
+		throw new AccessException();
 	$taal = new Taal();
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
