@@ -7,7 +7,7 @@ require_once 'Student.class.php';
 require_once 'Personeel.class.php';
 require_once 'Home.class.php';
 
-$from = "bert.vandeghinste+noreplywantikbengeenhuisvesting@gmail.com";
+$from = "Online Herstelformulier <huisvesting@UGent.be>";
 /*
 $email_student_subject_nl = "Controle herstelling";
 $email_student_body_nl = "Beste,\n\nEén van uw herstellingen werd een eindje geleden doorgegeven aan de herstellingsdienst. Wij hebben echter nog niet gehoord van u of deze herstelling uitgevoerd is, of dat u nog opmerkingen heeft. Met deze informatie kunnen we onze diensten verbeteren. Gelieve daarom in te loggen op https://chaos.ugent.be/test_herstelformulier/repair/studentMeldingEvalueren.php en ze zo te evalueren.\n\nDank bij voorbaat,\nhet webteam.";
@@ -36,7 +36,7 @@ foreach ($list as $formulier) {
 }*/
 
 // doorzenden naar Homemanager als er nieuwe herstelformulieren zijn
-$list = Herstelformulier::getList(0, new Status("ongezien"));
+/*$list = Herstelformulier::getList(0, new Status("ongezien"));
 $count = array();
 foreach ($list as $formulier) {
 	$count[$formulier->getHome()->getId()] = $count[$formulier->getHome()->getId()] + 1;
@@ -58,5 +58,19 @@ foreach ($beheerders as $personeel) {
 			//$mailer->send(array($personeel->getEmail()));
 		}			
 	}
+}*/
+
+$beheerders = Personeel::getBeheerders();
+foreach ($beheerders as $personeel) {
+	$mailer = new Mailer();
+	$mailer->setHTMLCharset("UTF-8");
+	$mailer->setFrom($from);
+	$aantal = sizeof(Herstelformulier::getPersoneelList($personeel->getHomeStringLijst(), new Status("ongezien")));
+	if($aantal>0){
+		$mailer->setSubject("[Herstelformulieren] ".$aantal." ongezien");
+		$mailer->setText("Beste,\n\nEr zijn ".$aantal." ongeziene herstelformulieren uit de homes waarvoor u verantwoordelijk bent. Gelieve hiervoor in te loggen op http://herstelformulier.ugent.be .");
+		$mailer->send(array($personeel->getEmail()));
+	}
 }
+
 ?>
