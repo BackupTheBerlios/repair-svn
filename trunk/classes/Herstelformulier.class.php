@@ -333,6 +333,52 @@ class Herstelformulier {
 	}
 	
 	/**
+	 * Geeft een lijst van Herstelformulieren terug. De eerste parameter zijn de homes van de herstelformulieren, de tweede parameter is de status
+	 *
+	 * @param integer(optioneel) $userId
+	 * @param Status(optioneel) $status
+	 * @return list<Status=>Herstelformulier>
+	 */
+	static function getPersoneelList($homes, $searchStatus = "") {
+		$db = DB::getDB();
+		$lijst = Array();
+		if(sizeof($homes)<1)
+			throw new BadParameterException("Je moet minstens 1 home opgeven voor de methode getPersoneelList");
+		
+		$homequery = "(";
+		foreach($homes as $home){
+			$homequery.= "home.korteNaam = '$home' OR ";
+		}
+		$homequery = substr($homequery, 0, -3).")";
+		
+		if ($searchStatus == "") {
+			$statement = $db->prepare("SELECT herstelformulier.id, status FROM herstelformulier INNER JOIN home ON (herstelformulier.homeId = home.id) WHERE $homequery ORDER BY status, datum DESC");
+		}
+		else {
+			if (!is_a($searchStatus, "Status")) throw new BadParameterException("supplied status is no Status object");
+			
+			$statement = $db->prepare("SELECT herstelformulier.id, status FROM herstelformulier INNER JOIN home ON (herstelformulier.homeId = home.id) WHERE $homequery AND status = ? ORDER BY datum DESC");
+			$statement->bind_param('s', $searchStatus->getValue());
+		}
+		$statement->execute();
+		$statement->bind_result($id, $status);
+		$statement->store_result();
+		while ($statement->fetch()) {
+			if (!isset($lijst[$status])) $lijst[$status] = Array();
+			$tmp = $lijst[$status];
+			$tmp[] = new Herstelformulier($id);
+			$lijst[$status] = $tmp;
+		}
+		$statement->free_result();
+		$statement->close();
+		
+		if ($searchStatus == "")
+			return $lijst;
+		else
+			return $lijst[$searchStatus->getValue()];
+	}
+	
+	/**
 	 * geeft een lijst van maximaal $aantal items terug met Herstelformulier objecten horende bij het opgegeven userid
 	 *
 	 * @param integer $userId

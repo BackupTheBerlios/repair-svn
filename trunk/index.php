@@ -79,6 +79,10 @@
 									<li><?=$taal->msg('overzicht_aanvragen');?></li>
 								</ul>
 								<div id="verwijderconfirm" style="display:none"><?=$taal->msg('confirm_verwijder') ?></div>
+								<?
+									$lijst = Herstelformulier::getLatest($auth->getUser()->getId());
+									if(sizeof($lijst) > 0){
+								?>
 								<table>
 									<tr class="tabelheader"><td colspan="6"><?=$taal->msg('overzicht_herstellingen') ?></td></tr>
 									<?
@@ -108,7 +112,7 @@
 										echo("</tbody>");
 									 ?>
 								</table>
-								
+								<?} ?>
 							</div>
 						<?}
 						else{//personeel?>
@@ -117,9 +121,11 @@
 							<table>
 								<tr class="tabelheader"><td colspan="6">Overzicht van herstellingen die niet afgewerkt zijn</td></tr>
 								<?
-								$lijst = Herstelformulier::getList(0, new Status("ongezien"));
+								$items = false;
+								$lijst = Herstelformulier::getPersoneelList($auth->getUser()->getHomeStringLijst(), new Status("ongezien"));
 								$size = sizeof($lijst);
 								if ($size > 0) {
+									$items = true;
 								?>
 								<tr class="subheader"><td colspan="5">Ongeziene herstellingen</td></tr>
 								<tbody>
@@ -147,9 +153,10 @@
 								<?
 								}
 								
-								$lijst = Herstelformulier::getList(0, new Status("gedaan"));
+								$lijst = Herstelformulier::getPersoneelList($auth->getUser()->getHomeStringLijst(), new Status("gedaan"));
 								$size = sizeof($lijst);
 								if ($size > 0) {
+										$items = true;
 		 						?>
 								<tr class="subheader"><td colspan="5">Doorgegeven herstellingen die nog niet afgesloten zijn</td></tr>
 								<tbody>
@@ -168,7 +175,10 @@
 									}
 								 ?>
 								</tbody>
-								<? } ?>
+								<? } 
+								if(!$items)
+									echo("<tr><td colspan='6'>Er zijn geen openstaande herstellingen voor de homes waarvoor u verantwoordelijk bent.</td></tr>");
+								?>
 							</table>
 						<?}
 					} 

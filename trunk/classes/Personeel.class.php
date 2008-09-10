@@ -129,6 +129,14 @@ class Personeel extends User {
 		return $lijst;
 	}
 	
+	function getHomeStringLijst(){
+		$l = self::getHomesLijst();
+		$lijst = array();
+		foreach($l as $h)
+			$lijst[]=$h->getKorteNaam();
+		return $lijst;
+	}
+	
 	function setHomes($lijst){
 		//eerst huidige homes wissen
 		$statement = $this->db->prepare("DELETE FROM relatie_personeel_home WHERE personeelId=?");
