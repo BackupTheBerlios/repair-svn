@@ -1,18 +1,18 @@
 <?php
 	include ("../classes/jpgraph/jpgraph.php");
-	include ("../classes/jpgraph/pgraph_line.php");
+	include ("../classes/jpgraph/jpgraph_line.php");
 	require_once '../classes/Config.class.php';
 	require_once '../classes/Categorie.class.php';
 	require_once '../classes/Herstelformulier.class.php';
 	
-	$kleuren = array("dodgerblue3", "firebrick3", "gold2", "goldenrod3", "gray4", "green", "hotpink3");
+	$kleuren = array("dodgerblue3", "firebrick3", "gold2", "goldenrod3", "gray4", "hotpink3", "indianred4", "khaki", "lavenderblush", "lemonchiffon");
 	
 	$cats = Categorie::getCategorien();//we halen eerst alle categorieën op
 	$data = array();
 	$eersteDag = '9999-00-00';
 	$laatsteDag = '0000-00-00';
 	foreach ($cats as $cat){
-		$lijst = Herstelformulier::getAantalFormulieren($cat, 1);
+		$lijst = Herstelformulier::getAantalFormulieren($cat, $_GET['homeId']);
 		if(sizeof($lijst)!=0){//categorie enkel gebruiken als er iets in zit
 			foreach ($lijst as $dag){
 				if($dag[0] < $eersteDag) $eersteDag=$dag[0];
@@ -42,11 +42,15 @@
 	}
 	
 	// Create the graph. These two calls are always required
-	$graph = new Graph(500,500,"auto");    
+	$graph = new Graph(600,400,"auto"); 
 	$graph->SetScale("textlin");
-	$graph->SetShadow();
-	$graph->img->SetMargin(40,30,20,40);
+	$graph->img->SetMargin(50,160,30,60);
 	
+	// Setup X-scale
+	$graph->xaxis->SetTickLabels($dagen);
+	$graph->xaxis->SetFont(FF_ARIAL,FS_NORMAL,8);
+	$graph->xaxis->SetLabelAngle(45);
+
 	//lineplots maken
 	$dplot=array();
 	$legende = array();
@@ -55,17 +59,20 @@
 		$legende[] = $naam;
 	}
 	//kleuren instellen
-	foreach ($dplot as $key=>$value)
-		$value->SetFillColor($kleuren[$key]);
+	foreach ($dplot as $key=>$value){
+		$value->SetFillColor($kleuren[$key%10]);
+		$value->SetLegend($legende[$key]);
+	}
 	
 	// Create the accumulated graph
 	$accplot = new AccLinePlot($dplot);
 	
 	// Add the plot to the graph
 	$graph->Add($accplot);
+	$graph->title->Set ("Aantal defecten per categorie");
+	$graph->legend->Pos(0.05,0.2,"right","center");
 	
 	$graph->xaxis->SetTextTickInterval(2);
-	$graph->xaxis->title->Set("Datum");
 	$graph->yaxis->title->Set("Aantal");
 	
 	$graph->title->SetFont(FF_FONT1,FS_BOLD);

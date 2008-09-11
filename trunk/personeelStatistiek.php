@@ -56,6 +56,7 @@
 						?>
 							<h1>Statistieken</h1>
 							<p class="disclaimer">Hier vindt u binnenkort de statistieken over deze applicatie.</p>
+							<img src='graphs/tijd_formulier.php' alt='grafiekje'/>
 						<?
 						}
 					}
