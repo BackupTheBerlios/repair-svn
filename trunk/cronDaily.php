@@ -10,7 +10,7 @@ require_once 'Home.class.php';
 $from = "Online Herstelformulier <huisvesting@UGent.be>";
 /*
 $email_student_subject_nl = "Controle herstelling";
-$email_student_body_nl = "Beste,\n\nEén van uw herstellingen werd een eindje geleden doorgegeven aan de herstellingsdienst. Wij hebben echter nog niet gehoord van u of deze herstelling uitgevoerd is, of dat u nog opmerkingen heeft. Met deze informatie kunnen we onze diensten verbeteren. Gelieve daarom in te loggen op https://chaos.ugent.be/test_herstelformulier/repair/studentMeldingEvalueren.php en ze zo te evalueren.\n\nDank bij voorbaat,\nhet webteam.";
+$email_student_body_nl = "Beste,\n\nEï¿½n van uw herstellingen werd een eindje geleden doorgegeven aan de herstellingsdienst. Wij hebben echter nog niet gehoord van u of deze herstelling uitgevoerd is, of dat u nog opmerkingen heeft. Met deze informatie kunnen we onze diensten verbeteren. Gelieve daarom in te loggen op https://chaos.ugent.be/test_herstelformulier/repair/studentMeldingEvalueren.php en ze zo te evalueren.\n\nDank bij voorbaat,\nhet webteam.";
 $email_student_subject_en = "Repair check";
 $email_student_body_en = "Dear,\n\nWe notified the repairteam of the defects you reported and we still need to hear from you if the repairs were successfull. We can use this information to improve our service. Can you please login onto https://chaos.ugent.be/test_herstelformulier/repair/studentMeldingEvalueren.php and evaluate them that way.\n\nThanks in advance,\nThe Webteam.";
 
@@ -67,7 +67,7 @@ foreach ($beheerders as $personeel) {
 	$mailer->setFrom($from);
 	$aantal = sizeof(Herstelformulier::getPersoneelList($personeel->getHomeStringLijst(), new Status("ongezien")));
 	if($aantal>0){
-		$mailer->setSubject("[Herstelformulieren] ".$aantal." ongezien");
+		$mailer->setSubject("[Herstelformulieren] ".$aantal." ongeziene formulieren");
 		$mailer->setText("Beste,\n\nEr zijn ".$aantal." ongeziene herstelformulieren uit de homes waarvoor u verantwoordelijk bent. Gelieve hiervoor in te loggen op http://herstelformulier.ugent.be .");
 		$mailer->send(array($personeel->getEmail()));
 	}

@@ -24,7 +24,7 @@ class Menu{
 							echo(self::generateItem("personeelAdminCategorie.php","Beheer Categorieën"));
 							$lijst = $a->getUser()->getHomesLijst();
 							foreach($lijst as $home){
-								echo(self::generateItem("personeelAdmin.php?homeId=".$home->getId(),"Beheer Home ".$home->getKorteNaam(), false, true));
+								echo(self::generateItem("personeelAdmin.php?homeId=".$home->getId(),"Home ".$home->getKorteNaam(), false, true));
 							}
 							echo"</ul></li>";
 						}
