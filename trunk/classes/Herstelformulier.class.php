@@ -452,6 +452,31 @@ class Herstelformulier {
 		
 		return $lijst;
 	}
+	
+	/**
+	 * statistiek functies
+	 */
+	static function getAantalFormulieren($categorie, $homeId=""){
+		$db = DB::getDB();
+		if($homeId==""){
+			$statement = $db->prepare("SELECT count(datum), DATE(datum) FROM herstelformulier INNER JOIN relatie_herstelformulier_velden ON (herstelformulier.id=relatie_herstelformulier_velden.herstelformulierId) INNER JOIN velden ON (relatie_herstelformulier_velden.veldId=velden.id) INNER JOIN categorie ON (velden.categorieId = categorie.id) WHERE categorie.naamNL=? GROUP BY DATE(datum) ORDER BY datum ASC");
+			$statement->bind_param('s', $categorie);
+		}
+		else{
+			$statement = $db->prepare("SELECT count(datum), DATE(datum) FROM herstelformulier INNER JOIN relatie_herstelformulier_velden ON (herstelformulier.id=relatie_herstelformulier_velden.herstelformulierId) INNER JOIN velden ON (relatie_herstelformulier_velden.veldId=velden.id) INNER JOIN categorie ON (velden.categorieId = categorie.id) WHERE categorie.naamNL=? AND velden.homeId=? GROUP BY DATE(datum) ORDER BY datum ASC");
+			$statement->bind_param('si', $categorie, $homeId);
+		}
+		$statement->execute();
+		$statement->bind_result($aantal, $datum);
+		$statement->store_result();
+		while ($statement->fetch())
+			$lijst[] = array($datum, $aantal);
+		$statement->free_result();
+		$statement->close();
+		
+		return $lijst;
+		
+	}
 }
 
 ?>
