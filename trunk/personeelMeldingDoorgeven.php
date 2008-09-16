@@ -105,6 +105,15 @@
 								<td colspan="3"></td>
 								<td><button name="submit" id="submit" type="submit" onclick="geefDoor('<?=$formid;?>', 0);">Doorgegeven</button></td>
 							</tr>
+							<?
+							foreach ($formulier->getVeldenlijst() as $veldid) {
+								$veld = new Veld($veldid);
+								?>
+								<tr class="referentienummer" style="display:none"><td>Referentienummer <?=$veld->getNaamNL()?>:</td><td colspan='3'><input type='text' name='factuurnummer' id='factuurnummer_<?=$velid;?>'/></td></tr>
+								<?
+							}
+							?>
+							<tr id='laatsterow' style="display:none"><td colspan='3'></td><td><button name='submit' id='submit' type='submit' onclick='geefDoor('<?=$formid?>', 1);'>Doorgegeven</button></td></tr>
 							</table>
 						</div>
 					</div>
