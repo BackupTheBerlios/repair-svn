@@ -109,7 +109,7 @@
 							foreach ($formulier->getVeldenlijst() as $veldid) {
 								$veld = new Veld($veldid);
 								?>
-								<tr class="referentienummer" style="display:none"><td>Referentienummer <?=$veld->getNaamNL()?>:</td><td colspan='3'><input type='text' name='factuurnummer' id='factuurnummer_<?=$velid;?>'/></td></tr>
+								<tr class="referentienummer" style="display:none"><td>Referentienummer <?=$veld->getNaamNL()?>:</td><td colspan='3'><input type='text' class='factuurnummer' name='factuurnummer' id='<?=$veldid;?>'/></td></tr>
 								<?
 							}
 							?>

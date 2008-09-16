@@ -6,8 +6,14 @@ function geefDoor(formid, fase){
 		$("#submitrow").hide();
 		$("#laatsterow").show();
 	} else {
-		var factuurnummer = $("#factuurnummer").val();
-		$.post("ajax/doorgevenMelding.php", { "formid": formid, "factuurnummer": factuurnummer }, 
+		var factuurnummers = new Array();
+		$(".referentienummer").each(function(el){
+			var factuurrow = $(this).find(".factuurnummer");
+			var id = factuurrow.attr("id");
+			var nummer = factuurrow.val();
+			factuurnummers[id] = nummer;
+		});	
+		$.post("ajax/doorgevenMelding.php", { "formid": formid, "factuurnummers": $.toJSON(factuurnummers) }, 
 			function(data){
 				if (data == "SUCCESS")
 					$("#beforecontent").before('<div><h1>Succes</h1><p>De melding werd doorgegeven en als "gedaan" gemarkeerd.</p></div>').hide();

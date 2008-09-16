@@ -252,11 +252,11 @@ INSERT INTO `velden` VALUES  (1,'Lamp boven lavabo','Lamp above the sink',1,1,0)
 -- Dumping data for table `herstelformulier`
 -- 
 
-INSERT INTO `herstelformulier` (`id`, `factuurnummer`, `datum`, `status`, `userId`, `kamer`, `homeId`, `opmerking`) VALUES 
-(1, '0', '2008-06-26 20:14:29', 'ongezien', 2, '91.01.240.030', 1, ''),
-(2, '0', '2008-06-25 20:14:58', 'gezien', 1, '91.01.230.012', 1, 'Dit herstelformulier is al gezien, maar nog niet uitgevoerd.'),
-(3, '0', '2008-06-17 20:15:45', 'gedaan', 1, '91.01.230.012', 1, 'Dit herstelformulier is uitgevoerd, maar niet geevalueerd.'),
-(4, '0', '2008-06-03 20:16:03', 'afgesloten', 2, '91.01.240.030', 1, 'Dit herstelformulier is uitgevoerd en afgesloten door de student.');
+INSERT INTO `herstelformulier` (`id`, `datum`, `status`, `userId`, `kamer`, `homeId`, `opmerking`) VALUES 
+(1, '2008-06-26 20:14:29', 'ongezien', 2, '91.01.240.030', 1, ''),
+(2, '2008-06-25 20:14:58', 'gezien', 1, '91.01.230.012', 1, 'Dit herstelformulier is al gezien, maar nog niet uitgevoerd.'),
+(3, '2008-06-17 20:15:45', 'gedaan', 1, '91.01.230.012', 1, 'Dit herstelformulier is uitgevoerd, maar niet geevalueerd.'),
+(4, '2008-06-03 20:16:03', 'afgesloten', 2, '91.01.240.030', 1, 'Dit herstelformulier is uitgevoerd en afgesloten door de student.');
 
 --
 -- Dumping data for table `personeel`
@@ -269,15 +269,15 @@ INSERT INTO `personeel` VALUES  (1,0,0),
 -- Dumping data for table `relatie_herstelformulier_velden`
 -- 
 
-INSERT INTO `relatie_herstelformulier_velden` (`herstelformulierId`, `veldId`) VALUES 
-(1, 2),
-(1, 6),
-(2, 8),
-(3, 4),
-(2, 4),
-(1, 15),
-(1, 7),
-(4, 1);
+INSERT INTO `relatie_herstelformulier_velden` (`herstelformulierId`, `veldId`, `referentienummer`) VALUES 
+(1, 2, '0'),
+(1, 6, '0'),
+(2, 8, '0'),
+(3, 4, '0'),
+(2, 4, '0'),
+(1, 15, '0'),
+(1, 7, '0'),
+(4, 1, '0');
 
 
 --

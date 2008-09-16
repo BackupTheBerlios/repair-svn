@@ -39,7 +39,6 @@ CREATE TABLE `categorie` (
 DROP TABLE IF EXISTS `herstelformulier`;
 CREATE TABLE `herstelformulier` (
   `id` int(11) NOT NULL auto_increment,
-  `factuurnummer` int(11) NOT NULL,
   `datum` datetime NOT NULL,
   `status` enum('ongezien','gezien','gedaan','afgesloten') NOT NULL,
   `userId` int(11) NOT NULL,
@@ -97,6 +96,7 @@ DROP TABLE IF EXISTS `relatie_herstelformulier_velden`;
 CREATE TABLE `relatie_herstelformulier_velden` (
   `herstelformulierId` int(11) NOT NULL,
   `veldId` int(11) NOT NULL,
+  `referentienummer` int(11) NOT NULL,
   KEY `herstelformulierId` (`herstelformulierId`),
   KEY `veldId` (`veldId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;

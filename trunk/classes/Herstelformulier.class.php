@@ -10,7 +10,6 @@ class Herstelformulier {
 	protected $db;
 	
 	private $id;
-	private $factuurnummer;
 	private $datum;
 	private $status;
 	private $studentId;
@@ -77,10 +76,10 @@ class Herstelformulier {
 			if (!is_numeric($id)) throw new BadParameterException();
 			
 			$this->id = $id;
-			$statement = $this->db->prepare("SELECT datum, factuurnummer, status, userId, kamer, homeId, opmerking FROM herstelformulier WHERE id = ? LIMIT 1");
+			$statement = $this->db->prepare("SELECT datum, status, userId, kamer, homeId, opmerking FROM herstelformulier WHERE id = ? LIMIT 1");
 			$statement->bind_param('i', $this->id);
 			$statement->execute();
-			$statement->bind_result($this->datum, $this->factuurnummer, $status, $this->studentId, $kamer, $this->homeId, $this->opmerking);
+			$statement->bind_result($this->datum, $status, $this->studentId, $kamer, $this->homeId, $this->opmerking);
 			$statement->fetch();
 			$statement->close();
 			$this->status = new Status($status);
@@ -268,13 +267,18 @@ class Herstelformulier {
 			return substr($output, 0, -2);
 	}
 	
-	public function getFactuurnummer() {
-		return $this->factuurnummer;	
+	public function getFactuurnummer($veldid) {
+		$statement = $this->db->prepare("SELECT referentienummer FROM relatie_herstelformulier_veld WHERE veldid = ? AND herstelformulierId = ?");
+		$statement->bind_param('ii', $veldid, $this->id);
+		$statement->bind_result($referentienummer);
+		return $referentienummer;	
 	}
 	
-	public function setFactuurnummer($factuurnummer) {
-		$this->factuurnummer = $factuurnummer;
-		$this->updated = 1;
+	public function setFactuurnummer($veldid, $factuurnummer) {
+		$statement = $this->db->prepare("INSERT INTO relatie_herstelformulier_veld (herstelformulierId, veldId, referentienummer) VALUES (?, ?, ?)");
+		$statement->bind_param('iis', $this->id, $veldid, $factuurnummer);
+		$statement->execute();
+		$statement->close();
 	}
 	
 	public function toArray(){
