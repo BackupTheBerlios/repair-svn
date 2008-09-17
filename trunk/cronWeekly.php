@@ -10,9 +10,9 @@ require_once 'Home.class.php';
 $from = "Online Herstelformulier <huisvesting@UGent.be>";
 
 $email_student_subject_nl = "[Online herstelformulier] Controle herstelling";
-$email_student_body_nl = "Beste,\n\nEén van uw herstellingen werd een eindje geleden doorgegeven aan de hersteldienst. Graag hadden wij van u gehoord of deze herstelling uitgevoerd is en of u nog opmerkingen heeft. Met deze informatie kunnen we onze diensten verbeteren. Gelieve daarom in te loggen op http://herstelformulier.ugent.be en ze zo te evalueren.\n\nDank bij voorbaat,\nAfdeling Huisvesting.";
+$email_student_body_nl = "Beste,\n\nEï¿½n van uw herstellingen werd een eindje geleden doorgegeven aan de hersteldienst. Graag hadden wij van u gehoord of deze herstelling uitgevoerd is en of u nog opmerkingen heeft. Met deze informatie kunnen we onze diensten verbeteren. Gelieve daarom in te loggen op https://herstelformulier.ugent.be en ze zo te evalueren.\n\nDank bij voorbaat,\nAfdeling Huisvesting.";
 $email_student_subject_en = "[Online Repairform] Repair check";
-$email_student_body_en = "Dear,\n\nWe notified the repairteam of the defects you reported and we still need to hear from you if the repairs were successfull. We can use this information to improve our service. Can you please login onto http://herstelformulier.ugent.be and evaluate them that way.\n\nThanks in advance,\nHousing Department.";
+$email_student_body_en = "Dear,\n\nWe notified the repairteam of the defects you reported and we still need to hear from you if the repairs were successfull. We can use this information to improve our service. Can you please login onto https://herstelformulier.ugent.be and evaluate them that way.\n\nThanks in advance,\nHousing Department.";
 
 // overloop alle herstelformulieren die voldoen aan evaluatiecriteria
 $list = Herstelformulier::getEvaluationList();

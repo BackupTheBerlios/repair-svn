@@ -66,9 +66,9 @@ foreach ($beheerders as $personeel) {
 	$mailer->setHTMLCharset("UTF-8");
 	$mailer->setFrom($from);
 	$aantal = sizeof(Herstelformulier::getPersoneelList($personeel->getHomeStringLijst(), new Status("ongezien")));
-	if($aantal>0){
+	if($aantal>0 && $personeel->getMails()){
 		$mailer->setSubject("[Herstelformulieren] ".$aantal." ongeziene formulieren");
-		$mailer->setText("Beste,\n\nEr zijn ".$aantal." ongeziene herstelformulieren uit de homes waarvoor u verantwoordelijk bent. Gelieve hiervoor in te loggen op http://herstelformulier.ugent.be .");
+		$mailer->setText("Beste,\n\nEr zijn ".$aantal." ongeziene herstelformulieren uit de homes waarvoor u verantwoordelijk bent. Gelieve hiervoor in te loggen op https://herstelformulier.ugent.be .");
 		$mailer->send(array($personeel->getEmail()));
 	}
 }

@@ -72,7 +72,7 @@
 	$graph->title->Set ("Aantal defecten per categorie");
 	$graph->legend->Pos(0.05,0.2,"right","center");
 	
-	$graph->xaxis->SetTextTickInterval(2);
+	$graph->xaxis->SetTextTickInterval(1);
 	$graph->yaxis->title->Set("Aantal");
 	
 	$graph->title->SetFont(FF_FONT1,FS_BOLD);
