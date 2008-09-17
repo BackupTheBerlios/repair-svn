@@ -10,6 +10,7 @@ class Herstelformulier {
 	protected $db;
 	
 	private $id;
+	private $factuurnummer;
 	private $datum;
 	private $status;
 	private $studentId;
@@ -76,10 +77,10 @@ class Herstelformulier {
 			if (!is_numeric($id)) throw new BadParameterException();
 			
 			$this->id = $id;
-			$statement = $this->db->prepare("SELECT datum, status, userId, kamer, homeId, opmerking FROM herstelformulier WHERE id = ? LIMIT 1");
+			$statement = $this->db->prepare("SELECT datum, factuurnummer, status, userId, kamer, homeId, opmerking FROM herstelformulier WHERE id = ? LIMIT 1");
 			$statement->bind_param('i', $this->id);
 			$statement->execute();
-			$statement->bind_result($this->datum, $status, $this->studentId, $kamer, $this->homeId, $this->opmerking);
+			$statement->bind_result($this->datum, $this->factuurnummer, $status, $this->studentId, $kamer, $this->homeId, $this->opmerking);
 			$statement->fetch();
 			$statement->close();
 			$this->status = new Status($status);
@@ -217,7 +218,6 @@ class Herstelformulier {
 		if (is_a($status, "Status"))
 			$this->status = $status;
 		else throw new BadParameterException("supplied status is no Status object");
-		
 		$this->updated = 1;
 	}
 	
@@ -267,18 +267,28 @@ class Herstelformulier {
 			return substr($output, 0, -2);
 	}
 	
-	public function getFactuurnummer($veldid) {
-		$statement = $this->db->prepare("SELECT referentienummer FROM relatie_herstelformulier_veld WHERE veldid = ? AND herstelformulierId = ?");
-		$statement->bind_param('ii', $veldid, $this->id);
-		$statement->bind_result($referentienummer);
-		return $referentienummer;	
+	public function getFactuurnummer($veldid = 0) {
+		if ($veldid == 0) { // opmerking
+			return $this->factuurnummer;	
+		} else { // echt veld
+			$statement = $this->db->prepare("SELECT referentienummer FROM relatie_herstelformulier_velden WHERE veldId = ? AND herstelformulierId = ?");
+			$statement->bind_param('ii', $veldid, $this->id);
+			$statement->bind_result($referentienummer);
+			$statement->close();
+			return $referentienummer;	
+		}
 	}
 	
 	public function setFactuurnummer($veldid, $factuurnummer) {
-		$statement = $this->db->prepare("INSERT INTO relatie_herstelformulier_veld (herstelformulierId, veldId, referentienummer) VALUES (?, ?, ?)");
-		$statement->bind_param('iis', $this->id, $veldid, $factuurnummer);
-		$statement->execute();
-		$statement->close();
+			if ($veldid == 0) { // opmerking
+				$this->factuurnummer = $factuurnummer;
+				$this->updated = 1;
+			} else if ($veldid != NULL) { // echt veld
+				$statement = $this->db->prepare("UPDATE relatie_herstelformulier_velden SET referentienummer = ? WHERE herstelformulierId = ? AND veldId = ?");
+				$statement->bind_param('iii', $factuurnummer, $this->id, $veldid);
+				$statement->execute();
+				$statement->close();
+			}
 	}
 	
 	public function toArray(){

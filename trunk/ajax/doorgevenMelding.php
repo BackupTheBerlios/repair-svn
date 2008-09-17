@@ -14,11 +14,15 @@
 	if (!is_numeric($formid) || $formid < 1)
 		throw new BadParameterException("Formid is ongeldig");
 		
-	$factuurnummers = json_decode($_POST['factuurnummers']);
-		
+	$factuurnummers = json_decode(stripslashes($_POST['factuurnummers']));
+	
+	$opmerkingnummer = json_decode(stripslashes($_POST['opmerkingnummer']));
+
 	$herstelformulier = new Herstelformulier($formid);
-	foreach ($factuurnummers as $veldid => $factuurnummer)
-		$herstelformulier->setFactuurnummer($veldid, $factuurnummer);
+	foreach ($factuurnummers as $veldid => $factuurnummer) {
+			$herstelformulier->setFactuurnummer($veldid, $factuurnummer);
+	}
+	$herstelformulier->setFactuurnummer(0, $opmerkingnummer);
 	$herstelformulier->setStatus(new Status("gedaan"));
 	$herstelformulier->save();
 	

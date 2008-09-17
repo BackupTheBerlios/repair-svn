@@ -112,8 +112,13 @@
 								<tr class="referentienummer" style="display:none"><td>Referentienummer <?=$veld->getNaamNL()?>:</td><td colspan='3'><input type='text' class='factuurnummer' name='factuurnummer' id='<?=$veldid;?>'/></td></tr>
 								<?
 							}
+							if (strlen($formulier->getOpmerking()) > 0) {
+								?>
+								<tr id="opmerkingnummer" style="display:none"><td>Referentienummer bij de opmerking:</td><td colspan='3'><input type='text' class='factuurnummer' name='factuurnummer' id='opmerkingnr'/></td></tr>
+								<?
+							}
 							?>
-							<tr id='laatsterow' style="display:none"><td colspan='3'></td><td><button name='submit' id='submit' type='submit' onclick='geefDoor('<?=$formid?>', 1);'>Doorgegeven</button></td></tr>
+							<tr id='laatsterow' style="display:none"><td colspan='3'></td><td><button name='submit' id='submit' type='submit' onclick="geefDoor('<?=$formid;?>', 1);">Doorgegeven</button></td></tr>
 							</table>
 						</div>
 					</div>

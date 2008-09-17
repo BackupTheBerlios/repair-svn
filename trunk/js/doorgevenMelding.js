@@ -3,6 +3,7 @@ function geefDoor(formid, fase){
 		$(".referentienummer").each(function(el){
 			$(this).show();
 		});
+		$("#opmerkingnummer").show();
 		$("#submitrow").hide();
 		$("#laatsterow").show();
 	} else {
@@ -13,7 +14,9 @@ function geefDoor(formid, fase){
 			var nummer = factuurrow.val();
 			factuurnummers[id] = nummer;
 		});	
-		$.post("ajax/doorgevenMelding.php", { "formid": formid, "factuurnummers": $.toJSON(factuurnummers) }, 
+		var opmerkingnummer = $.toJSON($("#opmerkingnummer").find(".factuurnummer").val());
+		var zenddoor = $.toJSON(factuurnummers);
+		$.post("ajax/doorgevenMelding.php", { "formid": formid, "factuurnummers": zenddoor, "opmerkingnummer": opmerkingnummer }, 
 			function(data){
 				if (data == "SUCCESS")
 					$("#beforecontent").before('<div><h1>Succes</h1><p>De melding werd doorgegeven en als "gedaan" gemarkeerd.</p></div>').hide();
