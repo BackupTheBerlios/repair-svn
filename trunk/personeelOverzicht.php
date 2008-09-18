@@ -55,7 +55,7 @@
 					<p class="disclaimer">Hier kunt u alle herstelformulieren opvragen, ook diegene die al afgehandeld zijn. Door in &#233&#233n van de velden bovenaan te typen, kan u filteren in de resultatenlijst.</p>
 					<table class="overzicht">
 							<tr class="tabelheader"><td colspan="8">Herstelformulieren</td></tr>
-							<tr class="legende"><td></td><td>id</td><td>Datum</td><td>Kamer</td><td>Home</td><td>Persoon</td><td>Status</td><td>Referentienummer</td></tr>
+							<tr class="legende"><td></td><td>id</td><td>Datum</td><td>Kamer</td><td>Home</td><td>Persoon</td><td>Status</td><td>Referentienummers</td></tr>
 							<tr class="filter"><td></td><td></td><td><input type="text" id="datum"/></td><td><input type="text" id="kamer"/></td><td><input type="text" id="korteNaam"/></td><td><input type="text" id="concat(voornaam, ' ',achternaam)"/></td><td><input type="text" id="status"/></td><td><input type="text" id="factuurnummer"/></td></tr>
 							<tbody id="inhoud"></tbody>
 					</table>

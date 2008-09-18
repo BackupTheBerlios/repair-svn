@@ -11,9 +11,6 @@
 	require_once 'Footer.class.php';
 	require_once 'Taal.class.php';
 	$auth = new Auth(true);
-	if (!$auth->getUser()->isStudent()) 
-		throw new AccessException();
-		
 	$taal = new Taal();
 		
 ?>
@@ -67,10 +64,14 @@
 					if ($auth->getUser()->isStudent()) {
 						$user = $auth->getUser();
 						$currentHome = $user->getHome();
+					} elseif ($auth->getUser()->isPersoneel()) {
+						$user = $auth->getUser();
+						$currentHome = new Home($_GET['home']);
 					}
 					
 					?>
 					<form id='meldingform'>
+					<div <? if ($auth->getUser()->isStudent()) echo 'style="display:none"'; ?>><label for="kamer">Lang kamernummer:</label><input type="text" name="kamer" id="kamer"/></div>
 					<table>
 							<tr class="tabelheader"><td colspan="4"><? printf($taal->msg('herstelformulier_homenaam'),$currentHome->getKorteNaam()); ?></td></tr>
 							<?

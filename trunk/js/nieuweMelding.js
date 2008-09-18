@@ -47,6 +47,7 @@ $(document).ready(function(){
 		
 		// data collectie
 		var opmerking = $("#opmerking").val();
+		var kamer = $("#kamer").val();
 		
 		var arrayCheckbox = new Array;
 		$('input:checked').each(function(){
@@ -54,7 +55,7 @@ $(document).ready(function(){
 		});
 		
 		if (hasError == false) {
-			$.post("ajax/postNieuweMelding.php", { "velden[]": arrayCheckbox, "opmerking": opmerking},
+			$.post("ajax/postNieuweMelding.php", { "velden[]": arrayCheckbox, "opmerking": opmerking, "kamer": kamer},
 				function (data){
 					if (data != "SUCCESS")
 						$("#error").show();

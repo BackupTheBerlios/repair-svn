@@ -37,7 +37,7 @@ class Herstelformulier {
 	 * @param string $opmerking
 	 * @param List<veldid> $veldenlijst
 	 */
-	function __construct($id, $datum = "", $status = "", $student = "", $opmerking = "", $veldenlijst = "") {
+	function __construct($id, $datum = "", $status = "", $student = "", $opmerking = "", $veldenlijst = "", $kamer = "") {
 		$this->db = DB::getDB();
 		
 		if ($id == "") {
@@ -48,12 +48,15 @@ class Herstelformulier {
 				$this->status = $status;
 			else throw new BadParameterException("supplied Status is not a Status object");
 			
-			if (is_a($student, "Student"))
+			if (is_a($student, "Student") || is_a($student, "Personeel"))
 				$this->student = $student;
-			else throw new BadParameterException("supplied Student is not a Student object");
+			else throw new BadParameterException("supplied Student is not a Student or Personeel object");
 			$this->studentId = $this->student->getId();
 			
-			$this->kamer = $this->student->getKamer();
+			if (strlen($kamer) == 0)
+				$this->kamer = $this->student->getKamer();
+			else
+				$this->kamer = new Kamer($kamer);
 			$this->home = $this->student->getHome();
 			$this->homeId = $this->home->getId();
 			$this->opmerking = $opmerking;
