@@ -48,7 +48,7 @@ $(document).ready(function(){
 		// data collectie
 		var opmerking = $("#opmerking").val();
 		var kamer = $("#kamer").val();
-		
+
 		var arrayCheckbox = new Array;
 		$('input:checked').each(function(){
 			arrayCheckbox.push(this.name);

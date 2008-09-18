@@ -53,11 +53,14 @@ class Herstelformulier {
 			else throw new BadParameterException("supplied Student is not a Student or Personeel object");
 			$this->studentId = $this->student->getId();
 			
-			if (strlen($kamer) == 0)
+			if (strlen($kamer) == 0) {
 				$this->kamer = $this->student->getKamer();
-			else
+				$this->home = $this->student->getHome();
+			} else {
 				$this->kamer = new Kamer($kamer);
-			$this->home = $this->student->getHome();
+				$this->home = $this->kamer->getHome();
+			}
+
 			$this->homeId = $this->home->getId();
 			$this->opmerking = $opmerking;
 			$this->veldenlijst = $veldenlijst;
