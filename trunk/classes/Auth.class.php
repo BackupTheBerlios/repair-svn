@@ -46,7 +46,6 @@ class Auth{
 				if (openssl_public_decrypt($ticket,$data,$pubkey)) {//decrypteren
 			        $_data = explode(":",$data);
 			        list($user,$time,$aid) = $_data;
-			        //$user = "sidooms";//DIT aanzetten als je met een andere user wil inloggen
 			        
 			        //gedecrypteerde data verifieren
 			        if($aid==self::$aid ){//klopt het application id?
@@ -65,7 +64,7 @@ class Auth{
 			        			if(isset($data[home]))
 			        				$this->user = new Student("", $data['gebruikersnaam'], $data['voornaam'], $data['achternaam'], "", $data['email'], "nl", $data['homeId'], $data['kamer'], "");
 			        			else
-			        				throw new Exception("Deze applicatie is enkel toegankelijk voor bewoners van een studentehomes");
+			        				throw new Exception("Deze applicatie is enkel toegankelijk voor bewoners van een studentehomes. ".$data['voornaam']." ".$data['achternaam']." komt niet voor in onze databank.");
 			        		}
 			        		$_SESSION['userid'] = $this->user->getId();
 			        		$this->isLoggedIn=true;

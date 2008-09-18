@@ -12,7 +12,7 @@
 	
 	$formid = $_POST['formid'];
 	if (!is_numeric($formid) || $formid < 1)
-		throw new BadParameterException("Formid is ongeldig");
+		throw new BadParameterException("Formid ".htmlspecialchars($formid)." is ongeldig");
 		
 	$factuurnummers = json_decode(stripslashes($_POST['factuurnummers']));
 	
