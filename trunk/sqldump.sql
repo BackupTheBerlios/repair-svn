@@ -1,5 +1,4 @@
 -- MySQL dump 10.11
---
 -- Host: localhost    Database: test_herstelformulier
 -- ------------------------------------------------------
 -- Server version	5.0.32-Debian_7etch6-log

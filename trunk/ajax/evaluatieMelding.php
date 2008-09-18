@@ -12,11 +12,11 @@
 	
 	$formid = $_POST['formid'];
 	if (!is_numeric($formid) || $formid < 1) 
-		throw new BadParameterException("formid is invalid");
+		throw new BadParameterException("formid ".htmlspecialchars($formid)." is invalid");
 		
 	$evaluatie = $_POST['evaluatie'];
 	if (!is_numeric($evaluatie) || ($evaluatie != 0 && $evaluatie != 1)) 
-		throw new BadParameterException("evaluatie is invalid");
+		throw new BadParameterException("evaluatie ".htmlspecialchars($evaluatie)." is invalid");
 	
 	if ($evaluatie == 1) {
 		$herstelformulier = new Herstelformulier($formid);

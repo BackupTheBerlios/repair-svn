@@ -11,7 +11,7 @@
 	
 	$formid = $_GET['formid'];
 	if (!is_numeric($formid) || $formid < 0)
-		throw new BadParameterException();
+		throw new BadParameterException(htmlspecialchars($formid));
 		
 	$opmerking = $_GET['opmerking'];
 	if (!is_numeric($opmerking) || ($opmerking != 1 && $opmerking != 0))

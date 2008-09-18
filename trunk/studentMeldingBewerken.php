@@ -21,7 +21,7 @@
 	// Input sanitizing
 	$formid = $_GET['formid'];
 	if (!is_numeric($formid) || $formid < 0)
-		throw new BadParameterException();
+		throw new BadParameterException("Parameter ".htmlspecialchars($formid)." is niet geldig");
 		
 	$formulier = new Herstelformulier($formid);
 	if ($formulier->getStudent()->getId() != $auth->getUser()->getId())
