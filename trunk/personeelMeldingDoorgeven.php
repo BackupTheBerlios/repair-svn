@@ -64,20 +64,22 @@
 						?>
 						<div id='tabel'>
 							<table>
-							<tr class="tabelheader"><td colspan="4">Melding</td></tr>
+							<tr class="tabelheader"><td colspan="5">Melding</td></tr>
 							<tr class="legende">
 								<td>Datum ingave</td>
 								<td>Student</td>
 								<td>Home</td>
 								<td>Kamer</td>
+								<td><span class='referentienummer' style="display:none" >Referentienummer</span></td>
 							</tr>
 							<tr>
 								<td><?=$formulier->getDatum();?></td>
 								<td><?=$formulier->getStudent()->getAchternaam()." ".$formulier->getStudent()->getVoornaam();?></td>
 								<td>Home <?=$formulier->getKamer()->getHome()->getKorteNaam();?></td>
 								<td><?=$formulier->getKamer()->getKamernummerLang();?></td>
+								<td></td>
 							</tr>
-							<tr><td colspan="4"class="unityheader">Gemelde defecten:</td></tr>
+							<tr><td colspan="5"class="unityheader">Gemelde defecten:</td></tr>
 							<?
 							foreach ($formulier->getVeldenlijst() as $veldid) {
 								$veld = new Veld($veldid);
@@ -86,13 +88,14 @@
 									<td></td>
 									<td><? 
 										if($veld->getCategorie()->getLocatie()->getValue()=="Kamer") 
-											echo "Kamer ".$formulier->getKamer()->getKamernummerLang();
+											echo "Kamer ".$formulier->getKamer()->getKamernummerLang()."</td><td>".$veld->getCategorie()->getNaamNL();
 										else if($veld->getCategorie()->getLocatie()->getValue()=="Verdiep") 
-											echo $veld->getCategorie()->getNaamNL()." ".$formulier->getKamer()->getVerdiep()."e";
+											echo $veld->getCategorie()->getNaamNL()." ".$formulier->getKamer()->getVerdiep()."e</td><td>";
 										else
-											echo $veld->getCategorie()->getNaamNL() ; 
+											echo $veld->getCategorie()->getNaamNL()."</td><td>" ; 
 									?></td>
-									<td colspan="2"><?=$veld->getNaamNL();?></td>
+									<td><?=$veld->getNaamNL();?></td>
+									<td><input class="referentienummer factuurnummer" style="display:none" type='text' name='factuurnummer' id='<?=$veldid;?>'/></td>
 								</tr>
 								<?
 							}
@@ -100,25 +103,18 @@
 							<tr>
 								<td>Opmerking:</td>
 								<td colspan="3"><?=$formulier->getOpmerking();?></td>
+								<td>
+									<? if (strlen($formulier->getOpmerking()) > 0) {?>
+									<input type='text' class='referentienummer factuurnummer' style="display:none" name='factuurnummer' id='opmerkingnr'/>
+									<?}?>
+								</td>
 							</tr>
 							<tr id="submitrow">
 								<td colspan="3"></td>
-								<td><button name="submit" id="submit" type="submit" onclick="geefDoor('<?=$formid;?>', 0);">Doorgegeven</button></td>
+								<td style="text-align:right;"><button name="submit" id="submit" type="submit" onclick="geefDoor('<?=$formid;?>', 0);">Doorgegeven</button></td>
+								<td></td>
 							</tr>
-							<?
-							foreach ($formulier->getVeldenlijst() as $veldid) {
-								$veld = new Veld($veldid);
-								?>
-								<tr class="referentienummer" style="display:none"><td>Referentienummer <?=$veld->getNaamNL()?>:</td><td colspan='3'><input type='text' class='factuurnummer' name='factuurnummer' id='<?=$veldid;?>'/></td></tr>
-								<?
-							}
-							if (strlen($formulier->getOpmerking()) > 0) {
-								?>
-								<tr id="opmerkingnummer" style="display:none"><td>Referentienummer bij de opmerking:</td><td colspan='3'><input type='text' class='factuurnummer' name='factuurnummer' id='opmerkingnr'/></td></tr>
-								<?
-							}
-							?>
-							<tr id='laatsterow' style="display:none"><td colspan='3'></td><td><button name='submit' id='submit' type='submit' onclick="geefDoor('<?=$formid;?>', 1);">Doorgegeven</button></td></tr>
+							<tr id='laatsterow' style="display:none"><td colspan='4'></td><td><button name='submit' id='submit' type='submit' onclick="geefDoor('<?=$formid;?>', 1);">Doorgegeven</button></td></tr>
 							</table>
 						</div>
 					</div>

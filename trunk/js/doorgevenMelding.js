@@ -8,13 +8,12 @@ function geefDoor(formid, fase){
 		$("#laatsterow").show();
 	} else {
 		var factuurnummers = new Array();
-		$(".referentienummer").each(function(el){
-			var factuurrow = $(this).find(".factuurnummer");
-			var id = factuurrow.attr("id");
-			var nummer = factuurrow.val();
+		$(".factuurnummer").each(function(el){
+			var id = $(this).attr("id");
+			var nummer = $(this).val();
 			factuurnummers[id] = nummer;
 		});	
-		var opmerkingnummer = $.toJSON($("#opmerkingnummer").find(".factuurnummer").val());
+		var opmerkingnummer = $.toJSON($("#opmerkingnummer").val());
 		var zenddoor = $.toJSON(factuurnummers);
 		$.post("ajax/doorgevenMelding.php", { "formid": formid, "factuurnummers": zenddoor, "opmerkingnummer": opmerkingnummer }, 
 			function(data){
