@@ -66,7 +66,11 @@
 						$currentHome = $user->getHome();
 					} elseif ($auth->getUser()->isPersoneel()) {
 						$user = $auth->getUser();
-						$currentHome = new Home($_GET['home']);
+						$homeid = $_GET['home'];
+						if (!is_numeric($homeid) || $homeid < 1)
+							throw new BadParameterException("De opgegeven Home bestaat niet.");
+							
+						$currentHome = new Home($homeid);
 					}
 					
 					?>
