@@ -64,7 +64,7 @@ class Auth{
 			        			if(isset($data[home]))
 			        				$this->user = new Student("", $data['gebruikersnaam'], $data['voornaam'], $data['achternaam'], "", $data['email'], "nl", $data['homeId'], $data['kamer'], "");
 			        			else
-			        				throw new Exception("Deze applicatie is enkel toegankelijk voor bewoners van een studentehomes. ".$data['voornaam']." ".$data['achternaam']." komt niet voor in onze databank.");
+			        				throw new Exception("Deze applicatie is enkel toegankelijk voor bewoners van een studentehome. ".$data['voornaam']." ".$data['achternaam']." komt niet voor in onze databank.");
 			        		}
 			        		$_SESSION['userid'] = $this->user->getId();
 			        		$this->isLoggedIn=true;
