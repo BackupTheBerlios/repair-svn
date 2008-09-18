@@ -4,8 +4,8 @@ function geefDoor(formid, fase){
 			$(this).show();
 		});
 		$("#opmerkingnummer").show();
-		$("#submitrow").hide();
-		$("#laatsterow").show();
+		var tekst = "<tr><td colspan='4'></td><td><img alt='doorgeven' class='bewerk klik' title='Deze referentienummers doorsturen' src='images/icon_accept.gif' onclick='geefDoor("+formid+", 1);'/></td></tr>";
+		$("#submitrow").after(tekst).hide();
 	} else {
 		var factuurnummers = new Array();
 		$(".factuurnummer").each(function(el){

@@ -114,7 +114,6 @@
 								<td style="text-align:right;"><button name="submit" id="submit" type="submit" onclick="geefDoor('<?=$formid;?>', 0);">Doorgegeven</button></td>
 								<td></td>
 							</tr>
-							<tr id='laatsterow' style="display:none"><td colspan='4'></td><td><button name='submit' id='submit' type='submit' onclick="geefDoor('<?=$formid;?>', 1);">Doorgegeven</button></td></tr>
 							</table>
 						</div>
 					</div>
