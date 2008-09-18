@@ -48,7 +48,7 @@
 		<div id="container">
 			<?new Header(array("index.php","#"), array("Index", "Melding_toevoegen")); ?>
 			<div id="main">
-				<?new Menu("Melding"); ?>
+				<?new Menu("Defect Melden"); ?>
 				<div id="content" class="normal">
 					<div class="documentActions">                 
 						<ul> 
