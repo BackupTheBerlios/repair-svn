@@ -13,7 +13,7 @@ function geefDoor(formid, fase){
 			var nummer = $(this).val();
 			factuurnummers[id] = nummer;
 		});	
-		var opmerkingnummer = $.toJSON($("#opmerkingnummer").val());
+		var opmerkingnummer = $.toJSON($("#opmerkingnr").val());
 		var zenddoor = $.toJSON(factuurnummers);
 		$.post("ajax/doorgevenMelding.php", { "formid": formid, "factuurnummers": zenddoor, "opmerkingnummer": opmerkingnummer }, 
 			function(data){
