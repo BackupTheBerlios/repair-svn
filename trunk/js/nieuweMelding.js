@@ -48,6 +48,7 @@ $(document).ready(function(){
 		// data collectie
 		var opmerking = $("#opmerking").val();
 		var kamer = $("#kamer").val();
+		// TODO: kamer moet volledig ingevuld zijn
 
 		var arrayCheckbox = new Array;
 		$('input:checked').each(function(){

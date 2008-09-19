@@ -75,7 +75,7 @@
 					
 					?>
 					<form id='meldingform'>
-					<div <? if ($auth->getUser()->isStudent()) echo 'style="display:none"'; ?>><label for="kamer">Lang kamernummer:</label><input type="text" name="kamer" id="kamer"/></div>
+					<div <? if ($auth->getUser()->isStudent()) echo 'style="display:none"'; ?>><label for="kamer">Lang kamernummer: </label><input type="text" name="kamer" id="kamer" value="<?=$currentHome->getKamerPrefix().".";?>"/></div>
 					<table>
 							<tr class="tabelheader"><td colspan="4"><? printf($taal->msg('herstelformulier_homenaam'),$currentHome->getKorteNaam()); ?></td></tr>
 							<?

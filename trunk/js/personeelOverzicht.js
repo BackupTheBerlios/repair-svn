@@ -9,7 +9,7 @@ function parse(alle_data){
 	var result="";
 	for(key in data){
 		result += "<tr>";
-		result += "<td><a href='personeelMeldingInformatie.php?formid="+data[key]['id']+"'><img title='Meer informatie over dit formulier' src='images/externesite.gif'/></a></td>";
+		result += "<td class='klik' onclick=\"window.location.href = 'personeelMeldingInformatie.php?formid="+data[key]['id']+"'\"><img title='Meer informatie over dit formulier' src='images/externesite.gif'/></td>";
 		result += "<td>"+data[key]['id']+"</td>";		
 		result += "<td>"+data[key]['datum']+"</td>";
 		result += "<td>"+data[key]['kamer']+"</td>";
