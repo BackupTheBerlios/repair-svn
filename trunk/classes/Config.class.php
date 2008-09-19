@@ -12,7 +12,7 @@ final class Config {
 	/*
 	 * Evaluatie nodig voor welke formulieren
 	 */
-	public static $DAYS_FOR_EVAL = "1";
+	public static $DAYS_FOR_EVAL = "7";
 	
 	/**
 	 * Debug
