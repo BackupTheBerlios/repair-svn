@@ -111,7 +111,7 @@ class Herstelformulier {
 	function save() {
 		if ($this->updated == 1) {
 			$statement = $this->db->prepare("UPDATE herstelformulier SET factuurnummer = ?, datum = ?, status = ?, userId = ?, kamer = ?, homeId = ?, opmerking = ? WHERE id = ?");
-			$statement->bind_param('issisisi', $this->factuurnummer, $this->datum, $this->status->getValue(), $this->studentId, $this->kamer->getKamernummerLang(), $this->homeId, $this->opmerking, $this->id);
+			$statement->bind_param('sssisisi', $this->factuurnummer, $this->datum, $this->status->getValue(), $this->studentId, $this->kamer->getKamernummerLang(), $this->homeId, $this->opmerking, $this->id);
 			$statement->execute();
 			$statement->close();
 		}
@@ -279,9 +279,13 @@ class Herstelformulier {
 		} else { // echt veld
 			$statement = $this->db->prepare("SELECT referentienummer FROM relatie_herstelformulier_velden WHERE veldId = ? AND herstelformulierId = ?");
 			$statement->bind_param('ii', $veldid, $this->id);
+			$statement->execute();
 			$statement->bind_result($referentienummer);
+			$statement->store_result();
+			$statement->fetch();
+			$r = $referentienummer;
 			$statement->close();
-			return $referentienummer;	
+			return $r;	
 		}
 	}
 	
@@ -291,7 +295,7 @@ class Herstelformulier {
 				$this->updated = 1;
 			} else if ($veldid != NULL) { // echt veld
 				$statement = $this->db->prepare("UPDATE relatie_herstelformulier_velden SET referentienummer = ? WHERE herstelformulierId = ? AND veldId = ?");
-				$statement->bind_param('iii', $factuurnummer, $this->id, $veldid);
+				$statement->bind_param('sii', $factuurnummer, $this->id, $veldid);
 				$statement->execute();
 				$statement->close();
 			}
@@ -303,9 +307,12 @@ class Herstelformulier {
 		$lijst['datum'] = date("Y-m-d",strtotime($this->datum));
 		$lijst['status'] = $this->status->getValue();
 		$lijst['kamer'] = $this->kamer->getKamernummerLang();
-		$lijst['factuurnummer'] = $this->factuurnummer==null?"":$this->factuurnummer;
 		$lijst['persoon'] = $this->getStudent()->getVoornaam()." ".$this->getStudent()->getAchternaam();
 		$lijst['home'] = $this->getHome()->getKorteNaam();
+		$lijst['factuurnummer'] = $this->getFactuurnummer().", ";
+		foreach ($this->veldenlijst as $idtje)
+			$lijst['factuurnummer'] .= $this->getFactuurnummer($idtje).", ";
+		$lijst['factuurnummer'] = substr($lijst['factuurnummer'], 0, -2);
 		return $lijst;
 	}
 	
