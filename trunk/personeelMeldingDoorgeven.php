@@ -112,7 +112,7 @@
 							<tr id="submitrow">
 								<td colspan="3"></td>
 								<td style="text-align:right;"><button name="submit" id="submit" type="submit" onclick="geefDoor('<?=$formid;?>', 0);">Doorgegeven</button></td>
-								<td></td>
+								<td style="text-align:right;"><button name="submit" id="submit" type="submit" onclick="negeer('<?=$formid;?>');">Negeer</button></td>
 							</tr>
 							</table>
 						</div>

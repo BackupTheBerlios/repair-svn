@@ -24,3 +24,16 @@ function geefDoor(formid, fase){
 			});
 	}
 }
+
+function negeer(formid) {
+	var answer = confirm("Weet u zeker dat u dit herstelformulier compleet wil negeren? Dit kan niet ongedaan gemaakt worden!");
+	if (answer) {
+		$.post("ajax/personeelNegeerMelding.php", { "formid": formid },
+			function(data){
+				if (data == "SUCCESS")
+					$("#beforecontent").before('<div><h1>Succes</h1><p>Deze melding wordt nu genegeerd, en wordt dus als "afgewerkt" beschouwd.</p></div>').hide();
+				else
+					$("#beforecontent").before('<div><h1>Fout</h1><p>Er was een probleem bij het afwerking van deze melding. Onze excuses voor het ongemak, gelieve het later nog eens te proberen.</p></div>').hide();
+			});
+	}
+}
