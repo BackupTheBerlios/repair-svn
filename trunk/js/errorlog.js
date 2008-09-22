@@ -22,7 +22,7 @@ function parse(alle_data){
 	
 	if (paginering['current_page'] != paginering['aantal_paginas']) {
 		$("#terug").addClass("klik").click(function(){
-			$("#paginering input").val(parseInt($("#paginering input").val())+1);
+			$("#paginering input").val(parseInt($("#paginering input").val())-1);
 			$("#paginering input").keyup();
 		});
 		
@@ -61,7 +61,7 @@ function doorsturen2(){
 	});
 	var v = $.toJSON(velden);
 	var w = $.toJSON(waarden);
-	$.get("ajax/postErrorlog.php", {type:$("table").attr("class"), velden:v, waarden:w, page:pagina}, parse);
+	$.get("ajax/postErrorlog.php", {type:$("table").attr("class"), velden:v, waarden:w, page:pagina}, parse, "json");
 }
 
 function update(data){

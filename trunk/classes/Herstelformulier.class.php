@@ -309,10 +309,18 @@ class Herstelformulier {
 		$lijst['kamer'] = $this->kamer->getKamernummerLang();
 		$lijst['persoon'] = $this->getStudent()->getVoornaam()." ".$this->getStudent()->getAchternaam();
 		$lijst['home'] = $this->getHome()->getKorteNaam();
-		$lijst['factuurnummer'] = $this->getFactuurnummer().", ";
-		foreach ($this->veldenlijst as $idtje)
-			$lijst['factuurnummer'] .= $this->getFactuurnummer($idtje).", ";
-		$lijst['factuurnummer'] = substr($lijst['factuurnummer'], 0, -2);
+		$nr = $this->getFactuurnummer();
+		if($nr!=0 && $nr!="" && $nr!="0" && $nr!=NULL && $nr!="\"\"")
+			$lijst['factuurnummer'] = $nr.", ";
+		foreach ($this->veldenlijst as $idtje){
+			$nr = $this->getFactuurnummer($idtje);
+			if($nr!=0 && $nr!="" && $nr!="0" && $nr!=NULL && $nr!="\"\"")
+				$lijst['factuurnummer'] .= $this->getFactuurnummer($idtje).", ";
+		}
+		if(strlen($lijst['factuurnummer'])>0)
+			$lijst['factuurnummer'] = substr($lijst['factuurnummer'], 0, -2);
+		else
+			$lijst['factuurnummer'] = "";
 		return $lijst;
 	}
 	

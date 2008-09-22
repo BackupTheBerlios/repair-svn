@@ -10,7 +10,7 @@
 	if(!$auth->isLoggedIn() || !$auth->getUser()->isPersoneel()) throw new AccessException();
 	
 	//aantal per pagina
-	$AANTAL_PER_PAGINA = 25;
+	$AANTAL_PER_PAGINA = 20;
 	
 	//paginering stuff
 	$pagina = $_GET['page']=="" ? 1 : $_GET['page'];

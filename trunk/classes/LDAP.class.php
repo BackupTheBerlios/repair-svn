@@ -110,6 +110,13 @@ class LdapRepair extends LDAP{
 		return self::parseData(parent::get_entries());
 	}
 	
+	function getUserInfo2($uid){
+		parent::connect();
+		parent::bind();
+		parent::search("uid=".$uid);
+		return parent::get_entries();
+	}
+	
 	function parseData($data){
 		$result = array();
 		$result['gebruikersnaam'] = $data[0]["uid"][0];
