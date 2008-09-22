@@ -24,9 +24,14 @@
 		$velden = json_decode(stripslashes($_GET["velden"]));
 		$waarden = json_decode(stripslashes($_GET["waarden"]));
 		//query opbouwen
-		$q = "SELECT herstelformulier.id FROM herstelformulier INNER JOIN user ON (herstelformulier.userId=user.id) INNER JOIN home ON (herstelformulier.homeId=home.id)WHERE ";
+		$q = "SELECT DISTINCT herstelformulier.id FROM herstelformulier INNER JOIN user ON (herstelformulier.userId=user.id) INNER JOIN home ON (herstelformulier.homeId=home.id) INNER JOIN relatie_herstelformulier_velden ON (herstelformulier.id=relatie_herstelformulier_velden.herstelformulierId)WHERE ";
 		foreach ($waarden as $key =>$value){
-			$q .= $velden[$key]." LIKE '%".$value."%' AND  ";
+			if(sizeof(explode("|", $velden[$key]))>1){
+				$e = explode("|", $velden[$key]);
+				$q .= "(".$e[0]." LIKE '%".$value."%' OR ".$e[1]." LIKE '%".$value."%') AND  ";
+			}
+			else
+				$q .= $velden[$key]." LIKE '%".$value."%' AND  ";
 		}
 		$q = substr($q, 0, -6);
 	}	
