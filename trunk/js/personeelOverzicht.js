@@ -22,12 +22,13 @@ function parse(alle_data){
 	$("#inhoud").html(result);
 	$("#paginering").html(paginering['aantal_rijen']+" resultaten: pagina <input type='text' class='pagina' value='"+paginering['current_page']+"'> van de "+paginering['aantal_paginas']+"  <img class='page' id='terug' src='images/back.gif'/>  <img class='page' id='volgende' src='images/forward.gif'/>");
 	
-	if (paginering['current_page'] != paginering['aantal_paginas']) {
+	if (paginering['current_page'] != 1) {
 		$("#terug").addClass("klik").click(function(){
 			$("#paginering input").val(parseInt($("#paginering input").val())-1);
 			$("#paginering input").keyup();
 		});
-		
+	}
+	if (paginering['current_page'] != paginering['aantal_paginas']) {	
 		$("#volgende").addClass("klik").click(function(){
 			$("#paginering input").val(parseInt($("#paginering input").val())+1);
 			$("#paginering input").keyup();

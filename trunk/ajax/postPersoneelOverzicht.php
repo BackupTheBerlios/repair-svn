@@ -24,7 +24,7 @@
 		$velden = json_decode(stripslashes($_GET["velden"]));
 		$waarden = json_decode(stripslashes($_GET["waarden"]));
 		//query opbouwen
-		$q = "SELECT DISTINCT herstelformulier.id FROM herstelformulier INNER JOIN user ON (herstelformulier.userId=user.id) INNER JOIN home ON (herstelformulier.homeId=home.id) INNER JOIN relatie_herstelformulier_velden ON (herstelformulier.id=relatie_herstelformulier_velden.herstelformulierId)WHERE ";
+		$q = "SELECT DISTINCT herstelformulier.id FROM herstelformulier INNER JOIN user ON (herstelformulier.userId=user.id) INNER JOIN home ON (herstelformulier.homeId=home.id) LEFT JOIN relatie_herstelformulier_velden ON (herstelformulier.id=relatie_herstelformulier_velden.herstelformulierId)WHERE ";
 		foreach ($waarden as $key =>$value){
 			if(sizeof(explode("|", $velden[$key]))>1){
 				$e = explode("|", $velden[$key]);
