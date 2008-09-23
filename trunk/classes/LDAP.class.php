@@ -110,13 +110,6 @@ class LdapRepair extends LDAP{
 		return self::parseData(parent::get_entries());
 	}
 	
-	function getUserInfo2($uid){
-		parent::connect();
-		parent::bind();
-		parent::search("uid=".$uid);
-		return parent::get_entries();
-	}
-	
 	function parseData($data){
 		$result = array();
 		$result['gebruikersnaam'] = $data[0]["uid"][0];
@@ -142,7 +135,40 @@ class LdapRepair extends LDAP{
 					if(sizeof($temp)>1)
 						$result['kamer'] = $home->getKamerPrefix().".".$temp[0];//enkel de laatste cijfers van de code staan tussen haakjes
 					else{
-						echo "jep";
+						$temp = explode("K. ", $kot[1]);
+						$result['kamer'] = $home->getKamerPrefix().".".converteer($temp[0]);//er wordt nog een oud kamernummer gebruikt
+					}
+				}
+			}
+		}
+		return $result;
+	}
+	
+	function parseDataSearch($data){
+		$result = array();
+		$result['gebruikersnaam'] = $data["uid"][0];
+		$result['voornaam'] = $data["ugentpreferredgivenname"][0];
+		$result['achternaam'] = $data["ugentpreferredsn"][0];
+		$result['email'] = $data["mail"][0];
+		$kot = $data["ugentdormpostaladdress"][0];
+		if($kot!=""){
+			$kot = explode("$", $kot);
+			if(strpos(" ".$kot[0], "HOME")){
+				//VUILE LDAP HACK :(
+				$kot[0] = $kot[0]=="HOME BERTHA DE VRIES"?"HOME BERTHA DE VRIESE":$kot[0];
+				require_once 'classes/Home.class.php';
+				$home = Home::getHome("ldapNaam", $kot[0]);
+				$result['homeId'] = $home->getId();
+				$result['home'] = $home->getLangeNaam();
+				$temp = explode(":", $kot[1]);
+				if(sizeof($temp)>1)
+					$result['kamer'] = $temp[1];//het meest normale geval (volledige kamercode staat waar hij moest staan)
+				else{
+					$temp = explode("(", $kot[1]);
+					$temp = explode(")", $temp[1]);
+					if(sizeof($temp)>1)
+						$result['kamer'] = $home->getKamerPrefix().".".$temp[0];//enkel de laatste cijfers van de code staan tussen haakjes
+					else{
 						$temp = explode("K. ", $kot[1]);
 						$result['kamer'] = $home->getKamerPrefix().".".converteer($temp[0]);//er wordt nog een oud kamernummer gebruikt
 					}
