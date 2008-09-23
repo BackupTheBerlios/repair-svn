@@ -22,7 +22,7 @@ function doorsturen(){
 	var velden = new Array();
 	var waarden = new Array();
 	$(".filter input").each(function(){
-		if($(this).val().length>2){
+		if($(this).val().length>4){
 			velden[velden.length] = $(this).attr("id");
 			waarden[waarden.length] = $(this).val();
 		}

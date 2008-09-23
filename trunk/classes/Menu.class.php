@@ -36,6 +36,10 @@ class Menu{
 							echo(self::generateItem("personeelMeldingInformatie.php","Formulier"));
 							echo"</ul></li>";
 						}
+						if($a->getUser()->getGebruikersnaam()=="bmesuere" || $a->getUser()->getGebruikersnaam()=="bevdeghi"){
+							echo self::generateItem("errorlog.php", "Errorlog");
+							echo self::generateItem("ldapSearch.php", "LDAP");
+						}
 					}
 					else{//we zijn student
 						echo self::generateItem("studentOverzicht.php", $taal->msg('Overzicht'));
