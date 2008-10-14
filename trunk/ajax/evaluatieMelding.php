@@ -29,7 +29,7 @@
 		$herstelformulier = new Herstelformulier($formid);
 		$herstelformulier->setDatum($mysqldate);
 		$herstelformulier->setStatus(new Status("ongezien"));
-		$herstelformulier->setOpmerking($opmerking);
+		$herstelformulier->setOpmerking($herstelformulier->getOpmerking()."\n".$opmerking);
 		$herstelformulier->save();	
 	}
 	

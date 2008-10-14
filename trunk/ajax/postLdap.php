@@ -31,7 +31,9 @@
 	$result = $ld->get_entries();
 	array_shift($result);
 	foreach ($result as $persoon){
-		$lijst[] = $ld->parseDataSearch($persoon);
+		$p = $ld->parseDataSearch($persoon);
+		if($p['gebruikersnaam']!=NULL)
+			$lijst[] = $p;
 	}
 	$uitvoer = array(array(), $lijst);
 	echo(json_encode($uitvoer));
