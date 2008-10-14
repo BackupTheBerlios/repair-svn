@@ -74,7 +74,7 @@
 											<?
 											foreach ($list as $formulier) {
 												?>
-													<tr id="row_<?=$formulier->getId();?>"><td><?=$formulier->getDatum();?></td><td><?=$formulier->getSamenvatting();?></td><td class="img"><img alt="doorgeven" class="bewerk klik" title="Deze herstelling positief evalueren" src="images/icon_accept.gif" onclick="evalueerPositief('<?=$formulier->getId();?>');"/></td><td class="img"><img alt="doorgeven" class="bewerk klik" title="Deze herstelling negatief evalueren" src="images/action_stop.gif" onclick="evalueerNegatief('<?=$formulier->getId();?>');"/></td></tr>
+													<tr id="row_<?=$formulier->getId();?>"><td><?=$formulier->getDatum();?></td><td><?=$formulier->getSamenvatting();?></td><td class="img"><img alt="doorgeven" class="bewerk klik" title="Deze herstelling positief evalueren" src="images/thumbs_up.gif" onclick="evalueerPositief('<?=$formulier->getId();?>');"/></td><td class="img"><img alt="doorgeven" class="bewerk klik" title="Deze herstelling negatief evalueren" src="images/thumbs_down.gif" onclick="evalueerNegatief('<?=$formulier->getId();?>');"/></td></tr>
 													<?
 											}
 											?>
