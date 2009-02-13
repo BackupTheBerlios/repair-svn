@@ -43,10 +43,6 @@
 					<h1>Kot adres aanpassen</h1>
 					<p>Op deze pagina kan je je correcte kotgegevens invullen en doorsturen naar de centrale studentenadministratie</p>
 					<form class="bodyform" method="post">
-			        <input type="hidden" name="hurl" value="http://escher.elis.ugent.be/firw/login/">
-			        <input type="hidden" name="haid" value="5173">
-			        <input type="hidden" name="hqs" value="">
-			        <input type="hidden" name="hsg" value="2b5138aaaaed544e0159adb379308ed2">
 			        <fieldset>
 			          <legend>Gegevens</legend>
 			          <div>
@@ -67,7 +63,7 @@
 			          </div>
 			          <div>
 			            <label>Home</label>
-			            <input name="home" type="text">
+			            <input name="home" type="text" >Home</input>
 			          </div>
 			          <div>
 			            <label>Kamernummer</label>
@@ -84,8 +80,8 @@
 					$mailer->setFrom($_POST['email']);
 					$mailer->setCc($_POST['email']);
 					$mailer->setSubject("adreswijziging");
-					$mailer->setText("Beste,\n\nIs het mogelijk van de kotadres gegevens van de volgende student aan te passen?\n\n".$_POST['voornaam']." ".$_POST['naam']."\nStudentennummer: ".$_POST['studnummer']."\nKotadres home: ".$_POST['home']." kamernummer: ".$_POST['kamer']."\n\n\n==========\nDeze e-mail werd gegenereerd door het Online Herstelformulier van de Afdeling Huisvesting");
-					$mailer->send("mesuerebart@gmail.com");//helpdesk.studadmin@UGent.be
+					$mailer->setText("Beste,\n\nIs het mogelijk van de kotadres gegevens van de volgende student aan te passen?\n\n".$_POST['voornaam']." ".$_POST['naam']."\nStudentennummer: ".$_POST['studnummer']."\nKotadres:\n".$_POST['home'].", kamernummer ".$_POST['kamer']."\n\n\n==========\nDeze e-mail werd gegenereerd door het Online Herstelformulier van de Afdeling Huisvesting");
+					$mailer->send(array("mesuerebart@gmail.com"));//helpdesk.studadmin@UGent.be
 			    	
 			    	?>
 			    <h1>Kot adres aanpassen</h1>
