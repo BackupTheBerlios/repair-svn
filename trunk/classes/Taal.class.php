@@ -55,6 +55,7 @@ class Taal {
 						  'exception_ongeldigemail' => 'Het opgegeven emailadres is geen geldig emailadres',
 						  'exception_publickey' => 'De opgegeven sleutel om in te loggen is ongeldig',
 						  'exception_invalidkey' => 'De opgegeven sleutel om in te loggen is ongeldig',
+						  'exception_kotadres' => "Deze applicatie is enkel toegankelijk voor bewoners van een studentehome. U komt niet voor in de databank met homebewoners. Indien u vermoedt dat dit een fout is, kunt u uw correcte gegevens <a href='studentenKotadres.php'>hier</a> doorgeven",
 						  'geen_error' => 'Er werd geen foutboodschap doorgegeven.',
 						  'fout' => 'Er is een onvoorziene fout opgetreden.',
 						  'fout_disclaimer' => 'De beheerders van deze applicatie werden op de hoogte gebracht.',
@@ -64,7 +65,17 @@ class Taal {
 						  'afdrukken' => 'Deze pagina afdrukken',
 						  'melding_bewerken' => 'Melding bewerken',
 						  'melding_evalueren' => 'Melding evalueren',
-						  'melding_toevoegen' => 'Defect melden'
+						  'melding_toevoegen' => 'Defect melden',
+						  'gegevens' => 'Gegevens',
+						  'voornaam' => 'Voornaam',
+						  'studentennummer' => 'Studentennummer',
+						  'email' => 'E-mail adres',
+						  'home' => 'Home',
+						  'kamernummer' => 'Kamernummer',
+						  'versturen' => 'Verzend deze data',
+						  'adresaanpassen' => 'Kot adres aanpassen',
+						  'adresaanpassen_disclaimer' => 'Op deze pagina kan je je correcte kotgegevens invullen en doorsturen naar de centrale studentenadministratie.',
+						  'adresaanpassen_submitted' => 'De ingevulde gegevens werden doorgemaild naar de studentenadministratie en er werd een kopie naar jezelf gestuurd. Hou er rekening mee dat het na het verwerken van de gegevens door de studentenadministratie het nog 24 uur kan duren nadat deze aanpassing zichtbaar is op deze website.'
 						  ),
 			'en' => array('titel' => 'Online Repairform',
 						  'dringende_herstellingen' => 'Urgent Repairs',
@@ -117,6 +128,7 @@ class Taal {
 						  'exception_ongeldigemail' => 'The supplied emailaddress is invalid',
 						  'exception_publickey' => 'The suplied loginkey is invalid',
 						  'exception_invalidkey' => 'The suplied login key is invalid',
+						  'exception_kotadres' => "This application is only accessible for students who reside on a dorm from the university. You can not be found in this database. If you suspect this to be wrong, you can send in your correct data <a href='studentenKotadres.php'>here</a>",
 						  'geen_error' => 'There was no errormessage specified.',
 						  'fout' => 'Error',
 						  'fout_disclaimer' => 'The application\'s administrators were notified of this problem.',
@@ -126,7 +138,17 @@ class Taal {
 						  'afdrukken' => 'Print this page',
 						  'melding_bewerken' => 'Edit Form',
 						  'melding_evalueren' => 'Evaluate defect',
-						  'melding_toevoegen' => 'Report defect'
+						  'melding_toevoegen' => 'Report defect',
+						  'gegevens' => 'Data',
+						  'voornaam' => 'Given name',
+						  'studentennummer' => 'Student id',
+						  'email' => 'Email address',
+						  'home' => 'Home',
+						  'kamernummer' => 'Roomnumber',
+						  'versturen' => 'Submit this data',
+						  'adresaanpassen' => 'Change dorm address',
+						  'adresaanpassen_disclaimer' => 'On this page you can submit your correct dorm address and submit it to the central studentadministration.',
+						  'adresaanpassen_submitted' => 'Your data was mailed to the studentadministration and copy has been sent to you. Please keep in mind that the processing of the data can take up to 24 hours before it is visible on this website.'
 						  )
 	);
 	

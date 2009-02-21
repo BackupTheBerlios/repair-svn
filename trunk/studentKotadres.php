@@ -40,36 +40,36 @@
 				<?
 					if(!isset($_POST['naam'])){
 				?>
-					<h1>Kot adres aanpassen</h1>
-					<p>Op deze pagina kan je je correcte kotgegevens invullen en doorsturen naar de centrale studentenadministratie</p>
+					<h1><?=$taal->msg('adresaanpassen') ?></h1>
+					<p><?=$taal->msg('adresaanpassen_disclaimer'); ?></p>
 					<form class="bodyform" method="post">
 			        <fieldset>
-			          <legend>Gegevens</legend>
+			          <legend><?=$taal->msg('gegevens');?></legend>
 			          <div>
-			            <label>Naam</label>
-			            <input name="naam" type="text">
+			            <label><?=$taal->msg('naam');?></label>
+			            <input name="naam" type="text"/>
 			          </div>
 			          <div>
-			            <label>Voornaam</label>
-			            <input name="voornaam" type="text">
+			            <label><<?=$taal->msg('voornaam');?></label>
+			            <input name="voornaam" type="text"/>
 			          </div>
 			          <div>
-			            <label>Studentennummer</label>
-			            <input name="studnummer" type="text">
+			            <label><?=$taal->msg('studentennummer');?></label>
+			            <input name="studnummer" type="text"/>
 			          </div>
 			          <div>
-			            <label>E-mail adres</label>
-			            <input name="email" type="text">
+			            <label><?=$taal->msg('email'); ?></label>
+			            <input name="email" type="text"/>
 			          </div>
 			          <div>
-			            <label>Home</label>
-			            <input name="home" type="text" >Home</input>
+			            <label><?=$taal->msg('home'); ?></label>
+			            <input name="home" type="text"/>
 			          </div>
 			          <div>
-			            <label>Kamernummer</label>
-			            <input name="kamer" type="text">
+			            <label><?=$taal->msg('kamernummer'); ?></label>
+			            <input name="kamer" type="text"/>
 			          </div>
-			          <input type="submit" value="Deze gegevens versturen">
+			          <input type="submit" value="<?=$taal->msg('versturen');?>"/>
 			        </fieldset>
 			      </form>
 			    <?} 
@@ -84,8 +84,8 @@
 					$mailer->send(array("mesuerebart@gmail.com"));//helpdesk.studadmin@UGent.be
 			    	
 			    	?>
-			    <h1>Kot adres aanpassen</h1>
-				<p>De ingevulde gegevens werden doorgemaild naar de studentenadministratie en er werd een kopie naar jezelf gestuurd. Hou er rekening mee dat het na het verwerken van de gegevens door de studentenadministratie het nog 24 uur kan duren nadat deze aanpassing zichtbaar is op deze website.</p>
+			    <h1><?=$taal->msg('adresaanpassen'); ?></h1>
+				<p><?=$taal->msg('adresaanpassen_submitted'); ?></p>
 			    <?} ?>
 				</div>		
 			</div>		
