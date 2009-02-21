@@ -55,7 +55,7 @@ class Taal {
 						  'exception_ongeldigemail' => 'Het opgegeven emailadres is geen geldig emailadres',
 						  'exception_publickey' => 'De opgegeven sleutel om in te loggen is ongeldig',
 						  'exception_invalidkey' => 'De opgegeven sleutel om in te loggen is ongeldig',
-						  'exception_kotadres' => "Deze applicatie is enkel toegankelijk voor bewoners van een studentehome. U komt niet voor in de databank met homebewoners. Indien u vermoedt dat dit een fout is, kunt u uw correcte gegevens <a href='studentenKotadres.php'>hier</a> doorgeven",
+						  'exception_kotadres' => "Deze applicatie is enkel toegankelijk voor bewoners van een studentenhome. U komt niet voor in de databank met homebewoners. Indien u vermoedt dat dit een fout is, kunt u uw correcte gegevens <a href='studentenKotadres.php'>hier</a> doorgeven",
 						  'geen_error' => 'Er werd geen foutboodschap doorgegeven.',
 						  'fout' => 'Er is een onvoorziene fout opgetreden.',
 						  'fout_disclaimer' => 'De beheerders van deze applicatie werden op de hoogte gebracht.',
